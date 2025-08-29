@@ -1,0 +1,106 @@
+---
+title: Welcome to Drizzle Cube
+description: Open source Embeddable Analytics Solution for platform builders
+template: splash
+hero:
+  title: Drizzle Cube <span class="embeddable-purple">Embeddable</span> Analytics
+  tagline: Open source analytics solution for platform builders. Deliver scalable, type-safe dashboarding capabilities directly to your users with zero infrastructure overhead.
+  image:
+    file: ../../assets/drizzle-cube.png
+    alt: Drizzle Cube logo
+  actions:
+    - text: Get Started
+      link: /getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Try it Now
+      link: https://try.drizzle-cube.dev
+      icon: external
+      variant: secondary
+    - text: View on GitHub
+      link: https://github.com/cliftonc/drizzle-cube
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Image } from 'astro:assets';
+
+<div class="home-gradient-wrapper">
+<div class="simple-gallery">
+  <Image src="/simple_1.png" alt="Drizzle Cube dashboard showing key metrics" width="400" height="250" />
+  <Image src="/query-builder.png" alt="Drizzle Cube Query Builder interface" width="400" height="250" />
+  <Image src="/color_1.png" alt="Analytics visualization showing productivity metrics" width="400" height="250" />
+  <Image src="/schema.png" alt="Schema diagram showing analytics relationships" width="400" height="250" />
+</div>
+</div>
+
+## Quick Start
+
+<CardGrid>
+  <Card title="Quick Start" icon="rocket">
+    Embed your first dashboard in 5 minutes
+    
+    [Get Started →](/getting-started/quick-start/)
+  </Card>
+  <Card title="Core Concepts" icon="information">
+    Understanding semantic layer architecture
+    
+    [Learn More →](/getting-started/)
+  </Card>
+  <Card title="How It Works" icon="puzzle">
+    Deep dive into where the magic happens
+    
+    [Explore →](/getting-started/how-it-works/)
+  </Card>
+  <Card title="NextJS Adapter" icon="seti:javascript">
+    Super fast integration with NextJS
+    
+    [View Docs →](/adapters/nextjs/)
+  </Card>
+</CardGrid>
+
+## Featured Topics
+
+<CardGrid>
+  <Card title="Embedding Components" icon="react">
+    Drop-in React components for dashboards and charts
+    
+    [View Components →](/client/)
+  </Card>
+  <Card title="Multi-Tenant Security" icon="shield">
+    Secure data isolation for your platform users
+    
+    [Security Guide →](/semantic-layer/security/)
+  </Card>
+  <Card title="Semantic Layer" icon="bars">
+    Transform your database into business metrics
+    
+    [Learn More →](/semantic-layer/)
+  </Card>
+  <Card title="Scaling Analytics" icon="rocket">
+    Handle thousands of users with optimized queries
+    
+    [Performance →](/advanced/performance/)
+  </Card>
+</CardGrid>
+
+## Used by these websites
+
+<CardGrid>
+  <Card title="Fintune" icon="external">
+    Smart team and financial budgeting and forecasting
+    
+    [Visit Fintune →](https://www.fintune.app)
+  </Card>
+  <Card title="Add your site here?" icon="add-document">
+    Contact us to showcase your project
+  </Card>
+</CardGrid>
+
+## Need More Help?
+
+Can't find what you're looking for? Check out these additional resources:
+
+- [View on GitHub](https://github.com/cliftonc/drizzle-cube)
+- [Report an Issue](https://github.com/cliftonc/drizzle-cube/issues)

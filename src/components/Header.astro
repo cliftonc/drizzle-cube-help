@@ -1,0 +1,48 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Header.astro';
+---
+
+<Default {...Astro.props}>
+	<a href="https://try.drizzle-cube.dev" class="try-button" slot="end">
+		Try it Now
+	</a>
+</Default>
+
+<style>
+.try-button {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.5rem 1rem;
+	background: linear-gradient(-45deg, #fce7f3, #e879f9, #a855f7, #8b5cf6);
+	background-size: 400% 400%;
+	animation: gradient-shift 4s ease infinite;
+	border: none;
+	border-radius: 0.5rem;
+	color: white;
+	font-weight: 600;
+	font-size: 0.875rem;
+	text-decoration: none;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	margin-left: 1rem;
+}
+
+.try-button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 25px rgba(168, 85, 247, 0.3);
+	color: white;
+}
+
+@keyframes gradient-shift {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+</style>

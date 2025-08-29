@@ -1,0 +1,40 @@
+{
+  "externalIncludes": {
+    "adapters/express": {
+      "source": "../drizzle-cube/src/adapters/express/README.md",
+      "title": "Express Adapter"
+    },
+    "adapters/fastify": {
+      "source": "../drizzle-cube/src/adapters/fastify/README.md",
+      "title": "Fastify Adapter"
+    },
+    "adapters/nextjs": {
+      "source": "../drizzle-cube/src/adapters/nextjs/README.md",
+      "title": "Next.js Adapter"
+    },
+    "adapters/hono": {
+      "source": "../drizzle-cube/src/adapters/hono/README.md",
+      "title": "Hono Adapter"
+    },
+    "examples/express": {
+      "source": "../drizzle-cube-express/README.md",
+      "title": "Express Example"
+    },
+    "examples/fastify": {
+      "source": "../drizzle-cube-fastify/README.md",
+      "title": "Fastify Example"
+    },
+    "examples/hono": {
+      "source": "../drizzle-cube-hono/README.md",
+      "title": "Hono Example"
+    },
+    "examples/nextjs": {
+      "source": "../drizzle-cube-nextjs/README.md",
+      "title": "Next.js Example"
+    },    
+    "contributing/guidelines": {
+      "source": "../drizzle-cube/CONTRIBUTING.md",
+      "title": "Full contribution guidelines"
+    }
+  }
+}

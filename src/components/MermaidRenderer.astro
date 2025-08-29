@@ -1,0 +1,24 @@
+---
+
+---
+
+<script>
+  import mermaid from 'mermaid';
+
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    securityLevel: 'loose',
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const mermaidElements = document.querySelectorAll('.mermaid');
+    mermaidElements.forEach((element, index) => {
+      const id = `mermaid-${index}`;
+      element.id = id;
+      mermaid.render(id, element.textContent, (svgCode) => {
+        element.innerHTML = svgCode;
+      });
+    });
+  });
+</script>

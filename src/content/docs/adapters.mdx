@@ -1,0 +1,89 @@
+---
+title: Adapters Overview
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Drizzle Cube adapters integrate seamlessly with popular web frameworks, providing framework-specific optimizations while maintaining consistent semantic layer functionality.
+
+## Official Framework Adapters
+
+Choose the adapter that matches your web framework:
+
+<CardGrid>
+  <Card>
+    ## <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/express.svg" alt="Express.js" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /> Express Adapter
+    
+    Full-featured adapter for Express.js with middleware support, request context, and authentication helpers.
+    
+    - [Documentation →](/adapters/express/)
+  </Card>
+
+  <Card>
+    ## <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/fastify.svg" alt="Fastify" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /> Fastify Adapter
+    
+    High-performance adapter optimized for Fastify's plugin system with built-in schema validation.
+    
+    - [Documentation →](/adapters/fastify/)
+  </Card>
+
+  <Card>
+    ## <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/hono.svg" alt="Hono" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /> Hono Adapter
+    
+    Lightweight adapter for Hono framework, perfect for Cloudflare Workers and edge computing environments.
+    
+    - [Documentation →](/adapters/hono/)
+  </Card>
+
+  <Card>
+    ## <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/nextdotjs.svg" alt="Next.js" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /> Next.js Adapter
+    
+    Full-stack adapter with App Router support, server components integration, and optimized client-side caching.
+    
+    - [Documentation →](/adapters/nextjs/)
+  </Card>
+</CardGrid>
+
+## Key Features
+
+All adapters provide:
+
+- **Framework Integration** - Native middleware and plugin patterns
+- **Request Context** - Automatic user context and tenant isolation
+- **Authentication** - Built-in auth helpers and security middleware
+- **Error Handling** - Framework-specific error responses
+- **TypeScript Support** - Full type safety with framework types
+- **Performance Optimizations** - Framework-specific caching and query optimization
+
+## Architecture
+
+Drizzle Cube adapters follow a consistent pattern:
+
+```typescript
+// Initialize your semantic layer
+const cubes = [usersCube, ordersCube, productsCube];
+const semanticLayer = createSemanticLayer({ cubes });
+
+// Create framework-specific adapter
+const adapter = createExpressAdapter(semanticLayer, {
+  // Framework-specific configuration
+  auth: (req) => ({ userId: req.user.id }),
+  errorHandler: (error, req, res, next) => { /* handle errors */ }
+});
+
+// Mount to your framework
+app.use('/api/cube', adapter);
+```
+
+## Custom Adapters
+
+Need support for a different framework? Check out our guide on [building custom adapters](/help/adapters/custom) to integrate Drizzle Cube with any web framework.
+
+## Getting Started
+
+1. **Choose your framework** from the adapters above
+2. **Install the adapter package** via npm
+3. **Follow the documentation** for setup instructions
+4. **Check out the examples** for complete implementation patterns
+
+Each adapter includes comprehensive documentation with setup guides, configuration options, and integration examples.

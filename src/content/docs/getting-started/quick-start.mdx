@@ -1,0 +1,75 @@
+---
+title: Quick Start Guide
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Get started with Drizzle Cube by exploring our complete examples, or build your first semantic layer from scratch in under 10 minutes.
+
+## 🚀 Try a Complete Example
+
+The fastest way to get started is with one of our ready-to-run examples. Each includes a full-stack application with database, API, and React dashboard:
+
+<CardGrid>
+  <Card>
+    ## <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/express.svg" alt="Express.js" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /> Express
+    
+    Express.js server with React client and TypeScript
+    
+    - [View Example →](/examples/express/)
+    - [GitHub Repository →](https://github.com/cliftonc/drizzle-cube-express)
+  </Card>
+  
+  <Card>
+    ## <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/fastify.svg" alt="Fastify" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /> Fastify
+    
+    High-performance Fastify server with React client
+    
+    - [View Example →](/examples/fastify/)
+    - [GitHub Repository →](https://github.com/cliftonc/drizzle-cube-fastify)
+  </Card>
+  
+  <Card>
+    ## <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/hono.svg" alt="Hono" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /> Hono
+    
+    Cloudflare Workers compatible with dashboard management
+    
+    - [View Example →](/examples/hono/)
+    - [GitHub Repository →](https://github.com/cliftonc/drizzle-cube-hono)
+    - [🚀 Live Demo →](https://try.drizzle-cube.dev/)
+  </Card>
+  
+  <Card>
+    ## <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/nextdotjs.svg" alt="Next.js" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /> Next.js
+    
+    Next.js 15 full-stack application with App Router
+    
+    - [View Example →](/examples/nextjs/)
+    - [GitHub Repository →](https://github.com/cliftonc/drizzle-cube-nextjs)
+    - [🚀 Live Demo →](https://nextjs.drizzle-cube.dev/)
+  </Card>
+</CardGrid>
+
+Each example includes:
+- Complete database schema and seed data
+- Semantic layer with cubes, dimensions, and measures  
+- Interactive dashboard with 4 working charts
+- Query builder for exploring your data
+- Multi-tenant security setup
+- Docker Compose for local development
+
+## 🔧 Adding to Your Own Application
+
+If you want to integrate Drizzle Cube into your existing application, the recommended approach is to:
+
+1. **Choose the example** that matches your framework (Express, Fastify, Hono, or Next.js)
+2. **Study the implementation** - Look at how the semantic layer, cubes, and API routes are structured
+3. **Copy the relevant parts** into your own codebase:
+   - Cube definitions and semantic layer setup
+   - API route configuration and security context
+   - Client components and dashboard setup
+
+Rather than building from scratch, copying and adapting an existing example will save you time and ensure you're following proven patterns.
+
+The examples serve as your **starting template** - take what you need and customize it for your specific use case.
+

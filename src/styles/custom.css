@@ -1,0 +1,178 @@
+/* Custom styles for Drizzle Cube documentation */
+
+:root {
+  /* Custom brand colors */
+  --sl-color-accent-low: #1e40af;
+  --sl-color-accent: #3b82f6;
+  --sl-color-accent-high: #60a5fa;
+}
+
+/* Gradient background wrapper for home page gallery */
+.home-gradient-wrapper {
+  background: linear-gradient(135deg, #fce7f3 0%, #e0e7ff 50%, #f3e8ff 100%);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+/* Make site header title text black instead of blue */
+.site-title,
+.site-title a,
+header .site-title,
+header .site-title a,
+.sl-nav .site-title,
+.sl-nav .site-title a {
+  color: #000000 !important;
+}
+
+/* Make 'Embeddable' purple in hero title */
+.hero h1 .embeddable-purple {
+  color: #8b5cf6 !important;
+}
+
+/* Animated gradient button for "Try it Now" */
+.hero .actions a[href="https://try.drizzle-cube.dev"] {
+  background: linear-gradient(-45deg, #fce7f3, #e879f9, #a855f7, #8b5cf6) !important;
+  background-size: 400% 400% !important;
+  animation: gradient-shift 4s ease infinite !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.hero .actions a[href="https://try.drizzle-cube.dev"]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(168, 85, 247, 0.3) !important;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Fix oversized logo in navigation */
+.sl-nav a[aria-current="page"] img,
+.site-title img,
+[data-has-logo] .site-title img {
+  height: 2rem !important;
+  width: auto !important;
+  max-height: 2rem !important;
+}
+
+/* Fix hero image size on splash page */
+.hero img {
+  max-height: 8rem !important;
+  width: auto !important;
+}
+
+/* Ensure regular content images are responsive and reasonably sized */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Content area images should be responsive but respect smaller explicit sizes */
+.sl-markdown-content img:not(.w-10):not([style*="width: 20px"]):not([src*="simple-icons"]) {
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 1rem auto !important;
+  display: block !important;
+  border-radius: 0.5rem !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Small icons and logos should not be affected by large image styling */
+.sl-markdown-content img.w-10,
+.sl-markdown-content img[style*="width: 20px"],
+.sl-markdown-content img[src*="simple-icons"] {
+  margin: 0 !important;
+  display: inline !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Chart images specifically should be smaller */
+img[src*="/charts/"] {
+  max-width: 400px !important;
+  max-height: 300px !important;
+}
+
+/* Card logo images should stay small and not be affected by global rules */
+.sl-card img[src*="simple-icons"] {
+  width: 32px !important;
+  height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
+  margin: 0 0 1rem 0 !important;
+  display: inline-block !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Specific styling for dashboard preview images */
+.dashboard-preview img,
+img[src*="simple_1.png"],
+img[src*="query-builder.png"],
+img[src*="color_1.png"],
+img[src*="schema.png"] {
+  max-width: 300px !important;
+  height: 200px !important;
+  object-fit: cover !important;
+  margin: 0.5rem !important;
+  border-radius: 0.5rem !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+}
+
+/* Simple gallery grid - override default image styling for gallery only */
+.simple-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.simple-gallery img {
+  width: 100% !important;
+  height: 250px !important;
+  object-fit: cover !important;
+  margin: 0 !important;
+  border-radius: 0.5rem !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Responsive: stack on mobile */
+@media (max-width: 768px) {
+  .simple-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Custom styling for tables */
+table {
+  margin: 1rem 0;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--sl-color-hairline);
+}
+
+table th {
+  background-color: var(--sl-color-bg-nav);
+}
+

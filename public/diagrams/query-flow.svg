@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800">
+  <defs>
+    <style>
+      .node { fill: #3b82f6; stroke: #1d4ed8; stroke-width: 2; }
+      .planning-node { fill: #e1f5fe; stroke: #0277bd; stroke-width: 2; color: #0277bd; }
+      .builder-node { fill: #f3e5f5; stroke: #7b1fa2; stroke-width: 2; }
+      .executor-node { fill: #e8f5e8; stroke: #2e7d32; stroke-width: 2; }
+      .text { fill: #1f2937; font-family: Arial, sans-serif; font-size: 11px; text-anchor: middle; font-weight: bold; }
+      .text-blue { fill: #0277bd; font-family: Arial, sans-serif; font-size: 11px; text-anchor: middle; font-weight: bold; }
+      .text-purple { fill: #7b1fa2; font-family: Arial, sans-serif; font-size: 11px; text-anchor: middle; font-weight: bold; }
+      .text-green { fill: #2e7d32; font-family: Arial, sans-serif; font-size: 11px; text-anchor: middle; font-weight: bold; }
+      .group-bg { fill: none; stroke: #e0e0e0; stroke-width: 2; stroke-dasharray: 8,4; rx: 10; }
+      .group-label { fill: #424242; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; text-anchor: start; }
+      .arrow { stroke: #6b7280; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+      .arrow-marker { fill: #6b7280; }
+    </style>
+    <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" class="arrow-marker"/>
+    </marker>
+  </defs>
+  
+  <!-- Initial Steps -->
+  <rect x="225" y="50" width="150" height="40" rx="5" class="node"/>
+  <text x="300" y="75" class="text">Semantic Query API</text>
+  
+  <rect x="225" y="120" width="150" height="40" rx="5" class="node"/>
+  <text x="300" y="145" class="text">Query Validation</text>
+  
+  <!-- Query Planner Group -->
+  <rect x="50" y="190" width="500" height="280" class="group-bg"/>
+  <text x="65" y="210" class="group-label">Query Planner</text>
+  
+  <rect x="225" y="230" width="150" height="40" rx="5" class="planning-node"/>
+  <text x="300" y="255" class="text-blue">Query Planning</text>
+  
+  <rect x="225" y="290" width="150" height="40" rx="5" class="planning-node"/>
+  <text x="300" y="315" class="text-blue">Cube Analysis</text>
+  
+  <rect x="225" y="350" width="150" height="40" rx="5" class="planning-node"/>
+  <text x="300" y="375" class="text-blue">Join Path Detection</text>
+  
+  <rect x="225" y="410" width="150" height="40" rx="5" class="planning-node"/>
+  <text x="300" y="435" class="text-blue">Fan-out Prevention</text>
+  
+  <!-- Query Builder Group -->
+  <rect x="50" y="485" width="500" height="140" class="group-bg"/>
+  <text x="65" y="505" class="group-label">Query Builder</text>
+  
+  <rect x="225" y="525" width="150" height="40" rx="5" class="builder-node"/>
+  <text x="300" y="550" class="text-purple">SQL Generation</text>
+  
+  <rect x="225" y="580" width="150" height="40" rx="5" class="builder-node"/>
+  <text x="300" y="605" class="text-purple">CTE Building</text>
+  
+  <!-- Query Executor Group -->
+  <rect x="50" y="640" width="500" height="140" class="group-bg"/>
+  <text x="65" y="660" class="group-label">Query Executor</text>
+  
+  <rect x="225" y="680" width="150" height="40" rx="5" class="executor-node"/>
+  <text x="300" y="705" class="text-green">Query Execution</text>
+  
+  <rect x="225" y="735" width="150" height="40" rx="5" class="executor-node"/>
+  <text x="300" y="760" class="text-green">Result Processing</text>
+  
+  <!-- Arrows -->
+  <!-- Initial flow -->
+  <path d="M300 90 L300 120" class="arrow"/>
+  <path d="M300 160 L300 230" class="arrow"/>
+  
+  <!-- Sequential flow within Query Planner -->
+  <path d="M300 270 L300 290" class="arrow"/>
+  <path d="M300 330 L300 350" class="arrow"/>
+  <path d="M300 390 L300 410" class="arrow"/>
+  
+  <!-- From Query Planner to Query Builder -->
+  <path d="M300 450 L300 525" class="arrow"/>
+  
+  <!-- Sequential flow within Query Builder -->
+  <path d="M300 565 L300 580" class="arrow"/>
+  
+  <!-- From Query Builder to Query Executor -->
+  <path d="M300 620 L300 680" class="arrow"/>
+  
+  <!-- Sequential flow within Query Executor -->
+  <path d="M300 720 L300 735" class="arrow"/>
+</svg>
