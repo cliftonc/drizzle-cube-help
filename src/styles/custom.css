@@ -15,6 +15,11 @@
   margin: 2rem 0;
 }
 
+/* Much darker background for gallery in dark mode */
+:root[data-theme="dark"] .home-gradient-wrapper {
+  background: linear-gradient(135deg, #1a0d1f 0%, #0f0a1a 50%, #1a0f1f 100%) !important;
+}
+
 /* Make site header title text black instead of blue */
 .site-title,
 .site-title a,
@@ -23,6 +28,28 @@ header .site-title a,
 .sl-nav .site-title,
 .sl-nav .site-title a {
   color: #000000 !important;
+}
+
+/* Make site header title text white in dark mode */
+:root[data-theme="dark"] .site-title,
+:root[data-theme="dark"] .site-title a,
+:root[data-theme="dark"] header .site-title,
+:root[data-theme="dark"] header .site-title a,
+:root[data-theme="dark"] .sl-nav .site-title,
+:root[data-theme="dark"] .sl-nav .site-title a {
+  color: #ffffff !important;
+}
+
+/* Hero title with white text shadow */
+.hero h1 {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
+               0 0 20px rgba(255, 255, 255, 0.6),
+               0 0 30px rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Remove white glow in dark mode */
+:root[data-theme="dark"] .hero h1 {
+  text-shadow: none !important;
 }
 
 /* Make 'Embeddable' purple in hero title */
@@ -68,10 +95,48 @@ header .site-title a,
   max-height: 2rem !important;
 }
 
-/* Fix hero image size on splash page */
-.hero img {
-  max-height: 8rem !important;
+/* Hero dashboard background positioning */
+.hero-dashboard-bg {
+  position: absolute;
+  top: 13%;
+  right: 5%;
+  width: 50%;
+  height: auto;
+  z-index: 0;
+  transform: rotate(-3deg);
+  overflow: visible;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.hero-dashboard-image {
   width: auto !important;
+  height: auto !important;
+  max-height: 28rem !important;
+  filter: drop-shadow(0 25px 50px rgba(139, 92, 246, 0.3)) !important;
+  opacity: 0.9 !important;
+  transition: transform 0.3s ease, filter 0.3s ease !important;
+}
+
+.hero-dashboard-bg:hover .hero-dashboard-image {
+  transform: scale(1.05) !important;
+  filter: drop-shadow(0 30px 60px rgba(139, 92, 246, 0.4)) !important;
+}
+
+/* Darker purple glow for hero image in dark mode */
+:root[data-theme="dark"] .hero-dashboard-image {
+  filter: drop-shadow(0 25px 50px rgba(79, 70, 229, 0.6)) !important;
+}
+
+:root[data-theme="dark"] .hero-dashboard-bg:hover .hero-dashboard-image {
+  filter: drop-shadow(0 30px 60px rgba(79, 70, 229, 0.8)) !important;
+}
+
+/* Hide hero dashboard image on smaller screens */
+@media (max-width: 768px) {
+  .hero-dashboard-bg {
+    display: none;
+  }
 }
 
 /* Ensure regular content images are responsive and reasonably sized */
@@ -150,6 +215,13 @@ img[src*="schema.png"] {
   border-radius: 0.5rem !important;
   border: 1px solid var(--sl-color-hairline) !important;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+  cursor: pointer !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.simple-gallery img:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.25) !important;
 }
 
 /* Responsive: stack on mobile */

@@ -5,9 +5,6 @@ template: splash
 hero:
   title: Drizzle Cube <span class="embeddable-purple">Embeddable</span> Analytics
   tagline: Open source analytics solution for platform builders. Deliver scalable, type-safe dashboarding capabilities directly to your users with zero infrastructure overhead.
-  image:
-    file: ../../assets/drizzle-cube.png
-    alt: Drizzle Cube logo
   actions:
     - text: Get Started
       link: /getting-started/
@@ -25,13 +22,20 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 import { Image } from 'astro:assets';
+import dashboardHero from '../../assets/dashboard-hero.png';
+import Lightbox from '../../components/Lightbox.astro';
+
+
+<div class="hero-dashboard-bg lightbox-trigger">
+  <Image src={dashboardHero} alt="Complete Analytics Toolkit - Allow your users to create their own dashboards with your data" class="hero-dashboard-image" />
+</div>
 
 <div class="home-gradient-wrapper">
 <div class="simple-gallery">
-  <Image src="/simple_1.png" alt="Drizzle Cube dashboard showing key metrics" width="400" height="250" />
-  <Image src="/query-builder.png" alt="Drizzle Cube Query Builder interface" width="400" height="250" />
-  <Image src="/color_1.png" alt="Analytics visualization showing productivity metrics" width="400" height="250" />
-  <Image src="/schema.png" alt="Schema diagram showing analytics relationships" width="400" height="250" />
+  <Image src="/simple_1.png" alt="Create rich and flexible dashboards with 10+ chart types and rich configuration" width="400" height="250" class="lightbox-trigger" />
+  <Image src="/query-builder.png" alt="Intuitive query builder for building analytics queries with drag-and-drop functionality" width="400" height="250" class="lightbox-trigger" />
+  <Image src="/color_1.png" alt="Drag drop page editing and out of the box functionality to get you going quickly" width="400" height="250" class="lightbox-trigger" />
+  <Image src="/schema.png" alt="Interactive diagram showing data relationships and semantic layer structure" width="400" height="250" class="lightbox-trigger" />
 </div>
 </div>
 
@@ -97,6 +101,10 @@ import { Image } from 'astro:assets';
     Contact us to showcase your project
   </Card>
 </CardGrid>
+
+<div style="display: none; visibility: hidden; position: absolute; left: -9999px;">
+  <Lightbox src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="" />
+</div>
 
 ## Need More Help?
 

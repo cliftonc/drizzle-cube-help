@@ -80,6 +80,13 @@ export default defineConfig({
 						content: 'https://drizzle-cube.com/drizzle-og.png',
 					},
 				},
+				{
+					tag: 'script',
+					attrs: {
+						async: true,
+						src: 'https://scripts.simpleanalyticscdn.com/latest.js',
+					},
+				},
 			],
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/cliftonc/drizzle-cube' },
