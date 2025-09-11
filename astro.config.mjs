@@ -4,6 +4,7 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://www.drizzle-cube.dev',
 	integrations: [
 		starlight({
 			title: 'Drizzle Cube',

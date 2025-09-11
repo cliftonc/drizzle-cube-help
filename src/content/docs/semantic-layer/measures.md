@@ -680,10 +680,10 @@ conversionRate: {
 
 ## Next Steps
 
-- Learn about [Dimensions](/help/semantic-layer/dimensions) for categorical data
-- Explore [Joins](/help/semantic-layer/joins) for multi-cube relationships
-- Understand [Cubes](/help/semantic-layer/cubes) structure and organization
-- Review [Security](/help/semantic-layer/security) patterns and best practices
+- Learn about [Dimensions](/semantic-layer/dimensions) for categorical data
+- Explore [Joins](/semantic-layer/joins) for multi-cube relationships
+- Understand [Cubes](/semantic-layer/cubes) structure and organization
+- Review [Security](/semantic-layer/security) patterns and best practices
 
 ## Roadmap Ideas
 

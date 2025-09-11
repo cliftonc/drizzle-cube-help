@@ -490,7 +490,7 @@ Handle various error scenarios:
 
 ## Next Steps
 
-- Explore [Charts](/help/client/charts) to visualize Query Builder results
-- Learn about [Dashboards](/help/client/dashboards) for multi-query interfaces
-- Check out [React Hooks](/help/client/hooks) for programmatic query building
-- See [Examples](/help/examples) for complete implementations
+- Explore [Charts](/client/charts) to visualize Query Builder results
+- Learn about [Dashboards](/client/dashboards) for multi-query interfaces
+- Check out [React Hooks](/client/hooks) for programmatic query building
+- See [Examples](/examples) for complete implementations

@@ -121,9 +121,9 @@ Security is built into every layer:
 
 Ready to get started? Here's what to do next:
 
-1. [**Quick Start**](/help/getting-started/quick-start) - Build your first semantic layer
-2. [**Scaling Your SaaS**](/help/getting-started/scaling) - Learn how Drizzle Cube grows with your business
-3. [**Semantic Layer**](/help/semantic-layer) - Deep dive into cubes, dimensions, and measures
+1. [**Quick Start**](/getting-started/quick-start) - Build your first semantic layer
+2. [**Scaling Your SaaS**](/getting-started/scaling) - Learn how Drizzle Cube grows with your business
+3. [**Semantic Layer**](/semantic-layer) - Deep dive into cubes, dimensions, and measures
 
 ## Community and Support
 

@@ -541,7 +541,7 @@ const userCohorts = {
 
 ## Next Steps
 
-- Learn about [Measures](/help/semantic-layer/measures) for time-based aggregations
-- Explore [Dimensions](/help/semantic-layer/dimensions) for categorical analysis
-- Review [Query Builder](/help/client/query-builder) for interactive time controls
-- See [Performance](/help/advanced/performance) for time dimension optimization
+- Learn about [Measures](/semantic-layer/measures) for time-based aggregations
+- Explore [Dimensions](/semantic-layer/dimensions) for categorical analysis
+- Review [Query Builder](/client/query-builder) for interactive time controls
+- See [Performance](/advanced/performance) for time dimension optimization

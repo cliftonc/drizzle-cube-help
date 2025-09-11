@@ -278,8 +278,8 @@ A: Use feature flags or environment variables to A/B test cube implementations.
 
 Ready to scale your analytics?
 
-- **Small SaaS**: Start with [Quick Start](/help/getting-started/quick-start) guide
-- **Growing SaaS**: Learn about [Performance](/help/advanced/performance) optimization
-- **Enterprise**: Explore [Advanced TypeScript](/help/advanced/typescript) patterns
+- **Small SaaS**: Start with [Quick Start](/getting-started/quick-start) guide
+- **Growing SaaS**: Learn about [Performance](/advanced/performance) optimization
+- **Enterprise**: Explore [Advanced TypeScript](/advanced/typescript) patterns
 
 Remember: **Start simple, scale smart**. Drizzle Cube grows with you! 🚀

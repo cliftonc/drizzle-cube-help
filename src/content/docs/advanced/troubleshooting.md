@@ -678,8 +678,8 @@ function generateDiagnosticReport() {
 
 ## Next Steps
 
-- Review [Performance](/help/advanced/performance) optimization techniques
-- Learn about [TypeScript](/help/advanced/typescript) advanced patterns
+- Review [Performance](/advanced/performance) optimization techniques
+- Learn about [TypeScript](/advanced/typescript) advanced patterns
 - Check the repository for example implementations
 - Set up proper monitoring and logging
 

@@ -659,6 +659,6 @@ function QueryBuilder({ query, onChange }) {
 
 ## Next Steps
 
-- [**Charts**](/help/client/charts) - Detailed chart documentation
-- [**Dashboards**](/help/client/dashboards) - Dashboard customization  
-- [**Hooks**](/help/client/hooks) - Advanced hook usage
+- [**Charts**](/client/charts) - Detailed chart documentation
+- [**Dashboards**](/client/dashboards) - Dashboard customization  
+- [**Hooks**](/client/hooks) - Advanced hook usage

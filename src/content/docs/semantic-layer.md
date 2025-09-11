@@ -289,8 +289,8 @@ dimensions: {
 
 ## Next Steps
 
-- [**Cubes**](/help/semantic-layer/cubes) - Deep dive into cube definitions
-- [**Dimensions**](/help/semantic-layer/dimensions) - Advanced dimension patterns
-- [**Measures**](/help/semantic-layer/measures) - Custom calculations and aggregations
-- [**Joins**](/help/semantic-layer/joins) - Multi-cube query patterns
-- [**Security**](/help/semantic-layer/security) - Advanced security patterns
+- [**Cubes**](/semantic-layer/cubes) - Deep dive into cube definitions
+- [**Dimensions**](/semantic-layer/dimensions) - Advanced dimension patterns
+- [**Measures**](/semantic-layer/measures) - Custom calculations and aggregations
+- [**Joins**](/semantic-layer/joins) - Multi-cube query patterns
+- [**Security**](/semantic-layer/security) - Advanced security patterns

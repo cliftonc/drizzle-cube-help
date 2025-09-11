@@ -132,7 +132,7 @@ dimensions: {
 }
 ```
 
-**Time dimensions have special usage patterns** and are used in the `timeDimensions` array with granularity and date range support. See the comprehensive [Time Dimensions](/help/semantic-layer/time-dimensions) guide for:
+**Time dimensions have special usage patterns** and are used in the `timeDimensions` array with granularity and date range support. See the comprehensive [Time Dimensions](/semantic-layer/time-dimensions) guide for:
 
 - Granularity options (year, quarter, month, week, day, hour)
 - Flexible date ranges (relative like "last 30 days" and absolute)
@@ -417,10 +417,10 @@ category: {
 
 ## Next Steps
 
-- Explore [Time Dimensions](/help/semantic-layer/time-dimensions) for comprehensive date range and time-series analytics
-- Learn about [Measures](/help/semantic-layer/measures) for metrics and aggregations
-- Explore [Joins](/help/semantic-layer/joins) for multi-cube relationships  
-- Review [Security](/help/semantic-layer/security) patterns
+- Explore [Time Dimensions](/semantic-layer/time-dimensions) for comprehensive date range and time-series analytics
+- Learn about [Measures](/semantic-layer/measures) for metrics and aggregations
+- Explore [Joins](/semantic-layer/joins) for multi-cube relationships  
+- Review [Security](/semantic-layer/security) patterns
 
 ## Roadmap Ideas
 

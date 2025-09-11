@@ -304,10 +304,10 @@ sql: (ctx) => ({
 
 ## Next Steps
 
-- Learn about [Dimensions](/help/semantic-layer/dimensions) to understand categorical data
-- Explore [Measures](/help/semantic-layer/measures) for metrics and aggregations  
-- Understand [Joins](/help/semantic-layer/joins) for multi-cube relationships
-- Review [Security](/help/semantic-layer/security) for multi-tenant patterns
+- Learn about [Dimensions](/semantic-layer/dimensions) to understand categorical data
+- Explore [Measures](/semantic-layer/measures) for metrics and aggregations  
+- Understand [Joins](/semantic-layer/joins) for multi-cube relationships
+- Review [Security](/semantic-layer/security) for multi-tenant patterns
 
 ## Roadmap Ideas
 
