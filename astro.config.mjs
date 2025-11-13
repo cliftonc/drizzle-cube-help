@@ -130,6 +130,7 @@ export default defineConfig({
 						{ label: 'Charts', slug: 'client/charts' },
 						{ label: 'Dashboards', slug: 'client/dashboards' },
 						{ label: 'Hooks', slug: 'client/hooks' },
+						{ label: 'Theming', slug: 'client/theming' },
 					],
 				},
 				{

@@ -265,6 +265,43 @@ UserProfiles: {
 }
 ```
 
+**belongsToMany** - Many-to-many relationship through junction table:
+```typescript
+// Employees connected to Departments through TimeEntries junction table
+DepartmentsViaTimeEntries: {
+  targetCube: () => departmentsCube,
+  relationship: 'belongsToMany',
+  on: [], // Not used for belongsToMany
+  through: {
+    table: timeEntries,              // Junction/pivot table
+    sourceKey: [
+      { source: employees.id, target: timeEntries.employeeId }
+    ],
+    targetKey: [
+      { source: timeEntries.departmentId, target: departments.id }
+    ],
+    // Optional: Security filtering on junction table
+    securitySql: (securityContext) =>
+      eq(timeEntries.organisationId, securityContext.organisationId)
+  }
+}
+```
+
+**Key Features of belongsToMany:**
+- **Automatic Junction Table Handling** - The system transparently handles the intermediate table
+- **Security Context** - Apply security filters to the junction table using `securitySql`
+- **Multi-Column Support** - Both `sourceKey` and `targetKey` support multiple columns for composite keys
+- **Transparent Querying** - Query dimensions from the target cube normally; the junction table is handled automatically
+
+**Example Query Using belongsToMany:**
+```typescript
+// Query employee count by department (through time entries)
+const result = await semanticLayer.execute({
+  measures: ['Employees.count'],
+  dimensions: ['DepartmentsViaTimeEntries.name'] // Uses the many-to-many join
+}, securityContext)
+```
+
 ### Advanced Cube Join Features
 
 **Multi-Column Joins** - Join on multiple columns:
