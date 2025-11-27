@@ -21,7 +21,8 @@ Compare values across categories
 | showLegend | boolean | Show/hide chart legend |
 | showGrid | boolean | Show/hide grid lines |
 | showTooltip | boolean | Show/hide hover tooltips |
-| stacked | boolean | Stack bars for grouped data |
+| stackType | select | Stacking mode: `none` (default), `normal` (stacked), or `percent` (stacked to 100%) |
+| target | string | Target value(s) shown as reference line |
 
 ---
 
@@ -40,6 +41,8 @@ Show trends and changes over time
 | showLegend | boolean | Show/hide chart legend |
 | showGrid | boolean | Show/hide grid lines |
 | showTooltip | boolean | Show/hide hover tooltips |
+| connectNulls | boolean | Draw continuous line through missing data points (default: false shows gaps) |
+| target | string | Target value(s) shown as reference line |
 
 ---
 
@@ -58,7 +61,9 @@ Emphasize magnitude of change over time
 | showLegend | boolean | Show/hide chart legend |
 | showGrid | boolean | Show/hide grid lines |
 | showTooltip | boolean | Show/hide hover tooltips |
-| stacked | boolean | Stack areas for grouped data |
+| stackType | select | Stacking mode: `none` (default), `normal` (stacked), or `percent` (stacked to 100%) |
+| connectNulls | boolean | Draw continuous line through missing data points (default: false shows gaps) |
+| target | string | Target value(s) shown as reference line |
 
 ---
 
@@ -219,6 +224,7 @@ Display key performance indicators as large numbers
 | prefix | string | Text to display before the number |
 | suffix | string | Text to display after the number |
 | decimals | number | Number of decimal places to display |
+| formatValue | function | Custom value formatter (takes precedence over prefix/suffix/decimals) |
 | valueColorIndex | number | Color from dashboard palette for the KPI value |
 
 ---
@@ -237,6 +243,7 @@ Display key performance indicators as customizable text
 |--------|------|-------------|
 | template | string | Template for displaying text. Use ${value} to insert measure value |
 | decimals | number | Number of decimal places to display for numeric values |
+| formatValue | function | Custom value formatter for numeric values in templates |
 | valueColorIndex | number | Color from dashboard palette for the KPI value text |
 
 ---
@@ -257,4 +264,138 @@ Display custom markdown content with formatting
 | accentColorIndex | number | Color from dashboard palette for headers, bullets, and links |
 | fontSize | string | Overall text size (small, medium, large) |
 | alignment | string | Horizontal alignment (left, center, right) |
+
+---
+
+## Custom Value Formatting
+
+### The `formatValue` Function
+
+KPI charts (KPI Number, KPI Text, and KPI Delta) support a powerful `formatValue` callback function that allows you to completely customize how numeric values are displayed. This is particularly useful for:
+
+- **Time-based metrics** - Convert hours to days/hours/minutes automatically
+- **Custom units** - Display values with context-aware units
+- **Special cases** - Handle edge cases like "< 1", "N/A", or "∞"
+- **Locale-specific formatting** - Use Intl.NumberFormat for currency, percentages, etc.
+
+#### How It Works
+
+When you provide a `formatValue` function in your chart's `displayConfig`, it takes complete control of value formatting and **overrides** the `prefix`, `suffix`, and `decimals` options. The formatter receives the raw numeric value (including `null` or `undefined`) and returns a formatted string to display.
+
+```typescript
+interface ChartDisplayConfig {
+  formatValue?: (value: number | null | undefined) => string
+}
+```
+
+#### Basic Example: Smart Time Formatting
+
+One of the most common use cases is formatting time-based metrics. Here's a formatter that automatically chooses the best unit (hours vs days):
+
+```typescript
+function formatSmartTime(hours: number | null | undefined): string {
+  // Handle null/undefined values gracefully
+  if (hours === null || hours === undefined || Number.isNaN(hours)) {
+    return 'N/A'
+  }
+
+  // Show "< 1 hour" for very small values
+  if (hours < 1) {
+    return '< 1 hour'
+  }
+
+  // Show in hours for values under 2 days
+  if (hours < 48) {
+    return `${hours.toFixed(1)} hours`
+  }
+
+  // Show in days for longer timeframes
+  const days = hours / 24
+  return `${days.toFixed(1)} days`
+}
+```
+
+**Usage in a portlet:**
+
+```jsx
+<AnalyticsPortlet
+  title="Median Lead Time"
+  query={JSON.stringify({
+    measures: ['DORAMetrics.medianLeadTimeHours'],
+    timeDimensions: [{
+      dimension: 'DORAMetrics.deployedAt',
+      dateRange: 'last 30 days'
+    }]
+  })}
+  chartType="kpiNumber"
+  displayConfig={{
+    formatValue: formatSmartTime,
+    valueColorIndex: 1
+  }}
+/>
+```
+
+**Results:**
+- `120.5` hours → `"5.0 days"`
+- `24.0` hours → `"24.0 hours"`
+- `0.5` hours → `"< 1 hour"`
+- `null` → `"N/A"`
+
+#### More Examples
+
+**Currency Formatting:**
+```typescript
+const formatCurrency = (value: number | null | undefined): string => {
+  if (!value) return '$0.00'
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  }).format(value)
+}
+
+// Usage
+displayConfig: {
+  formatValue: formatCurrency
+}
+```
+
+**Percentage with Threshold:**
+```typescript
+const formatPercentage = (value: number | null | undefined): string => {
+  if (value === null || value === undefined) return 'N/A'
+  if (value < 0.1) return '< 0.1%'
+  return `${value.toFixed(1)}%`
+}
+```
+
+**File Size Formatting:**
+```typescript
+const formatFileSize = (bytes: number | null | undefined): string => {
+  if (!bytes) return '0 B'
+  if (bytes < 1024) return `${bytes} B`
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+}
+```
+
+#### Best Practices
+
+1. **Always handle null/undefined** - Your formatter will receive these values, so handle them gracefully
+2. **Return strings** - The formatter must return a string, not a number
+3. **Keep it fast** - The formatter may be called multiple times during rendering
+4. **Be consistent** - Use the same formatter for related metrics across your dashboard
+5. **Consider edge cases** - Think about very large, very small, zero, and negative values
+
+#### When to Use formatValue vs prefix/suffix
+
+Use **formatValue** when:
+- The unit changes based on the value (e.g., hours vs days)
+- You need complex logic (e.g., "< 1", thresholds)
+- You want locale-specific formatting
+- You need to handle null/undefined specially
+
+Use **prefix/suffix/decimals** when:
+- You just need simple static text before/after numbers
+- The formatting is straightforward
+- You want to configure it via the UI without code
 
