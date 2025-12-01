@@ -219,13 +219,70 @@ Display key performance indicators as large numbers
 
 **Display Options:**
 
-| Option | Type | Description |
-|--------|------|-------------|
-| prefix | string | Text to display before the number |
-| suffix | string | Text to display after the number |
-| decimals | number | Number of decimal places to display |
-| formatValue | function | Custom value formatter (takes precedence over prefix/suffix/decimals) |
-| valueColorIndex | number | Color from dashboard palette for the KPI value |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| target | string | | Target value to compare against (shows variance) |
+| prefix | string | | Text to display before the number |
+| suffix | string | | Text to display after the number |
+| decimals | number | 0 | Number of decimal places to display |
+| formatValue | function | | Custom value formatter (takes precedence over prefix/suffix/decimals) |
+| valueColorIndex | number | 0 | Color from dashboard palette for the KPI value |
+| useLastCompletePeriod | boolean | true | Exclude current incomplete period from aggregation (e.g., partial week/month) |
+| skipLastPeriod | boolean | false | Always exclude the last period regardless of completeness |
+
+**Period Handling:**
+
+When working with time-series data, the last period (week, month, etc.) is often incomplete, which can skew KPI values. The period handling options help address this:
+
+- **Use Last Complete Period** (default: on) - Automatically detects if the last period is incomplete based on the current date and excludes it. For example, if today is Wednesday and you're viewing weekly data, the current partial week will be excluded.
+
+- **Skip Last Period** - Always excludes the last period regardless of whether it's complete. Useful when you always want to show the previous period's data for consistency, or when working with test data.
+
+When either option filters out data, an info icon (ℹ️) appears next to the metric label with a tooltip explaining what was excluded.
+
+---
+
+### KPI Delta
+
+Display change between periods with trend indicators
+
+![KPI Delta](/charts/kpi_delta.png)
+
+**Use Case:** Perfect for showing performance changes over time, such as revenue growth, user acquisition changes, or metrics where the trend and delta are more important than the absolute value
+
+**Display Options:**
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| prefix | string | | Text to display before numbers |
+| suffix | string | | Text to display after numbers |
+| decimals | number | 1 | Number of decimal places to display |
+| positiveColorIndex | number | 2 | Color from dashboard palette for positive changes |
+| negativeColorIndex | number | 3 | Color from dashboard palette for negative changes |
+| showHistogram | boolean | true | Display historical variance chart below the delta |
+| useLastCompletePeriod | boolean | true | Exclude current incomplete period from delta calculation |
+| skipLastPeriod | boolean | false | Always exclude the last period regardless of completeness |
+
+**How It Works:**
+
+KPI Delta calculates and displays:
+1. **Current Value** - The most recent period's value (large number)
+2. **Absolute Change** - The difference from the previous period (e.g., +2K)
+3. **Percentage Change** - The relative change (e.g., +15.3%)
+4. **Variance Histogram** - Visual comparison of historical periods against the current value
+
+**Period Handling:**
+
+The same period handling options available in KPI Number apply here:
+
+- **Use Last Complete Period** (default: on) - Detects and excludes incomplete current periods. This is especially important for delta calculations, as an incomplete period (e.g., showing 0 for the current week when it's only Monday) would show a misleading -100% change.
+
+- **Skip Last Period** - Always excludes the last period. Use this when you want consistent behavior regardless of the current date, or when your data pipeline has incomplete recent data.
+
+**Example:** With weekly granularity on a Wednesday:
+- Without filtering: Shows current (partial) week vs last week → misleading delta
+- With `useLastCompletePeriod`: Shows last complete week vs week before → accurate delta
+- With `skipLastPeriod`: Always shows previous week vs week before that → consistent
 
 ---
 
