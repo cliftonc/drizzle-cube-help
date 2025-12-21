@@ -418,6 +418,60 @@ Apply custom styling and themes:
 </style>
 ```
 
+### Custom Loading Indicator
+
+Customize the loading spinner shown while portlets are fetching data. By default, a theme-aware spinner is displayed using `var(--dc-primary)` for the color.
+
+**Dashboard-level override** - applies to all portlets:
+
+```tsx
+import { AnalyticsDashboard } from 'drizzle-cube/client'
+
+// Custom loading component
+const MyCustomLoader = () => (
+  <div className="flex items-center justify-center">
+    <img
+      src="/my-logo.png"
+      alt="Loading..."
+      className="h-10 w-10 animate-spin"
+    />
+  </div>
+)
+
+// Apply to all portlets in the dashboard
+<AnalyticsDashboard
+  config={config}
+  editable={true}
+  loadingComponent={<MyCustomLoader />}
+/>
+```
+
+**Portlet-level override** - when using `AnalyticsPortlet` directly:
+
+```tsx
+import { AnalyticsPortlet } from 'drizzle-cube/client'
+
+<AnalyticsPortlet
+  query={query}
+  chartType="bar"
+  chartConfig={chartConfig}
+  loadingComponent={<MyCustomLoader />}
+/>
+```
+
+**Using the built-in LoadingIndicator with different sizes:**
+
+```tsx
+import { LoadingIndicator } from 'drizzle-cube/client'
+
+// Available sizes: 'sm' (24px), 'md' (32px), 'lg' (48px)
+<LoadingIndicator size="lg" />
+<LoadingIndicator size="md" />  // default
+<LoadingIndicator size="sm" />
+```
+
+The default `LoadingIndicator` component uses `var(--dc-primary)` for its color, so it automatically adapts to your theme settings.
+
 ### Dashboard Persistence
 
 Save and load dashboard configurations:

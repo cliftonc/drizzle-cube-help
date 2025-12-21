@@ -9,6 +9,7 @@ Time dimensions are specialized dimensions that represent dates, timestamps, and
 Time dimensions in Drizzle Cube provide:
 - **Granular Time Analysis**: Break down data by year, quarter, month, week, day, or hour
 - **Flexible Date Ranges**: Support for relative dates ("last 30 days") and absolute ranges
+- **Continuous Time Series**: Automatic gap filling ensures charts display without discontinuities
 - **Type-Safe Queries**: Full TypeScript support with Drizzle schema integration
 - **Time Zone Handling**: Consistent UTC-based calculations
 - **Performance Optimization**: Efficient query generation for time-based filters
@@ -239,6 +240,143 @@ const complexTimeQuery = {
   ]
 }
 ```
+
+## Gap Filling for Continuous Time Series
+
+When displaying time series data in charts, gaps in the data (dates with no records) can make visualizations look discontinuous. Drizzle Cube automatically fills these gaps by default, ensuring your charts show continuous time series.
+
+### Default Behavior
+
+Gap filling is **enabled by default** for time dimensions with both `granularity` and `dateRange` specified:
+
+```typescript
+const query = {
+  measures: ["Sales.revenue"],
+  timeDimensions: [{
+    dimension: "Sales.date",
+    granularity: "day",
+    dateRange: ["2024-01-01", "2024-01-07"]
+    // fillMissingDates defaults to true
+  }]
+}
+
+// Returns 7 rows - one for each day
+// Days without data have revenue: 0
+```
+
+### Disabling Gap Filling
+
+Set `fillMissingDates: false` to return only rows where data exists:
+
+```typescript
+const query = {
+  measures: ["Sales.revenue"],
+  timeDimensions: [{
+    dimension: "Sales.date",
+    granularity: "day",
+    dateRange: ["2024-01-01", "2024-01-07"],
+    fillMissingDates: false  // Only return days with actual data
+  }]
+}
+
+// Returns only days that have sales records
+```
+
+### Custom Fill Value
+
+By default, gaps are filled with `0` for all measures. Use `fillMissingDatesValue` to specify a different fill value:
+
+```typescript
+const query = {
+  measures: ["Sales.revenue", "Sales.count"],
+  timeDimensions: [{
+    dimension: "Sales.date",
+    granularity: "day",
+    dateRange: ["2024-01-01", "2024-01-07"]
+  }],
+  fillMissingDatesValue: null  // Fill gaps with null instead of 0
+}
+```
+
+### Gap Filling with Dimensions
+
+When your query includes regular dimensions, gaps are filled **within each dimension group**:
+
+```typescript
+const query = {
+  measures: ["Sales.revenue"],
+  dimensions: ["Sales.region"],
+  timeDimensions: [{
+    dimension: "Sales.date",
+    granularity: "day",
+    dateRange: ["2024-01-01", "2024-01-03"]
+  }]
+}
+
+// Input data (from database):
+// { date: "2024-01-01", region: "US", revenue: 100 }
+// { date: "2024-01-03", region: "US", revenue: 150 }
+// { date: "2024-01-01", region: "EU", revenue: 80 }
+
+// Output (with gap filling):
+// { date: "2024-01-01", region: "US", revenue: 100 }
+// { date: "2024-01-02", region: "US", revenue: 0 }    // Filled
+// { date: "2024-01-03", region: "US", revenue: 150 }
+// { date: "2024-01-01", region: "EU", revenue: 80 }
+// { date: "2024-01-02", region: "EU", revenue: 0 }    // Filled
+// { date: "2024-01-03", region: "EU", revenue: 0 }    // Filled
+```
+
+### When Gap Filling is Skipped
+
+Gap filling is automatically skipped when:
+- No `granularity` is specified (raw timestamp queries)
+- No `dateRange` is specified (unbounded queries)
+- `fillMissingDates: false` is explicitly set
+
+```typescript
+// No gap filling - missing granularity
+const rawQuery = {
+  measures: ["Sales.revenue"],
+  timeDimensions: [{
+    dimension: "Sales.date",
+    dateRange: ["2024-01-01", "2024-01-07"]
+    // No granularity - gaps not filled
+  }]
+}
+
+// No gap filling - missing dateRange
+const unboundedQuery = {
+  measures: ["Sales.revenue"],
+  timeDimensions: [{
+    dimension: "Sales.date",
+    granularity: "day"
+    // No dateRange - cannot determine bounds
+  }]
+}
+```
+
+### Supported Granularities
+
+Gap filling works with all time granularities:
+
+| Granularity | Gap Interval |
+|-------------|--------------|
+| `year` | 1 year |
+| `quarter` | 3 months |
+| `month` | 1 month |
+| `week` | 7 days (aligned to Monday) |
+| `day` | 1 day |
+| `hour` | 1 hour |
+| `minute` | 1 minute |
+| `second` | 1 second |
+
+### Best Practices
+
+1. **Enable for charts**: Keep gap filling enabled (default) for line charts and area charts
+2. **Disable for tables**: Consider disabling for data tables where you only want actual records
+3. **Use null for averages**: Set `fillMissingDatesValue: null` when computing averages to avoid skewing results with zeros
+4. **Mind the date range**: Large date ranges with fine granularities generate many rows
 
 ## Time Dimension Filtering
 
