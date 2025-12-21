@@ -206,7 +206,7 @@ import { CubeProvider } from 'drizzle-cube/client';
 
 function App() {
   return (
-    <CubeProvider 
+    <CubeProvider
       apiOptions={{
         apiUrl: '/api/cube',
         headers: {
@@ -220,6 +220,50 @@ function App() {
   );
 }
 ```
+
+#### Credentials Configuration
+
+By default, the client includes cookies with all requests (`credentials: 'include'`). This is useful for cookie-based session authentication. However, if you're using token-based authentication (JWT, API keys, etc.), you can disable this:
+
+```tsx
+// Token-based auth without cookies
+<CubeProvider
+  apiOptions={{
+    apiUrl: '/api/cube',
+    credentials: 'omit',  // Don't send cookies
+    headers: {
+      'Authorization': 'Bearer your-jwt-token'
+    }
+  }}
+>
+  {/* Your dashboard components */}
+</CubeProvider>
+
+// Same-origin cookies only
+<CubeProvider
+  apiOptions={{
+    apiUrl: '/api/cube',
+    credentials: 'same-origin'  // Only send cookies to same origin
+  }}
+>
+  {/* Your dashboard components */}
+</CubeProvider>
+
+// Default behavior (cookies always included)
+<CubeProvider
+  apiOptions={{
+    apiUrl: '/api/cube',
+    credentials: 'include'  // Default - include cookies for cross-origin requests
+  }}
+>
+  {/* Your dashboard components */}
+</CubeProvider>
+```
+
+**Credentials Options:**
+- `'include'` (default) - Always send cookies, even for cross-origin requests
+- `'same-origin'` - Only send cookies if the request URL is on the same origin
+- `'omit'` - Never send cookies
 
 ### AnalyticsDashboard
 
