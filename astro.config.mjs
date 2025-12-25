@@ -94,6 +94,7 @@ export default defineConfig({
 			],
 			components: {
 				SocialIcons: './src/components/SocialIcons.astro',
+				Header: './src/components/Header.astro',
 			},
 			logo: {
 				src: './src/assets/drizzle-cube.png',

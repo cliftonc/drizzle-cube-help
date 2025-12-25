@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.15% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/19</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/4</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.15% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/19</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -107,7 +107,10 @@
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -123,35 +126,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">135x</span>
-<span class="cline-any cline-yes">135x</span>
-<span class="cline-any cline-yes">135x</span>
-<span class="cline-any cline-yes">135x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">135x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">135x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">135x</span>
-<span class="cline-any cline-yes">135x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">244x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">207x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Database Adapter Factory
  * Creates appropriate database adapters based on engine type
  * Provides centralized adapter management and instantiation
@@ -161,22 +167,25 @@ import type { DatabaseAdapter } from './adapters/base-adapter'
 import { PostgresAdapter } from './adapters/postgres-adapter'
 import { MySQLAdapter } from './adapters/mysql-adapter'
 import { SQLiteAdapter } from './adapters/sqlite-adapter'
+import { SingleStoreAdapter } from './adapters/singlestore-adapter'
 &nbsp;
 /**
  * Create a database adapter for the specified engine type
  * @param engineType - The database engine type
  * @returns Database adapter instance
  */
-export function createDatabaseAdapter(engineType: 'postgres' | 'mysql' | 'sqlite'): DatabaseAdapter {
+export function createDatabaseAdapter(engineType: 'postgres' | 'mysql' | 'sqlite' | 'singlestore'): DatabaseAdapter {
   switch (engineType) {
     case 'postgres':
       return new PostgresAdapter()
-<span class="branch-0 cbranch-no" title="branch not covered" >    case 'mysql':</span>
-<span class="cstat-no" title="statement not covered" >      return new MySQLAdapter()</span>
-<span class="branch-0 cbranch-no" title="branch not covered" >    case 'sqlite':</span>
-<span class="cstat-no" title="statement not covered" >      return new SQLiteAdapter()</span>
-<span class="branch-0 cbranch-no" title="branch not covered" >    default:</span>
-<span class="cstat-no" title="statement not covered" >      throw new Error(`Unsupported database engine: ${engineType}`)</span>
+    case 'mysql':
+      return new MySQLAdapter()
+    case 'sqlite':
+      return new SQLiteAdapter()
+    case 'singlestore':
+      return new SingleStoreAdapter()
+    default:
+      throw new Error(`Unsupported database engine: ${engineType}`)
   }
 }
 &nbsp;
@@ -184,25 +193,25 @@ export function createDatabaseAdapter(engineType: 'postgres' | 'mysql' | 'sqlite
  * Get available database adapters
  * @returns Array of supported engine types
  */
-export <span class="fstat-no" title="function not covered" >function getSupportedEngines(): ('postgres' | 'mysql' | 'sqlite')[] {</span>
-<span class="cstat-no" title="statement not covered" >  return ['postgres', 'mysql', 'sqlite']</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+export function getSupportedEngines(): ('postgres' | 'mysql' | 'sqlite' | 'singlestore')[] {
+  return ['postgres', 'mysql', 'sqlite', 'singlestore']
+}
 &nbsp;
 /**
  * Check if an engine type is supported
  * @param engineType - Engine type to check
  * @returns True if supported, false otherwise
  */
-export <span class="fstat-no" title="function not covered" >function isEngineSupported(engineType: string): engineType is 'postgres' | 'mysql' | 'sqlite' {</span>
-<span class="cstat-no" title="statement not covered" >  return ['postgres', 'mysql', 'sqlite'].includes(engineType)</span>
-<span class="cstat-no" title="statement not covered" >}</span></pre></td></tr></table></pre>
+export function isEngineSupported(engineType: string): engineType is 'postgres' | 'mysql' | 'sqlite' | 'singlestore' {
+  return ['postgres', 'mysql', 'sqlite', 'singlestore'].includes(engineType)
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-27T16:52:58.675Z
+                at 2025-12-24T09:56:02.763Z
             </div>
         <script src="../prettify.js"></script>
         <script>

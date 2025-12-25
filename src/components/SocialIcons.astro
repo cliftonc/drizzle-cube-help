@@ -4,11 +4,35 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <Default {...Astro.props} />
+<a href="/coverage/" class="coverage-link">
+	Coverage
+</a>
 <a href="https://try.drizzle-cube.dev" class="try-button">
 	Try it Now
 </a>
 
 <style>
+.coverage-link {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.5rem 1rem;
+	background: transparent;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.5rem;
+	color: var(--sl-color-text);
+	font-weight: 500;
+	font-size: 0.875rem;
+	text-decoration: none;
+	transition: background 0.2s ease, border-color 0.2s ease;
+	margin-left: 1rem;
+}
+
+.coverage-link:hover {
+	background: var(--sl-color-gray-6);
+	border-color: var(--sl-color-gray-4);
+	color: var(--sl-color-text);
+}
+
 .try-button {
 	display: inline-flex;
 	align-items: center;

@@ -55,4 +55,23 @@ description: ${config_item.title} documentation
   }
 }
 
+// Sync coverage report from drizzle-cube
+const coverageSource = path.resolve(__dirname, '..', '..', 'drizzle-cube', 'coverage');
+const coverageTarget = path.resolve(__dirname, '..', 'public', 'coverage');
+
+if (fs.existsSync(coverageSource)) {
+  console.log('Syncing coverage report...');
+
+  // Remove existing coverage directory
+  if (fs.existsSync(coverageTarget)) {
+    fs.rmSync(coverageTarget, { recursive: true });
+  }
+
+  // Copy entire coverage directory
+  fs.cpSync(coverageSource, coverageTarget, { recursive: true });
+  console.log('  ✓ Coverage report synced to public/coverage/');
+} else {
+  console.log('  ⚠ Coverage folder not found at', coverageSource);
+}
+
 console.log('External content sync complete!');

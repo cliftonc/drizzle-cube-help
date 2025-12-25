@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
@@ -89,7 +89,22 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -105,17 +120,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { barChartConfig } from '../components/charts/BarChart.config'<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { barChartConfig } from '../components/charts/BarChart.config'
 import { lineChartConfig } from '../components/charts/LineChart.config'
 import { areaChartConfig } from '../components/charts/AreaChart.config'
 import { pieChartConfig } from '../components/charts/PieChart.config'
@@ -125,30 +145,40 @@ import { radarChartConfig } from '../components/charts/RadarChart.config'
 import { radialBarChartConfig } from '../components/charts/RadialBarChart.config'
 import { treemapChartConfig } from '../components/charts/TreeMapChart.config'
 import { dataTableConfig } from '../components/charts/DataTable.config'
+import { activityGridChartConfig } from '../components/charts/ActivityGridChart.config'
+import { kpiNumberConfig } from '../components/charts/KpiNumber.config'
+import { kpiDeltaConfig } from '../components/charts/KpiDelta.config'
+import { kpiTextConfig } from '../components/charts/KpiText.config'
+import { markdownConfig } from '../components/charts/MarkdownChart.config'
 import type { ChartConfigRegistry } from './chartConfigs'
 &nbsp;
 /**
  * Registry of all chart type configurations
  */
-<span class="cstat-no" title="statement not covered" >export const chartConfigRegistry: ChartConfigRegistry = {</span>
-<span class="cstat-no" title="statement not covered" >  bar: barChartConfig,</span>
-<span class="cstat-no" title="statement not covered" >  line: lineChartConfig,</span>
-<span class="cstat-no" title="statement not covered" >  area: areaChartConfig,</span>
-<span class="cstat-no" title="statement not covered" >  pie: pieChartConfig,</span>
-<span class="cstat-no" title="statement not covered" >  scatter: scatterChartConfig,</span>
-<span class="cstat-no" title="statement not covered" >  bubble: bubbleChartConfig,</span>
-<span class="cstat-no" title="statement not covered" >  radar: radarChartConfig,</span>
-<span class="cstat-no" title="statement not covered" >  radialBar: radialBarChartConfig,</span>
-<span class="cstat-no" title="statement not covered" >  treemap: treemapChartConfig,</span>
-<span class="cstat-no" title="statement not covered" >  table: dataTableConfig</span>
-<span class="cstat-no" title="statement not covered" >}</span></pre></td></tr></table></pre>
+export const chartConfigRegistry: ChartConfigRegistry = <span class="cstat-no" title="statement not covered" >{</span>
+  bar: barChartConfig,
+  line: lineChartConfig,
+  area: areaChartConfig,
+  pie: pieChartConfig,
+  scatter: scatterChartConfig,
+  bubble: bubbleChartConfig,
+  radar: radarChartConfig,
+  radialBar: radialBarChartConfig,
+  treemap: treemapChartConfig,
+  table: dataTableConfig,
+  activityGrid: activityGridChartConfig,
+  kpiNumber: kpiNumberConfig,
+  kpiDelta: kpiDeltaConfig,
+  kpiText: kpiTextConfig,
+  markdown: markdownConfig
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-27T16:54:27.423Z
+                at 2025-12-25T05:21:28.339Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
