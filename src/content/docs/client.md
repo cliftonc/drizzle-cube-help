@@ -7,43 +7,48 @@ The Drizzle Cube React client provides pre-built components and hooks for creati
 ## Installation
 
 ```bash
-npm install drizzle-cube react react-dom recharts react-grid-layout
+npm install drizzle-cube react react-dom recharts react-grid-layout react-is
 ```
 
 ### Dependencies & Requirements
 
 **Required Dependencies:**
-- `react` (^18.2.0) - React framework
-- `react-dom` (^18.2.0) - React DOM rendering
-- `recharts` (^2.8.0) - Chart visualization library
-- `react-grid-layout` (^1.4.0) - Dashboard grid layout
+- `react` (^18.0.0) - React framework
+- `react-dom` (^18.0.0) - React DOM rendering
+- `recharts` (^3.5.1) - Chart visualization library
+- `react-grid-layout` (^2.1.1) - Dashboard grid layout
+- `react-is` (^19.2.3) - React type checking utilities
 
 **Optional Dependencies:**
 - `@heroicons/react` (^2.2.0) - Icons used in components
 - `@tanstack/react-query` (^5.0.0) - Data fetching and caching
 - `react-router-dom` (^6.8.0) - Routing for multi-page dashboards
+- `reactflow` (^11.11.4) - Schema diagram visualization
+- `dagre` (^0.8.5) - Graph layout for schema diagrams
+- `d3` (^7.9.0) - Data visualization utilities
 
-**Tailwind CSS v3 Required:**
-Components are styled with Tailwind CSS v3 classes. You must have Tailwind CSS v3 configured in your project:
+**Tailwind CSS v4 Required:**
+Components are styled with Tailwind CSS v4 classes. You must have Tailwind CSS v4 configured in your project:
 
 ```bash
-npm install -D tailwindcss postcss
+npm install -D tailwindcss @tailwindcss/postcss postcss
 ```
 
-Configure your `tailwind.config.js` to include the drizzle-cube components:
+Configure your `postcss.config.js`:
 
 ```js
-/** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    './src/**/*.{js,ts,jsx,tsx}',
-    './node_modules/drizzle-cube/dist/**/*.js', // Include drizzle-cube components
-  ],
-  theme: {
-    extend: {},
+  plugins: {
+    '@tailwindcss/postcss': {},
   },
-  plugins: [],
 }
+```
+
+Create a CSS file that imports Tailwind and includes drizzle-cube components:
+
+```css
+@import "tailwindcss";
+@source "../node_modules/drizzle-cube/dist/**/*.js";
 ```
 
 ## Modular Imports
@@ -115,7 +120,7 @@ When using modular imports, you only need the dependencies for what you import:
 
 ```bash
 # Full client - requires all dependencies
-npm install drizzle-cube react react-dom recharts react-grid-layout
+npm install drizzle-cube react react-dom recharts react-grid-layout react-is
 
 # Charts only - no grid layout needed
 npm install drizzle-cube react react-dom recharts

@@ -91,7 +91,7 @@ function MyDashboard() {
       editable={true}
       onConfigChange={setConfig}
       onSave={saveDashboardConfig}
-      apiUrl="/cubejs-api/v1"
+      dashboardModes={['rows', 'grid']}  // Available layout modes
     />
   )
 }
@@ -139,12 +139,18 @@ interface DashboardConfig {
   name: string
   description?: string
   portlets: PortletConfig[]
-  layout?: {
-    breakpoints?: { [key: string]: number }
-    cols?: { [key: string]: number }
-    margin?: [number, number]
-    containerPadding?: [number, number]
+  layoutMode?: 'grid' | 'rows'  // Layout mode (default: 'grid')
+  grid?: {
+    cols: number        // Grid columns (default: 12)
+    rowHeight: number   // Row height in pixels (default: 80)
+    minW: number        // Minimum portlet width (default: 2)
+    minH: number        // Minimum portlet height (default: 2)
   }
+  rows?: RowLayout[]    // Row definitions for 'rows' mode
+  layouts?: { [breakpoint: string]: LayoutItem[] }  // react-grid-layout layouts
+  colorPalette?: string // Color palette name (default: 'default')
+  filters?: DashboardFilter[]  // Dashboard-level filters
+  eagerLoad?: boolean   // Force immediate loading (default: false)
 }
 ```
 
@@ -201,6 +207,112 @@ Enable interactive layout editing:
 - Resize portlets by dragging corners
 - Responsive breakpoints for different screen sizes
 - Snap-to-grid alignment
+
+### Layout Modes
+
+Dashboards support two layout modes that control how portlets are arranged and edited:
+
+```tsx
+// Control available layout modes
+<DashboardGrid
+  config={config}
+  editable={true}
+  dashboardModes={['grid', 'rows']}  // Allow both modes (default)
+/>
+
+// Restrict to rows-only mode
+<DashboardGrid
+  config={config}
+  editable={true}
+  dashboardModes={['rows']}
+/>
+
+// Restrict to grid-only mode
+<DashboardGrid
+  config={config}
+  editable={true}
+  dashboardModes={['grid']}
+/>
+```
+
+#### Grid Mode
+
+The default free-form layout mode using `react-grid-layout`:
+
+- **Free positioning**: Drag portlets anywhere on the grid
+- **Flexible sizing**: Resize portlets in any direction (all 8 handles)
+- **Automatic compaction**: Portlets compact vertically to fill gaps
+- **Pixel-perfect control**: Position portlets at any grid coordinate
+
+Best for: Complex dashboards requiring precise layout control.
+
+#### Rows Mode
+
+A structured row-based layout mode:
+
+- **Row organization**: Portlets are organized into horizontal rows
+- **Equal distribution**: Portlets within a row are automatically sized equally
+- **Simplified editing**: Drag portlets between rows or create new rows
+- **Consistent heights**: All portlets in a row share the same height
+- **Column resizing**: Drag between columns to adjust relative widths
+
+Best for: Clean, organized dashboards with consistent structure.
+
+#### Mode Switching
+
+When both modes are enabled, users can switch between them in edit mode:
+
+```tsx
+// The mode switcher appears in the dashboard toolbar when:
+// 1. editable={true}
+// 2. dashboardModes includes both 'grid' and 'rows'
+// 3. User is in edit mode
+
+<DashboardGrid
+  config={config}
+  editable={true}
+  dashboardModes={['rows', 'grid']}  // Shows Grid/Rows toggle in edit mode
+  onConfigChange={(newConfig) => {
+    // newConfig.layoutMode will be 'grid' or 'rows'
+    setConfig(newConfig)
+  }}
+/>
+```
+
+#### Configuration by Mode
+
+The dashboard configuration stores mode-specific layout data:
+
+```typescript
+interface DashboardConfig {
+  portlets: PortletConfig[]
+  layoutMode?: 'grid' | 'rows'  // Current active mode
+
+  // Grid mode uses x, y, w, h on each portlet
+  // plus optional react-grid-layout layouts object
+  layouts?: { [breakpoint: string]: LayoutItem[] }
+
+  // Rows mode uses structured row definitions
+  rows?: RowLayout[]
+
+  // Grid settings apply to both modes
+  grid?: {
+    cols: number      // Grid columns (default: 12)
+    rowHeight: number // Row height in pixels (default: 80)
+    minW: number      // Minimum portlet width (default: 2)
+    minH: number      // Minimum portlet height (default: 2)
+  }
+}
+
+interface RowLayout {
+  id: string
+  h: number  // Row height in grid units
+  columns: {
+    portletId: string
+    w: number  // Column width in grid units
+  }[]
+}
+```
 
 ### Responsive Design
 

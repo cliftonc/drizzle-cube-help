@@ -49,10 +49,10 @@ Perfect for apps that need visualizations with custom UI:
 // package.json
 {
   "dependencies": {
-    "drizzle-cube": "^0.1.14",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "recharts": "^2.8.0"
+    "drizzle-cube": "^0.2.4",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "recharts": "^3.5.1"
     // No react-grid-layout needed
   }
 }
@@ -107,9 +107,9 @@ For completely custom UI implementations:
 // package.json - minimal dependencies
 {
   "dependencies": {
-    "drizzle-cube": "^0.1.14",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "drizzle-cube": "^0.2.4",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
     // No chart or layout dependencies
   }
 }
