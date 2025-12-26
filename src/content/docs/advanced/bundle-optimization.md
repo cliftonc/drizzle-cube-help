@@ -380,4 +380,65 @@ if (process.env.NODE_ENV === 'development') {
 }
 ```
 
+## Schema Diagram Feature (Optional)
+
+The QueryBuilder includes an optional schema diagram feature that visualizes cube relationships using an interactive ERD-style diagram. This feature requires additional dependencies (`reactflow` and `dagre`) and is **disabled by default** to keep bundle sizes small.
+
+### Enabling the Schema Diagram
+
+1. Install the optional dependencies:
+
+```bash
+npm install reactflow dagre
+```
+
+2. Enable the feature in your CubeProvider:
+
+```tsx
+import { CubeProvider, QueryBuilder } from 'drizzle-cube/client';
+
+function App() {
+  return (
+    <CubeProvider
+      apiOptions={{ apiUrl: '/api/cube' }}
+      features={{ showSchemaDiagram: true }}
+    >
+      <QueryBuilder />
+    </CubeProvider>
+  );
+}
+```
+
+### What You Get
+
+When enabled, the QueryBuilder's Schema Explorer shows a "Schema" tab alongside the "Fields" tab:
+
+- **Interactive ERD diagram** showing cube relationships
+- **Click on cubes** to expand/collapse their fields
+- **Click on fields** to add them to your query
+- **Drag nodes** to rearrange the diagram
+- **Auto-layout** for automatic positioning
+- **Search** to highlight matching fields across cubes
+
+### Bundle Impact
+
+| Configuration | Extra Bundle Size |
+|---------------|-------------------|
+| `showSchemaDiagram: false` (default) | 0 KB |
+| `showSchemaDiagram: true` | ~280 KB (reactflow + dagre) |
+
+The schema diagram is loaded lazily - it only loads when the user clicks the "Schema" tab in the QueryBuilder, so even when enabled, there's no initial load penalty until the user actually views the diagram.
+
+### When to Enable
+
+Enable the schema diagram feature when:
+- You're building a **playground or exploration tool** where users need to understand cube relationships
+- Your cubes have **complex relationships** that are easier to understand visually
+- Users need to **discover available fields** across related cubes
+
+Keep it disabled (default) when:
+- You're building **production dashboards** where users don't need to explore the schema
+- **Bundle size is critical** and the ~280KB addition is not acceptable
+- Users are **familiar with the schema** and don't need visual exploration
+
 The modular architecture of Drizzle Cube ensures you can build performant applications with optimal bundle sizes while maintaining full functionality.

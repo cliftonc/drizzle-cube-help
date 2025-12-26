@@ -133,6 +133,7 @@ export default defineConfig({
 						{ label: 'Dashboards', slug: 'client/dashboards' },
 						{ label: 'Hooks', slug: 'client/hooks' },
 						{ label: 'Theming', slug: 'client/theming' },
+						{ label: 'Icons', slug: 'client/icons' },
 					],
 				},
 				{
