@@ -159,7 +159,7 @@ Combine modular imports for optimal bundle size:
 
 ```tsx
 // Import only what you need
-import { QueryBuilder } from 'drizzle-cube/client/components'; // Dashboard builder
+import { AnalysisBuilder } from 'drizzle-cube/client/components'; // Dashboard builder
 import { RechartsBarChart, RechartsLineChart } from 'drizzle-cube/client/charts'; // Specific charts
 import { useCubeQuery } from 'drizzle-cube/client/hooks'; // Data fetching
 import { CubeProvider } from 'drizzle-cube/client/providers'; // Context
@@ -170,7 +170,7 @@ function MixedApp() {
       <div className="grid grid-cols-2 gap-8">
         <div>
           <h2>Query Builder</h2>
-          <QueryBuilder />
+          <AnalysisBuilder />
         </div>
         <div>
           <h2>Custom Charts</h2>
@@ -182,7 +182,7 @@ function MixedApp() {
 }
 ```
 
-**Bundle size**: Only includes QueryBuilder component + specific charts (saves ~200KB+ vs full import)
+**Bundle size**: Only includes AnalysisBuilder component + specific charts (saves ~200KB+ vs full import)
 
 ## Chunk Optimization
 
@@ -382,7 +382,7 @@ if (process.env.NODE_ENV === 'development') {
 
 ## Schema Diagram Feature (Optional)
 
-The QueryBuilder includes an optional schema diagram feature that visualizes cube relationships using an interactive ERD-style diagram. This feature requires additional dependencies (`reactflow` and `dagre`) and is **disabled by default** to keep bundle sizes small.
+The AnalysisBuilder includes an optional schema diagram feature that visualizes cube relationships using an interactive ERD-style diagram. This feature requires additional dependencies (`reactflow` and `dagre`) and is **disabled by default** to keep bundle sizes small.
 
 ### Enabling the Schema Diagram
 
@@ -395,7 +395,7 @@ npm install reactflow dagre
 2. Enable the feature in your CubeProvider:
 
 ```tsx
-import { CubeProvider, QueryBuilder } from 'drizzle-cube/client';
+import { CubeProvider, AnalysisBuilder } from 'drizzle-cube/client';
 
 function App() {
   return (
@@ -403,7 +403,7 @@ function App() {
       apiOptions={{ apiUrl: '/api/cube' }}
       features={{ showSchemaDiagram: true }}
     >
-      <QueryBuilder />
+      <AnalysisBuilder />
     </CubeProvider>
   );
 }
@@ -411,7 +411,7 @@ function App() {
 
 ### What You Get
 
-When enabled, the QueryBuilder's Schema Explorer shows a "Schema" tab alongside the "Fields" tab:
+When enabled, the AnalysisBuilder's Schema Explorer shows a "Schema" tab alongside the "Fields" tab:
 
 - **Interactive ERD diagram** showing cube relationships
 - **Click on cubes** to expand/collapse their fields
@@ -427,7 +427,7 @@ When enabled, the QueryBuilder's Schema Explorer shows a "Schema" tab alongside 
 | `showSchemaDiagram: false` (default) | 0 KB |
 | `showSchemaDiagram: true` | ~280 KB (reactflow + dagre) |
 
-The schema diagram is loaded lazily - it only loads when the user clicks the "Schema" tab in the QueryBuilder, so even when enabled, there's no initial load penalty until the user actually views the diagram.
+The schema diagram is loaded lazily - it only loads when the user clicks the "Schema" tab in the AnalysisBuilder, so even when enabled, there's no initial load penalty until the user actually views the diagram.
 
 ### When to Enable
 

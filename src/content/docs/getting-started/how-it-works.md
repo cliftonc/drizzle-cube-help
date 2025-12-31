@@ -186,7 +186,7 @@ private planPreAggregationCTEs(
 
 ## Phase 3: SQL Generation with Drizzle
 
-The `QueryBuilder` generates type-safe SQL using Drizzle ORM's query builder. **Every piece of SQL goes through Drizzle** - no string concatenation or manual SQL construction.
+The `AnalysisBuilder` generates type-safe SQL using Drizzle ORM's query builder. **Every piece of SQL goes through Drizzle** - no string concatenation or manual SQL construction.
 
 ### Selection Building
 

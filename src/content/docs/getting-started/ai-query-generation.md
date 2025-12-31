@@ -30,7 +30,7 @@ The system uses a server-side AI service to convert natural language into struct
 The AI feature is enabled by default in the Query Builder. To get started:
 
 ```typescript
-import { CubeProvider, QueryBuilder } from 'drizzle-cube/client'
+import { CubeProvider, AnalysisBuilder } from 'drizzle-cube/client'
 
 function App() {
   return (
@@ -38,7 +38,7 @@ function App() {
       apiOptions={{ apiUrl: '/cubejs-api/v1' }}
       features={{ enableAI: true }} // Default: true
     >
-      <QueryBuilder />
+      <AnalysisBuilder />
     </CubeProvider>
   )
 }
@@ -150,7 +150,7 @@ You can configure the AI endpoint to use your own AI service:
     aiEndpoint: '/api/my-custom-ai/generate' // Complete custom endpoint
   }}
 >
-  <QueryBuilder />
+  <AnalysisBuilder />
 </CubeProvider>
 ```
 

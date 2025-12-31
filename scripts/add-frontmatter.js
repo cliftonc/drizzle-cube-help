@@ -26,7 +26,7 @@ const titles = {
   'semantic-layer/security': 'Security',
   
   'client/index': 'React Client Overview',
-  'client/query-builder': 'Query Builder',
+  'client/analysis-builder': 'Analysis Builder',
   'client/charts': 'Charts',
   'client/dashboards': 'Dashboards',
   'client/hooks': 'React Hooks',

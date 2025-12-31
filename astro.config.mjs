@@ -128,7 +128,7 @@ export default defineConfig({
 					label: 'Client Components',
 					items: [
 						{ label: 'React Client', slug: 'client' },
-						{ label: 'Query Builder', slug: 'client/query-builder' },
+						{ label: 'Analysis Builder', slug: 'client/analysis-builder' },
 						{ label: 'Charts', slug: 'client/charts' },
 						{ label: 'Dashboards', slug: 'client/dashboards' },
 						{ label: 'Hooks', slug: 'client/hooks' },

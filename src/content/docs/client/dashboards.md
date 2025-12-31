@@ -28,7 +28,7 @@ import {
   AnalyticsDashboard, 
   DashboardGrid, 
   AnalyticsPortlet,
-  QueryBuilder,
+  AnalysisBuilder,
   Modal,
   PortletEditModal,
   DashboardEditModal 

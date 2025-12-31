@@ -153,7 +153,7 @@ import { useCubeQuery, useCubeMeta } from 'drizzle-cube/client/hooks';
 import { CubeProvider, createCubeClient } from 'drizzle-cube/client/providers';
 
 // UI Components without charts (~218KB)
-import { QueryBuilder, AnalyticsDashboard } from 'drizzle-cube/client/components';
+import { AnalysisBuilder, AnalyticsDashboard } from 'drizzle-cube/client/components';
 
 // Utilities only (~40 bytes)
 import { formatChartData, validateCubeQuery } from 'drizzle-cube/client/utils';
@@ -381,14 +381,14 @@ import { AnalyticsPortlet } from 'drizzle-cube/client';
 />
 ```
 
-### QueryBuilder
+### AnalysisBuilder
 
 Interactive query builder:
 
 ```tsx
-import { QueryBuilder } from 'drizzle-cube/client';
+import { AnalysisBuilder } from 'drizzle-cube/client';
 
-<QueryBuilder
+<AnalysisBuilder
   initialQuery={{
     measures: ['Sales.totalRevenue'],
     dimensions: ['Sales.productCategory']
@@ -402,9 +402,9 @@ import { QueryBuilder } from 'drizzle-cube/client';
 />
 ```
 
-**Note**: QueryBuilder now uses the CubeProvider context for API configuration. The settings panel allows dynamic URL/token changes.
+**Note**: AnalysisBuilder now uses the CubeProvider context for API configuration. The settings panel allows dynamic URL/token changes.
 
-**QueryBuilder Features:**
+**AnalysisBuilder Features:**
 - **Interactive Cube Explorer**: Browse available cubes, measures, and dimensions
 - **Drag & Drop Query Building**: Visual query construction interface  
 - **API Configuration Panel**: Configure endpoint URL and authentication
@@ -669,7 +669,7 @@ Validate queries before execution:
 ```tsx
 import { validateQuery } from 'drizzle-cube/client';
 
-function QueryBuilder({ query, onChange }) {
+function AnalysisBuilder({ query, onChange }) {
   const validation = validateQuery(query);
   
   if (!validation.isValid) {
