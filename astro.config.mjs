@@ -120,6 +120,7 @@ export default defineConfig({
 						{ label: 'Time Dimensions', slug: 'semantic-layer/time-dimensions' },
 						{ label: 'Measures', slug: 'semantic-layer/measures' },
 						{ label: 'Calculated Measures', slug: 'semantic-layer/calculated-measures' },
+						{ label: 'Statistical Functions', slug: 'semantic-layer/statistical-functions' },
 						{ label: 'Joins', slug: 'semantic-layer/joins' },
 						{ label: 'Security', slug: 'semantic-layer/security' },
 					],
