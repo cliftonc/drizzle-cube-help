@@ -268,6 +268,38 @@ Colors for modal backdrops and overlays:
 | `--dc-overlay` | Primary overlay color |
 | `--dc-overlay-light` | Light overlay color |
 
+### Card/Component Colors
+
+Colors for cards, panels, and components:
+
+| Variable | Description |
+|----------|-------------|
+| `--dc-card-bg` | Card background color |
+| `--dc-card-bg-hover` | Card hover background |
+| `--dc-card-border` | Card border color |
+| `--dc-card-border-hover` | Card hover border |
+
+### Accent Colors
+
+Theme-aware highlight colors:
+
+| Variable | Description |
+|----------|-------------|
+| `--dc-accent` | Accent color |
+| `--dc-accent-hover` | Accent hover state |
+| `--dc-accent-bg` | Accent background |
+| `--dc-accent-border` | Accent border |
+
+### Muted/Subtle Colors
+
+Colors for secondary elements:
+
+| Variable | Description |
+|----------|-------------|
+| `--dc-muted` | Muted text color |
+| `--dc-muted-bg` | Muted background |
+| `--dc-muted-border` | Muted border |
+
 ### Field Type Colors
 
 Colors for semantic field type badges in the Query Builder:
@@ -283,6 +315,9 @@ Colors for semantic field type badges in the Query Builder:
 | `--dc-measure-bg` | Measure badge background |
 | `--dc-measure-text` | Measure badge text |
 | `--dc-measure-border` | Measure badge border |
+| `--dc-filter-bg` | Filter badge background |
+| `--dc-filter-text` | Filter badge text |
+| `--dc-filter-border` | Filter badge border |
 
 ### Shadow Variables
 
@@ -296,6 +331,15 @@ Pre-configured shadow styles for elevation:
 | `--dc-shadow-lg` | Large shadow |
 | `--dc-shadow-xl` | Extra large shadow |
 | `--dc-shadow-2xl` | 2X large shadow |
+
+### AI Panel Gradient
+
+Special gradient colors for AI features:
+
+| Variable | Description |
+|----------|-------------|
+| `--dc-ai-gradient-start` | Gradient start color |
+| `--dc-ai-gradient-end` | Gradient end color |
 
 ## Advanced Features
 
@@ -412,11 +456,18 @@ Drizzle Cube exports Tailwind utility classes for theme variables:
 ```
 
 Available utility classes:
-- Background: `bg-dc-surface`, `bg-dc-surface-secondary`, `bg-dc-surface-tertiary`
-- Text: `text-dc-text`, `text-dc-text-secondary`, `text-dc-text-muted`
-- Border: `border-dc-border`, `border-dc-border-secondary`
-- Hover: `hover:bg-dc-surface-hover`, `hover:border-dc-border-hover`
-- Field types: `bg-dc-dimension`, `text-dc-dimension`, `border-dc-dimension`, etc.
+- Surface: `bg-dc-surface`, `bg-dc-surface-secondary`, `bg-dc-surface-tertiary`, `bg-dc-surface-hover`
+- Text: `text-dc-text`, `text-dc-text-secondary`, `text-dc-text-muted`, `text-dc-text-disabled`
+- Border: `border-dc-border`, `border-dc-border-secondary`, `border-dc-border-hover`
+- Primary: `bg-dc-primary`, `bg-dc-primary-hover`, `text-dc-primary`, `text-dc-primary-content`, `border-dc-primary`, `ring-dc-primary`
+- States: `bg-dc-success`, `bg-dc-success-bg`, `text-dc-success`, `border-dc-success`, (and similar for warning, error, info, danger)
+- Card: `bg-dc-card-bg`, `bg-dc-card-bg-hover`, `border-dc-card-border`, `border-dc-card-border-hover`
+- Accent: `bg-dc-accent`, `bg-dc-accent-bg`, `bg-dc-accent-hover`, `text-dc-accent`, `border-dc-accent`, `border-dc-accent-border`, `ring-dc-accent`
+- Muted: `bg-dc-muted`, `bg-dc-muted-bg`, `text-dc-muted`, `border-dc-muted`, `border-dc-muted-border`
+- Field types: `bg-dc-dimension`, `text-dc-dimension`, `border-dc-dimension` (and similar for time-dimension, measure, filter)
+- Hover: `hover:bg-dc-surface-hover`, `hover:border-dc-border-hover`, `hover:bg-dc-primary-hover`, `hover:bg-dc-card-bg-hover`, `hover:text-dc-primary`, `hover:text-dc-accent`
+- Focus: `focus:ring-dc-primary`, `focus:ring-dc-accent`, `focus:border-dc-primary`, `focus:border-dc-accent`
+- Placeholder: `placeholder-dc-text-muted`, `placeholder-dc-text-disabled`
 
 ### Custom Theme Sync
 
