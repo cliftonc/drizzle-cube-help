@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/124</span>
+                <span class='fraction'>0/125</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/121</span>
+                <span class='fraction'>0/122</span>
             </div>
         
             
@@ -574,7 +574,10 @@
 <a name='L509'></a><a href='#L509'>509</a>
 <a name='L510'></a><a href='#L510'>510</a>
 <a name='L511'></a><a href='#L511'>511</a>
-<a name='L512'></a><a href='#L512'>512</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L512'></a><a href='#L512'>512</a>
+<a name='L513'></a><a href='#L513'>513</a>
+<a name='L514'></a><a href='#L514'>514</a>
+<a name='L515'></a><a href='#L515'>515</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -707,7 +710,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -719,6 +722,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -981,6 +985,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1085,10 +1091,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState, useRef, useEffect } from "react";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState, useRef, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import infoCircleIcon from "@iconify-icons/tabler/info-circle";
-import { useCubeContext } from "../../providers/CubeProvider";
+import { useCubeFieldLabel } from "../../hooks/useCubeFieldLabel";
 import { filterIncompletePeriod } from "../../utils/periodUtils";
 import type { ChartProps } from "../../types";
 &nbsp;
@@ -1130,10 +1136,10 @@ function <span class="fstat-no" title="function not covered" >VarianceHistogram(
 <span class="cstat-no" title="statement not covered" >  if (range === 0 || variances.length === 0) {</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;div
-        className="flex items-center justify-center bg-gray-50 rounded-sm border"
+        className="flex items-center justify-center bg-dc-bg-secondary rounded-sm border border-dc-border"
         style={{ width: `${width}px`, height: `${height}px` }}
       &gt;
-        &lt;span className="text-xs text-gray-500"&gt;No variance data&lt;/span&gt;
+        &lt;span className="text-xs text-dc-text-muted"&gt;No variance data&lt;/span&gt;
       &lt;/div&gt;
     );
   }
@@ -1218,7 +1224,7 @@ function <span class="fstat-no" title="function not covered" >VarianceHistogram(
   );
 }
 &nbsp;
-export default function <span class="fstat-no" title="function not covered" >KpiDelta({</span>
+const KpiDelta = <span class="cstat-no" title="statement not covered" >React.memo(function <span class="fstat-no" title="function not covered" >KpiDelta({</span></span>
   data,
   chartConfig,
   displayConfig = <span class="branch-0 cbranch-no" title="branch not covered" >{},</span>
@@ -1230,7 +1236,8 @@ export default function <span class="fstat-no" title="function not covered" >Kpi
   const [textWidth, setTextWidth<span class="cstat-no" title="statement not covered" >] = useState(250);</span>
   const <span class="cstat-no" title="statement not covered" >containerRef = useRef&lt;HTMLDivElement&gt;(null);</span>
   const <span class="cstat-no" title="statement not covered" >valueRef = useRef&lt;HTMLDivElement&gt;(null);</span>
-  const { getFieldLabel <span class="cstat-no" title="statement not covered" >} = useCubeContext();</span>
+  // Use specialized hook to avoid re-renders from unrelated context changes
+  const <span class="cstat-no" title="statement not covered" >getFieldLabel = useCubeFieldLabel();</span>
 &nbsp;
   // Calculate font size and text width based on container dimensions
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
@@ -1595,7 +1602,9 @@ export default function <span class="fstat-no" title="function not covered" >Kpi
       )}
     &lt;/div&gt;
   );
-}
+})
+&nbsp;
+export default KpiDelta
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -1603,7 +1612,7 @@ export default function <span class="fstat-no" title="function not covered" >Kpi
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-25T05:21:28.339Z
+                at 2026-01-02T08:02:33.988Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

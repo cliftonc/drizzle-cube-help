@@ -686,12 +686,12 @@ export function <span class="fstat-no" title="function not covered" >CubeNode({<
       // Still show selected field highlighting even in faded cubes
 <span class="cstat-no" title="statement not covered" >      if (isHighlighted) {</span>
 <span class="cstat-no" title="statement not covered" >        if (fieldType === 'measure') {</span>
-<span class="cstat-no" title="statement not covered" >          return `${baseClasses} bg-amber-100 text-amber-800`</span>
+<span class="cstat-no" title="statement not covered" >          return `${baseClasses} bg-dc-warning-bg text-dc-warning`</span>
 <span class="cstat-no" title="statement not covered" >        } else if (fieldType === 'dimension') {</span>
 <span class="cstat-no" title="statement not covered" >          if (field.type === 'time') {</span>
-<span class="cstat-no" title="statement not covered" >            return `${baseClasses} bg-blue-100 text-blue-800`</span>
+<span class="cstat-no" title="statement not covered" >            return `${baseClasses} bg-dc-accent-bg text-dc-accent`</span>
           } else {
-<span class="cstat-no" title="statement not covered" >            return `${baseClasses} bg-green-100 text-green-800`</span>
+<span class="cstat-no" title="statement not covered" >            return `${baseClasses} bg-dc-success-bg text-dc-success`</span>
           }
         }
       }
@@ -705,19 +705,19 @@ export function <span class="fstat-no" title="function not covered" >CubeNode({<
 &nbsp;
     // If searching and this field matches, make it prominent with bold purple text
 <span class="cstat-no" title="statement not covered" >    if (searchTerm?.trim() &amp;&amp; isSearchMatch &amp;&amp; !isHighlighted) {</span>
-<span class="cstat-no" title="statement not covered" >      return `${baseClasses} font-bold hover:bg-purple-50`</span>
+<span class="cstat-no" title="statement not covered" >      return `${baseClasses} font-bold hover:bg-dc-accent-bg`</span>
     }
 &nbsp;
     // Normal highlighting behavior for selected fields (takes priority over search match styling)
 <span class="cstat-no" title="statement not covered" >    if (isHighlighted) {</span>
 <span class="cstat-no" title="statement not covered" >      if (fieldType === 'measure') {</span>
-<span class="cstat-no" title="statement not covered" >        return `${baseClasses} bg-amber-100 text-amber-800 font-semibold`</span>
+<span class="cstat-no" title="statement not covered" >        return `${baseClasses} bg-dc-warning-bg text-dc-warning font-semibold`</span>
 <span class="cstat-no" title="statement not covered" >      } else if (fieldType === 'dimension') {</span>
         // Check if this is a time dimension
 <span class="cstat-no" title="statement not covered" >        if (field.type === 'time') {</span>
-<span class="cstat-no" title="statement not covered" >          return `${baseClasses} bg-blue-100 text-blue-800 font-semibold` // time dimensions</span>
+<span class="cstat-no" title="statement not covered" >          return `${baseClasses} bg-dc-accent-bg text-dc-accent font-semibold` // time dimensions</span>
         } else {
-<span class="cstat-no" title="statement not covered" >          return `${baseClasses} bg-green-100 text-green-800 font-semibold` // regular dimensions</span>
+<span class="cstat-no" title="statement not covered" >          return `${baseClasses} bg-dc-success-bg text-dc-success font-semibold` // regular dimensions</span>
         }
       }
     }
@@ -730,7 +730,7 @@ export function <span class="fstat-no" title="function not covered" >CubeNode({<
       className={`
         border-2 rounded-lg shadow-lg min-w-[280px] overflow-hidden transition-all
         ${!hasCubeMatches &amp;&amp; searchTerm?.trim() ? 'opacity-30 grayscale' : ''}
-        ${isHighlighted ? 'border-purple-500 ring-2 ring-purple-200' : 'border-dc-border'}
+        ${isHighlighted ? 'border-dc-accent ring-2 ring-dc-accent' : 'border-dc-border'}
       `}
       style={{
         backgroundColor: 'var(--dc-surface)'
@@ -740,7 +740,7 @@ export function <span class="fstat-no" title="function not covered" >CubeNode({<
       &lt;div
         className={`
           px-4 py-3 cursor-pointer transition-colors
-          ${isHighlighted ? 'bg-purple-100 hover:bg-purple-200' : 'bg-dc-surface-secondary hover:bg-dc-surface-hover'}
+          ${isHighlighted ? 'bg-dc-accent-bg hover:bg-dc-accent-bg' : 'bg-dc-surface-secondary hover:bg-dc-surface-hover'}
         `}
         onClick={handleCubeHeaderClick}
       &gt;
@@ -765,9 +765,9 @@ export function <span class="fstat-no" title="function not covered" >CubeNode({<
       {/* Measures Section */}
       {cube.measures.length &gt; 0 &amp;&amp; (
         &lt;div className="border-t border-dc-border"&gt;
-          &lt;div className="px-4 py-2 bg-amber-50 border-b border-dc-border"&gt;
-            &lt;h4 className="text-xs font-medium text-amber-800 flex items-center"&gt;
-              &lt;span className="w-2 h-2 bg-amber-500 rounded-full mr-2"&gt;&lt;/span&gt;
+          &lt;div className="px-4 py-2 bg-dc-warning-bg border-b border-dc-border"&gt;
+            &lt;h4 className="text-xs font-medium text-dc-warning flex items-center"&gt;
+              &lt;span className="w-2 h-2 bg-dc-warning-bg0 rounded-full mr-2"&gt;&lt;/span&gt;
               Measures ({cube.measures.length})
             &lt;/h4&gt;
           &lt;/div&gt;
@@ -800,9 +800,9 @@ export function <span class="fstat-no" title="function not covered" >CubeNode({<
       {/* Time Dimensions Section */}
       {cube.dimensions.filter(<span class="fstat-no" title="function not covered" >d =&gt; <span class="cstat-no" title="statement not covered" >d</span>.type === 'time')</span>.length &gt; 0 &amp;&amp; (
         &lt;div className="border-t border-dc-border"&gt;
-          &lt;div className="px-4 py-2 bg-blue-50 border-b border-dc-border"&gt;
-            &lt;h4 className="text-xs font-medium text-blue-800 flex items-center"&gt;
-              &lt;span className="w-2 h-2 bg-blue-500 rounded-full mr-2"&gt;&lt;/span&gt;
+          &lt;div className="px-4 py-2 bg-dc-accent-bg border-b border-dc-border"&gt;
+            &lt;h4 className="text-xs font-medium text-dc-accent flex items-center"&gt;
+              &lt;span className="w-2 h-2 bg-dc-accent-bg0 rounded-full mr-2"&gt;&lt;/span&gt;
               Time Dimensions ({cube.dimensions.filter(<span class="fstat-no" title="function not covered" >d =&gt; <span class="cstat-no" title="statement not covered" >d</span>.type === 'time')</span>.length})
             &lt;/h4&gt;
           &lt;/div&gt;
@@ -835,9 +835,9 @@ export function <span class="fstat-no" title="function not covered" >CubeNode({<
       {/* Dimensions Section (non-time) */}
       {cube.dimensions.filter(<span class="fstat-no" title="function not covered" >d =&gt; <span class="cstat-no" title="statement not covered" >d</span>.type !== 'time')</span>.length &gt; 0 &amp;&amp; (
         &lt;div className="border-t border-dc-border"&gt;
-          &lt;div className="px-4 py-2 bg-green-50 border-b border-dc-border"&gt;
-            &lt;h4 className="text-xs font-medium text-green-800 flex items-center"&gt;
-              &lt;span className="w-2 h-2 bg-green-500 rounded-full mr-2"&gt;&lt;/span&gt;
+          &lt;div className="px-4 py-2 bg-dc-success-bg border-b border-dc-border"&gt;
+            &lt;h4 className="text-xs font-medium text-dc-success flex items-center"&gt;
+              &lt;span className="w-2 h-2 bg-dc-success-bg0 rounded-full mr-2"&gt;&lt;/span&gt;
               Dimensions ({cube.dimensions.filter(<span class="fstat-no" title="function not covered" >d =&gt; <span class="cstat-no" title="statement not covered" >d</span>.type !== 'time')</span>.length})
             &lt;/h4&gt;
           &lt;/div&gt;
@@ -907,7 +907,7 @@ export default CubeNode</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-25T05:21:28.339Z
+                at 2026-01-02T08:02:33.988Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

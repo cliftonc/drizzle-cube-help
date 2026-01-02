@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/70</span>
+                <span class='fraction'>0/73</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/57</span>
+                <span class='fraction'>0/60</span>
             </div>
         
             
@@ -413,7 +413,11 @@
 <a name='L348'></a><a href='#L348'>348</a>
 <a name='L349'></a><a href='#L349'>349</a>
 <a name='L350'></a><a href='#L350'>350</a>
-<a name='L351'></a><a href='#L351'>351</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L351'></a><a href='#L351'>351</a>
+<a name='L352'></a><a href='#L352'>352</a>
+<a name='L353'></a><a href='#L353'>353</a>
+<a name='L354'></a><a href='#L354'>354</a>
+<a name='L355'></a><a href='#L355'>355</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -425,6 +429,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -773,8 +781,12 @@
  */
 &nbsp;
 import React, { useState } from 'react'
-import { ExclamationCircleIcon, CheckCircleIcon, SparklesIcon } from '@heroicons/react/24/outline'
+import { getIcon } from '../../icons'
 import Modal from '../Modal'
+&nbsp;
+const <span class="cstat-no" title="statement not covered" >ErrorIcon = getIcon('error')</span>
+const <span class="cstat-no" title="statement not covered" >SuccessIcon = getIcon('success')</span>
+const <span class="cstat-no" title="statement not covered" >SparklesIcon = getIcon('sparkles')</span>
 import type { AIAssistantState } from './types'
 import {
   sendGeminiMessage,
@@ -926,7 +938,7 @@ const AIAssistantModal: React.FC&lt;AIAssistantModalProps&gt; = <span class="cst
       const query = <span class="cstat-no" title="statement not covered" >JSON.parse(state.response)</span>
 <span class="cstat-no" title="statement not covered" >      onQueryLoad(query)</span>
 <span class="cstat-no" title="statement not covered" >      handleClose()</span>
-    } catch (error) {
+    } catch {
 <span class="cstat-no" title="statement not covered" >      setState(<span class="fstat-no" title="function not covered" >prev =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span></span>
         ...prev,
         validationError: 'Invalid JSON format'
@@ -960,7 +972,7 @@ const AIAssistantModal: React.FC&lt;AIAssistantModalProps&gt; = <span class="cst
       &lt;div className="shrink-0 p-3 bg-dc-surface-secondary border border-dc-border rounded-md"&gt;
         &lt;div className="text-sm text-dc-text-muted"&gt;
           Using: &lt;span className="font-medium"&gt;AI Query Generation&lt;/span&gt;
-          &lt;span className="ml-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-sm"&gt;
+          &lt;span className="ml-2 px-2 py-1 bg-dc-accent-bg text-dc-accent text-xs rounded-sm"&gt;
             Server-provided AI (Rate Limited)
           &lt;/span&gt;
         &lt;/div&gt;
@@ -979,7 +991,7 @@ const AIAssistantModal: React.FC&lt;AIAssistantModalProps&gt; = <span class="cst
             onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >setState(<span class="fstat-no" title="function not covered" >prev =&gt; (<span class="cstat-no" title="statement not covered" >{</span> ...prev, userPrompt: e.target.value }))</span>}</span>
             onKeyDown={handleKeyDown}
             placeholder="e.g., Show me the total revenue by month for the last year (Press Enter to generate, Shift+Enter for new line)"
-            className="flex-1 w-full px-3 py-2 border border-dc-border rounded-md shadow-xs focus:outline-none focus:ring-blue-500 focus:border-blue-500 resize-none bg-dc-surface text-dc-text"
+            className="flex-1 w-full px-3 py-2 border border-dc-border rounded-md shadow-xs focus:outline-none focus:ring-dc-accent focus:border-dc-accent resize-none bg-dc-surface text-dc-text"
             required
           /&gt;
         &lt;/div&gt;
@@ -990,8 +1002,8 @@ const AIAssistantModal: React.FC&lt;AIAssistantModalProps&gt; = <span class="cst
             &lt;div className="flex items-center space-x-2"&gt;
               {state.response ? (
                 &lt;&gt;
-                  &lt;CheckCircleIcon className="w-5 h-5 text-green-500" /&gt;
-                  &lt;span className="text-sm font-medium text-green-700"&gt;AI Generated Query&lt;/span&gt;
+                  &lt;SuccessIcon className="w-5 h-5 text-dc-success" /&gt;
+                  &lt;span className="text-sm font-medium text-dc-success"&gt;AI Generated Query&lt;/span&gt;
                 &lt;/&gt;
               ) : (
                 &lt;span className="text-sm font-medium text-dc-text-muted"&gt;Generated Query&lt;/span&gt;
@@ -1001,7 +1013,7 @@ const AIAssistantModal: React.FC&lt;AIAssistantModalProps&gt; = <span class="cst
               &lt;button
                 onClick={handleValidate}
                 disabled={state.isValidating}
-                className="text-xs text-blue-600 hover:text-blue-800 disabled:opacity-50"
+                className="text-xs text-dc-accent hover:text-dc-accent disabled:opacity-50"
                 title="Click to re-validate query"
               &gt;
                 {state.isValidating ? 'Validating...' : 'Re-validate'}
@@ -1010,7 +1022,7 @@ const AIAssistantModal: React.FC&lt;AIAssistantModalProps&gt; = <span class="cst
           &lt;/div&gt;
 &nbsp;
           {state.response ? (
-            &lt;div className="flex-1 bg-green-50 border border-green-200 rounded-md p-3"&gt;
+            &lt;div className="flex-1 bg-dc-success-bg border border-dc-success rounded-md p-3"&gt;
               &lt;pre className="text-sm text-dc-text whitespace-pre-wrap overflow-auto bg-dc-surface p-3 rounded-sm border h-full"&gt;
                 {state.response}
               &lt;/pre&gt;
@@ -1028,30 +1040,30 @@ const AIAssistantModal: React.FC&lt;AIAssistantModalProps&gt; = <span class="cst
       {/* Status Messages - Fixed height */}
       &lt;div className="shrink-0"&gt;
         {state.responseError &amp;&amp; (
-          &lt;div className="flex items-start space-x-2 p-3 bg-red-50 border border-red-200 rounded-md"&gt;
-            &lt;ExclamationCircleIcon className="w-5 h-5 text-red-500 mt-0.5 shrink-0" /&gt;
-            &lt;div className="text-sm text-red-700"&gt;{state.responseError}&lt;/div&gt;
+          &lt;div className="flex items-start space-x-2 p-3 bg-dc-danger-bg border border-dc-error rounded-md"&gt;
+            &lt;ErrorIcon className="w-5 h-5 text-dc-error mt-0.5 shrink-0" /&gt;
+            &lt;div className="text-sm text-dc-error"&gt;{state.responseError}&lt;/div&gt;
           &lt;/div&gt;
         )}
         
         {state.isValidating &amp;&amp; (
-          &lt;div className="flex items-start space-x-2 p-3 bg-blue-50 border border-blue-200 rounded-md"&gt;
-            &lt;div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600 mt-0.5 shrink-0"&gt;&lt;/div&gt;
-            &lt;div className="text-sm text-blue-700"&gt;Validating query...&lt;/div&gt;
+          &lt;div className="flex items-start space-x-2 p-3 bg-dc-accent-bg border border-dc-accent rounded-md"&gt;
+            &lt;div className="animate-spin rounded-full h-5 w-5 border-b-2 border-dc-accent mt-0.5 shrink-0"&gt;&lt;/div&gt;
+            &lt;div className="text-sm text-dc-accent"&gt;Validating query...&lt;/div&gt;
           &lt;/div&gt;
         )}
         
         {state.validationResult === 'valid' &amp;&amp; !state.isValidating &amp;&amp; (
-          &lt;div className="flex items-start space-x-2 p-3 bg-green-50 border border-green-200 rounded-md"&gt;
-            &lt;CheckCircleIcon className="w-5 h-5 text-green-500 mt-0.5 shrink-0" /&gt;
-            &lt;div className="text-sm text-green-700"&gt;Query is valid and ready to use!&lt;/div&gt;
+          &lt;div className="flex items-start space-x-2 p-3 bg-dc-success-bg border border-dc-success rounded-md"&gt;
+            &lt;SuccessIcon className="w-5 h-5 text-dc-success mt-0.5 shrink-0" /&gt;
+            &lt;div className="text-sm text-dc-success"&gt;Query is valid and ready to use!&lt;/div&gt;
           &lt;/div&gt;
         )}
         
         {state.validationResult === 'invalid' &amp;&amp; !state.isValidating &amp;&amp; (
-          &lt;div className="flex items-start space-x-2 p-3 bg-red-50 border border-red-200 rounded-md"&gt;
-            &lt;ExclamationCircleIcon className="w-5 h-5 text-red-500 mt-0.5 shrink-0" /&gt;
-            &lt;div className="text-sm text-red-700"&gt;
+          &lt;div className="flex items-start space-x-2 p-3 bg-dc-danger-bg border border-dc-error rounded-md"&gt;
+            &lt;ErrorIcon className="w-5 h-5 text-dc-error mt-0.5 shrink-0" /&gt;
+            &lt;div className="text-sm text-dc-error"&gt;
               &lt;div className="font-medium mb-1"&gt;Query validation failed:&lt;/div&gt;
               &lt;div className="text-xs"&gt;{state.validationError}&lt;/div&gt;
             &lt;/div&gt;
@@ -1065,7 +1077,7 @@ const AIAssistantModal: React.FC&lt;AIAssistantModalProps&gt; = <span class="cst
           type="submit"
           disabled={!state.userPrompt.trim() || state.isSubmitting}
           onClick={handleQuerySubmit}
-          className="px-4 py-2 text-white text-sm rounded-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+          className="px-4 py-2 text-white text-sm rounded-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-dc-accent focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
           style={{
             backgroundColor: 'var(--dc-primary)'
           }}
@@ -1088,9 +1100,9 @@ const AIAssistantModal: React.FC&lt;AIAssistantModalProps&gt; = <span class="cst
         &lt;button
           onClick={handleUseQuery}
           disabled={!state.response || !onQueryLoad}
-          className="px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+          className="px-4 py-2 bg-dc-success text-white text-sm rounded-md hover:bg-dc-success focus:outline-none focus:ring-2 focus:ring-dc-success focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
         &gt;
-          &lt;CheckCircleIcon className="w-4 h-4 mr-2" /&gt;
+          &lt;SuccessIcon className="w-4 h-4 mr-2" /&gt;
           Use Query
         &lt;/button&gt;
       &lt;/div&gt;
@@ -1120,7 +1132,7 @@ export default AIAssistantModal</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-25T05:21:28.339Z
+                at 2026-01-02T08:02:33.988Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

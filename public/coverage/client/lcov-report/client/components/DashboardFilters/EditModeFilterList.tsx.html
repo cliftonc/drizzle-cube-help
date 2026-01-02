@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>0/26</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>0/26</span>
             </div>
         
             
@@ -315,7 +315,14 @@
 <a name='L250'></a><a href='#L250'>250</a>
 <a name='L251'></a><a href='#L251'>251</a>
 <a name='L252'></a><a href='#L252'>252</a>
-<a name='L253'></a><a href='#L253'>253</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L253'></a><a href='#L253'>253</a>
+<a name='L254'></a><a href='#L254'>254</a>
+<a name='L255'></a><a href='#L255'>255</a>
+<a name='L256'></a><a href='#L256'>256</a>
+<a name='L257'></a><a href='#L257'>257</a>
+<a name='L258'></a><a href='#L258'>258</a>
+<a name='L259'></a><a href='#L259'>259</a>
+<a name='L260'></a><a href='#L260'>260</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -324,6 +331,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -574,8 +588,15 @@
  */
 &nbsp;
 import React from 'react'
-import { FunnelIcon, PlusIcon, XMarkIcon, PencilIcon, ChevronDownIcon, ClockIcon } from '@heroicons/react/24/outline'
+import { getIcon } from '../../icons'
 import type { DashboardFilter } from '../../types'
+&nbsp;
+const <span class="cstat-no" title="statement not covered" >FilterIcon = getIcon('filter')</span>
+const <span class="cstat-no" title="statement not covered" >AddIcon = getIcon('add')</span>
+const <span class="cstat-no" title="statement not covered" >CloseIcon = getIcon('close')</span>
+const <span class="cstat-no" title="statement not covered" >EditIcon = getIcon('edit')</span>
+const <span class="cstat-no" title="statement not covered" >ChevronDownIcon = getIcon('chevronDown')</span>
+const <span class="cstat-no" title="statement not covered" >ClockIcon = getIcon('timeDimension')</span>
 &nbsp;
 interface EditModeFilterListProps {
   dashboardFilters: DashboardFilter[]
@@ -604,7 +625,7 @@ const EditModeFilterList: React.FC&lt;EditModeFilterListProps&gt; = <span class=
     const isSelected = <span class="cstat-no" title="statement not covered" >selectedFilterId === id</span>
 &nbsp;
     // Use calendar icon for universal time filters, funnel for regular filters
-    const IconComponent = <span class="cstat-no" title="statement not covered" >isUniversalTime ? ClockIcon : FunnelIcon</span>
+    const IconComponent = <span class="cstat-no" title="statement not covered" >isUniversalTime ? ClockIcon : FilterIcon</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;div
@@ -638,14 +659,14 @@ const EditModeFilterList: React.FC&lt;EditModeFilterListProps&gt; = <span class=
               className="p-0.5 hover:bg-dc-hover rounded transition-colors"
               title="Edit filter"
             &gt;
-              &lt;PencilIcon className="w-3 h-3" /&gt;
+              &lt;EditIcon className="w-3 h-3" /&gt;
             &lt;/button&gt;
             &lt;button
               onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >o</span>nRemoveFilter(id)}</span>
-              className="p-0.5 hover:bg-red-50 hover:text-red-600 rounded transition-colors"
+              className="p-0.5 hover:bg-dc-danger-bg hover:text-dc-danger rounded transition-colors"
               title="Remove filter"
             &gt;
-              &lt;XMarkIcon className="w-3 h-3" /&gt;
+              &lt;CloseIcon className="w-3 h-3" /&gt;
             &lt;/button&gt;
           &lt;/div&gt;
         )}
@@ -663,7 +684,7 @@ const EditModeFilterList: React.FC&lt;EditModeFilterListProps&gt; = <span class=
           onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etIsCollapsed(!isCollapsed)}</span>
         &gt;
           &lt;div className="flex items-center gap-2"&gt;
-            &lt;FunnelIcon className="w-4 h-4 shrink-0" style={{ color: 'var(--dc-primary)' }} /&gt;
+            &lt;FilterIcon className="w-4 h-4 shrink-0" style={{ color: 'var(--dc-primary)' }} /&gt;
             &lt;h3 className="text-sm font-semibold" style={{ color: 'var(--dc-text)' }}&gt;
               Filters
             &lt;/h3&gt;
@@ -700,7 +721,7 @@ const EditModeFilterList: React.FC&lt;EditModeFilterListProps&gt; = <span class=
                 }}
                 title="Add date range filter (applies to all time dimensions)"
               &gt;
-                &lt;PlusIcon className="w-3.5 h-3.5" /&gt;
+                &lt;AddIcon className="w-3.5 h-3.5" /&gt;
                 &lt;ClockIcon className="w-3.5 h-3.5" /&gt;
               &lt;/button&gt;
             )}
@@ -715,7 +736,7 @@ const EditModeFilterList: React.FC&lt;EditModeFilterListProps&gt; = <span class=
                 color: 'white'
               }}
             &gt;
-              &lt;PlusIcon className="w-3.5 h-3.5" /&gt;
+              &lt;AddIcon className="w-3.5 h-3.5" /&gt;
             &lt;/button&gt;
           &lt;/div&gt;
         &lt;/div&gt;
@@ -747,7 +768,7 @@ const EditModeFilterList: React.FC&lt;EditModeFilterListProps&gt; = <span class=
       &lt;div className="hidden md:flex md:items-center md:gap-3 px-4 py-2"&gt;
         {/* Header Section */}
         &lt;div className="flex items-center gap-2 shrink-0"&gt;
-          &lt;FunnelIcon className="w-4 h-4 shrink-0" style={{ color: 'var(--dc-primary)' }} /&gt;
+          &lt;FilterIcon className="w-4 h-4 shrink-0" style={{ color: 'var(--dc-primary)' }} /&gt;
           &lt;h3 className="text-sm font-semibold whitespace-nowrap" style={{ color: 'var(--dc-text)' }}&gt;
             Filters
           &lt;/h3&gt;
@@ -797,7 +818,7 @@ const EditModeFilterList: React.FC&lt;EditModeFilterListProps&gt; = <span class=
               }}
               title="Add date range filter (applies to all time dimensions)"
             &gt;
-              &lt;PlusIcon className="w-3.5 h-3.5" /&gt;
+              &lt;AddIcon className="w-3.5 h-3.5" /&gt;
               &lt;span&gt;Date Range&lt;/span&gt;
             &lt;/button&gt;
           )}
@@ -809,7 +830,7 @@ const EditModeFilterList: React.FC&lt;EditModeFilterListProps&gt; = <span class=
               color: 'white'
             }}
           &gt;
-            &lt;PlusIcon className="w-3.5 h-3.5" /&gt;
+            &lt;AddIcon className="w-3.5 h-3.5" /&gt;
             &lt;span&gt;Filter&lt;/span&gt;
           &lt;/button&gt;
         &lt;/div&gt;
@@ -826,7 +847,7 @@ export default EditModeFilterList
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-25T05:21:28.398Z
+                at 2026-01-02T08:02:34.046Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

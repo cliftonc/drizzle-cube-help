@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">98.18% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>47/47</span>
+                <span class='fraction'>54/55</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>14/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>46/46</span>
+                <span class='fraction'>51/51</span>
             </div>
         
             
@@ -216,7 +216,22 @@
 <a name='L151'></a><a href='#L151'>151</a>
 <a name='L152'></a><a href='#L152'>152</a>
 <a name='L153'></a><a href='#L153'>153</a>
-<a name='L154'></a><a href='#L154'>154</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -310,12 +325,22 @@
 <span class="cline-any cline-yes">93x</span>
 <span class="cline-any cline-yes">93x</span>
 <span class="cline-any cline-yes">93x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">93x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">93x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">93x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">44x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -336,7 +361,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">38x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">18x</span>
@@ -349,6 +378,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">93x</span>
 <span class="cline-any cline-yes">41x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">93x</span>
@@ -369,7 +399,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState, useEffect, useCallback } from 'react'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState, useEffect, useCallback, useRef } from 'react'
 import type { CubeClient } from '../client/CubeClient'
 &nbsp;
 export interface CubeMetaField {
@@ -461,15 +491,25 @@ export function clearMetaCache() {
 &nbsp;
 export function useCubeMeta(cubeApi: CubeClient): UseCubeMetaResult {
   const [meta, setMeta] = useState&lt;CubeMeta | null&gt;(null)
-  const [labelMap, setLabelMap] = useState&lt;FieldLabelMap&gt;({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState&lt;string | null&gt;(null)
+&nbsp;
+  // Use ref for stable labelMap reference to prevent context re-renders
+  // The ref holds the actual data, updated when meta changes
+  const labelMapRef = useRef&lt;FieldLabelMap&gt;({})
+&nbsp;
+  // Keep a stable object reference for labelMap that we return
+  // This object is mutated in place rather than recreated
+  const [stableLabelMap] = useState&lt;FieldLabelMap&gt;(() =&gt; ({}))
 &nbsp;
   const fetchMeta = useCallback(async () =&gt; {
     // Check cache first
     if (isCacheValid() &amp;&amp; cachedMeta) {
       setMeta(cachedMeta.data)
-      setLabelMap(cachedMeta.labelMap)
+      // Update ref and stable object with cached labelMap
+      labelMapRef.current = cachedMeta.labelMap
+      Object.keys(stableLabelMap).forEach(<span class="fstat-no" title="function not covered" >key =&gt; <span class="cstat-no" title="statement not covered" >d</span>elete stableLabelMap[key])</span>
+      Object.assign(stableLabelMap, cachedMeta.labelMap)
       setLoading(false)
       setError(null)
       return
@@ -478,19 +518,23 @@ export function useCubeMeta(cubeApi: CubeClient): UseCubeMetaResult {
     try {
       setLoading(true)
       setError(null)
-      
+&nbsp;
       const metaData: CubeMeta = await cubeApi.meta()
       const newLabelMap = buildLabelMap(metaData)
-      
+&nbsp;
       // Cache the result
       cachedMeta = {
         data: metaData,
         labelMap: newLabelMap,
         timestamp: Date.now()
       }
-      
+&nbsp;
+      // Update ref and stable object
+      labelMapRef.current = newLabelMap
+      Object.keys(stableLabelMap).forEach(key =&gt; delete stableLabelMap[key])
+      Object.assign(stableLabelMap, newLabelMap)
+&nbsp;
       setMeta(metaData)
-      setLabelMap(newLabelMap)
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch metadata'
       setError(errorMessage)
@@ -498,15 +542,16 @@ export function useCubeMeta(cubeApi: CubeClient): UseCubeMetaResult {
     } finally {
       setLoading(false)
     }
-  }, [cubeApi])
+  }, [cubeApi, stableLabelMap])
 &nbsp;
   useEffect(() =&gt; {
     fetchMeta()
   }, [fetchMeta])
 &nbsp;
+  // Stable callback that reads from ref - no dependencies means stable reference
   const getFieldLabel = useCallback((fieldName: string): string =&gt; {
-    return labelMap[fieldName] || fieldName
-  }, [labelMap])
+    return labelMapRef.current[fieldName] || fieldName
+  }, [])
 &nbsp;
   const refetch = useCallback(() =&gt; {
     // Clear cache and refetch
@@ -516,7 +561,7 @@ export function useCubeMeta(cubeApi: CubeClient): UseCubeMetaResult {
 &nbsp;
   return {
     meta,
-    labelMap,
+    labelMap: stableLabelMap, // Return stable reference
     loading,
     error,
     refetch,
@@ -529,7 +574,7 @@ export function useCubeMeta(cubeApi: CubeClient): UseCubeMetaResult {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-25T05:21:28.339Z
+                at 2026-01-02T08:02:33.988Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/99</span>
+                <span class='fraction'>0/100</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/98</span>
+                <span class='fraction'>0/99</span>
             </div>
         
             
@@ -354,12 +354,15 @@
 <a name='L289'></a><a href='#L289'>289</a>
 <a name='L290'></a><a href='#L290'>290</a>
 <a name='L291'></a><a href='#L291'>291</a>
-<a name='L292'></a><a href='#L292'>292</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L292'></a><a href='#L292'>292</a>
+<a name='L293'></a><a href='#L293'>293</a>
+<a name='L294'></a><a href='#L294'>294</a>
+<a name='L295'></a><a href='#L295'>295</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -370,6 +373,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -609,6 +613,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -645,12 +651,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState, useRef, useEffect } from 'react'
-import { useCubeContext } from '../../providers/CubeProvider'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState, useRef, useEffect } from 'react'
+import { useCubeFieldLabel } from '../../hooks/useCubeFieldLabel'
 import DataHistogram from '../DataHistogram'
 import type { ChartProps } from '../../types'
 &nbsp;
-export default function <span class="fstat-no" title="function not covered" >KpiText({ </span>
+const KpiText = <span class="cstat-no" title="statement not covered" >React.memo(function <span class="fstat-no" title="function not covered" >KpiText({ </span></span>
   data, 
   chartConfig, 
   displayConfig = <span class="branch-0 cbranch-no" title="branch not covered" >{},</span>
@@ -661,7 +667,8 @@ export default function <span class="fstat-no" title="function not covered" >Kpi
   const [textWidth, setTextWidth<span class="cstat-no" title="statement not covered" >] = useState(0)</span>
   const <span class="cstat-no" title="statement not covered" >containerRef = useRef&lt;HTMLDivElement&gt;(null)</span>
   const <span class="cstat-no" title="statement not covered" >textRef = useRef&lt;HTMLDivElement&gt;(null)</span>
-  const { getFieldLabel <span class="cstat-no" title="statement not covered" >} = useCubeContext()</span>
+  // Use specialized hook to avoid re-renders from unrelated context changes
+  const <span class="cstat-no" title="statement not covered" >getFieldLabel = useCubeFieldLabel()</span>
 &nbsp;
   // Calculate font size and text width based on container dimensions
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
@@ -876,7 +883,7 @@ export default function <span class="fstat-no" title="function not covered" >Kpi
         }
 <span class="cstat-no" title="statement not covered" >        return match</span>
       })
-    } catch (error) {
+    } catch {
       // Error processing template
 <span class="cstat-no" title="statement not covered" >      return String(value)</span>
     }
@@ -936,14 +943,16 @@ export default function <span class="fstat-no" title="function not covered" >Kpi
         )}
     &lt;/div&gt;
   )
-}</pre></td></tr></table></pre>
+})
+&nbsp;
+export default KpiText</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-25T05:21:28.398Z
+                at 2026-01-02T08:02:34.046Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

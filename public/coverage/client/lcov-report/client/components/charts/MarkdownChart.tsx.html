@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/148</span>
+                <span class='fraction'>0/149</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/143</span>
+                <span class='fraction'>0/144</span>
             </div>
         
             
@@ -472,7 +472,11 @@
 <a name='L407'></a><a href='#L407'>407</a>
 <a name='L408'></a><a href='#L408'>408</a>
 <a name='L409'></a><a href='#L409'>409</a>
-<a name='L410'></a><a href='#L410'>410</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L410'></a><a href='#L410'>410</a>
+<a name='L411'></a><a href='#L411'>411</a>
+<a name='L412'></a><a href='#L412'>412</a>
+<a name='L413'></a><a href='#L413'>413</a>
+<a name='L414'></a><a href='#L414'>414</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -485,7 +489,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -717,6 +721,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -752,6 +757,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -879,6 +885,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
@@ -894,7 +902,7 @@ interface MarkdownNode {
   parentOrdered?: boolean // For list items to know if parent list is ordered
 }
 &nbsp;
-export default function <span class="fstat-no" title="function not covered" >MarkdownChart({ </span>
+const MarkdownChart = <span class="cstat-no" title="statement not covered" >React.memo(function <span class="fstat-no" title="function not covered" >MarkdownChart({ </span></span>
   displayConfig = <span class="branch-0 cbranch-no" title="branch not covered" >{},</span>
   height = <span class="branch-0 cbranch-no" title="branch not covered" >"100%",</span>
   colorPalette
@@ -1102,16 +1110,16 @@ export default function <span class="fstat-no" title="function not covered" >Mar
           &lt;/a&gt;
         )
 &nbsp;
-      case 'header':
+      case 'header': {
         // Header classes that scale with fontSize setting
         const getHeaderClasses = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(l</span>evel: number, fontSize: string) =&gt; {</span>
           const baseClasses = <span class="cstat-no" title="statement not covered" >'font-bold'</span>
           const marginClasses = <span class="cstat-no" title="statement not covered" >{</span>
             1: 'mb-4',
-            2: 'mb-3', 
+            2: 'mb-3',
             3: 'mb-2'
           }
-          
+&nbsp;
           let sizeClasses = <span class="cstat-no" title="statement not covered" >''</span>
 <span class="cstat-no" title="statement not covered" >          if (fontSize === 'small') {</span>
 <span class="cstat-no" title="statement not covered" >            sizeClasses = { 1: 'text-lg', 2: 'text-base', 3: 'text-sm' }[level] || 'text-sm'</span>
@@ -1120,20 +1128,21 @@ export default function <span class="fstat-no" title="function not covered" >Mar
           } else { // medium (default)
 <span class="cstat-no" title="statement not covered" >            sizeClasses = { 1: 'text-3xl', 2: 'text-2xl', 3: 'text-xl' }[level] || 'text-xl'</span>
           }
-          
+&nbsp;
 <span class="cstat-no" title="statement not covered" >          return `${baseClasses} ${sizeClasses} ${marginClasses[level as keyof typeof marginClasses]}`</span>
         }
-        
-        const HeaderTag = <span class="cstat-no" title="statement not covered" >`h${node.level}` as keyof JSX.IntrinsicElements</span>
+&nbsp;
+        const HeaderTag = <span class="cstat-no" title="statement not covered" >`h${node.level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'</span>
 <span class="cstat-no" title="statement not covered" >        return (</span>
-          &lt;HeaderTag 
-            key={key} 
+          &lt;HeaderTag
+            key={key}
             className={getHeaderClasses(node.level as number, fontSize)}
             style={{ color: accentColor }}
           &gt;
             {node.content}
           &lt;/HeaderTag&gt;
         )
+      }
 &nbsp;
       case 'paragraph':
 <span class="cstat-no" title="statement not covered" >        return (</span>
@@ -1142,10 +1151,10 @@ export default function <span class="fstat-no" title="function not covered" >Mar
           &lt;/p&gt;
         )
 &nbsp;
-      case 'list':
+      case 'list': {
         const ListTag = <span class="cstat-no" title="statement not covered" >node.ordered ? 'ol' : 'ul'</span>
         let listClasses = <span class="cstat-no" title="statement not covered" >'mb-3'</span>
-        
+&nbsp;
 <span class="cstat-no" title="statement not covered" >        if (alignment === 'center') {</span>
 <span class="cstat-no" title="statement not covered" >          listClasses += ' list-none flex flex-col items-center'</span>
 <span class="cstat-no" title="statement not covered" >        } else if (alignment === 'right') {</span>
@@ -1153,12 +1162,13 @@ export default function <span class="fstat-no" title="function not covered" >Mar
         } else {
 <span class="cstat-no" title="statement not covered" >          listClasses += ' list-none ml-6'</span>
         }
-        
+&nbsp;
 <span class="cstat-no" title="statement not covered" >        return (</span>
           &lt;ListTag key={key} className={listClasses}&gt;
             {node.children?.map(<span class="fstat-no" title="function not covered" >(c</span>hild, i) =&gt; <span class="cstat-no" title="statement not covered" >renderNode(child, i, node.ordered ? i + 1 : undefined))</span>}
           &lt;/ListTag&gt;
         )
+      }
 &nbsp;
       case 'listItem':
 <span class="cstat-no" title="statement not covered" >        if (node.children) {</span>
@@ -1290,14 +1300,16 @@ export default function <span class="fstat-no" title="function not covered" >Mar
       {parsedNodes.map(<span class="fstat-no" title="function not covered" >(n</span>ode, index) =&gt; <span class="cstat-no" title="statement not covered" >renderNode(node, index))</span>}
     &lt;/div&gt;
   )
-}</pre></td></tr></table></pre>
+})
+&nbsp;
+export default MarkdownChart</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-25T05:21:28.398Z
+                at 2026-01-02T08:02:34.046Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

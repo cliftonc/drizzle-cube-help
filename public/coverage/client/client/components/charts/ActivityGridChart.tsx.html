@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/291</span>
+                <span class='fraction'>0/292</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/278</span>
+                <span class='fraction'>0/279</span>
             </div>
         
             
@@ -823,7 +823,10 @@
 <a name='L758'></a><a href='#L758'>758</a>
 <a name='L759'></a><a href='#L759'>759</a>
 <a name='L760'></a><a href='#L760'>760</a>
-<a name='L761'></a><a href='#L761'>761</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L761'></a><a href='#L761'>761</a>
+<a name='L762'></a><a href='#L762'>762</a>
+<a name='L763'></a><a href='#L763'>763</a>
+<a name='L764'></a><a href='#L764'>764</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -852,7 +855,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -865,6 +868,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1572,6 +1576,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1583,11 +1589,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { select, scaleQuantize, max, min } from 'd3'
 import { CHART_COLORS_GRADIENT, CHART_MARGINS } from '../../utils/chartConstants'
 import { formatTimeValue } from '../../utils/chartUtils'
-import { useCubeContext } from '../../providers/CubeProvider'
+import { useCubeFieldLabel } from '../../hooks/useCubeFieldLabel'
 import { getTheme, watchThemeChanges, type Theme } from '../../theme'
 import type { ChartProps } from '../../types'
 &nbsp;
@@ -1612,7 +1618,7 @@ interface GridMapping {
   getYearFromX?: (value: number) =&gt; number
 }
 &nbsp;
-export default function <span class="fstat-no" title="function not covered" >ActivityGridChart({</span>
+const ActivityGridChart = <span class="cstat-no" title="statement not covered" >React.memo(function <span class="fstat-no" title="function not covered" >ActivityGridChart({</span></span>
   data,
   chartConfig,
   displayConfig = <span class="branch-0 cbranch-no" title="branch not covered" >{},</span>
@@ -1625,7 +1631,8 @@ export default function <span class="fstat-no" title="function not covered" >Act
   const [dimensions, setDimensions<span class="cstat-no" title="statement not covered" >] = useState({ width: 0, height: 0 })</span>
   const [dimensionsReady, setDimensionsReady<span class="cstat-no" title="statement not covered" >] = useState(false)</span>
   const [currentTheme, setCurrentTheme<span class="cstat-no" title="statement not covered" >] = useState&lt;Theme&gt;('light')</span>
-  const { getFieldLabel <span class="cstat-no" title="statement not covered" >} = useCubeContext()</span>
+  // Use specialized hook to avoid re-renders from unrelated context changes
+  const <span class="cstat-no" title="statement not covered" >getFieldLabel = useCubeFieldLabel()</span>
 &nbsp;
   // Watch for theme changes
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
@@ -1647,7 +1654,7 @@ export default function <span class="fstat-no" title="function not covered" >Act
     let retryCount = <span class="cstat-no" title="statement not covered" >0</span>
     const maxRetries = <span class="cstat-no" title="statement not covered" >10</span>
     let rafId: number
-    let timeoutId: NodeJS.Timeout
+    let timeoutId: ReturnType&lt;typeof setTimeout&gt;
     
     const updateDimensions = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
 <span class="cstat-no" title="statement not covered" >      if (containerRef.current) {</span>
@@ -2343,14 +2350,16 @@ export default function <span class="fstat-no" title="function not covered" >Act
       &lt;/div&gt;
     &lt;/div&gt;
   )
-}</pre></td></tr></table></pre>
+})
+&nbsp;
+export default ActivityGridChart</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-25T05:21:28.339Z
+                at 2026-01-02T08:02:33.988Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
