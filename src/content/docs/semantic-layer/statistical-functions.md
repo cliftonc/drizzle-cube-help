@@ -167,53 +167,111 @@ measures: {
 }
 ```
 
-## Window Functions
+## Window Functions (Post-Aggregation)
 
-Window functions perform calculations across rows related to the current row. They're useful for rankings, running totals, and comparing values across time periods.
+Window functions perform calculations across rows of aggregated data. They're useful for period-over-period comparisons, rankings, running totals, and trend analysis.
 
-### LAG and LEAD
+**Important**: Window functions in drizzle-cube operate on **aggregated data**. This means:
+1. Your base measure is first aggregated (e.g., SUM revenue grouped by month)
+2. The window function is then applied to those aggregated results (e.g., LAG to compare months)
 
-Compare current values with previous or next values:
+This follows the typical analytics pattern where you want to compare aggregated values across time periods or categories.
+
+### Defining Post-Aggregation Window Functions
+
+Window functions reference a base measure via `windowConfig.measure` and specify an `operation` for how to combine the current value with the window result:
 
 ```typescript
 measures: {
-  // Previous day's value
-  previousDayAmount: {
-    name: 'previousDayAmount',
-    title: 'Previous Day Amount',
+  // First, define the base aggregate measure
+  totalRevenue: {
+    name: 'totalRevenue',
+    title: 'Total Revenue',
+    type: 'sum',
+    sql: () => orders.amount
+  },
+
+  // Then define window functions that reference it
+  revenueChange: {
+    name: 'revenueChange',
+    title: 'Revenue Change',
     type: 'lag',
-    sql: () => orders.amount,
     windowConfig: {
-      partitionBy: ['customerId'],  // Partition by customer
-      orderBy: [{ field: 'date', direction: 'asc' }],
-      offset: 1,  // 1 row back
-      defaultValue: 0  // Return 0 if no previous row
+      measure: 'totalRevenue',  // Reference the base measure
+      operation: 'difference',   // current - previous
+      orderBy: [{ field: 'date', direction: 'asc' }]
+    }
+  }
+}
+```
+
+### Operations
+
+The `operation` property controls how the window function result is combined with the current value:
+
+- **`difference`** (default for lag/lead): `current - window` - Shows the change
+- **`ratio`**: `current / window` - Shows relative size
+- **`percentChange`**: `((current - window) / window) * 100` - Shows percentage change
+- **`raw`** (default for rank/rowNumber): Returns the window function result directly
+
+### LAG and LEAD
+
+Compare aggregated values with previous or next periods:
+
+```typescript
+measures: {
+  // Base aggregate measure
+  totalRevenue: {
+    name: 'totalRevenue',
+    type: 'sum',
+    sql: () => orders.amount
+  },
+
+  // Month-over-month revenue change
+  revenueChange: {
+    name: 'revenueChange',
+    title: 'Revenue Change (vs Previous)',
+    type: 'lag',
+    windowConfig: {
+      measure: 'totalRevenue',
+      operation: 'difference',
+      orderBy: [{ field: 'date', direction: 'asc' }]
     }
   },
 
-  // Next day's value (look ahead)
-  nextDayAmount: {
-    name: 'nextDayAmount',
-    title: 'Next Day Amount',
+  // Previous period's revenue (raw value)
+  previousRevenue: {
+    name: 'previousRevenue',
+    title: 'Previous Period Revenue',
+    type: 'lag',
+    windowConfig: {
+      measure: 'totalRevenue',
+      operation: 'raw',
+      orderBy: [{ field: 'date', direction: 'asc' }]
+    }
+  },
+
+  // Percent change from previous period
+  revenuePercentChange: {
+    name: 'revenuePercentChange',
+    title: 'Revenue % Change',
+    type: 'lag',
+    windowConfig: {
+      measure: 'totalRevenue',
+      operation: 'percentChange',
+      orderBy: [{ field: 'date', direction: 'asc' }]
+    }
+  },
+
+  // Compare to next period (look ahead)
+  changeToNext: {
+    name: 'changeToNext',
+    title: 'Change to Next Period',
     type: 'lead',
-    sql: () => orders.amount,
     windowConfig: {
-      partitionBy: ['customerId'],
-      orderBy: [{ field: 'date', direction: 'asc' }],
-      offset: 1,
-      defaultValue: null
-    }
-  },
-
-  // Compare to 7 days ago
-  weekAgoAmount: {
-    name: 'weekAgoAmount',
-    title: 'Week Ago Amount',
-    type: 'lag',
-    sql: () => orders.amount,
-    windowConfig: {
-      orderBy: [{ field: 'date', direction: 'asc' }],
-      offset: 7
+      measure: 'totalRevenue',
+      operation: 'difference',
+      orderBy: [{ field: 'date', direction: 'asc' }]
     }
   }
 }
@@ -221,90 +279,67 @@ measures: {
 
 ### Ranking Functions
 
-Rank rows within partitions:
+Rank aggregated values:
 
 ```typescript
 measures: {
-  // Standard ranking (gaps after ties)
+  totalSales: {
+    name: 'totalSales',
+    type: 'sum',
+    sql: () => orders.amount
+  },
+
+  // Rank periods by total sales (1 = highest)
   salesRank: {
     name: 'salesRank',
     title: 'Sales Rank',
     type: 'rank',
     windowConfig: {
-      partitionBy: ['region'],
+      measure: 'totalSales',
+      operation: 'raw',
       orderBy: [{ field: 'totalSales', direction: 'desc' }]
     }
   },
 
-  // Dense ranking (no gaps after ties)
-  denseRank: {
-    name: 'denseRank',
-    title: 'Dense Rank',
-    type: 'denseRank',
+  // Rank with partitioning
+  regionSalesRank: {
+    name: 'regionSalesRank',
+    title: 'Rank within Region',
+    type: 'rank',
     windowConfig: {
-      partitionBy: ['category'],
-      orderBy: [{ field: 'revenue', direction: 'desc' }]
-    }
-  },
-
-  // Row number (unique for each row)
-  rowNum: {
-    name: 'rowNum',
-    title: 'Row Number',
-    type: 'rowNumber',
-    windowConfig: {
-      orderBy: [{ field: 'createdAt', direction: 'asc' }]
-    }
-  },
-
-  // Divide into quartiles
-  quartile: {
-    name: 'quartile',
-    title: 'Performance Quartile',
-    type: 'ntile',
-    windowConfig: {
-      partitionBy: ['department'],
-      orderBy: [{ field: 'performance', direction: 'desc' }],
-      nTile: 4  // Divide into 4 groups
+      measure: 'totalSales',
+      operation: 'raw',
+      partitionBy: ['region'],
+      orderBy: [{ field: 'totalSales', direction: 'desc' }]
     }
   }
 }
 ```
 
-### Moving Averages and Sums
+### Moving Averages and Running Totals
 
-Calculate rolling aggregations:
+Calculate rolling aggregations on already-aggregated data:
 
 ```typescript
 measures: {
-  // 7-day moving average
-  movingAvg7Day: {
-    name: 'movingAvg7Day',
-    title: '7-Day Moving Average',
-    type: 'movingAvg',
-    sql: () => orders.amount,
-    windowConfig: {
-      partitionBy: ['productId'],
-      orderBy: [{ field: 'date', direction: 'asc' }],
-      frame: {
-        type: 'rows',
-        start: 6,  // 6 preceding rows
-        end: 'current'  // Current row
-      }
-    }
+  dailyRevenue: {
+    name: 'dailyRevenue',
+    type: 'sum',
+    sql: () => orders.amount
   },
 
-  // 30-day moving sum
-  movingSum30Day: {
-    name: 'movingSum30Day',
-    title: '30-Day Rolling Total',
-    type: 'movingSum',
-    sql: () => orders.amount,
+  // 7-period moving average
+  movingAvg7Period: {
+    name: 'movingAvg7Period',
+    title: '7-Period Moving Avg',
+    type: 'movingAvg',
     windowConfig: {
+      measure: 'dailyRevenue',
+      operation: 'raw',
       orderBy: [{ field: 'date', direction: 'asc' }],
       frame: {
         type: 'rows',
-        start: 29,
+        start: 6,  // 6 preceding periods
         end: 'current'
       }
     }
@@ -315,12 +350,13 @@ measures: {
     name: 'runningTotal',
     title: 'Running Total',
     type: 'movingSum',
-    sql: () => orders.amount,
     windowConfig: {
+      measure: 'dailyRevenue',
+      operation: 'raw',
       orderBy: [{ field: 'date', direction: 'asc' }],
       frame: {
         type: 'rows',
-        start: 'unbounded',  // From beginning
+        start: 'unbounded',
         end: 'current'
       }
     }
@@ -328,41 +364,105 @@ measures: {
 }
 ```
 
-### First and Last Values
+### Querying Window Functions
 
-Get the first or last value in a window:
+Window functions are queried alongside their base measures:
 
 ```typescript
-measures: {
-  // First order amount in the period
-  firstOrderAmount: {
-    name: 'firstOrderAmount',
-    title: 'First Order Amount',
-    type: 'firstValue',
-    sql: () => orders.amount,
-    windowConfig: {
-      partitionBy: ['customerId'],
-      orderBy: [{ field: 'date', direction: 'asc' }]
+const query = {
+  measures: [
+    'Orders.totalRevenue',      // Base measure
+    'Orders.revenueChange',     // Window function
+    'Orders.revenuePercentChange'
+  ],
+  timeDimensions: [{
+    dimension: 'Orders.createdAt',
+    granularity: 'month',
+    dateRange: 'last 12 months'
+  }]
+}
+```
+
+The base measure (`totalRevenue`) is automatically included if not explicitly requested.
+
+### Example: Complete Analytics Dashboard
+
+```typescript
+const analyticsCube = defineCube('Analytics', {
+  sql: (ctx) => ({
+    from: orders,
+    where: eq(orders.organisationId, ctx.securityContext.organisationId)
+  }),
+
+  measures: {
+    // Base aggregates
+    totalRevenue: {
+      name: 'totalRevenue',
+      type: 'sum',
+      sql: () => orders.amount
+    },
+    orderCount: {
+      name: 'orderCount',
+      type: 'count',
+      sql: () => orders.id
+    },
+
+    // Period-over-period analysis
+    revenueChange: {
+      name: 'revenueChange',
+      title: 'Revenue Change',
+      type: 'lag',
+      windowConfig: {
+        measure: 'totalRevenue',
+        operation: 'difference',
+        orderBy: [{ field: 'date', direction: 'asc' }]
+      }
+    },
+    revenueGrowthPercent: {
+      name: 'revenueGrowthPercent',
+      title: 'Growth %',
+      type: 'lag',
+      windowConfig: {
+        measure: 'totalRevenue',
+        operation: 'percentChange',
+        orderBy: [{ field: 'date', direction: 'asc' }]
+      }
+    },
+
+    // Rankings
+    revenueRank: {
+      name: 'revenueRank',
+      title: 'Revenue Rank',
+      type: 'rank',
+      windowConfig: {
+        measure: 'totalRevenue',
+        operation: 'raw',
+        orderBy: [{ field: 'totalRevenue', direction: 'desc' }]
+      }
+    },
+
+    // Cumulative analysis
+    cumulativeRevenue: {
+      name: 'cumulativeRevenue',
+      title: 'Cumulative Revenue',
+      type: 'movingSum',
+      windowConfig: {
+        measure: 'totalRevenue',
+        operation: 'raw',
+        orderBy: [{ field: 'date', direction: 'asc' }],
+        frame: { type: 'rows', start: 'unbounded', end: 'current' }
+      }
     }
   },
 
-  // Most recent order amount
-  lastOrderAmount: {
-    name: 'lastOrderAmount',
-    title: 'Last Order Amount',
-    type: 'lastValue',
-    sql: () => orders.amount,
-    windowConfig: {
-      partitionBy: ['customerId'],
-      orderBy: [{ field: 'date', direction: 'asc' }],
-      frame: {
-        type: 'rows',
-        start: 'unbounded',
-        end: 'unbounded'  // Include all rows to get true last
-      }
+  dimensions: {
+    date: {
+      name: 'date',
+      type: 'time',
+      sql: () => orders.createdAt
     }
   }
-}
+})
 ```
 
 ## Window Configuration Reference
@@ -371,7 +471,14 @@ The `windowConfig` object supports these options:
 
 ```typescript
 interface WindowConfig {
-  // Columns to partition by (similar to GROUP BY for window)
+  // Required: Reference to the base aggregate measure
+  measure: string
+
+  // How to combine with window result
+  operation?: 'raw' | 'difference' | 'ratio' | 'percentChange'
+  // Defaults: 'difference' for lag/lead, 'raw' for others
+
+  // Dimension references to partition by
   partitionBy?: string[]
 
   // How to order rows within each partition
@@ -380,7 +487,7 @@ interface WindowConfig {
     direction: 'asc' | 'desc'
   }>
 
-  // For LAG/LEAD: number of rows to offset
+  // For LAG/LEAD: number of periods to offset (default: 1)
   offset?: number
 
   // For LAG/LEAD: default value when offset is out of bounds
