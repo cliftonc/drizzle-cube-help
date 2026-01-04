@@ -270,6 +270,79 @@ By default, the client includes cookies with all requests (`credentials: 'includ
 - `'same-origin'` - Only send cookies if the request URL is on the same origin
 - `'omit'` - Never send cookies
 
+### Features Configuration
+
+Configure optional features through the `features` prop on CubeProvider:
+
+```tsx
+<CubeProvider
+  apiOptions={{ apiUrl: '/api/cube' }}
+  features={{
+    enableAI: true,                    // Enable AI query generation (default: true)
+    aiEndpoint: '/api/ai/generate',    // Custom AI endpoint
+    useAnalysisBuilder: true,          // Use new AnalysisBuilder modal for portlet editing
+    editToolbar: 'both',               // Edit toolbar display mode
+    floatingToolbarPosition: 'right'   // Position of floating toolbar
+  }}
+>
+  {/* Your components */}
+</CubeProvider>
+```
+
+#### Feature Options
+
+| Feature | Type | Default | Description |
+|---------|------|---------|-------------|
+| `enableAI` | `boolean` | `true` | Enable AI-powered query generation |
+| `aiEndpoint` | `string` | `'/api/ai/generate'` | Custom endpoint for AI query generation |
+| `showSchemaDiagram` | `boolean` | `false` | Show schema diagram in QueryBuilder (requires reactflow/dagre) |
+| `useAnalysisBuilder` | `boolean` | `false` | Use new AnalysisBuilder modal for portlet editing |
+| `editToolbar` | `'floating' \| 'top' \| 'both'` | `'both'` | Which edit toolbar(s) to display |
+| `floatingToolbarPosition` | `'left' \| 'right'` | `'right'` | Position of floating toolbar |
+
+#### Edit Toolbar Modes
+
+The `editToolbar` option controls which editing toolbar(s) are displayed on dashboards:
+
+- **`'both'`** (default): Shows both the top edit bar and a floating toolbar. The floating toolbar appears when you scroll past the top bar, providing persistent access to edit controls.
+
+- **`'floating'`**: Shows only the floating toolbar (no top bar). The floating toolbar is always visible on the side of the screen, providing a compact editing interface.
+
+- **`'top'`**: Shows only the top edit bar (no floating toolbar). The traditional editing interface at the top of the dashboard.
+
+```tsx
+// Floating toolbar only - compact sidebar editing
+<CubeProvider
+  apiOptions={{ apiUrl: '/api/cube' }}
+  features={{
+    editToolbar: 'floating',
+    floatingToolbarPosition: 'left'  // Position on left side
+  }}
+>
+  <AnalyticsDashboard config={config} editable={true} />
+</CubeProvider>
+
+// Top bar only - traditional editing interface
+<CubeProvider
+  features={{ editToolbar: 'top' }}
+>
+  <AnalyticsDashboard config={config} editable={true} />
+</CubeProvider>
+
+// Both toolbars - floating appears on scroll (default)
+<CubeProvider
+  features={{ editToolbar: 'both' }}
+>
+  <AnalyticsDashboard config={config} editable={true} />
+</CubeProvider>
+```
+
+The floating toolbar provides quick access to:
+- Toggle edit mode (with save icon when editing)
+- Switch between Grid and Rows layout modes
+- Color palette selection
+- Add new portlet
+
 ### AnalyticsDashboard
 
 A complete dashboard with drag-and-drop layout:
