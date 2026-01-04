@@ -118,6 +118,7 @@ export default defineConfig({
 						{ label: 'Cubes', slug: 'semantic-layer/cubes' },
 						{ label: 'Dimensions', slug: 'semantic-layer/dimensions' },
 						{ label: 'Time Dimensions', slug: 'semantic-layer/time-dimensions' },
+						{ label: 'Period Comparisons', slug: 'semantic-layer/period-comparisons' },
 						{ label: 'Measures', slug: 'semantic-layer/measures' },
 						{ label: 'Calculated Measures', slug: 'semantic-layer/calculated-measures' },
 						{ label: 'Statistical Functions', slug: 'semantic-layer/statistical-functions' },
