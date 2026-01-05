@@ -278,6 +278,60 @@ const semanticLayer = new SemanticLayerCompiler({
 })
 ```
 
+### Cloudflare KV Implementation Example
+
+For Cloudflare Workers deployments, you can use Cloudflare KV as your cache backend. KV provides globally distributed, eventually consistent storage that's ideal for caching analytics queries at the edge.
+
+See the complete implementation: [CloudflareKVProvider on GitHub](https://github.com/cliftonc/drizzle-cube-try-site/blob/main/src/cache/cloudflare-kv-provider.ts)
+
+**Key considerations for Cloudflare KV:**
+- **Minimum TTL**: KV requires a minimum TTL of 60 seconds
+- **Eventual consistency**: Writes propagate globally within ~60 seconds
+- **Rate limits**: 1 write per key per second
+- **Value size**: Maximum 25 MiB per value
+
+**Usage with Hono:**
+
+```typescript
+import { createCubeApp } from 'drizzle-cube/adapters/hono'
+import { CloudflareKVProvider } from './cache/cloudflare-kv-provider'
+
+// In your Cloudflare Worker
+interface CloudflareEnv {
+  CACHE: KVNamespace
+  DATABASE_URL: string
+}
+
+const app = new Hono<{ Bindings: CloudflareEnv }>()
+
+app.use('/cubejs-api/*', async (c) => {
+  const cubeApp = createCubeApp({
+    cubes: allCubes,
+    drizzle: db,
+    schema,
+    extractSecurityContext: getSecurityContext,
+    cache: {
+      provider: new CloudflareKVProvider(c.env.CACHE, {
+        defaultTtlMs: 3600000  // 60 minutes
+      }),
+      defaultTtlMs: 3600000,
+      keyPrefix: 'drizzle-cube:',
+      includeSecurityContext: true
+    }
+  })
+  return cubeApp.fetch(c.req.raw)
+})
+```
+
+**Wrangler configuration:**
+
+```toml
+[[kv_namespaces]]
+binding = "CACHE"
+id = "your-kv-namespace-id"
+preview_id = "your-preview-kv-namespace-id"
+```
+
 ## Cache Invalidation
 
 When your data changes, you'll need to invalidate the cache. The `CacheProvider` interface provides two methods for this:
