@@ -104,7 +104,26 @@ export const performanceTestCube: Cube<Schema> = defineCube('Performance', {
 
 ### Result Set Caching
 
-Drizzle Cube provides basic query memoization. For advanced caching, you can implement additional caching layers:
+Drizzle Cube provides an opt-in server-side caching layer with pluggable cache backends. For detailed configuration and custom provider implementation, see the dedicated [Caching Guide](/advanced/caching).
+
+**Quick Setup:**
+
+```typescript
+import { SemanticLayerCompiler, MemoryCacheProvider } from 'drizzle-cube/server'
+
+const semanticLayer = new SemanticLayerCompiler({
+  drizzle: db,
+  schema,
+  cache: {
+    provider: new MemoryCacheProvider(),
+    defaultTtlMs: 300000 // 5 minutes
+  }
+})
+```
+
+> **Warning**: The `MemoryCacheProvider` is for development and single-instance deployments only. For production with multiple server instances, use a distributed cache provider like Redis. See the [Caching Guide](/advanced/caching) for a complete Redis implementation example.
+
+**Client-side Memoization:**
 
 ```typescript
 // Client-side caching with useCubeQuery
@@ -112,41 +131,13 @@ function CachedQuery() {
   const query = useMemo(() => ({
     measures: ['Employees.count'],
     dimensions: ['Employees.departmentName']
-  }), []) // Memoize query to enable caching
+  }), []) // Memoize query to prevent unnecessary re-fetches
 
-  const { resultSet } = useCubeQuery(query) // Automatically cached
-}
-
-// Server-side result caching
-class CachedSemanticLayer extends SemanticLayerCompiler {
-  private cache = new Map<string, { result: any; timestamp: number }>()
-  
-  async load(query: SemanticQuery, context: SecurityContext) {
-    const cacheKey = this.getCacheKey(query, context)
-    const cached = this.cache.get(cacheKey)
-    
-    // Return cached result if fresh (5 minutes)
-    if (cached && Date.now() - cached.timestamp < 300000) {
-      return cached.result
-    }
-    
-    const result = await super.load(query, context)
-    
-    this.cache.set(cacheKey, {
-      result,
-      timestamp: Date.now()
-    })
-    
-    return result
-  }
-  
-  private getCacheKey(query: SemanticQuery, context: SecurityContext): string {
-    return `${context.organisationId}:${JSON.stringify(query)}`
-  }
+  const { resultSet } = useCubeQuery(query)
 }
 ```
 
-> **Note**: The `CachedSemanticLayer` example above is custom implementation code that you would need to build. Drizzle Cube currently provides basic client-side query memoization but does not include built-in server-side result caching.
+For comprehensive caching documentation including custom providers, cache invalidation, and monitoring, see the [Caching Guide →](/advanced/caching)
 
 ### Query Batching
 
@@ -638,7 +629,6 @@ The following performance enhancements are planned for future versions of Drizzl
 - **Automatic query optimization suggestions** - AI-powered query analysis
 - **Built-in performance monitoring dashboard** - Real-time performance metrics
 - **Query execution plan visualization** - Visual query plan analysis
-- **Intelligent caching strategies** - Smart pre-computation and cache invalidation
 - **Performance regression testing** - Automated performance testing suite
 - **Cost-based query optimization** - Advanced query planning algorithms
 

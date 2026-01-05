@@ -163,6 +163,7 @@ export default defineConfig({
 					label: 'Advanced',
 					items: [
 						{ label: 'Performance', slug: 'advanced/performance' },
+						{ label: 'Caching', slug: 'advanced/caching' },
 						{ label: 'Bundle Optimization', slug: 'advanced/bundle-optimization' },
 						{ label: 'Troubleshooting', slug: 'advanced/troubleshooting' },
 						{ label: 'TypeScript', slug: 'advanced/typescript' },
