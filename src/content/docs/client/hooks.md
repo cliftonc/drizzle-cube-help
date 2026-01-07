@@ -344,6 +344,173 @@ function RevenueOverTime() {
 
 Time-based comparison features are planned for future releases. Currently, you can implement comparative analysis by making separate queries with different date ranges.
 
+## useFunnelQuery Hook
+
+The `useFunnelQuery` hook executes sequential funnel queries where each step filters based on binding key values from the previous step.
+
+### Basic Usage
+
+```tsx
+import { useFunnelQuery } from 'drizzle-cube/client'
+
+function SignupFunnel() {
+  const {
+    chartData,
+    stepResults,
+    isExecuting,
+    currentStepIndex,
+    error
+  } = useFunnelQuery({
+    id: 'signup-funnel',
+    name: 'User Signup Funnel',
+    bindingKey: { dimension: 'Users.userId' },
+    steps: [
+      {
+        id: 'signup',
+        name: 'Signed Up',
+        query: { measures: ['Signups.count'] }
+      },
+      {
+        id: 'verified',
+        name: 'Email Verified',
+        query: { measures: ['Verifications.count'] }
+      },
+      {
+        id: 'purchased',
+        name: 'First Purchase',
+        query: { measures: ['Purchases.count'] }
+      }
+    ]
+  })
+
+  if (isExecuting) {
+    return <div>Executing step {(currentStepIndex ?? 0) + 1}...</div>
+  }
+
+  return <FunnelChart data={chartData} />
+}
+```
+
+### Hook Return Value
+
+```typescript
+interface UseFunnelQueryResult {
+  // Funnel execution state
+  result: FunnelExecutionResult | null
+  status: 'idle' | 'executing' | 'success' | 'error' | 'partial'
+  isExecuting: boolean
+  isDebouncing: boolean
+  currentStepIndex: number | null
+
+  // Per-step data (for progressive rendering)
+  stepLoadingStates: boolean[]
+  stepResults: FunnelStepResult[]
+
+  // Chart-ready data
+  chartData: FunnelChartData[]
+
+  // Error handling
+  error: Error | null
+
+  // Actions
+  execute: () => Promise<FunnelExecutionResult | null>
+  cancel: () => void
+  reset: () => void
+
+  // Debug: actual queries sent to server
+  executedQueries: CubeQuery[]
+}
+```
+
+### Funnel Configuration
+
+```typescript
+interface FunnelConfig {
+  id: string                    // Unique funnel identifier
+  name: string                  // Display name
+  bindingKey: FunnelBindingKey  // Dimension linking steps
+  steps: FunnelStep[]           // Ordered step array
+  bindingKeyLimit?: number      // Max values passed (default: 500)
+}
+
+interface FunnelStep {
+  id: string                    // Step identifier
+  name: string                  // Display name (e.g., "Signup")
+  query: CubeQuery              // The cube query for this step
+  timeToConvert?: string        // Optional: ISO 8601 duration (e.g., "P7D")
+}
+```
+
+### Cross-Cube Funnels
+
+When steps query different cubes with different field names for the binding key:
+
+```tsx
+const { chartData } = useFunnelQuery({
+  id: 'cross-cube-funnel',
+  name: 'User Journey',
+  bindingKey: {
+    dimension: [
+      { cube: 'Signups', dimension: 'Signups.userId' },
+      { cube: 'Purchases', dimension: 'Purchases.customerId' }
+    ]
+  },
+  steps: [
+    { id: 'signup', name: 'Signup', query: { measures: ['Signups.count'] } },
+    { id: 'purchase', name: 'Purchase', query: { measures: ['Purchases.count'] } }
+  ]
+})
+```
+
+### Progressive Rendering
+
+Show results as each step completes:
+
+```tsx
+function ProgressiveFunnel({ config }: { config: FunnelConfig }) {
+  const { stepResults, isExecuting, currentStepIndex } = useFunnelQuery(config)
+
+  return (
+    <div>
+      {stepResults.map((step, i) => (
+        <div key={step.stepId}>
+          <span>{step.stepName}: {step.count}</span>
+          {step.conversionRate && (
+            <span> ({step.conversionRate.toFixed(1)}% conversion)</span>
+          )}
+        </div>
+      ))}
+      {isExecuting && (
+        <div>Loading step {(currentStepIndex ?? 0) + 1}...</div>
+      )}
+    </div>
+  )
+}
+```
+
+### Hook Options
+
+```typescript
+interface UseFunnelQueryOptions {
+  skip?: boolean               // Skip execution
+  debounceMs?: number          // Debounce delay (default: 300)
+  onStepComplete?: (step: FunnelStepResult) => void
+  onComplete?: (result: FunnelExecutionResult) => void
+  onError?: (error: Error, stepIndex: number) => void
+}
+```
+
+:::caution[Sequential Execution Warning]
+Unlike `useCubeQuery` which executes immediately, funnel queries run **sequentially**. Each step must complete before the next begins. A 5-step funnel with 200ms per query takes ~1 second total. Plan your UX accordingly.
+:::
+
+:::tip[Binding Key Selection]
+Choose a binding key dimension that:
+- Uniquely identifies tracked entities (userId, sessionId)
+- Exists in all cubes (or use cross-cube mapping)
+- Has reasonable cardinality (<500K unique values)
+:::
+
 ## Error Handling
 
 Handle different types of errors gracefully:

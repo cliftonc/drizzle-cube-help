@@ -139,6 +139,57 @@ The filter builder supports complex filter logic:
 }
 ```
 
+## Multi-Query Mode
+
+AnalysisBuilder supports three merge strategies for combining multiple queries:
+
+### Merge Strategies
+
+| Strategy | Description | Use Case |
+|----------|-------------|----------|
+| `concat` | Append rows with `__queryIndex` marker | Separate series per query (e.g., "Sales 2023" vs "Sales 2024") |
+| `merge` | Align data by common dimension key | Side-by-side comparison on same axis |
+| `funnel` | Sequential execution with binding key linking | User journey and conversion analysis |
+
+### Funnel Mode
+
+When you select "Funnel" as the merge strategy, AnalysisBuilder enters funnel mode:
+
+1. **Binding Key Selector** - A dimension picker appears above the query tabs. Select the dimension that links steps together (e.g., `Users.userId`, `Sessions.sessionId`).
+
+2. **Step Tabs** - Query tabs are labeled "Step 1", "Step 2", etc. instead of "Q1", "Q2".
+
+3. **Auto Chart Selection** - The chart type automatically switches to Funnel Chart.
+
+4. **Sequential Execution** - Queries execute in order, with each step filtering by binding key values from the previous step.
+
+**Example Funnel Setup:**
+
+```
+Binding Key: Users.userId
+
+Step 1: Signups
+  - Measure: Signups.count
+  - Filter: Signups.createdAt in last 30 days
+
+Step 2: Profile Complete
+  - Measure: ProfileCompletions.count
+
+Step 3: First Purchase
+  - Measure: Purchases.count
+```
+
+:::tip[Binding Key Selection]
+Choose a dimension that:
+- Exists in all cubes used across your steps (or use cross-cube mapping)
+- Uniquely identifies the entity you're tracking (user, session, order)
+- Has reasonable cardinality (not millions of unique values)
+:::
+
+:::caution[Performance Warning]
+Funnel queries execute **sequentially** - each step waits for the previous to complete. A 5-step funnel with 300ms queries will take ~1.5 seconds. Keep step counts reasonable for responsive UX.
+:::
+
 ## Chart Configuration
 
 The AnalysisBuilder automatically selects appropriate chart types based on your query:

@@ -324,6 +324,101 @@ Display custom markdown content with formatting
 
 ---
 
+### Funnel Chart
+
+Visualize multi-step conversion flows
+
+![Funnel Chart](/charts/funnel.png)
+
+**Use Case:** Perfect for user journey analysis, sales pipelines, onboarding flows, and any multi-step process where you want to track drop-off between stages
+
+**How Funnel Charts Work:**
+
+Unlike other charts that execute a single query, funnel charts use **sequential query execution**. Each step is a separate query, and the results from one step filter the next step via a "binding key" (typically a user ID or session ID).
+
+```
+Step 1: All Signups (1000 users)
+    ↓ 45% converted
+Step 2: Completed Profile (450 users)
+    ↓ 67% converted
+Step 3: Made Purchase (300 users)
+```
+
+**Display Options:**
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| funnelStepLabels | string[] | - | Custom labels for each step (e.g., `["Signup", "Activation", "Purchase"]`) |
+| funnelOrientation | string | `'horizontal'` | Layout orientation: `'horizontal'` (bars left to right) or `'vertical'` (bars bottom to top) |
+| hideSummaryFooter | boolean | `false` | Hide the summary footer showing overall conversion |
+
+**Programmatic Usage:**
+
+```tsx
+import { useFunnelQuery } from 'drizzle-cube/client'
+
+function ConversionFunnel() {
+  const {
+    chartData,           // Ready for FunnelChart
+    stepResults,         // Per-step details
+    isExecuting,         // Currently running
+    currentStepIndex,    // Which step is executing
+    error
+  } = useFunnelQuery({
+    id: 'signup-funnel',
+    name: 'Signup Funnel',
+    bindingKey: { dimension: 'Users.userId' },
+    steps: [
+      {
+        id: 'signup',
+        name: 'Signup',
+        query: { measures: ['Signups.count'] }
+      },
+      {
+        id: 'activation',
+        name: 'Activated',
+        query: { measures: ['Activations.count'] }
+      },
+      {
+        id: 'purchase',
+        name: 'First Purchase',
+        query: { measures: ['Purchases.count'] }
+      }
+    ]
+  })
+
+  return <FunnelChart data={chartData} />
+}
+```
+
+**Important Considerations:**
+
+:::caution[Sequential Execution]
+Funnel queries execute **sequentially**, not in parallel. Each step must complete before the next begins because it needs the binding key values from the previous step. This means:
+- **Latency adds up** - A 3-step funnel with 500ms per query takes ~1.5 seconds total
+- **Progressive loading** - Results appear step-by-step as each query completes
+- **Network-dependent** - Poor network conditions will impact each step
+:::
+
+:::caution[Binding Key Limits]
+To prevent performance issues with very large `IN` clauses, funnel execution limits the number of binding key values passed between steps (default: 500). If your first step returns more unique values, results may be approximate. The step result includes `bindingKeyTotalCount` to detect truncation.
+:::
+
+**Cross-Cube Funnels:**
+
+For funnels spanning multiple cubes where the binding key has different names:
+
+```tsx
+bindingKey: {
+  dimension: [
+    { cube: 'Signups', dimension: 'Signups.userId' },
+    { cube: 'Purchases', dimension: 'Purchases.customerId' }
+  ]
+}
+```
+
+---
+
 ## Custom Value Formatting
 
 ### The `formatValue` Function
