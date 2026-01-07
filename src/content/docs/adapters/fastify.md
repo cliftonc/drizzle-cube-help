@@ -7,6 +7,10 @@ description: Fastify Adapter documentation
 
 The Fastify adapter provides Cube.js-compatible API endpoints as a Fastify plugin, leveraging the high performance and TypeScript-first approach of Fastify v5.
 
+:::caution[No Built-in Authentication]
+This adapter **does not include built-in authentication**. You must register your authentication plugin or hook **before** the cube plugin. Without this, your analytics API will be publicly accessible. See [Security Requirements](#security-requirements) below.
+:::
+
 ## Installation
 
 ```bash
@@ -535,6 +539,64 @@ Key differences when migrating from Express:
 3. **Schema validation**: Built-in validation
 4. **Async/await**: Required for all handlers
 5. **Error handling**: Uses `setErrorHandler()`
+
+## Security Requirements
+
+### Authentication Hooks
+
+**CRITICAL**: Drizzle Cube adapters do not authenticate requests. Your application must enforce authentication before requests reach adapter routes.
+
+#### Correct Registration Order
+
+```typescript
+import fastify from 'fastify'
+import jwt from '@fastify/jwt'
+import { cubePlugin } from 'drizzle-cube/adapters/fastify'
+
+const server = fastify()
+
+// 1. Register JWT plugin FIRST
+await server.register(jwt, {
+  secret: process.env.JWT_SECRET
+})
+
+// 2. Add authentication hook BEFORE cube plugin
+server.addHook('onRequest', async (request, reply) => {
+  try {
+    await request.jwtVerify()
+  } catch (err) {
+    reply.code(401).send({ error: 'Unauthorized' })
+  }
+})
+
+// 3. Register cube plugin AFTER authentication
+await server.register(cubePlugin, {
+  cubes: [employeesCube],
+  drizzle: db,
+  schema,
+  extractSecurityContext: async (request) => ({
+    organisationId: request.user.orgId,
+    userId: request.user.sub
+  })
+})
+```
+
+#### What Happens Without Authentication
+
+If you register the cube plugin without prior authentication:
+- Analytics endpoints become publicly accessible
+- `extractSecurityContext` receives unauthenticated requests
+- Data may be exposed if security context defaults are unsafe
+
+### Security Checklist
+
+Before deploying to production:
+
+- [ ] Authentication hook/plugin runs **before** cube plugin
+- [ ] `extractSecurityContext` validates the request is authenticated
+- [ ] `extractSecurityContext` throws/rejects if user is not authenticated
+- [ ] All cubes filter by `organisationId` for multi-tenant isolation
+- [ ] Rate limiting is applied to prevent abuse
 
 ## Troubleshooting
 

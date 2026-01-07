@@ -8,6 +8,31 @@ Security in Drizzle Cube is built on three core principles: **multi-tenant data 
 
 Drizzle Cube's security-first design ensures that every query is automatically filtered by security context, preventing data leakage between tenants and protecting against SQL injection attacks. All security filtering is applied at the database level for maximum performance and reliability.
 
+## Authentication Requirements
+
+:::caution[No Built-in Authentication]
+Drizzle Cube adapters **do not include built-in authentication**. Your application is responsible for authenticating users before requests reach the adapter routes.
+:::
+
+Before security context can be applied, requests must be authenticated. If adapter routes are mounted without prior authentication:
+
+- Analytics endpoints become publicly accessible
+- `getSecurityContext` / `extractSecurityContext` receives unauthenticated requests
+- Data may be exposed if security context defaults are unsafe
+
+### Implementation Requirements
+
+1. **Mount authentication middleware before adapter routes** (Express, Fastify, Hono)
+2. **Validate authentication in `getSecurityContext`** (Next.js)
+3. **Reject unauthenticated requests** before returning security context
+
+Each framework adapter documentation includes specific guidance:
+
+- [Express Adapter - Security Requirements](/adapters/express#security-requirements)
+- [Fastify Adapter - Security Requirements](/adapters/fastify#security-requirements)
+- [Hono Adapter - Security Requirements](/adapters/hono#security-requirements)
+- [Next.js Adapter - Security Requirements](/adapters/nextjs#security-requirements)
+
 ## Security Context
 
 The security context is the foundation of Drizzle Cube's security model. It contains user and tenant-specific information that is automatically injected into all cube queries.

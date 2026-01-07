@@ -7,6 +7,10 @@ description: Express Adapter documentation
 
 The Express adapter provides Cube.js-compatible API endpoints for Express.js applications, offering a familiar and flexible integration path for Node.js web applications.
 
+:::caution[No Built-in Authentication]
+This adapter **does not include built-in authentication**. You must mount your authentication middleware **before** the adapter routes. Without this, your analytics API will be publicly accessible. See [Security Requirements](#security-requirements) below.
+:::
+
 ## Installation
 
 ```bash
@@ -664,6 +668,53 @@ Key differences when migrating from Hono:
 2. **Middleware**: Express middleware system
 3. **Routing**: Express Router patterns
 4. **Environment**: Node.js only (no edge runtime)
+
+## Security Requirements
+
+### Authentication Middleware
+
+**CRITICAL**: Drizzle Cube adapters do not authenticate requests. Your application must enforce authentication before requests reach adapter routes.
+
+#### Correct Mounting Order
+
+```typescript
+import express from 'express'
+import { createCubeRouter } from 'drizzle-cube/adapters/express'
+
+const app = express()
+
+// 1. Authentication middleware FIRST
+app.use('/api', authenticationMiddleware)
+
+// 2. Cube adapter routes AFTER
+const cubeRouter = createCubeRouter({
+  cubes: [employeesCube],
+  drizzle: db,
+  schema,
+  extractSecurityContext: async (req) => ({
+    organisationId: req.user.organisationId,
+    userId: req.user.id
+  })
+})
+app.use('/api', cubeRouter)
+```
+
+#### What Happens Without Authentication
+
+If you mount adapter routes without prior authentication:
+- Analytics endpoints become publicly accessible
+- `extractSecurityContext` receives unauthenticated requests
+- Data may be exposed if security context defaults are unsafe
+
+### Security Checklist
+
+Before deploying to production:
+
+- [ ] Authentication middleware runs **before** cube routes
+- [ ] `extractSecurityContext` validates the request is authenticated
+- [ ] `extractSecurityContext` throws/rejects if user is not authenticated
+- [ ] All cubes filter by `organisationId` for multi-tenant isolation
+- [ ] Rate limiting is applied to prevent abuse
 
 ## Troubleshooting
 

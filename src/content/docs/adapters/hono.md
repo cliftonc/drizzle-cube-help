@@ -7,6 +7,10 @@ description: Hono Adapter documentation
 
 The Hono adapter provides Cube.js-compatible API endpoints for Hono applications, offering high performance and edge runtime compatibility with a modern TypeScript-first API.
 
+:::caution[No Built-in Authentication]
+This adapter **does not include built-in authentication**. You must apply your authentication middleware **before** mounting the cube routes. Without this, your analytics API will be publicly accessible. See [Security Requirements](#security-requirements) below.
+:::
+
 ## Installation
 
 ```bash
@@ -683,6 +687,56 @@ Key differences when migrating from Fastify:
 2. **Context**: Single context object instead of request/reply
 3. **Schema validation**: Manual validation or third-party libraries
 4. **Edge runtime**: Edge-first design patterns
+
+## Security Requirements
+
+### Authentication Middleware
+
+**CRITICAL**: Drizzle Cube adapters do not authenticate requests. Your application must enforce authentication before requests reach adapter routes.
+
+#### Correct Middleware Order
+
+```typescript
+import { Hono } from 'hono'
+import { jwt } from 'hono/jwt'
+import { createCubeApp } from 'drizzle-cube/adapters/hono'
+
+const app = new Hono()
+
+// 1. Authentication middleware FIRST
+app.use('/api/*', jwt({
+  secret: process.env.JWT_SECRET!
+}))
+
+// 2. Cube routes AFTER authentication
+const cubeApp = createCubeApp({
+  cubes: [employeesCube],
+  drizzle: db,
+  schema,
+  extractSecurityContext: async (c) => ({
+    organisationId: c.get('jwtPayload').orgId,
+    userId: c.get('jwtPayload').sub
+  })
+})
+app.route('/api', cubeApp)
+```
+
+#### What Happens Without Authentication
+
+If you mount cube routes without prior authentication:
+- Analytics endpoints become publicly accessible
+- `extractSecurityContext` receives unauthenticated requests
+- Data may be exposed if security context defaults are unsafe
+
+### Security Checklist
+
+Before deploying to production:
+
+- [ ] Authentication middleware runs **before** cube routes
+- [ ] `extractSecurityContext` validates the request is authenticated
+- [ ] `extractSecurityContext` throws/returns error if user is not authenticated
+- [ ] All cubes filter by `organisationId` for multi-tenant isolation
+- [ ] Rate limiting is applied to prevent abuse
 
 ## Troubleshooting
 
