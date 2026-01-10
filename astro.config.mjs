@@ -108,6 +108,7 @@ export default defineConfig({
 						{ label: 'Quick Start', slug: 'getting-started/quick-start' },
 						{ label: 'How It Works', slug: 'getting-started/how-it-works' },
 						{ label: 'AI Query Generation', slug: 'getting-started/ai-query-generation' },
+						{ label: 'Comparison', slug: 'getting-started/comparison' },
 						{ label: 'Scaling Your SaaS', slug: 'getting-started/scaling' },
 					],
 				},
