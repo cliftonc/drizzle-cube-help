@@ -139,56 +139,63 @@ The filter builder supports complex filter logic:
 }
 ```
 
-## Multi-Query Mode
+## Analysis Types
 
-AnalysisBuilder supports three merge strategies for combining multiple queries:
+AnalysisBuilder supports three distinct analysis modes, each with dedicated UI and execution patterns:
 
-### Merge Strategies
+### Query Mode (Default)
+
+Standard single-query analytics. Build a query with metrics, breakdowns, and filters.
+
+| Component | Description |
+|-----------|-------------|
+| **Metrics** | Measures (aggregations) from your cubes |
+| **Breakdowns** | Dimensions and time dimensions for grouping |
+| **Filters** | Filter conditions on dimensions |
+
+### Multi-Query Mode
+
+Combine multiple queries with merge strategies for comparative analysis.
 
 | Strategy | Description | Use Case |
 |----------|-------------|----------|
 | `concat` | Append rows with `__queryIndex` marker | Separate series per query (e.g., "Sales 2023" vs "Sales 2024") |
 | `merge` | Align data by common dimension key | Side-by-side comparison on same axis |
-| `funnel` | Sequential execution with binding key linking | User journey and conversion analysis |
+
+**Multi-Query Setup:**
+- Click "+" to add additional query tabs (Q1, Q2, Q3, etc.)
+- Configure each query independently
+- Select merge strategy to combine results
 
 ### Funnel Mode
 
-When you select "Funnel" as the merge strategy, AnalysisBuilder enters funnel mode:
+Dedicated funnel analysis for tracking entity journeys through sequential steps.
 
-1. **Binding Key Selector** - A dimension picker appears above the query tabs. Select the dimension that links steps together (e.g., `Users.userId`, `Sessions.sessionId`).
+When you switch to Funnel mode, the Analysis Builder provides a completely different interface:
 
-2. **Step Tabs** - Query tabs are labeled "Step 1", "Step 2", etc. instead of "Q1", "Q2".
+| Panel | Description |
+|-------|-------------|
+| **Steps Tab** | Configure funnel steps with filters and time windows |
+| **Display Tab** | Chart configuration options |
+| **Results Panel** | Funnel visualization with conversion metrics |
 
-3. **Auto Chart Selection** - The chart type automatically switches to Funnel Chart.
+**Key Differences from Multi-Query Mode:**
+- Server-side CTE-based execution (not sequential client queries)
+- Single cube requirement (all steps use the same event stream cube)
+- Temporal ordering guarantee (step N must occur after step N-1)
+- Time-to-convert metrics (average, median, p90)
+- No binding key value limits
 
-4. **Sequential Execution** - Queries execute in order, with each step filtering by binding key values from the previous step.
+**Funnel Requirements:**
+- Cube must have `eventStream` metadata defined
+- At least 2 steps required
+- Step filters can only use dimensions (not measures)
 
-**Example Funnel Setup:**
-
-```
-Binding Key: Users.userId
-
-Step 1: Signups
-  - Measure: Signups.count
-  - Filter: Signups.createdAt in last 30 days
-
-Step 2: Profile Complete
-  - Measure: ProfileCompletions.count
-
-Step 3: First Purchase
-  - Measure: Purchases.count
-```
-
-:::tip[Binding Key Selection]
-Choose a dimension that:
-- Exists in all cubes used across your steps (or use cross-cube mapping)
-- Uniquely identifies the entity you're tracking (user, session, order)
-- Has reasonable cardinality (not millions of unique values)
+:::tip[Event Stream Cubes]
+Mark cubes with `meta.eventStream` to enable funnel analysis. See [Cubes](/semantic-layer/cubes#event-stream-metadata) for setup details.
 :::
 
-:::caution[Performance Warning]
-Funnel queries execute **sequentially** - each step waits for the previous to complete. A 5-step funnel with 300ms queries will take ~1.5 seconds. Keep step counts reasonable for responsive UX.
-:::
+For comprehensive funnel documentation, see [Funnel Analysis](/client/funnel-analysis)
 
 ## Chart Configuration
 
@@ -262,6 +269,144 @@ Analysis state can be shared via URL hash parameters. The AnalysisBuilder automa
 - Encodes the current state in the URL hash when sharing
 - Restores state from URL hash on load
 - Clears the hash after restoration to enable further editing
+
+### Share URL Format
+
+Share URLs use LZ-String compression to encode the full `AnalysisConfig`:
+
+```
+https://app.com/analysis#share=eJy...compressed-config...
+```
+
+### Programmatic Sharing
+
+```tsx
+import { generateShareUrl, parseShareUrl } from 'drizzle-cube/client'
+
+// Generate share URL from current state
+function ShareButton() {
+  const save = useAnalysisBuilderStore(state => state.save)
+
+  const handleShare = () => {
+    const config = save()
+    const url = generateShareUrl(config)
+    navigator.clipboard.writeText(url)
+  }
+
+  return <button onClick={handleShare}>Copy Share Link</button>
+}
+
+// Load from share URL
+function useShareUrlLoader() {
+  const load = useAnalysisBuilderStore(state => state.load)
+
+  useEffect(() => {
+    const config = parseShareUrl()
+    if (config) {
+      load(config)
+      // Clear hash after loading
+      window.history.replaceState(null, '', window.location.pathname)
+    }
+  }, [])
+}
+```
+
+## State Persistence
+
+The AnalysisBuilder uses `AnalysisConfig` as its canonical persistence format.
+
+### AnalysisConfig Format
+
+```typescript
+interface AnalysisConfig {
+  version: 1
+  analysisType: 'query' | 'funnel'
+  activeView: 'table' | 'chart'
+  charts: {
+    query?: ChartConfig
+    funnel?: ChartConfig
+  }
+  query: CubeQuery | MultiQueryConfig | ServerFunnelQuery
+}
+```
+
+See [AnalysisConfig Reference](/api-reference/analysis-config) for complete documentation.
+
+### Store Methods
+
+The `AnalysisBuilderStore` provides persistence methods:
+
+```tsx
+import { useAnalysisBuilderStore } from 'drizzle-cube/client'
+
+function PersistenceExample() {
+  // Single-mode operations (share URLs, portlets)
+  const save = useAnalysisBuilderStore(state => state.save)
+  const load = useAnalysisBuilderStore(state => state.load)
+
+  // Multi-mode operations (localStorage)
+  const saveWorkspace = useAnalysisBuilderStore(state => state.saveWorkspace)
+  const loadWorkspace = useAnalysisBuilderStore(state => state.loadWorkspace)
+
+  // Export current mode as AnalysisConfig
+  const handleSave = () => {
+    const config = save()
+    console.log('Saved config:', config)
+  }
+
+  // Import AnalysisConfig
+  const handleLoad = (config: AnalysisConfig) => {
+    load(config)
+  }
+}
+```
+
+### Save vs SaveWorkspace
+
+| Method | Format | Preserves | Use Case |
+|--------|--------|-----------|----------|
+| `save()` | `AnalysisConfig` | Current mode only | Share URLs, portlets |
+| `saveWorkspace()` | `AnalysisWorkspace` | All modes | localStorage |
+
+### localStorage Persistence
+
+When `disableLocalStorage={false}` (default), the store automatically persists to localStorage using the workspace format:
+
+```tsx
+// Persistence is enabled by default
+<AnalysisBuilder />
+
+// Disable for embedded/modal usage
+<AnalysisBuilder disableLocalStorage={true} />
+```
+
+The workspace format preserves both query and funnel state, preventing data loss when switching modes.
+
+### Mode Switching
+
+Each analysis mode maintains independent state:
+
+```typescript
+// Query mode state is preserved when switching to funnel mode
+setAnalysisType('funnel')
+// ... configure funnel ...
+setAnalysisType('query')
+// Query mode state is restored intact
+```
+
+### Validation
+
+Get validation results before saving or executing:
+
+```tsx
+const getValidation = useAnalysisBuilderStore(state => state.getValidation)
+
+const { isValid, errors, warnings } = getValidation()
+
+if (!isValid) {
+  console.error('Validation errors:', errors)
+}
+```
 
 ## Styling
 

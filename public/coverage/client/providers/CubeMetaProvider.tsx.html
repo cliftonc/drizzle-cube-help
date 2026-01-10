@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/10</span>
+                <span class='fraction'>12/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>4/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>4/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">84.61% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/9</span>
+                <span class='fraction'>11/13</span>
             </div>
         
             
@@ -127,7 +127,22 @@
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -155,7 +170,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -164,20 +178,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -197,11 +223,13 @@
  * Provides cube metadata (meta, labelMap) isolated from API layer.
  * This prevents components from re-rendering when metadata loads
  * if they only need API access.
+ *
+ * Uses TanStack Query for metadata fetching with built-in caching.
  */
 &nbsp;
-import { createContext, useContext, useMemo, type ReactNode } from 'react'
-import { useCubeApi } from './CubeApiProvider'
-import { useCubeMeta as useCubeMetaHook, type CubeMeta, type FieldLabelMap } from '../hooks/useCubeMeta'
+import { createContext, useContext, useCallback, useMemo, type ReactNode } from 'react'
+import { useCubeMetaQuery } from '../hooks/queries/useCubeMetaQuery'
+import type { CubeMeta, FieldLabelMap } from '../types'
 &nbsp;
 export interface CubeMetaContextValue {
   meta: CubeMeta | null
@@ -219,17 +247,28 @@ interface CubeMetaProviderProps {
 }
 &nbsp;
 export function CubeMetaProvider({ children }: CubeMetaProviderProps) {
-  const { cubeApi } = useCubeApi()
-&nbsp;
-  // Use existing useCubeMeta hook
+  // Use TanStack Query hook for metadata fetching
   const {
     meta,
     labelMap,
-    loading: metaLoading,
-    error: metaError,
-    getFieldLabel,
-    refetch: refetchMeta
-  } = useCubeMetaHook(cubeApi)
+    isLoading: metaLoading,
+    error,
+    refetch,
+    getFieldLabel: getFieldLabelFromQuery
+  } = useCubeMetaQuery()
+&nbsp;
+  // Convert error to string for backward compatibility
+  const metaError = error ? (error instanceof Error ? <span class="branch-0 cbranch-no" title="branch not covered" >error.message : S</span>tring(error)) : null
+&nbsp;
+  // Wrap refetch to match expected signature
+  const refetchMeta = useCallback(<span class="fstat-no" title="function not covered" >() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    refetch()</span>
+  }, [refetch])
+&nbsp;
+  // Create stable getFieldLabel that reads from current labelMap
+  const getFieldLabel = useCallback((fieldName: string): string =&gt; {
+    return getFieldLabelFromQuery(fieldName)
+  }, [getFieldLabelFromQuery])
 &nbsp;
   // Memoize context value to prevent unnecessary re-renders
   const value = useMemo(() =&gt; ({
@@ -262,7 +301,7 @@ export function useCubeMeta() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-06T09:57:37.164Z
+                at 2026-01-10T03:46:39.926Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">2.32% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/128</span>
+                <span class='fraction'>3/129</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">2.15% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/137</span>
+                <span class='fraction'>3/139</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">2.94% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/33</span>
+                <span class='fraction'>1/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">2.67% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/111</span>
+                <span class='fraction'>3/112</span>
             </div>
         
             
@@ -465,7 +465,15 @@
 <a name='L400'></a><a href='#L400'>400</a>
 <a name='L401'></a><a href='#L401'>401</a>
 <a name='L402'></a><a href='#L402'>402</a>
-<a name='L403'></a><a href='#L403'>403</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L403'></a><a href='#L403'>403</a>
+<a name='L404'></a><a href='#L404'>404</a>
+<a name='L405'></a><a href='#L405'>405</a>
+<a name='L406'></a><a href='#L406'>406</a>
+<a name='L407'></a><a href='#L407'>407</a>
+<a name='L408'></a><a href='#L408'>408</a>
+<a name='L409'></a><a href='#L409'>409</a>
+<a name='L410'></a><a href='#L410'>410</a>
+<a name='L411'></a><a href='#L411'>411</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -581,10 +589,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -828,7 +844,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -845,13 +861,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -976,6 +992,14 @@ export function <span class="fstat-no" title="function not covered" >createOrFil
     type: 'or',
     filters
   }
+}
+&nbsp;
+/**
+ * Clean up filters - backward compatible (returns filters unchanged)
+ * @deprecated This function is no longer used as we now support filtering on any schema field
+ */
+export function <span class="fstat-no" title="function not covered" >cleanupFilters(f</span>ilters: Filter[], _query?: CubeQuery): Filter[] {
+<span class="cstat-no" title="statement not covered" >  return filters || []</span>
 }
 &nbsp;
 // ============================================================================
@@ -1229,8 +1253,8 @@ export function <span class="fstat-no" title="function not covered" >getAllFilte
 /**
  * Convert DateRangeType to Cube.js compatible date range format
  */
-export function <span class="fstat-no" title="function not covered" >convertDateRangeTypeToValue(r</span>angeType: string, number?: number): string {
-  const typeMap: Record&lt;string, string&gt; = <span class="cstat-no" title="statement not covered" >{</span>
+export function convertDateRangeTypeToValue(rangeType: string, number?: number): string {
+  const typeMap: Record&lt;string, string&gt; = {
     'today': 'today',
     'yesterday': 'yesterday',
     'this_week': 'this week',
@@ -1247,13 +1271,13 @@ export function <span class="fstat-no" title="function not covered" >convertDate
   }
 &nbsp;
   // Handle dynamic ranges with number input
-<span class="cstat-no" title="statement not covered" >  if (rangeType.startsWith('last_n_') &amp;&amp; number !== undefined &amp;&amp; number &gt; 0) {</span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (rangeType.startsWith('last_n_') &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >number !== undefined &amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >n</span>umber &gt; 0) {</span>
     const unit = <span class="cstat-no" title="statement not covered" >rangeType.replace('last_n_', '')</span>
     const unitSingular = <span class="cstat-no" title="statement not covered" >unit.slice(0, -1) // Remove 's' for singular form</span>
 <span class="cstat-no" title="statement not covered" >    return number === 1 ? `last ${unitSingular}` : `last ${number} ${unit}`</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return typeMap[rangeType] || rangeType</span>
+  return typeMap[rangeType] || <span class="branch-1 cbranch-no" title="branch not covered" >rangeType</span>
 }
 &nbsp;
 /**
@@ -1276,7 +1300,7 @@ export function <span class="fstat-no" title="function not covered" >formatDateF
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-06T09:57:37.244Z
+                at 2026-01-10T03:46:40.014Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

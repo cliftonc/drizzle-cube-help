@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for client/components/AIAssistant/AIAssistantModal.tsx</title>
+    <title>Code coverage report for client/stores/slices/coreSlice.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">client/components/AIAssistant</a> AIAssistantModal.tsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">client/stores/slices</a> coreSlice.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">80.95% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/73</span>
+                <span class='fraction'>68/84</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">44.68% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/49</span>
+                <span class='fraction'>21/47</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">70.83% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/22</span>
+                <span class='fraction'>17/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">80.48% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/60</span>
+                <span class='fraction'>66/82</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -417,7 +417,400 @@
 <a name='L352'></a><a href='#L352'>352</a>
 <a name='L353'></a><a href='#L353'>353</a>
 <a name='L354'></a><a href='#L354'>354</a>
-<a name='L355'></a><a href='#L355'>355</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L355'></a><a href='#L355'>355</a>
+<a name='L356'></a><a href='#L356'>356</a>
+<a name='L357'></a><a href='#L357'>357</a>
+<a name='L358'></a><a href='#L358'>358</a>
+<a name='L359'></a><a href='#L359'>359</a>
+<a name='L360'></a><a href='#L360'>360</a>
+<a name='L361'></a><a href='#L361'>361</a>
+<a name='L362'></a><a href='#L362'>362</a>
+<a name='L363'></a><a href='#L363'>363</a>
+<a name='L364'></a><a href='#L364'>364</a>
+<a name='L365'></a><a href='#L365'>365</a>
+<a name='L366'></a><a href='#L366'>366</a>
+<a name='L367'></a><a href='#L367'>367</a>
+<a name='L368'></a><a href='#L368'>368</a>
+<a name='L369'></a><a href='#L369'>369</a>
+<a name='L370'></a><a href='#L370'>370</a>
+<a name='L371'></a><a href='#L371'>371</a>
+<a name='L372'></a><a href='#L372'>372</a>
+<a name='L373'></a><a href='#L373'>373</a>
+<a name='L374'></a><a href='#L374'>374</a>
+<a name='L375'></a><a href='#L375'>375</a>
+<a name='L376'></a><a href='#L376'>376</a>
+<a name='L377'></a><a href='#L377'>377</a>
+<a name='L378'></a><a href='#L378'>378</a>
+<a name='L379'></a><a href='#L379'>379</a>
+<a name='L380'></a><a href='#L380'>380</a>
+<a name='L381'></a><a href='#L381'>381</a>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a>
+<a name='L384'></a><a href='#L384'>384</a>
+<a name='L385'></a><a href='#L385'>385</a>
+<a name='L386'></a><a href='#L386'>386</a>
+<a name='L387'></a><a href='#L387'>387</a>
+<a name='L388'></a><a href='#L388'>388</a>
+<a name='L389'></a><a href='#L389'>389</a>
+<a name='L390'></a><a href='#L390'>390</a>
+<a name='L391'></a><a href='#L391'>391</a>
+<a name='L392'></a><a href='#L392'>392</a>
+<a name='L393'></a><a href='#L393'>393</a>
+<a name='L394'></a><a href='#L394'>394</a>
+<a name='L395'></a><a href='#L395'>395</a>
+<a name='L396'></a><a href='#L396'>396</a>
+<a name='L397'></a><a href='#L397'>397</a>
+<a name='L398'></a><a href='#L398'>398</a>
+<a name='L399'></a><a href='#L399'>399</a>
+<a name='L400'></a><a href='#L400'>400</a>
+<a name='L401'></a><a href='#L401'>401</a>
+<a name='L402'></a><a href='#L402'>402</a>
+<a name='L403'></a><a href='#L403'>403</a>
+<a name='L404'></a><a href='#L404'>404</a>
+<a name='L405'></a><a href='#L405'>405</a>
+<a name='L406'></a><a href='#L406'>406</a>
+<a name='L407'></a><a href='#L407'>407</a>
+<a name='L408'></a><a href='#L408'>408</a>
+<a name='L409'></a><a href='#L409'>409</a>
+<a name='L410'></a><a href='#L410'>410</a>
+<a name='L411'></a><a href='#L411'>411</a>
+<a name='L412'></a><a href='#L412'>412</a>
+<a name='L413'></a><a href='#L413'>413</a>
+<a name='L414'></a><a href='#L414'>414</a>
+<a name='L415'></a><a href='#L415'>415</a>
+<a name='L416'></a><a href='#L416'>416</a>
+<a name='L417'></a><a href='#L417'>417</a>
+<a name='L418'></a><a href='#L418'>418</a>
+<a name='L419'></a><a href='#L419'>419</a>
+<a name='L420'></a><a href='#L420'>420</a>
+<a name='L421'></a><a href='#L421'>421</a>
+<a name='L422'></a><a href='#L422'>422</a>
+<a name='L423'></a><a href='#L423'>423</a>
+<a name='L424'></a><a href='#L424'>424</a>
+<a name='L425'></a><a href='#L425'>425</a>
+<a name='L426'></a><a href='#L426'>426</a>
+<a name='L427'></a><a href='#L427'>427</a>
+<a name='L428'></a><a href='#L428'>428</a>
+<a name='L429'></a><a href='#L429'>429</a>
+<a name='L430'></a><a href='#L430'>430</a>
+<a name='L431'></a><a href='#L431'>431</a>
+<a name='L432'></a><a href='#L432'>432</a>
+<a name='L433'></a><a href='#L433'>433</a>
+<a name='L434'></a><a href='#L434'>434</a>
+<a name='L435'></a><a href='#L435'>435</a>
+<a name='L436'></a><a href='#L436'>436</a>
+<a name='L437'></a><a href='#L437'>437</a>
+<a name='L438'></a><a href='#L438'>438</a>
+<a name='L439'></a><a href='#L439'>439</a>
+<a name='L440'></a><a href='#L440'>440</a>
+<a name='L441'></a><a href='#L441'>441</a>
+<a name='L442'></a><a href='#L442'>442</a>
+<a name='L443'></a><a href='#L443'>443</a>
+<a name='L444'></a><a href='#L444'>444</a>
+<a name='L445'></a><a href='#L445'>445</a>
+<a name='L446'></a><a href='#L446'>446</a>
+<a name='L447'></a><a href='#L447'>447</a>
+<a name='L448'></a><a href='#L448'>448</a>
+<a name='L449'></a><a href='#L449'>449</a>
+<a name='L450'></a><a href='#L450'>450</a>
+<a name='L451'></a><a href='#L451'>451</a>
+<a name='L452'></a><a href='#L452'>452</a>
+<a name='L453'></a><a href='#L453'>453</a>
+<a name='L454'></a><a href='#L454'>454</a>
+<a name='L455'></a><a href='#L455'>455</a>
+<a name='L456'></a><a href='#L456'>456</a>
+<a name='L457'></a><a href='#L457'>457</a>
+<a name='L458'></a><a href='#L458'>458</a>
+<a name='L459'></a><a href='#L459'>459</a>
+<a name='L460'></a><a href='#L460'>460</a>
+<a name='L461'></a><a href='#L461'>461</a>
+<a name='L462'></a><a href='#L462'>462</a>
+<a name='L463'></a><a href='#L463'>463</a>
+<a name='L464'></a><a href='#L464'>464</a>
+<a name='L465'></a><a href='#L465'>465</a>
+<a name='L466'></a><a href='#L466'>466</a>
+<a name='L467'></a><a href='#L467'>467</a>
+<a name='L468'></a><a href='#L468'>468</a>
+<a name='L469'></a><a href='#L469'>469</a>
+<a name='L470'></a><a href='#L470'>470</a>
+<a name='L471'></a><a href='#L471'>471</a>
+<a name='L472'></a><a href='#L472'>472</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">205x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">200x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">30x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">30x</span>
+<span class="cline-any cline-yes">30x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">30x</span>
+<span class="cline-any cline-yes">30x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">30x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -431,205 +824,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -646,104 +848,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -759,9 +870,132 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -772,367 +1006,484 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
- * AI Assistant Modal Component
- * 
- * Multi-step modal for AI-powered query generation
- * Step 1: API Key input
- * Step 2: Model selection  
- * Step 3: Query input and response
+ * Core Slice
+ *
+ * Handles:
+ * - analysisType (mode selection)
+ * - charts map (per-mode chart configurations)
+ * - save/load delegation to adapters
+ *
+ * This slice is mode-agnostic - it delegates to the adapter registry
+ * for mode-specific logic.
  */
 &nbsp;
-import React, { useState } from 'react'
-import { getIcon } from '../../icons'
-import Modal from '../Modal'
-&nbsp;
-const <span class="cstat-no" title="statement not covered" >ErrorIcon = getIcon('error')</span>
-const <span class="cstat-no" title="statement not covered" >SuccessIcon = getIcon('success')</span>
-const <span class="cstat-no" title="statement not covered" >SparklesIcon = getIcon('sparkles')</span>
-import type { AIAssistantState } from './types'
+import type { StateCreator } from 'zustand'
+import type { AnalysisBuilderStore } from '../analysisBuilderStore'
+// Import from barrel export to ensure adapters are auto-registered via initializeAdapters()
 import {
-  sendGeminiMessage,
-  loadAIConfig,
-  extractTextFromResponse
-} from './utils'
-import { DEFAULT_SYSTEM_PROMPT_TEMPLATE } from './constants'
+  adapterRegistry,
+  queryModeAdapter,
+  funnelModeAdapter,
+} from '../../adapters'
+import type {
+  AnalysisConfig,
+  AnalysisType,
+  ChartConfig,
+  AnalysisWorkspace,
+  QueryAnalysisConfig,
+  FunnelAnalysisConfig,
+} from '../../types/analysisConfig'
+import type { ChartType, ChartAxisConfig, ChartDisplayConfig } from '../../types'
 &nbsp;
-interface AIAssistantModalProps {
-  isOpen: boolean
-  onClose: () =&gt; void
-  schema?: any
-  onQueryLoad?: (query: any) =&gt; void
-  aiEndpoint?: string
-}
+// ============================================================================
+// Types
+// ============================================================================
 &nbsp;
-const AIAssistantModal: React.FC&lt;AIAssistantModalProps&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span></span>
-  isOpen,
-  onClose,
-  onQueryLoad,
-  aiEndpoint = <span class="branch-0 cbranch-no" title="branch not covered" >'/api/ai'</span>
-}) =&gt; {
-  const [state, setState<span class="cstat-no" title="statement not covered" >] = useState&lt;AIAssistantState&gt;(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-    const <span class="cstat-no" title="statement not covered" >savedConfig = loadAIConfig()</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
-      step: 'query', // Skip API key step and go straight to query
-      apiKey: savedConfig.apiKey || '',
-      systemPromptTemplate: DEFAULT_SYSTEM_PROMPT_TEMPLATE,
-      userPrompt: '',
-      isSubmitting: false,
-      response: null,
-      responseError: null,
-      isValidating: false,
-      validationResult: null,
-      validationError: null
-    }
-  })
+/**
+ * Core slice state
+ */
+export interface CoreSliceState {
+  /** Current analysis mode */
+  analysisType: AnalysisType
 &nbsp;
-&nbsp;
-  const handleQuerySubmit = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async (e</span>?: React.FormEvent) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    e?.preventDefault()</span>
-<span class="cstat-no" title="statement not covered" >    if (!state.userPrompt.trim()) <span class="cstat-no" title="statement not covered" >return</span></span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    setState(<span class="fstat-no" title="function not covered" >prev =&gt; (<span class="cstat-no" title="statement not covered" >{ </span></span></span>
-      ...prev, 
-      isSubmitting: true, 
-      response: null, 
-      responseError: null,
-      validationResult: null,
-      validationError: null,
-      isValidating: false
-    }))
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      // Send only the user prompt - server will handle system prompt building
-      const response = <span class="cstat-no" title="statement not covered" >await sendGeminiMessage(</span>
-        state.apiKey,
-        state.userPrompt,
-        aiEndpoint
-      )
-&nbsp;
-      const <span class="cstat-no" title="statement not covered" >responseText = extractTextFromResponse(response)</span>
-<span class="cstat-no" title="statement not covered" >      setState(<span class="fstat-no" title="function not covered" >prev =&gt; (<span class="cstat-no" title="statement not covered" >{ </span></span></span>
-        ...prev, 
-        isSubmitting: false, 
-        response: responseText 
-      }))
-      
-      // Automatically validate after successful generation
-<span class="cstat-no" title="statement not covered" >      setTimeout(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >        validateResponse(responseText)</span>
-      }, 500)
-    } catch (error) {
-<span class="cstat-no" title="statement not covered" >      setState(<span class="fstat-no" title="function not covered" >prev =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span></span>
-        ...prev,
-        isSubmitting: false,
-        responseError: error instanceof Error ? error.message : 'Failed to process query'
-      }))
-    }
+  /**
+   * Per-mode chart configuration map.
+   * Each mode owns its own chart settings.
+   * Phase 4: This is now the source of truth for all chart configuration.
+   */
+  charts: {
+    [K in AnalysisType]?: ChartConfig
   }
 &nbsp;
-  // Validate a specific response text (used for auto-validation)
-  const validateResponse = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async (r</span>esponseText: string) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (!responseText) {</span>
-<span class="cstat-no" title="statement not covered" >      console.log('AI Modal: No response text to validate')</span>
+  /**
+   * Per-mode active view (table or chart) map.
+   * Each mode owns its own view preference.
+   * This preserves view preference when switching between modes.
+   */
+  activeViews: {
+    [K in AnalysisType]?: 'table' | 'chart'
+  }
+&nbsp;
+  /** Whether user manually selected a chart type */
+  userManuallySelectedChart: boolean
+  /** Color palette name */
+  localPaletteName: string
+}
+&nbsp;
+/**
+ * Core slice actions
+ */
+export interface CoreSliceActions {
+  /** Set the analysis type (switches between Query/Funnel modes) */
+  setAnalysisType: (type: AnalysisType) =&gt; void
+&nbsp;
+  /** Set chart type for current mode */
+  setChartType: (type: ChartType) =&gt; void
+&nbsp;
+  /** Set chart type with manual selection flag */
+  setChartTypeManual: (type: ChartType) =&gt; void
+&nbsp;
+  /** Set chart config for current mode */
+  setChartConfig: (config: ChartAxisConfig) =&gt; void
+&nbsp;
+  /** Set display config for current mode */
+  setDisplayConfig: (config: ChartDisplayConfig) =&gt; void
+&nbsp;
+  /** Set color palette name */
+  setLocalPaletteName: (name: string) =&gt; void
+&nbsp;
+  /** Set user manually selected chart flag */
+  setUserManuallySelectedChart: (value: boolean) =&gt; void
+&nbsp;
+  /**
+   * @deprecated Use setChartType() instead - works for any mode via charts map.
+   * This setter is kept for backward compatibility but will be removed in a future version.
+   */
+  setFunnelChartType: (type: ChartType) =&gt; void
+&nbsp;
+  /**
+   * @deprecated Use setChartConfig() instead - works for any mode via charts map.
+   * This setter is kept for backward compatibility but will be removed in a future version.
+   */
+  setFunnelChartConfig: (config: ChartAxisConfig) =&gt; void
+&nbsp;
+  /**
+   * @deprecated Use setDisplayConfig() instead - works for any mode via charts map.
+   * This setter is kept for backward compatibility but will be removed in a future version.
+   */
+  setFunnelDisplayConfig: (config: ChartDisplayConfig) =&gt; void
+&nbsp;
+  /**
+   * Save current state to AnalysisConfig format.
+   * Delegates to the appropriate adapter based on analysisType.
+   * Use for share URLs and portlets (single-mode).
+   */
+  save: () =&gt; AnalysisConfig
+&nbsp;
+  /**
+   * Load state from AnalysisConfig.
+   * Delegates to the appropriate adapter based on config.analysisType.
+   * Use for share URLs and portlets (single-mode).
+   */
+  load: (config: AnalysisConfig) =&gt; void
+&nbsp;
+  /**
+   * Save ALL modes to AnalysisWorkspace format.
+   * Used for localStorage persistence to preserve state across mode switches.
+   */
+  saveWorkspace: () =&gt; AnalysisWorkspace
+&nbsp;
+  /**
+   * Load ALL modes from AnalysisWorkspace.
+   * Used for localStorage persistence to restore state for all modes.
+   */
+  loadWorkspace: (workspace: AnalysisWorkspace) =&gt; void
+}
+&nbsp;
+export type CoreSlice = CoreSliceState &amp; CoreSliceActions
+&nbsp;
+// ============================================================================
+// Initial State
+// ============================================================================
+&nbsp;
+export const createInitialCoreState = (): CoreSliceState =&gt; ({
+  analysisType: 'query',
+&nbsp;
+  // Use adapter defaults as single source of truth for chart configuration
+  charts: {
+    query: queryModeAdapter.getDefaultChartConfig(),
+    funnel: funnelModeAdapter.getDefaultChartConfig(),
+  },
+&nbsp;
+  // Per-mode active view preference
+  activeViews: {
+    query: 'chart',
+    funnel: 'chart',
+  },
+&nbsp;
+  userManuallySelectedChart: false,
+  localPaletteName: 'default',
+})
+&nbsp;
+// ============================================================================
+// Slice Creator
+// ============================================================================
+&nbsp;
+/**
+ * Create the core slice.
+ * Uses StateCreator pattern for composability with other slices.
+ */
+export const createCoreSlice: StateCreator&lt;
+  AnalysisBuilderStore,
+  [],
+  [],
+  CoreSlice
+&gt; = (set, get) =&gt; ({
+  ...createInitialCoreState(),
+&nbsp;
+  setAnalysisType: (type) =&gt; {
+    set((state) =&gt; {
+      // Ensure the target mode has chart config (apply defaults if missing)
+      const charts = { ...state.charts }
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!charts[type]) {
+        const adapter = <span class="cstat-no" title="statement not covered" >adapterRegistry.get(type)</span>
+<span class="cstat-no" title="statement not covered" >        charts[type] = adapter.getDefaultChartConfig()</span>
+      }
+      const activeViews = { ...state.activeViews }
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!activeViews[type]) {
+<span class="cstat-no" title="statement not covered" >        activeViews[type] = 'chart'</span>
+      }
+      return {
+        analysisType: type,
+        charts,
+        activeViews,
+        activeView: activeViews[type] ?? <span class="branch-1 cbranch-no" title="branch not covered" >'chart',</span>
+      }
+    })
+  },
+&nbsp;
+  setChartType: (type) =&gt; {
+    set((state) =&gt; {
+      const mode = state.analysisType
+      const currentConfig = state.charts[mode] || <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
+        chartType: type,
+        chartConfig: {},
+        displayConfig: {},
+      }
+&nbsp;
+      // Phase 4: Only update charts map (legacy fields removed)
+      return {
+        charts: {
+          ...state.charts,
+          [mode]: { ...currentConfig, chartType: type },
+        },
+      }
+    })
+  },
+&nbsp;
+  setChartTypeManual: (type) =&gt; {
+    set((state) =&gt; {
+      const mode = state.analysisType
+      const currentConfig = state.charts[mode] || <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
+        chartType: type,
+        chartConfig: {},
+        displayConfig: {},
+      }
+&nbsp;
+      // Phase 4: Only update charts map (legacy fields removed)
+      return {
+        charts: {
+          ...state.charts,
+          [mode]: { ...currentConfig, chartType: type },
+        },
+        userManuallySelectedChart: true,
+        activeView: 'chart' as const,
+        activeViews: {
+          ...state.activeViews,
+          [mode]: 'chart' as const,
+        },
+      }
+    })
+  },
+&nbsp;
+  setChartConfig: (config) =&gt; {
+    set((state) =&gt; {
+      const mode = state.analysisType
+      const currentConfig = state.charts[mode] || <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
+        chartType: 'bar',
+        chartConfig: config,
+        displayConfig: {},
+      }
+&nbsp;
+      // Phase 4: Only update charts map (legacy fields removed)
+      return {
+        charts: {
+          ...state.charts,
+          [mode]: { ...currentConfig, chartConfig: config },
+        },
+        activeView: 'chart' as const,
+        activeViews: {
+          ...state.activeViews,
+          [mode]: 'chart' as const,
+        },
+      }
+    })
+  },
+&nbsp;
+  setDisplayConfig: (config) =&gt; {
+    set((state) =&gt; {
+      const mode = state.analysisType
+      const currentConfig = state.charts[mode] || <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
+        chartType: 'bar',
+        chartConfig: {},
+        displayConfig: config,
+      }
+&nbsp;
+      // Phase 4: Only update charts map (legacy fields removed)
+      return {
+        charts: {
+          ...state.charts,
+          [mode]: { ...currentConfig, displayConfig: config },
+        },
+        activeView: 'chart' as const,
+        activeViews: {
+          ...state.activeViews,
+          [mode]: 'chart' as const,
+        },
+      }
+    })
+  },
+&nbsp;
+  setLocalPaletteName: <span class="fstat-no" title="function not covered" >(n</span>ame) =&gt; <span class="cstat-no" title="statement not covered" >set({ localPaletteName: name }),</span>
+&nbsp;
+  setUserManuallySelectedChart: (value) =&gt; set({ userManuallySelectedChart: value }),
+&nbsp;
+  // @deprecated - Use setChartType() instead
+  // Kept for backward compatibility
+  setFunnelChartType: <span class="fstat-no" title="function not covered" >(t</span>ype) =&gt; {
+<span class="cstat-no" title="statement not covered" >    set(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; {</span>
+      const currentConfig = <span class="cstat-no" title="statement not covered" >state.charts.funnel || {</span>
+        chartType: type,
+        chartConfig: {},
+        displayConfig: {},
+      }
+<span class="cstat-no" title="statement not covered" >      return {</span>
+        charts: {
+          ...state.charts,
+          funnel: { ...currentConfig, chartType: type },
+        },
+      }
+    })
+  },
+&nbsp;
+  // @deprecated - Use setChartConfig() instead
+  // Kept for backward compatibility
+  setFunnelChartConfig: <span class="fstat-no" title="function not covered" >(c</span>onfig) =&gt; {
+<span class="cstat-no" title="statement not covered" >    set(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; {</span>
+      const currentConfig = <span class="cstat-no" title="statement not covered" >state.charts.funnel || {</span>
+        chartType: 'funnel',
+        chartConfig: config,
+        displayConfig: {},
+      }
+<span class="cstat-no" title="statement not covered" >      return {</span>
+        charts: {
+          ...state.charts,
+          funnel: { ...currentConfig, chartConfig: config },
+        },
+      }
+    })
+  },
+&nbsp;
+  // @deprecated - Use setDisplayConfig() instead
+  // Kept for backward compatibility
+  setFunnelDisplayConfig: <span class="fstat-no" title="function not covered" >(c</span>onfig) =&gt; {
+<span class="cstat-no" title="statement not covered" >    set(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; {</span>
+      const currentConfig = <span class="cstat-no" title="statement not covered" >state.charts.funnel || {</span>
+        chartType: 'funnel',
+        chartConfig: {},
+        displayConfig: config,
+      }
+<span class="cstat-no" title="statement not covered" >      return {</span>
+        charts: {
+          ...state.charts,
+          funnel: { ...currentConfig, displayConfig: config },
+        },
+      }
+    })
+  },
+&nbsp;
+  save: () =&gt; {
+    const state = get()
+    const adapter = adapterRegistry.get(state.analysisType)
+&nbsp;
+    // Use adapter's extractState method for mode-specific state
+    const modeState = adapter.extractState(state as unknown as Record&lt;string, unknown&gt;)
+&nbsp;
+    // Use per-mode activeView, falling back to legacy activeView
+    const activeView = state.activeViews[state.analysisType] ?? <span class="branch-1 cbranch-no" title="branch not covered" >state.activeView ?? <span class="branch-2 cbranch-no" title="branch not covered" >'</span>chart'</span>
+&nbsp;
+    return adapter.save(modeState, state.charts, activeView)
+  },
+&nbsp;
+  load: (config) =&gt; {
+    const adapter = adapterRegistry.get(config.analysisType)
+&nbsp;
+    // Validate config can be loaded
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!adapter.canLoad(config)) {
+<span class="cstat-no" title="statement not covered" >      console.warn('[coreSlice] Invalid config, cannot load')</span>
 <span class="cstat-no" title="statement not covered" >      return</span>
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    console.log('AI Modal: Starting validation with response:', responseText.substring(0, 100) + '...')</span>
-    
-<span class="cstat-no" title="statement not covered" >    setState(<span class="fstat-no" title="function not covered" >prev =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span></span>
-      ...prev,
-      isValidating: true,
-      validationResult: null,
-      validationError: null
-    }))
+    const modeState = adapter.load(config)
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      const query = <span class="cstat-no" title="statement not covered" >JSON.parse(responseText)</span>
-<span class="cstat-no" title="statement not covered" >      console.log('AI Modal: Parsed query:', query)</span>
-      
-      const response = <span class="cstat-no" title="statement not covered" >await fetch('/cubejs-api/v1/load', {</span>
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(query)
-      })
-&nbsp;
-<span class="cstat-no" title="statement not covered" >      console.log('AI Modal: Validation response status:', response.status)</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >      if (response.ok) {</span>
-<span class="cstat-no" title="statement not covered" >        console.log('AI Modal: Validation SUCCESS')</span>
-<span class="cstat-no" title="statement not covered" >        setState(<span class="fstat-no" title="function not covered" >prev =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span></span>
-          ...prev,
-          isValidating: false,
-          validationResult: 'valid'
-        }))
-      } else {
-        const errorData = <span class="cstat-no" title="statement not covered" >await response.text()</span>
-<span class="cstat-no" title="statement not covered" >        console.log('AI Modal: Validation FAILED:', errorData)</span>
-<span class="cstat-no" title="statement not covered" >        setState(<span class="fstat-no" title="function not covered" >prev =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span></span>
-          ...prev,
-          isValidating: false,
-          validationResult: 'invalid',
-          validationError: errorData || `HTTP ${response.status}: ${response.statusText}`
-        }))
-      }
-    } catch (error) {
-<span class="cstat-no" title="statement not covered" >      console.log('AI Modal: Validation ERROR:', error)</span>
-<span class="cstat-no" title="statement not covered" >      setState(<span class="fstat-no" title="function not covered" >prev =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span></span>
-        ...prev,
-        isValidating: false,
-        validationResult: 'invalid',
-        validationError: error instanceof Error ? error.message : 'Failed to validate query'
-      }))
+    // Merge charts to preserve other modes' settings
+    const currentState = get()
+    const mergedCharts = {
+      ...currentState.charts,
+      ...config.charts,
     }
-  }
 &nbsp;
-  const handleValidate = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async () =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >    if (!state.response) <span class="cstat-no" title="statement not covered" >return</span></span>
-<span class="cstat-no" title="statement not covered" >    await validateResponse(state.response)</span>
-  }
-&nbsp;
-  const handleUseQuery = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >    if (!state.response || !onQueryLoad) <span class="cstat-no" title="statement not covered" >return</span></span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      const query = <span class="cstat-no" title="statement not covered" >JSON.parse(state.response)</span>
-<span class="cstat-no" title="statement not covered" >      onQueryLoad(query)</span>
-<span class="cstat-no" title="statement not covered" >      handleClose()</span>
-    } catch {
-<span class="cstat-no" title="statement not covered" >      setState(<span class="fstat-no" title="function not covered" >prev =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span></span>
-        ...prev,
-        validationError: 'Invalid JSON format'
-      }))
+    // Apply defaults if current mode's chart config is missing
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!mergedCharts[config.analysisType]) {
+<span class="cstat-no" title="statement not covered" >      mergedCharts[config.analysisType] = adapter.getDefaultChartConfig()</span>
     }
-  }
 &nbsp;
-  const handleClose = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >    setState(<span class="fstat-no" title="function not covered" >prev =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span></span>
-      ...prev,
-      response: null,
-      responseError: null,
-      validationResult: null,
-      validationError: null
-    }))
-<span class="cstat-no" title="statement not covered" >    onClose()</span>
-  }
-&nbsp;
-  const handleKeyDown = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>: React.KeyboardEvent&lt;HTMLTextAreaElement&gt;) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (e.key === 'Enter' &amp;&amp; !e.shiftKey) {</span>
-<span class="cstat-no" title="statement not covered" >      e.preventDefault()</span>
-<span class="cstat-no" title="statement not covered" >      handleQuerySubmit()</span>
+    // Merge activeViews to preserve other modes' view preferences
+    const mergedActiveViews = {
+      ...currentState.activeViews,
+      [config.analysisType]: config.activeView,
     }
-  }
 &nbsp;
+    // Update state (mode-agnostic)
+    set({
+      analysisType: config.analysisType,
+      charts: mergedCharts,
+      activeView: config.activeView,
+      activeViews: mergedActiveViews,
+      // Mode-specific state from adapter
+      ...(modeState as any),
+    })
+  },
 &nbsp;
+  saveWorkspace: (): AnalysisWorkspace =&gt; {
+    const state = get()
+    const stateAsRecord = state as unknown as Record&lt;string, unknown&gt;
 &nbsp;
-  const renderQueryStep = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; (</span></span>
-<span class="cstat-no" title="statement not covered" >    &lt;div className="flex flex-col space-y-4"&gt;</span>
-      {/* Top: Config Panel - Full Width */}
-      &lt;div className="shrink-0 p-3 bg-dc-surface-secondary border border-dc-border rounded-md"&gt;
-        &lt;div className="text-sm text-dc-text-muted"&gt;
-          Using: &lt;span className="font-medium"&gt;AI Query Generation&lt;/span&gt;
-          &lt;span className="ml-2 px-2 py-1 bg-dc-accent-bg text-dc-accent text-xs rounded-sm"&gt;
-            Server-provided AI (Rate Limited)
-          &lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      
-      {/* Middle: Input/Output Row - Takes remaining space */}
-      &lt;div className="flex flex-col md:flex-row gap-6 flex-1 min-h-0"&gt;
-        {/* Left: Query Input */}
-        &lt;div className="w-full md:w-1/2 flex flex-col"&gt;
-          &lt;label htmlFor="user-prompt" className="block text-sm font-medium text-dc-text-secondary mb-2"&gt;
-            Describe your query in natural language
-          &lt;/label&gt;
-          &lt;textarea
-            id="user-prompt"
-            value={state.userPrompt}
-            onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >setState(<span class="fstat-no" title="function not covered" >prev =&gt; (<span class="cstat-no" title="statement not covered" >{</span> ...prev, userPrompt: e.target.value }))</span>}</span>
-            onKeyDown={handleKeyDown}
-            placeholder="e.g., Show me the total revenue by month for the last year (Press Enter to generate, Shift+Enter for new line)"
-            className="flex-1 w-full px-3 py-2 border border-dc-border rounded-md shadow-xs focus:outline-none focus:ring-dc-accent focus:border-dc-accent resize-none bg-dc-surface text-dc-text"
-            required
-          /&gt;
-        &lt;/div&gt;
-        
-        {/* Right: Output Query */}
-        &lt;div className="w-full md:w-1/2 flex flex-col"&gt;
-          &lt;div className="flex items-center justify-between mb-2"&gt;
-            &lt;div className="flex items-center space-x-2"&gt;
-              {state.response ? (
-                &lt;&gt;
-                  &lt;SuccessIcon className="w-5 h-5 text-dc-success" /&gt;
-                  &lt;span className="text-sm font-medium text-dc-success"&gt;AI Generated Query&lt;/span&gt;
-                &lt;/&gt;
-              ) : (
-                &lt;span className="text-sm font-medium text-dc-text-muted"&gt;Generated Query&lt;/span&gt;
-              )}
-            &lt;/div&gt;
-            {state.response &amp;&amp; (
-              &lt;button
-                onClick={handleValidate}
-                disabled={state.isValidating}
-                className="text-xs text-dc-accent hover:text-dc-accent disabled:opacity-50"
-                title="Click to re-validate query"
-              &gt;
-                {state.isValidating ? 'Validating...' : 'Re-validate'}
-              &lt;/button&gt;
-            )}
-          &lt;/div&gt;
+    // Save query mode state using adapter's extractState
+    const queryAdapter = adapterRegistry.get('query')
+    const queryModeState = queryAdapter.extractState(stateAsRecord)
+    const queryActiveView = state.activeViews.query ?? <span class="branch-1 cbranch-no" title="branch not covered" >state.activeView ?? <span class="branch-2 cbranch-no" title="branch not covered" >'</span>chart'</span>
+    const queryConfig = queryAdapter.save(
+      queryModeState,
+      state.charts,
+      queryActiveView
+    ) as QueryAnalysisConfig
 &nbsp;
-          {state.response ? (
-            &lt;div className="flex-1 bg-dc-success-bg border border-dc-success rounded-md p-3"&gt;
-              &lt;pre className="text-sm text-dc-text whitespace-pre-wrap overflow-auto bg-dc-surface p-3 rounded-sm border h-full"&gt;
-                {state.response}
-              &lt;/pre&gt;
-            &lt;/div&gt;
-          ) : (
-            &lt;div className="flex-1 flex items-center justify-center text-dc-text-muted border-2 border-dashed border-dc-border rounded-md p-8 min-h-64"&gt;
-              &lt;div className="text-center"&gt;
-                &lt;SparklesIcon className="w-12 h-12 mx-auto text-dc-text-muted" /&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-          )}
-        &lt;/div&gt;
-      &lt;/div&gt;
-      
-      {/* Status Messages - Fixed height */}
-      &lt;div className="shrink-0"&gt;
-        {state.responseError &amp;&amp; (
-          &lt;div className="flex items-start space-x-2 p-3 bg-dc-danger-bg border border-dc-error rounded-md"&gt;
-            &lt;ErrorIcon className="w-5 h-5 text-dc-error mt-0.5 shrink-0" /&gt;
-            &lt;div className="text-sm text-dc-error"&gt;{state.responseError}&lt;/div&gt;
-          &lt;/div&gt;
-        )}
-        
-        {state.isValidating &amp;&amp; (
-          &lt;div className="flex items-start space-x-2 p-3 bg-dc-accent-bg border border-dc-accent rounded-md"&gt;
-            &lt;div className="animate-spin rounded-full h-5 w-5 border-b-2 border-dc-accent mt-0.5 shrink-0"&gt;&lt;/div&gt;
-            &lt;div className="text-sm text-dc-accent"&gt;Validating query...&lt;/div&gt;
-          &lt;/div&gt;
-        )}
-        
-        {state.validationResult === 'valid' &amp;&amp; !state.isValidating &amp;&amp; (
-          &lt;div className="flex items-start space-x-2 p-3 bg-dc-success-bg border border-dc-success rounded-md"&gt;
-            &lt;SuccessIcon className="w-5 h-5 text-dc-success mt-0.5 shrink-0" /&gt;
-            &lt;div className="text-sm text-dc-success"&gt;Query is valid and ready to use!&lt;/div&gt;
-          &lt;/div&gt;
-        )}
-        
-        {state.validationResult === 'invalid' &amp;&amp; !state.isValidating &amp;&amp; (
-          &lt;div className="flex items-start space-x-2 p-3 bg-dc-danger-bg border border-dc-error rounded-md"&gt;
-            &lt;ErrorIcon className="w-5 h-5 text-dc-error mt-0.5 shrink-0" /&gt;
-            &lt;div className="text-sm text-dc-error"&gt;
-              &lt;div className="font-medium mb-1"&gt;Query validation failed:&lt;/div&gt;
-              &lt;div className="text-xs"&gt;{state.validationError}&lt;/div&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-        )}
-      &lt;/div&gt;
-      
-      {/* Bottom: Action Buttons - Right Aligned */}
-      &lt;div className="shrink-0 flex justify-end space-x-3 pt-3"&gt;
-        &lt;button
-          type="submit"
-          disabled={!state.userPrompt.trim() || state.isSubmitting}
-          onClick={handleQuerySubmit}
-          className="px-4 py-2 text-white text-sm rounded-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-dc-accent focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-          style={{
-            backgroundColor: 'var(--dc-primary)'
-          }}
-        &gt;
-          {state.isSubmitting ? (
-            &lt;&gt;
-              &lt;div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"&gt;&lt;/div&gt;
-              Generating...
-            &lt;/&gt;
-          ) : (
-            &lt;&gt;
-              &lt;SparklesIcon className="w-4 h-4 mr-2" /&gt;
-              Generate
-            &lt;/&gt;
-          )}
-        &lt;/button&gt;
+    // Save funnel mode state using adapter's extractState
+    const funnelAdapter = adapterRegistry.get('funnel')
+    const funnelModeState = funnelAdapter.extractState(stateAsRecord)
+    const funnelActiveView = state.activeViews.funnel ?? <span class="branch-1 cbranch-no" title="branch not covered" >state.activeView ?? <span class="branch-2 cbranch-no" title="branch not covered" >'</span>chart'</span>
+    const funnelConfig = funnelAdapter.save(
+      funnelModeState,
+      state.charts,
+      funnelActiveView
+    ) as FunnelAnalysisConfig
 &nbsp;
-        {/* Validation happens automatically after generation */}
+    return {
+      version: 1,
+      activeType: state.analysisType,
+      modes: {
+        query: queryConfig,
+        funnel: funnelConfig,
+      },
+    }
+  },
 &nbsp;
-        &lt;button
-          onClick={handleUseQuery}
-          disabled={!state.response || !onQueryLoad}
-          className="px-4 py-2 bg-dc-success text-white text-sm rounded-md hover:bg-dc-success focus:outline-none focus:ring-2 focus:ring-dc-success focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-        &gt;
-          &lt;SuccessIcon className="w-4 h-4 mr-2" /&gt;
-          Use Query
-        &lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  )
+  loadWorkspace: (workspace: AnalysisWorkspace): void =&gt; {
+    const queryAdapter = adapterRegistry.get('query')
+    const funnelAdapter = adapterRegistry.get('funnel')
 &nbsp;
-  const getTitle = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >    return 'AI Assistant - Generate Query'</span>
-  }
+    let queryModeState: Record&lt;string, unknown&gt; = {}
+    let funnelModeState: Record&lt;string, unknown&gt; = {}
+    let mergedCharts = { ...get().charts }
+    let mergedActiveViews = { ...get().activeViews }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;Modal
-      isOpen={isOpen}
-      onClose={handleClose}
-      title={getTitle()}
-      size="fullscreen-mobile"
-    &gt;
-      {renderQueryStep()}
-    &lt;/Modal&gt;
-  )
-}
+    // Load query mode if present
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (workspace.modes.query &amp;&amp; queryAdapter.canLoad(workspace.modes.query)) {
+      queryModeState = queryAdapter.load(workspace.modes.query) as Record&lt;string, unknown&gt;
+      mergedCharts = { ...mergedCharts, ...workspace.modes.query.charts }
+      mergedActiveViews.query = workspace.modes.query.activeView ?? <span class="branch-1 cbranch-no" title="branch not covered" >'chart'</span>
+    }
 &nbsp;
-export default AIAssistantModal</pre></td></tr></table></pre>
+    // Load funnel mode if present
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (workspace.modes.funnel &amp;&amp; funnelAdapter.canLoad(workspace.modes.funnel)) {
+      funnelModeState = funnelAdapter.load(workspace.modes.funnel) as Record&lt;string, unknown&gt;
+      mergedCharts = { ...mergedCharts, ...workspace.modes.funnel.charts }
+      mergedActiveViews.funnel = workspace.modes.funnel.activeView ?? <span class="branch-1 cbranch-no" title="branch not covered" >'chart'</span>
+    }
+&nbsp;
+    // Determine activeView from the active mode's config
+    const activeConfig = workspace.modes[workspace.activeType]
+    const activeView = activeConfig?.activeView ?? <span class="branch-1 cbranch-no" title="branch not covered" >'chart'</span>
+&nbsp;
+    set({
+      analysisType: workspace.activeType,
+      charts: mergedCharts,
+      activeViews: mergedActiveViews,
+      activeView,
+      ...queryModeState,
+      ...funnelModeState,
+    })
+  },
+})
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-06T09:57:37.164Z
+                at 2026-01-10T03:46:39.926Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

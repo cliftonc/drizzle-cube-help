@@ -161,7 +161,7 @@ interface PortletConfig {
   id: string
   name: string
   description?: string
-  
+
   // Layout (react-grid-layout format)
   x: number                    // X position in grid
   y: number                    // Y position in grid
@@ -169,20 +169,61 @@ interface PortletConfig {
   h: number                    // Height in grid units
   minW?: number               // Minimum width
   minH?: number               // Minimum height
-  
-  // Query configuration
-  query: CubeQuery            // Cube.js query object
-  chartConfig: ChartConfig    // Chart configuration
-  displayConfig?: DisplayConfig // Chart display options
-  
-  // Chart type
-  chartType: 'bar' | 'line' | 'area' | 'pie' | 'scatter' | 'table'
-  
+
+  /**
+   * NEW (v0.3.0+): Canonical format for analysis configuration.
+   * When present, this is the source of truth for query/chart config.
+   * See /api-reference/analysis-config for complete documentation.
+   */
+  analysisConfig?: AnalysisConfig
+
+  // Legacy fields (kept for backward compatibility)
+  query: CubeQuery | string   // Cube.js query object or JSON string
+  chartType: ChartType        // Chart visualization type
+  chartConfig?: ChartAxisConfig   // Axis mapping configuration
+  displayConfig?: ChartDisplayConfig // Chart display options
+
+  // Dashboard filter integration
+  dashboardFilterMapping?: string[] // IDs of dashboard filters to apply
+
   // Behavior
   autoRefresh?: number        // Auto-refresh interval (seconds)
   cachingEnabled?: boolean    // Enable result caching
 }
 ```
+
+#### AnalysisConfig Integration
+
+As of v0.3.0, portlets can use the new `AnalysisConfig` format for configuration:
+
+```typescript
+// New format with AnalysisConfig
+const portlet: PortletConfig = {
+  id: 'revenue-chart',
+  name: 'Monthly Revenue',
+  x: 0, y: 0, w: 6, h: 4,
+
+  // New canonical format
+  analysisConfig: {
+    version: 1,
+    analysisType: 'query',
+    activeView: 'chart',
+    charts: {
+      query: {
+        chartType: 'line',
+        chartConfig: { xAxis: ['Orders.date'], yAxis: ['Orders.revenue'] },
+        displayConfig: { showLegend: true }
+      }
+    },
+    query: {
+      measures: ['Orders.revenue'],
+      timeDimensions: [{ dimension: 'Orders.date', granularity: 'month' }]
+    }
+  }
+}
+```
+
+**Migration:** Legacy portlets without `analysisConfig` are automatically migrated at runtime. See [Config Migration Guide](/guides/config-migration) for details.
 
 ## Dashboard Features
 

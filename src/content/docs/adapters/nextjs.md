@@ -7,10 +7,6 @@ description: Next.js Adapter documentation
 
 The Next.js adapter provides seamless integration between Drizzle Cube and Next.js 15 applications using the App Router. It creates route handlers that expose Cube.js-compatible API endpoints for your analytics and dashboard applications.
 
-:::caution[No Built-in Authentication]
-This adapter **does not include built-in authentication**. You must validate authentication in your `getSecurityContext` function or use Next.js middleware. Without this, your analytics API will be publicly accessible. See [Security Requirements](#security-requirements) below.
-:::
-
 ## Features
 
 - 🚀 **App Router Support** - Full Next.js 15 App Router integration
@@ -867,85 +863,6 @@ const handlers = createCubeHandlers({
   getSecurityContext: async (request) => ({ organisationId: 'org-123' })
 })
 ```
-
-## Security Requirements
-
-### Authentication in Route Handlers
-
-**CRITICAL**: Drizzle Cube adapters do not authenticate requests. Your application must enforce authentication before requests can access analytics data.
-
-#### Recommended: Validate in getSecurityContext
-
-```typescript
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-
-const handlers = createCubeHandlers({
-  cubes: [employeesCube],
-  drizzle: db,
-  schema,
-  getSecurityContext: async (request) => {
-    // VALIDATE AUTHENTICATION
-    const session = await getServerSession(authOptions)
-
-    if (!session?.user) {
-      throw new Error('Unauthorized')  // This returns 500 - see alternative below
-    }
-
-    return {
-      organisationId: session.user.organisationId,
-      userId: session.user.id
-    }
-  }
-})
-```
-
-#### Alternative: Use Next.js Middleware
-
-```typescript
-// middleware.ts
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-
-export function middleware(request: NextRequest) {
-  // Check authentication for cube API routes
-  if (request.nextUrl.pathname.startsWith('/api/cubejs')) {
-    const token = request.headers.get('authorization')
-
-    if (!token) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      )
-    }
-
-    // Validate token...
-  }
-
-  return NextResponse.next()
-}
-
-export const config = {
-  matcher: '/api/cubejs/:path*'
-}
-```
-
-#### What Happens Without Authentication
-
-If your route handlers accept requests without authentication:
-- Analytics endpoints become publicly accessible
-- `getSecurityContext` receives unauthenticated requests
-- Data may be exposed if security context defaults are unsafe
-
-### Security Checklist
-
-Before deploying to production:
-
-- [ ] `getSecurityContext` validates session/token before returning context
-- [ ] `getSecurityContext` throws an error if user is not authenticated
-- [ ] Or: Next.js middleware blocks unauthenticated requests to `/api/cubejs/*`
-- [ ] All cubes filter by `organisationId` for multi-tenant isolation
-- [ ] Rate limiting is applied via middleware or Vercel settings
 
 ## Troubleshooting
 

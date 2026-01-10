@@ -214,6 +214,111 @@ sql: (ctx: QueryContext<Schema>): BaseQueryDefinition => {
 }
 ```
 
+## Event Stream Metadata
+
+Cubes can be marked as **event streams** to enable funnel analysis. Event stream cubes represent sequences of events that can be tracked through a funnel (e.g., user journeys, PR lifecycles, order fulfillment).
+
+### Basic Event Stream Configuration
+
+```typescript
+export const prEventsCube: Cube<Schema> = defineCube('PREvents', {
+  title: 'PR Events',
+  description: 'Pull request lifecycle events',
+
+  sql: (ctx: QueryContext<Schema>): BaseQueryDefinition => ({
+    from: prEvents,
+    where: eq(prEvents.organisationId, ctx.securityContext.organisationId)
+  }),
+
+  dimensions: {
+    prNumber: {
+      name: 'prNumber',
+      title: 'PR Number',
+      type: 'number',
+      sql: prEvents.prNumber
+    },
+    eventType: {
+      name: 'eventType',
+      title: 'Event Type',
+      type: 'string',
+      sql: prEvents.eventType
+    },
+    timestamp: {
+      name: 'timestamp',
+      title: 'Event Timestamp',
+      type: 'time',
+      sql: prEvents.timestamp
+    }
+  },
+
+  measures: {
+    count: {
+      name: 'count',
+      title: 'Event Count',
+      type: 'count',
+      sql: prEvents.id
+    }
+  },
+
+  // Mark as event stream for funnel analysis
+  meta: {
+    eventStream: {
+      bindingKey: 'PREvents.prNumber',      // Entity identifier
+      timeDimension: 'PREvents.timestamp'   // Event ordering
+    }
+  }
+})
+```
+
+### Event Stream Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `bindingKey` | `string` | Fully qualified dimension name (`CubeName.dimensionName`) that uniquely identifies entities through the funnel |
+| `timeDimension` | `string` | Fully qualified time dimension name used for temporal ordering of events |
+
+### How Event Streams Work
+
+When a cube has `eventStream` metadata:
+
+1. **Analysis Builder Integration**: The cube appears in the funnel mode cube selector
+2. **Auto-Configuration**: Selecting the cube auto-populates binding key and time dimension fields
+3. **Funnel Execution**: Server-side CTE-based funnel queries use these settings for temporal analysis
+
+### Common Event Stream Patterns
+
+**User Journey Tracking:**
+```typescript
+meta: {
+  eventStream: {
+    bindingKey: 'Events.userId',
+    timeDimension: 'Events.timestamp'
+  }
+}
+```
+
+**Session-Based Funnel:**
+```typescript
+meta: {
+  eventStream: {
+    bindingKey: 'PageViews.sessionId',
+    timeDimension: 'PageViews.viewedAt'
+  }
+}
+```
+
+**Transaction Lifecycle:**
+```typescript
+meta: {
+  eventStream: {
+    bindingKey: 'OrderEvents.orderId',
+    timeDimension: 'OrderEvents.eventTime'
+  }
+}
+```
+
+See [Funnel Analysis](/client/funnel-analysis) for complete documentation on building and executing funnel queries.
+
 ## Cube Registration
 
 Register cubes with the semantic layer compiler:
