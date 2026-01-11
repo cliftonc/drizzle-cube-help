@@ -107,7 +107,6 @@ export default defineConfig({
 						{ label: 'Introduction', slug: 'getting-started' },
 						{ label: 'Quick Start', slug: 'getting-started/quick-start' },
 						{ label: 'How It Works', slug: 'getting-started/how-it-works' },
-						{ label: 'AI Query Generation', slug: 'getting-started/ai-query-generation' },
 						{ label: 'Comparison', slug: 'getting-started/comparison' },
 						{ label: 'Scaling Your SaaS', slug: 'getting-started/scaling' },
 					],
@@ -125,6 +124,15 @@ export default defineConfig({
 						{ label: 'Statistical Functions', slug: 'semantic-layer/statistical-functions' },
 						{ label: 'Joins', slug: 'semantic-layer/joins' },
 						{ label: 'Security', slug: 'semantic-layer/security' },
+					],
+				},
+				{
+					label: 'AI Features',
+					items: [
+						{ label: 'Overview', slug: 'ai' },
+						{ label: 'Query Generation', slug: 'ai/query-generation' },
+						{ label: 'Query Analysis', slug: 'ai/query-analysis' },
+						{ label: 'Adding AI Endpoints', slug: 'ai/adding-ai-endpoints' },
 					],
 				},
 				{
