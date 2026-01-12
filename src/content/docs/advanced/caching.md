@@ -471,7 +471,7 @@ const router = createCubeRouter({
 })
 ```
 
-The caching configuration is identical for Fastify, Hono, and Next.js adapters. See the individual [adapter documentation](/adapters) for framework-specific examples.
+The caching configuration is identical for Fastify, Hono, and Next.js adapters. See the individual [adapter documentation](/adapters/) for framework-specific examples.
 
 ## Best Practices
 
@@ -520,6 +520,6 @@ Or configure `enabled: false` in the cache config to disable all caching without
 
 ## Next Steps
 
-- Learn about [Performance Optimization](/advanced/performance) for other optimization strategies
-- See [Security](/semantic-layer/security) for multi-tenant security best practices
-- Explore [Framework Adapters](/adapters) for your specific framework
+- Learn about [Performance Optimization](/advanced/performance/) for other optimization strategies
+- See [Security](/semantic-layer/security/) for multi-tenant security best practices
+- Explore [Framework Adapters](/adapters/) for your specific framework

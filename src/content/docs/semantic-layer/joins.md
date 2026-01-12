@@ -638,9 +638,9 @@ joins: {
 
 ## Next Steps
 
-- Learn about [Security](/semantic-layer/security) patterns for multi-tenant systems
-- Explore [Cubes](/semantic-layer/cubes) for complete cube definitions
-- Understand [Dimensions](/semantic-layer/dimensions) and [Measures](/semantic-layer/measures)
+- Learn about [Security](/semantic-layer/security/) patterns for multi-tenant systems
+- Explore [Cubes](/semantic-layer/cubes/) for complete cube definitions
+- Understand [Dimensions](/semantic-layer/dimensions/) and [Measures](/semantic-layer/measures/)
 - Review database indexing strategies for optimal join performance
 
 ## Roadmap Ideas

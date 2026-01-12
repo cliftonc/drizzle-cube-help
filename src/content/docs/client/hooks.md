@@ -694,9 +694,9 @@ const { resultSet } = useCubeQuery(
 
 ## Next Steps
 
-- Learn about [Charts](/client/charts) for data visualization
-- Explore [Dashboards](/client/dashboards) for layout management
-- Review [React Client](/client) overview
+- Learn about [Charts](/client/charts/) for data visualization
+- Explore [Dashboards](/client/dashboards/) for layout management
+- Review [React Client](/client/) overview
 - Check out hook examples in the repository
 
 ## Future Features *(Planned for Upcoming Releases)*

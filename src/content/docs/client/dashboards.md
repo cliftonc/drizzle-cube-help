@@ -223,7 +223,7 @@ const portlet: PortletConfig = {
 }
 ```
 
-**Migration:** Legacy portlets without `analysisConfig` are automatically migrated at runtime. See [Config Migration Guide](/guides/config-migration) for details.
+**Migration:** Legacy portlets without `analysisConfig` are automatically migrated at runtime. See [Config Migration Guide](/guides/config-migration/) for details.
 
 ## Dashboard Features
 
@@ -829,9 +829,9 @@ const operationsDashboard: DashboardConfig = {
 
 ## Next Steps
 
-- Learn about [Hooks](/client/hooks) for data fetching patterns
-- Explore [Charts](/client/charts) for visualization options
-- Review [React Client](/client) overview
+- Learn about [Hooks](/client/hooks/) for data fetching patterns
+- Explore [Charts](/client/charts/) for visualization options
+- Review [React Client](/client/) overview
 - Check dashboard examples in the repository
 
 ## Roadmap Ideas

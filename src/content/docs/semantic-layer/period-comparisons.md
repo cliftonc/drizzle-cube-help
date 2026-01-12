@@ -405,6 +405,6 @@ const query = {
 
 ## Next Steps
 
-- Learn about [Time Dimensions](/semantic-layer/time-dimensions) for single-period queries
-- Explore [Charts](/client/charts) for visualization options
-- Review [Calculated Measures](/semantic-layer/calculated-measures) for period-over-period calculations
+- Learn about [Time Dimensions](/semantic-layer/time-dimensions/) for single-period queries
+- Explore [Charts](/client/charts/) for visualization options
+- Review [Calculated Measures](/semantic-layer/calculated-measures/) for period-over-period calculations

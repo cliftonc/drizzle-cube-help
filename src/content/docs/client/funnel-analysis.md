@@ -393,7 +393,7 @@ function handleConfig(config: unknown) {
 }
 ```
 
-See [AnalysisConfig Reference](/api-reference/analysis-config) for complete type documentation.
+See [AnalysisConfig Reference](/api-reference/analysis-config/) for complete type documentation.
 
 ## Funnel Metrics Explained
 
@@ -633,7 +633,7 @@ console.log(sql);
 
 ## Next Steps
 
-- [Analysis Builder](/client/analysis-builder) - Using the visual query builder
-- [Charts](/client/charts) - Chart configuration and customization
-- [Cubes](/semantic-layer/cubes) - Cube definition patterns
-- [Time Dimensions](/semantic-layer/time-dimensions) - Time-based analysis
+- [Analysis Builder](/client/analysis-builder/) - Using the visual query builder
+- [Charts](/client/charts/) - Chart configuration and customization
+- [Cubes](/semantic-layer/cubes/) - Cube definition patterns
+- [Time Dimensions](/semantic-layer/time-dimensions/) - Time-based analysis

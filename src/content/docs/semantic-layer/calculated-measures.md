@@ -799,7 +799,7 @@ expect(detailedResult.data.length).toBeGreaterThan(1)
 
 ## Next Steps
 
-- Review [Measures](/semantic-layer/measures) for base measure types
-- Learn about [Security](/semantic-layer/security) context enforcement
-- Explore [Joins](/semantic-layer/joins) for multi-cube calculations
-- Check [Cubes](/semantic-layer/cubes) for complete cube structure
+- Review [Measures](/semantic-layer/measures/) for base measure types
+- Learn about [Security](/semantic-layer/security/) context enforcement
+- Explore [Joins](/semantic-layer/joins/) for multi-cube calculations
+- Check [Cubes](/semantic-layer/cubes/) for complete cube structure

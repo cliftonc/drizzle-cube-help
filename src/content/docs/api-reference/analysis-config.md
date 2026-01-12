@@ -490,6 +490,6 @@ const loadWorkspace = useAnalysisBuilderStore(state => state.loadWorkspace)
 
 ## Next Steps
 
-- See [Config Migration](/guides/config-migration) for upgrading from legacy formats
-- Learn about [Funnel Analysis](/client/funnel-analysis) for funnel configuration
-- Review [Dashboards](/client/dashboards) for portlet integration
+- See [Config Migration](/guides/config-migration/) for upgrading from legacy formats
+- Learn about [Funnel Analysis](/client/funnel-analysis/) for funnel configuration
+- Review [Dashboards](/client/dashboards/) for portlet integration

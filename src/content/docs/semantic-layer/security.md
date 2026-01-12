@@ -496,9 +496,9 @@ joins: [{
 
 ## Next Steps
 
-- Review [Cubes](/semantic-layer/cubes) for complete security implementation
-- Understand [Joins](/semantic-layer/joins) security requirements
-- Learn about [Adapters](/adapters/hono) security context extraction
+- Review [Cubes](/semantic-layer/cubes/) for complete security implementation
+- Understand [Joins](/semantic-layer/joins/) security requirements
+- Learn about [Adapters](/adapters/hono/) security context extraction
 - Implement comprehensive security testing
 
 ## Roadmap Ideas

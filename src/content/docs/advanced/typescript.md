@@ -646,8 +646,8 @@ function isCubeError(error: unknown): error is DrizzleCubeError {
 
 ## Next Steps
 
-- Review [Performance](/advanced/performance) considerations for TypeScript
-- Explore [Troubleshooting](/advanced/troubleshooting) type-related issues
+- Review [Performance](/advanced/performance/) considerations for TypeScript
+- Explore [Troubleshooting](/advanced/troubleshooting/) type-related issues
 - Check out TypeScript examples in the repository
 - Set up proper IDE integration for the best development experience
 

@@ -622,8 +622,8 @@ export class ProductionAdapter<TSchema> extends BaseAdapter<TSchema> {
 
 ## Next Steps
 
-- Review the [Hono Adapter](/adapters/hono) implementation
-- Learn about [Security](/semantic-layer/security) context patterns
+- Review the [Hono Adapter](/adapters/hono/) implementation
+- Learn about [Security](/semantic-layer/security/) context patterns
 - Explore deployment options for your chosen framework
 - Check out adapter examples in the repository
 

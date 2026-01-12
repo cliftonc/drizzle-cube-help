@@ -680,8 +680,8 @@ conversionRate: {
 
 ## Next Steps
 
-- Learn about [Dimensions](/semantic-layer/dimensions) for categorical data
-- Explore [Statistical Functions](/semantic-layer/statistical-functions) for stddev, percentiles, and window functions
-- Explore [Joins](/semantic-layer/joins) for multi-cube relationships
-- Understand [Cubes](/semantic-layer/cubes) structure and organization
-- Review [Security](/semantic-layer/security) patterns and best practices
+- Learn about [Dimensions](/semantic-layer/dimensions/) for categorical data
+- Explore [Statistical Functions](/semantic-layer/statistical-functions/) for stddev, percentiles, and window functions
+- Explore [Joins](/semantic-layer/joins/) for multi-cube relationships
+- Understand [Cubes](/semantic-layer/cubes/) structure and organization
+- Review [Security](/semantic-layer/security/) patterns and best practices

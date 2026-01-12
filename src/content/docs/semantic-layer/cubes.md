@@ -317,7 +317,7 @@ meta: {
 }
 ```
 
-See [Funnel Analysis](/client/funnel-analysis) for complete documentation on building and executing funnel queries.
+See [Funnel Analysis](/client/funnel-analysis/) for complete documentation on building and executing funnel queries.
 
 ## Cube Registration
 
@@ -409,10 +409,10 @@ sql: (ctx) => ({
 
 ## Next Steps
 
-- Learn about [Dimensions](/semantic-layer/dimensions) to understand categorical data
-- Explore [Measures](/semantic-layer/measures) for metrics and aggregations  
-- Understand [Joins](/semantic-layer/joins) for multi-cube relationships
-- Review [Security](/semantic-layer/security) for multi-tenant patterns
+- Learn about [Dimensions](/semantic-layer/dimensions/) to understand categorical data
+- Explore [Measures](/semantic-layer/measures/) for metrics and aggregations  
+- Understand [Joins](/semantic-layer/joins/) for multi-cube relationships
+- Review [Security](/semantic-layer/security/) for multi-tenant patterns
 
 ## Roadmap Ideas
 

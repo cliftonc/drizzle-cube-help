@@ -781,6 +781,6 @@ function AnalysisBuilder({ query, onChange }) {
 
 ## Next Steps
 
-- [**Charts**](/client/charts) - Detailed chart documentation
-- [**Dashboards**](/client/dashboards) - Dashboard customization  
-- [**Hooks**](/client/hooks) - Advanced hook usage
+- [**Charts**](/client/charts/) - Detailed chart documentation
+- [**Dashboards**](/client/dashboards/) - Dashboard customization  
+- [**Hooks**](/client/hooks/) - Advanced hook usage

@@ -195,7 +195,7 @@ When you switch to Funnel mode, the Analysis Builder provides a completely diffe
 Mark cubes with `meta.eventStream` to enable funnel analysis. See [Cubes](/semantic-layer/cubes#event-stream-metadata) for setup details.
 :::
 
-For comprehensive funnel documentation, see [Funnel Analysis](/client/funnel-analysis)
+For comprehensive funnel documentation, see [Funnel Analysis](/client/funnel-analysis/)
 
 ## Chart Configuration
 
@@ -330,7 +330,7 @@ interface AnalysisConfig {
 }
 ```
 
-See [AnalysisConfig Reference](/api-reference/analysis-config) for complete documentation.
+See [AnalysisConfig Reference](/api-reference/analysis-config/) for complete documentation.
 
 ### Store Methods
 
@@ -420,7 +420,7 @@ The AnalysisBuilder uses the drizzle-cube theming system. Customize colors by ov
 }
 ```
 
-See the [Theming](/client/theming) documentation for complete customization options.
+See the [Theming](/client/theming/) documentation for complete customization options.
 
 ## Migration from QueryBuilder
 

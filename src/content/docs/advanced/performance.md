@@ -7,7 +7,7 @@ Drizzle Cube is designed for high-performance analytics with multiple optimizati
 ## Overview
 
 Performance in Drizzle Cube is achieved through:
-- **Bundle Size Optimization**: Modular imports and tree shaking (see [Bundle Optimization](/advanced/bundle-optimization))
+- **Bundle Size Optimization**: Modular imports and tree shaking (see [Bundle Optimization](/advanced/bundle-optimization/))
 - **Drizzle ORM Query Optimization**: Prepared statements and efficient SQL generation
 - **Database-Level Optimization**: Proper indexing and query planning
 - **Application-Level Caching**: Result set caching and query memoization
@@ -17,7 +17,7 @@ Performance in Drizzle Cube is achieved through:
 
 ### Bundle Optimization
 
-For detailed information on optimizing client-side bundle sizes, see the dedicated [Bundle Optimization Guide](/advanced/bundle-optimization).
+For detailed information on optimizing client-side bundle sizes, see the dedicated [Bundle Optimization Guide](/advanced/bundle-optimization/).
 
 **Quick Overview:**
 - Use modular imports for smaller bundles
@@ -104,7 +104,7 @@ export const performanceTestCube: Cube<Schema> = defineCube('Performance', {
 
 ### Result Set Caching
 
-Drizzle Cube provides an opt-in server-side caching layer with pluggable cache backends. For detailed configuration and custom provider implementation, see the dedicated [Caching Guide](/advanced/caching).
+Drizzle Cube provides an opt-in server-side caching layer with pluggable cache backends. For detailed configuration and custom provider implementation, see the dedicated [Caching Guide](/advanced/caching/).
 
 **Quick Setup:**
 
@@ -121,7 +121,7 @@ const semanticLayer = new SemanticLayerCompiler({
 })
 ```
 
-> **Warning**: The `MemoryCacheProvider` is for development and single-instance deployments only. For production with multiple server instances, use a distributed cache provider like Redis. See the [Caching Guide](/advanced/caching) for a complete Redis implementation example.
+> **Warning**: The `MemoryCacheProvider` is for development and single-instance deployments only. For production with multiple server instances, use a distributed cache provider like Redis. See the [Caching Guide](/advanced/caching/) for a complete Redis implementation example.
 
 **Client-side Memoization:**
 
@@ -137,7 +137,7 @@ function CachedQuery() {
 }
 ```
 
-For comprehensive caching documentation including custom providers, cache invalidation, and monitoring, see the [Caching Guide →](/advanced/caching)
+For comprehensive caching documentation including custom providers, cache invalidation, and monitoring, see the [Caching Guide →](/advanced/caching/)
 
 ### Query Batching
 
@@ -617,8 +617,8 @@ INCLUDE (lines_of_code, date);
 
 ## Next Steps
 
-- Learn about [Troubleshooting](/advanced/troubleshooting) common issues
-- Explore [TypeScript](/advanced/typescript) advanced patterns
+- Learn about [Troubleshooting](/advanced/troubleshooting/) common issues
+- Explore [TypeScript](/advanced/typescript/) advanced patterns
 - Review database-specific optimization guides
 - Set up performance monitoring in production
 

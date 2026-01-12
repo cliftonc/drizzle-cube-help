@@ -662,6 +662,6 @@ measures: {
 
 ## Next Steps
 
-- Learn about [Calculated Measures](/semantic-layer/calculated-measures) for custom formulas
-- Explore [Time Dimensions](/semantic-layer/time-dimensions) for time-series analysis
-- Review [Performance](/advanced/performance) tips for optimizing statistical queries
+- Learn about [Calculated Measures](/semantic-layer/calculated-measures/) for custom formulas
+- Explore [Time Dimensions](/semantic-layer/time-dimensions/) for time-series analysis
+- Review [Performance](/advanced/performance/) tips for optimizing statistical queries

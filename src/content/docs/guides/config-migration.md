@@ -540,6 +540,6 @@ Ensure the legacy format has proper funnel indicators:
 
 ## Next Steps
 
-- Review [AnalysisConfig Reference](/api-reference/analysis-config) for complete type documentation
-- Learn about [Funnel Analysis](/client/funnel-analysis) for funnel-specific configuration
-- See [Dashboards](/client/dashboards) for portlet integration patterns
+- Review [AnalysisConfig Reference](/api-reference/analysis-config/) for complete type documentation
+- Learn about [Funnel Analysis](/client/funnel-analysis/) for funnel-specific configuration
+- See [Dashboards](/client/dashboards/) for portlet integration patterns
