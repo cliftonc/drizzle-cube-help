@@ -106,6 +106,7 @@ AI features respect your security context at every step:
 
 ## Next Steps
 
+- [Claude Code Plugin](/ai/claude-code-plugin/) - Query your semantic layer with natural language from Claude Code
 - [Query Generation](/ai/query-generation/) - Deep dive into natural language query generation
 - [Query Analysis](/ai/query-analysis/) - Learn about EXPLAIN plan analysis
 - [Adding AI Endpoints](/ai/adding-ai-endpoints/) - Implement AI routes in your server

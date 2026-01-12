@@ -147,6 +147,7 @@ export default defineConfig({
           label: "AI Features",
           items: [
             { label: "Overview", slug: "ai" },
+            { label: "Claude Code Plugin", slug: "ai/claude-code-plugin" },
             { label: "Query Generation", slug: "ai/query-generation" },
             { label: "Query Analysis", slug: "ai/query-analysis" },
             { label: "Adding AI Endpoints", slug: "ai/adding-ai-endpoints" },
