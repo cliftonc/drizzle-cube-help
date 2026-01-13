@@ -304,6 +304,42 @@ const result = await semanticLayer.execute({
 
 ### Advanced Cube Join Features
 
+**Preferred Join Paths** - When multiple paths exist between cubes, use `preferredFor` to specify the canonical route:
+
+```typescript
+// Employees can reach Teams via two paths:
+// 1. Employees → Departments → Teams (department-based teams)
+// 2. Employees → EmployeeTeams → Teams (employee team memberships)
+
+joins: {
+  Departments: {
+    targetCube: () => departmentsCube,
+    relationship: 'belongsTo',
+    on: [{ source: employees.departmentId, target: departments.id }]
+  },
+  EmployeeTeams: {
+    targetCube: () => employeeTeamsCube,
+    relationship: 'hasMany',
+    // Prefer this path when reaching Teams - uses junction table
+    preferredFor: ['Teams'],
+    on: [{ source: employees.id, target: employeeTeams.employeeId }]
+  }
+}
+```
+
+Without `preferredFor`, the query planner uses BFS and may choose either path. With `preferredFor: ['Teams']`, queries involving Teams will always route through EmployeeTeams, ensuring semantically correct results.
+
+**When to use `preferredFor`:**
+- Junction tables that represent the "true" relationship (e.g., employee team memberships vs department assignments)
+- When multiple paths exist but one is semantically more appropriate for the domain
+- To ensure consistent query behavior across different query combinations
+
+**Path Selection Priority:**
+1. Paths using joins with `preferredFor` targeting the destination cube (+10 priority)
+2. Paths through cubes with measures in the current query (+1 per cube)
+3. Paths reusing already-joined cubes
+4. Shorter paths
+
 **Multi-Column Joins** - Join on multiple columns:
 ```typescript
 joins: {
@@ -610,6 +646,21 @@ joins: {
     relationship: 'belongsTo',
     on: [
       { source: employees.departmentId, target: departments.id }
+    ]
+  }
+}
+```
+
+### Preferred Path Through Junction Table
+```typescript
+// Use preferredFor when a junction table is the canonical path
+joins: {
+  EmployeeTeams: {
+    targetCube: () => employeeTeamsCube,
+    relationship: 'hasMany',
+    preferredFor: ['Teams'], // Always use this path to reach Teams
+    on: [
+      { source: employees.id, target: employeeTeams.employeeId }
     ]
   }
 }
