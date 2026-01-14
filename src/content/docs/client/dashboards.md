@@ -829,6 +829,7 @@ const operationsDashboard: DashboardConfig = {
 
 ## Next Steps
 
+- Implement [Dashboard Persistence](/client/dashboard-persistence/) for saving and loading dashboards
 - Learn about [Hooks](/client/hooks/) for data fetching patterns
 - Explore [Charts](/client/charts/) for visualization options
 - Review [React Client](/client/) overview

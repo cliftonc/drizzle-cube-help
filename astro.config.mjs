@@ -161,6 +161,7 @@ export default defineConfig({
             { label: "Funnel Analysis", slug: "client/funnel-analysis" },
             { label: "Charts", slug: "client/charts" },
             { label: "Dashboards", slug: "client/dashboards" },
+            { label: "Dashboard Persistence", slug: "client/dashboard-persistence" },
             { label: "Hooks", slug: "client/hooks" },
             { label: "Theming", slug: "client/theming" },
             { label: "Icons", slug: "client/icons" },
