@@ -1,0 +1,10 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orange chevron (left) -->
+  <polyline points="24,35 56,67 24,99" stroke="#FF8800" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Green chevron (right) -->
+  <polyline points="64,35 96,67 64,99" stroke="#22C55E" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Green underscore -->
+  <line x1="64" y1="115" x2="96" y2="115" stroke="#22C55E" stroke-width="8" stroke-linecap="round"/>
+</svg>
