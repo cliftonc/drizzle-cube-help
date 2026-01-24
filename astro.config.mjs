@@ -147,6 +147,9 @@ export default defineConfig({
           label: "AI Features",
           items: [
             { label: "Overview", slug: "ai" },
+            { label: "MCP Endpoints", slug: "ai/mcp-endpoints" },
+            { label: "Semantic Metadata", slug: "ai/semantic-metadata" },
+            { label: "Claude Desktop Setup", slug: "ai/claude-desktop-setup" },
             { label: "Claude Code Plugin", slug: "ai/claude-code-plugin" },
             { label: "Query Generation", slug: "ai/query-generation" },
             { label: "Query Analysis", slug: "ai/query-analysis" },

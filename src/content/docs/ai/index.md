@@ -3,19 +3,40 @@ title: AI Features Overview
 description: Enhance your analytics with AI-powered query generation and execution plan analysis
 ---
 
-Drizzle Cube provides utilities and example implementations to help you add AI-powered features to your analytics. These features help users interact with your data through natural language and optimize query performance.
+Drizzle Cube provides two approaches for AI-powered analytics:
 
-> **Important**: AI endpoints (`/api/ai/*`) are **not included** in the drizzle-cube package. You must implement them yourself in your server. We provide prompt templates, type definitions, and a complete reference implementation - but we intentionally don't bundle AI routes because:
->
-> - **Provider Choice**: You may want to use OpenAI, Anthropic, Google Gemini, or other AI providers
-> - **Cost Control**: You control API keys, rate limiting, and billing
-> - **Customization**: You can modify prompts, add domain-specific context, and tune behavior
+1. **Built-in MCP Endpoints** - Zero-config AI readiness using server-side NLU (no LLM required)
+2. **Custom AI Endpoints** - Full LLM-powered query generation (you implement with your preferred provider)
+
+## Built-in MCP Server
+
+All framework adapters include a **built-in MCP server** at `/mcp` that lets AI agents discover and query your data:
+
+| Tool | Purpose |
+|------|---------|
+| `drizzle_cube_meta` | Fetch cube metadata (measures, dimensions, relationships) |
+| `drizzle_cube_discover` | Find relevant cubes based on topic or intent |
+| `drizzle_cube_validate` | Validate queries and get auto-corrections |
+| `drizzle_cube_load` | Execute queries and return results |
+
+Connect Claude, ChatGPT, n8n, or any MCP-compatible client to your semantic layer.
+
+[Learn more about the MCP Server →](/ai/mcp-endpoints/)
+
+---
+
+## Custom AI Endpoints
+
+For more sophisticated natural language understanding, you can implement custom AI endpoints using an LLM provider like Google Gemini.
+
+> **Note**: Custom AI endpoints (`/api/ai/*`) are **not included** in the drizzle-cube package. You must implement them yourself. We provide prompt templates, type definitions, and a complete reference implementation.
 
 ## What Drizzle Cube Provides
 
 | Component | Included | Description |
 |-----------|----------|-------------|
-| `/cubejs-api/v1/explain` | ✅ Built-in | Execution plan endpoint (in all adapters) |
+| `/mcp/*` endpoints | ✅ Built-in | MCP endpoints for AI agents (all adapters) |
+| `/cubejs-api/v1/explain` | ✅ Built-in | Execution plan endpoint (all adapters) |
 | Prompt templates | ✅ Exported | `buildStep0Prompt`, `buildStep1Prompt`, etc. |
 | Type definitions | ✅ Exported | `Step0Result`, `Step1Result`, `AIExplainAnalysis` |
 | `/api/ai/*` endpoints | ❌ You build | Reference implementation provided |
@@ -55,27 +76,38 @@ To use AI features, you need:
 ## Architecture Overview
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                      Your Application                        │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  ┌─────────────────┐      ┌─────────────────────────────┐  │
-│  │  Cube API       │      │  AI Routes (you implement)  │  │
-│  │  /cubejs-api/v1 │      │  /api/ai                    │  │
-│  │                 │      │                             │  │
-│  │  • /load        │      │  • /generate                │  │
-│  │  • /meta        │      │  • /explain/analyze         │  │
-│  │  • /explain     │      │  • /health                  │  │
-│  └─────────────────┘      └─────────────────────────────┘  │
-│           │                          │                      │
-│           └──────────┬───────────────┘                      │
-│                      │                                      │
-│              ┌───────▼───────┐                              │
-│              │ Semantic Layer │                              │
-│              │ + Security Ctx │                              │
-│              └───────────────┘                              │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────┐
+│                        Your Application                             │
+├────────────────────────────────────────────────────────────────────┤
+│                                                                    │
+│  ┌─────────────────┐  ┌──────────────────┐  ┌───────────────────┐ │
+│  │  Cube API       │  │  MCP Server      │  │  AI Routes        │ │
+│  │  /cubejs-api/v1 │  │  /mcp (built-in) │  │  /api/ai (custom) │ │
+│  │                 │  │                  │  │                   │ │
+│  │  • /load        │  │  • meta          │  │  • /generate      │ │
+│  │  • /meta        │  │  • discover      │  │  • /explain/...   │ │
+│  │  • /explain     │  │  • validate      │  │  • /health        │ │
+│  │  • /batch       │  │  • load          │  │                   │ │
+│  └─────────────────┘  └──────────────────┘  └───────────────────┘ │
+│           │                    │                     │             │
+│           └────────────────────┴─────────────────────┘             │
+│                                │                                   │
+│                       ┌────────▼────────┐                          │
+│                       │ Semantic Layer  │                          │
+│                       │ + Security Ctx  │                          │
+│                       └─────────────────┘                          │
+│                                                                    │
+└────────────────────────────────────────────────────────────────────┘
+
+  ┌─────────────────┐        ┌──────────────────┐
+  │   MCP Endpoints │        │  Custom AI       │
+  │   (Built-in)    │        │  (You implement) │
+  ├─────────────────┤        ├──────────────────┤
+  │ • No LLM needed │        │ • LLM required   │
+  │ • Zero config   │        │ • Customizable   │
+  │ • Server-side   │        │ • Provider choice│
+  │   NLU           │        │ • Full control   │
+  └─────────────────┘        └──────────────────┘
 ```
 
 ## Security Model
@@ -106,7 +138,13 @@ AI features respect your security context at every step:
 
 ## Next Steps
 
-- [Claude Code Plugin](/ai/claude-code-plugin/) - Query your semantic layer with natural language from Claude Code
-- [Query Generation](/ai/query-generation/) - Deep dive into natural language query generation
-- [Query Analysis](/ai/query-analysis/) - Learn about EXPLAIN plan analysis
-- [Adding AI Endpoints](/ai/adding-ai-endpoints/) - Implement AI routes in your server
+### Getting Started with AI
+- [MCP Endpoints](/ai/mcp-endpoints/) - Built-in AI-ready endpoints (no LLM required)
+- [Adding Semantic Metadata](/ai/semantic-metadata/) - Make your cubes AI-friendly
+- [Connect Claude Desktop](/ai/claude-desktop-setup/) - Step-by-step connection guide
+
+### Advanced AI Features
+- [Claude Code Plugin](/ai/claude-code-plugin/) - Query your semantic layer from Claude Code
+- [Query Generation](/ai/query-generation/) - LLM-powered natural language query generation
+- [Query Analysis](/ai/query-analysis/) - EXPLAIN plan analysis with AI recommendations
+- [Adding AI Endpoints](/ai/adding-ai-endpoints/) - Implement custom AI routes
