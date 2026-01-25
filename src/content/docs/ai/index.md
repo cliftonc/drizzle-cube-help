@@ -14,7 +14,6 @@ All framework adapters include a **built-in MCP server** at `/mcp` that lets AI 
 
 | Tool | Purpose |
 |------|---------|
-| `drizzle_cube_meta` | Fetch cube metadata (measures, dimensions, relationships) |
 | `drizzle_cube_discover` | Find relevant cubes based on topic or intent |
 | `drizzle_cube_validate` | Validate queries and get auto-corrections |
 | `drizzle_cube_load` | Execute queries and return results |

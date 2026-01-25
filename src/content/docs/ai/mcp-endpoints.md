@@ -22,13 +22,9 @@ This endpoint implements the full MCP specification including:
 
 | Tool | Purpose |
 |------|---------|
-| `drizzle_cube_meta` | Fetch cube metadata (measures, dimensions, relationships) |
 | `drizzle_cube_discover` | Find relevant cubes based on topic or intent |
 | `drizzle_cube_validate` | Validate queries and get auto-corrections |
 | `drizzle_cube_load` | Execute queries and return results |
-| `drizzle_cube_dry_run` | Preview generated SQL without executing |
-| `drizzle_cube_explain` | Get query execution plan for performance analysis |
-| `drizzle_cube_batch` | Execute multiple queries in parallel |
 
 ## Connecting AI Tools
 
@@ -108,28 +104,6 @@ User: "Show me average salary by department"
 ```
 
 ## Tool Reference
-
-### drizzle_cube_meta
-
-Fetch all cube metadata including measures, dimensions, and relationships.
-
-```json
-// No parameters required
-{}
-
-// Response
-{
-  "cubes": [
-    {
-      "name": "Employees",
-      "title": "Employee Analytics",
-      "measures": [...],
-      "dimensions": [...],
-      "joins": [...]
-    }
-  ]
-}
-```
 
 ### drizzle_cube_discover
 
@@ -213,69 +187,6 @@ Execute a query and return results.
       "Departments.name": { "title": "Department Name", "type": "string" }
     }
   }
-}
-```
-
-### drizzle_cube_dry_run
-
-Validate a query and preview the generated SQL without executing.
-
-```json
-// Parameters
-{
-  "query": {
-    "measures": ["Employees.count"],
-    "dimensions": ["Departments.name"]
-  }
-}
-
-// Response
-{
-  "sql": "SELECT departments.name, COUNT(employees.id) FROM employees JOIN departments ON ...",
-  "params": []
-}
-```
-
-### drizzle_cube_explain
-
-Get the query execution plan for performance analysis.
-
-```json
-// Parameters
-{
-  "query": {
-    "measures": ["Employees.count"],
-    "dimensions": ["Departments.name"]
-  }
-}
-
-// Response
-{
-  "plan": [...],
-  "estimatedCost": 1234,
-  "warnings": []
-}
-```
-
-### drizzle_cube_batch
-
-Execute multiple queries in parallel.
-
-```json
-// Parameters
-{
-  "queries": [
-    { "measures": ["Employees.count"] },
-    { "measures": ["Departments.count"] }
-  ]
-}
-
-// Response
-{
-  "results": [
-    { "data": [...], "annotation": {...} },
-    { "data": [...], "annotation": {...} }
-  ]
 }
 ```
 
