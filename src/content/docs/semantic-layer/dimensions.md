@@ -196,13 +196,12 @@ dimensions: {
     title: 'Employee ID',
     type: 'number',
     sql: employees.id,
-    primaryKey: true  // Enables drill-down and unique identification
+    primaryKey: true  // Enables unique identification
   }
 }
 ```
 
 **Primary Key Benefits:**
-- Enables drill-down functionality
 - Improves query performance
 - Provides unique record identification
 - Required for some visualization types
