@@ -44,12 +44,14 @@ export default {
 }
 ```
 
-Create a CSS file that imports Tailwind and includes drizzle-cube components:
+Create a CSS file that imports Tailwind and the drizzle-cube styles:
 
 ```css
 @import "tailwindcss";
-@source "../node_modules/drizzle-cube/dist/**/*.js";
+@import "drizzle-cube/client/styles.css";
 ```
+
+Drizzle Cube uses prefixed Tailwind classes for full CSS isolation, so you don't need to configure Tailwind to scan drizzle-cube's source files.
 
 ## Modular Imports
 
