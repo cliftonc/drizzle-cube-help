@@ -346,7 +346,49 @@
 <a name='L281'></a><a href='#L281'>281</a>
 <a name='L282'></a><a href='#L282'>282</a>
 <a name='L283'></a><a href='#L283'>283</a>
-<a name='L284'></a><a href='#L284'>284</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L284'></a><a href='#L284'>284</a>
+<a name='L285'></a><a href='#L285'>285</a>
+<a name='L286'></a><a href='#L286'>286</a>
+<a name='L287'></a><a href='#L287'>287</a>
+<a name='L288'></a><a href='#L288'>288</a>
+<a name='L289'></a><a href='#L289'>289</a>
+<a name='L290'></a><a href='#L290'>290</a>
+<a name='L291'></a><a href='#L291'>291</a>
+<a name='L292'></a><a href='#L292'>292</a>
+<a name='L293'></a><a href='#L293'>293</a>
+<a name='L294'></a><a href='#L294'>294</a>
+<a name='L295'></a><a href='#L295'>295</a>
+<a name='L296'></a><a href='#L296'>296</a>
+<a name='L297'></a><a href='#L297'>297</a>
+<a name='L298'></a><a href='#L298'>298</a>
+<a name='L299'></a><a href='#L299'>299</a>
+<a name='L300'></a><a href='#L300'>300</a>
+<a name='L301'></a><a href='#L301'>301</a>
+<a name='L302'></a><a href='#L302'>302</a>
+<a name='L303'></a><a href='#L303'>303</a>
+<a name='L304'></a><a href='#L304'>304</a>
+<a name='L305'></a><a href='#L305'>305</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -662,13 +704,17 @@ export {
   preloadChart,
   preloadCharts,
   isValidChartType,
-  getAvailableChartTypes
+  getAvailableChartTypes,
+  isChartTypeAvailable,
+  getUnavailableChartTypes
 } from './charts/ChartLoader'
 export type { LazyChartProps } from './charts/ChartLoader'
 &nbsp;
 // Layout components
 export { default as DashboardGrid } from './components/DashboardGrid'
 export { default as PortletContainer } from './components/PortletContainer'
+export { DashboardThumbnailPlaceholder } from './components/DashboardThumbnailPlaceholder'
+export type { DashboardThumbnailPlaceholderProps } from './components/DashboardThumbnailPlaceholder'
 &nbsp;
 // Modals and configuration
 export { default as PortletAnalysisModal } from './components/PortletAnalysisModal'
@@ -680,7 +726,7 @@ export { default as ConfirmModal } from './components/ConfirmModal'
 export { default as QueryBuilder } from './components/QueryBuilderShim'
 &nbsp;
 // Analysis Builder (search-based query builder)
-export { default as AnalysisBuilder } from './components/AnalysisBuilder'
+export { default as AnalysisBuilder } from './components/AnalysisBuilderLazy'
 &nbsp;
 // Data provider and hooks
 export {
@@ -707,6 +753,9 @@ export {
   // Funnel query hook
   useFunnelQuery,
   createFunnelQueryKey,
+  // Flow query hook
+  useFlowQuery,
+  createFlowQueryKey,
 } from './hooks/queries'
 export type {
   UseCubeMetaQueryOptions,
@@ -716,6 +765,9 @@ export type {
   UseMultiCubeLoadQueryOptions,
   UseMultiCubeLoadQueryResult,
   DebugDataEntry,
+  // Flow query types
+  UseFlowQueryOptions,
+  UseFlowQueryResult,
 } from './hooks/queries'
 &nbsp;
 // Master coordination hook for AnalysisBuilder
@@ -768,6 +820,7 @@ export {
   selectModalActions,
   selectLayoutActions,
   selectDebugDataActions,
+  selectThumbnailDirty,
   selectAllActions,
 } from './stores/dashboardStore'
 export type {
@@ -826,10 +879,19 @@ export type {
   FunnelValidationResult,
   UseFunnelQueryOptions,
   UseFunnelQueryResult,
+  // Flow types
+  ServerFlowQuery,
+  FlowQueryConfig,
+  FlowChartData,
+  FlowSliceState,
+  SankeyNode,
+  SankeyLink,
+  FlowStartingStep,
+  FlowResultRow,
 } from './types'
 &nbsp;
 // Multi-query type guard
-export { isMultiQueryConfig } from './types'
+export { isMultiQueryConfig, isServerFunnelQuery, isServerFlowQuery, isSankeyData } from './types'
 &nbsp;
 // Chart configuration types
 export type {
@@ -912,14 +974,15 @@ export type {
   IconRegistry,
   IconName,
   PartialIconRegistry
-} from './icons'</pre></td></tr></table></pre>
+} from './icons'
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:39.926Z
+                at 2026-01-28T05:21:04.679Z
             </div>
         <script src="../prettify.js"></script>
         <script>

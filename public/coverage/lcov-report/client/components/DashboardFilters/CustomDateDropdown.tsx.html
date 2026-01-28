@@ -951,7 +951,7 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
 <span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;div
       ref={dropdownRef}
-      className="absolute top-full left-0 mt-1 z-50 border rounded-lg shadow-lg min-w-[280px]"
+      className="dc:absolute dc:top-full dc:left-0 dc:mt-1 dc:z-50 dc:border dc:rounded-lg dc:shadow-lg dc:min-w-[280px]"
       style={{
         backgroundColor: 'var(--dc-surface)',
         borderColor: 'var(--dc-border)',
@@ -962,7 +962,7 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
     &gt;
       {/* Tab Headers */}
       &lt;div
-        className="flex border-b"
+        className="dc:flex dc:border-b"
         style={{ borderColor: 'var(--dc-border)' }}
       &gt;
         {(['fixed', 'since', 'last'] as TabType[]).map(<span class="fstat-no" title="function not covered" >tab =&gt; (</span>
@@ -970,7 +970,7 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
             key={tab}
             type="button"
             onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etActiveTab(tab)}</span>
-            className="flex-1 px-4 py-2 text-sm font-medium capitalize transition-colors"
+            className="dc:flex-1 dc:px-4 dc:py-2 dc:text-sm dc:font-medium dc:capitalize dc:transition-colors"
             style={tabButtonStyle(activeTab === tab)}
           &gt;
             {tab}
@@ -979,13 +979,13 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
       &lt;/div&gt;
 &nbsp;
       {/* Tab Content */}
-      &lt;div className="p-4"&gt;
+      &lt;div className="dc:p-4"&gt;
         {/* Fixed Tab */}
         {activeTab === 'fixed' &amp;&amp; (
-          &lt;div className="space-y-3"&gt;
+          &lt;div className="dc:space-y-3"&gt;
             &lt;div&gt;
               &lt;label
-                className="block text-xs font-medium mb-1"
+                className="dc:block dc:text-xs dc:font-medium dc:mb-1"
                 style={{ color: 'var(--dc-text-secondary)' }}
               &gt;
                 Start Date
@@ -994,7 +994,7 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
                 type="date"
                 value={fixedStartDate}
                 onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >setFixedStartDate(e.target.value)}</span>
-                className="w-full px-3 py-2 text-sm border rounded focus:outline-none focus:ring-2"
+                className="dc:w-full dc:px-3 dc:py-2 dc:text-sm dc:border dc:rounded dc:focus:outline-none dc:focus:ring-2"
                 style={{
                   borderColor: 'var(--dc-border)',
                   backgroundColor: 'var(--dc-bg)',
@@ -1004,7 +1004,7 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
             &lt;/div&gt;
             &lt;div&gt;
               &lt;label
-                className="block text-xs font-medium mb-1"
+                className="dc:block dc:text-xs dc:font-medium dc:mb-1"
                 style={{ color: 'var(--dc-text-secondary)' }}
               &gt;
                 End Date
@@ -1013,7 +1013,7 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
                 type="date"
                 value={fixedEndDate}
                 onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >setFixedEndDate(e.target.value)}</span>
-                className="w-full px-3 py-2 text-sm border rounded focus:outline-none focus:ring-2"
+                className="dc:w-full dc:px-3 dc:py-2 dc:text-sm dc:border dc:rounded dc:focus:outline-none dc:focus:ring-2"
                 style={{
                   borderColor: 'var(--dc-border)',
                   backgroundColor: 'var(--dc-bg)',
@@ -1025,7 +1025,7 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
               type="button"
               onClick={handleApplyFixed}
               disabled={!fixedStartDate}
-              className="w-full py-2 text-sm font-medium rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="dc:w-full dc:py-2 dc:text-sm dc:font-medium dc:rounded dc:transition-colors dc:disabled:opacity-50 dc:disabled:cursor-not-allowed"
               style={{
                 backgroundColor: 'var(--dc-primary)',
                 color: 'white'
@@ -1038,10 +1038,10 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
 &nbsp;
         {/* Since Tab */}
         {activeTab === 'since' &amp;&amp; (
-          &lt;div className="space-y-3"&gt;
+          &lt;div className="dc:space-y-3"&gt;
             &lt;div&gt;
               &lt;label
-                className="block text-xs font-medium mb-1"
+                className="dc:block dc:text-xs dc:font-medium dc:mb-1"
                 style={{ color: 'var(--dc-text-secondary)' }}
               &gt;
                 Since Date
@@ -1050,7 +1050,7 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
                 type="date"
                 value={sinceDate}
                 onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >setSinceDate(e.target.value)}</span>
-                className="w-full px-3 py-2 text-sm border rounded focus:outline-none focus:ring-2"
+                className="dc:w-full dc:px-3 dc:py-2 dc:text-sm dc:border dc:rounded dc:focus:outline-none dc:focus:ring-2"
                 style={{
                   borderColor: 'var(--dc-border)',
                   backgroundColor: 'var(--dc-bg)',
@@ -1059,7 +1059,7 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
               /&gt;
             &lt;/div&gt;
             &lt;p
-              className="text-xs"
+              className="dc:text-xs"
               style={{ color: 'var(--dc-text-secondary)' }}
             &gt;
               From selected date to today
@@ -1068,7 +1068,7 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
               type="button"
               onClick={handleApplySince}
               disabled={!sinceDate}
-              className="w-full py-2 text-sm font-medium rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="dc:w-full dc:py-2 dc:text-sm dc:font-medium dc:rounded dc:transition-colors dc:disabled:opacity-50 dc:disabled:cursor-not-allowed"
               style={{
                 backgroundColor: 'var(--dc-primary)',
                 color: 'white'
@@ -1081,11 +1081,11 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
 &nbsp;
         {/* Last Tab */}
         {activeTab === 'last' &amp;&amp; (
-          &lt;div className="space-y-3"&gt;
-            &lt;div className="flex gap-2"&gt;
-              &lt;div className="flex-1"&gt;
+          &lt;div className="dc:space-y-3"&gt;
+            &lt;div className="dc:flex dc:gap-2"&gt;
+              &lt;div className="dc:flex-1"&gt;
                 &lt;label
-                  className="block text-xs font-medium mb-1"
+                  className="dc:block dc:text-xs dc:font-medium dc:mb-1"
                   style={{ color: 'var(--dc-text-secondary)' }}
                 &gt;
                   Number
@@ -1096,7 +1096,7 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
                   max="999"
                   value={lastNumber}
                   onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >setLastNumber(Math.max(1, parseInt(e.target.value, 10) || 1))}</span>
-                  className="w-full px-3 py-2 text-sm border rounded focus:outline-none focus:ring-2"
+                  className="dc:w-full dc:px-3 dc:py-2 dc:text-sm dc:border dc:rounded dc:focus:outline-none dc:focus:ring-2"
                   style={{
                     borderColor: 'var(--dc-border)',
                     backgroundColor: 'var(--dc-bg)',
@@ -1104,9 +1104,9 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
                   }}
                 /&gt;
               &lt;/div&gt;
-              &lt;div className="flex-1"&gt;
+              &lt;div className="dc:flex-1"&gt;
                 &lt;label
-                  className="block text-xs font-medium mb-1"
+                  className="dc:block dc:text-xs dc:font-medium dc:mb-1"
                   style={{ color: 'var(--dc-text-secondary)' }}
                 &gt;
                   Unit
@@ -1114,7 +1114,7 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
                 &lt;select
                   value={lastUnit}
                   onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >setLastUnit(e.target.value as LastUnit)}</span>
-                  className="w-full px-3 py-2 text-sm border rounded focus:outline-none focus:ring-2"
+                  className="dc:w-full dc:px-3 dc:py-2 dc:text-sm dc:border dc:rounded dc:focus:outline-none dc:focus:ring-2"
                   style={{
                     borderColor: 'var(--dc-border)',
                     backgroundColor: 'var(--dc-bg)',
@@ -1130,7 +1130,7 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
               &lt;/div&gt;
             &lt;/div&gt;
             &lt;p
-              className="text-xs"
+              className="dc:text-xs"
               style={{ color: 'var(--dc-text-secondary)' }}
             &gt;
               Last {lastNumber} {lastNumber === 1 ? lastUnit.slice(0, -1) : lastUnit}
@@ -1139,7 +1139,7 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
               type="button"
               onClick={handleApplyLast}
               disabled={lastNumber &lt; 1}
-              className="w-full py-2 text-sm font-medium rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="dc:w-full dc:py-2 dc:text-sm dc:font-medium dc:rounded dc:transition-colors dc:disabled:opacity-50 dc:disabled:cursor-not-allowed"
               style={{
                 backgroundColor: 'var(--dc-primary)',
                 color: 'white'
@@ -1153,12 +1153,12 @@ const CustomDateDropdown: React.FC&lt;CustomDateDropdownProps&gt; = <span class=
 &nbsp;
       {/* Cancel Button */}
       &lt;div
-        className="px-4 pb-4"
+        className="dc:px-4 dc:pb-4"
       &gt;
         &lt;button
           type="button"
           onClick={onClose}
-          className="w-full py-2 text-sm font-medium rounded border transition-colors"
+          className="dc:w-full dc:py-2 dc:text-sm dc:font-medium dc:rounded dc:border dc:transition-colors"
           style={{
             borderColor: 'var(--dc-border)',
             color: 'var(--dc-text-secondary)',
@@ -1180,7 +1180,7 @@ export default CustomDateDropdown
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:40.014Z
+                at 2026-01-28T05:21:04.795Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

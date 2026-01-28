@@ -195,7 +195,10 @@
 <a name='L130'></a><a href='#L130'>130</a>
 <a name='L131'></a><a href='#L131'>131</a>
 <a name='L132'></a><a href='#L132'>132</a>
-<a name='L133'></a><a href='#L133'>133</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -258,32 +261,35 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -390,11 +396,12 @@ export default function <span class="fstat-no" title="function not covered" >Cha
 <span class="cstat-no" title="statement not covered" >  try {</span>
 <span class="cstat-no" title="statement not covered" >    if (height === "100%") {</span>
       // For 100% height, make the container fill the available flex space with proper sizing
+      // user-select: none prevents browser selection box from appearing when clicking/dragging on charts
 <span class="cstat-no" title="statement not covered" >      return (</span>
         &lt;div
           ref={containerRef}
-          className="w-full h-full flex-1 flex flex-col relative"
-          style={{ minHeight: '250px', minWidth: '100px', overflow: 'hidden' }}
+          className="dc:w-full dc:h-full dc:flex-1 dc:flex dc:flex-col dc:relative"
+          style={{ minHeight: '250px', minWidth: '100px', overflow: 'hidden', userSelect: 'none' }}
         &gt;
           {isReady &amp;&amp; containerSize.width &gt; 0 &amp;&amp; containerSize.height &gt; 0 ? (
             &lt;ResponsiveContainer
@@ -406,7 +413,7 @@ export default function <span class="fstat-no" title="function not covered" >Cha
               {children}
             &lt;/ResponsiveContainer&gt;
           ) : (
-            &lt;div className="flex items-center justify-center w-full h-full"&gt;
+            &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full dc:h-full"&gt;
               &lt;LoadingIndicator size="sm" /&gt;
             &lt;/div&gt;
           )}
@@ -415,17 +422,19 @@ export default function <span class="fstat-no" title="function not covered" >Cha
     }
 &nbsp;
     // For specific heights, use them directly
+    // user-select: none prevents browser selection box from appearing when clicking/dragging on charts
     const containerStyle = <span class="cstat-no" title="statement not covered" >{</span>
       height: typeof height === 'number' ? `${height}px` : height,
       width: '100%',
       minHeight: '200px',
-      minWidth: '100px'
+      minWidth: '100px',
+      userSelect: 'none' as const
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;div
         ref={containerRef}
-        className="w-full flex flex-col relative"
+        className="dc:w-full dc:flex dc:flex-col dc:relative"
         style={{ ...containerStyle, overflow: 'hidden' }}
       &gt;
         {isReady &amp;&amp; containerSize.width &gt; 0 &amp;&amp; containerSize.height &gt; 0 ? (
@@ -438,7 +447,7 @@ export default function <span class="fstat-no" title="function not covered" >Cha
             {children}
           &lt;/ResponsiveContainer&gt;
         ) : (
-          &lt;div className="flex items-center justify-center w-full h-full"&gt;
+          &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full dc:h-full"&gt;
             &lt;LoadingIndicator size="sm" /&gt;
           &lt;/div&gt;
         )}
@@ -449,11 +458,11 @@ export default function <span class="fstat-no" title="function not covered" >Cha
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;div
-        className="flex flex-col items-center justify-center w-full h-full p-4 text-center border border-dashed rounded-lg"
+        className="dc:flex dc:flex-col dc:items-center dc:justify-center dc:w-full dc:h-full dc:p-4 text-center dc:border dc:border-dashed dc:rounded-lg"
         style={{ height, borderColor: 'var(--dc-border)', backgroundColor: 'var(--dc-surface)' }}
       &gt;
-        &lt;div className="text-sm font-semibold mb-1 text-dc-text-muted"&gt;Unable to display chart&lt;/div&gt;
-        &lt;div className="text-xs text-dc-text-secondary"&gt;
+        &lt;div className="dc:text-sm dc:font-semibold dc:mb-1 text-dc-text-muted"&gt;Unable to display chart&lt;/div&gt;
+        &lt;div className="dc:text-xs text-dc-text-secondary"&gt;
           {error instanceof Error ? error.message : 'Failed to create responsive container'}
         &lt;/div&gt;
       &lt;/div&gt;
@@ -466,7 +475,7 @@ export default function <span class="fstat-no" title="function not covered" >Cha
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:39.926Z
+                at 2026-01-28T05:21:04.679Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

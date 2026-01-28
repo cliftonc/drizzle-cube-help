@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">8.18% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/110</span>
+                <span class='fraction'>9/110</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">9.18% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/98</span>
+                <span class='fraction'>9/98</span>
             </div>
         
             
@@ -536,13 +536,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -622,7 +622,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -826,7 +826,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -992,13 +992,13 @@ import { getIcon } from '../../icons'
 import { getAvailableBindingKeyDimensions } from '../../utils/funnelValidation'
 import SectionHeading from './SectionHeading'
 &nbsp;
-const <span class="cstat-no" title="statement not covered" >ChevronDownIcon = getIcon('chevronDown')</span>
-const <span class="cstat-no" title="statement not covered" >ChevronRightIcon = getIcon('chevronRight')</span>
-const <span class="cstat-no" title="statement not covered" >CheckIcon = getIcon('check')</span>
-const <span class="cstat-no" title="statement not covered" >SearchIcon = getIcon('search')</span>
-const <span class="cstat-no" title="statement not covered" >CubeIcon = getIcon('dimension') // Used for cube selector (no dedicated cube icon)</span>
-const <span class="cstat-no" title="statement not covered" >LinkIcon = getIcon('link') // Used as key icon</span>
-const <span class="cstat-no" title="statement not covered" >TimeDimensionIcon = getIcon('timeDimension') // Used as clock icon</span>
+const ChevronDownIcon = getIcon('chevronDown')
+const ChevronRightIcon = getIcon('chevronRight')
+const CheckIcon = getIcon('check')
+const SearchIcon = getIcon('search')
+const CubeIcon = getIcon('dimension') // Used for cube selector (no dedicated cube icon)
+const LinkIcon = getIcon('link') // Used as key icon
+const TimeDimensionIcon = getIcon('timeDimension') // Used as clock icon
 &nbsp;
 export interface FunnelConfigPanelProps {
   /** Currently selected cube for this funnel */
@@ -1078,7 +1078,7 @@ interface DropdownSelectorProps {
   helpText: string
 }
 &nbsp;
-const <span class="cstat-no" title="statement not covered" >DropdownSelector = memo(function <span class="fstat-no" title="function not covered" >DropdownSelector({</span></span>
+const DropdownSelector = memo(function <span class="fstat-no" title="function not covered" >DropdownSelector({</span>
   value,
   label,
   placeholder,
@@ -1170,34 +1170,34 @@ const <span class="cstat-no" title="statement not covered" >DropdownSelector = m
   const hasValue = <span class="cstat-no" title="statement not covered" >value !== null</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div className="flex-1 min-w-0"&gt;
-      &lt;label className="flex items-center gap-1.5 text-xs font-medium text-dc-text-muted mb-1"&gt;
-        {Icon &amp;&amp; &lt;Icon className="w-3.5 h-3.5" /&gt;}
+    &lt;div className="dc:flex-1 dc:min-w-0"&gt;
+      &lt;label className="dc:flex dc:items-center dc:gap-1.5 dc:text-xs dc:font-medium text-dc-text-muted dc:mb-1"&gt;
+        {Icon &amp;&amp; &lt;Icon className="dc:w-3.5 dc:h-3.5" /&gt;}
         {label}
       &lt;/label&gt;
 &nbsp;
-      &lt;div ref={dropdownRef} className="relative"&gt;
+      &lt;div ref={dropdownRef} className="dc:relative"&gt;
         &lt;button
           type="button"
           onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etIsOpen(!isOpen)}</span>
           className={`
-            flex items-center justify-between w-full px-2.5 py-1.5 text-sm
-            bg-dc-surface border border-dc-border rounded
-            transition-colors hover:border-dc-primary cursor-pointer
-            ${isOpen ? 'border-dc-primary ring-1 ring-dc-primary' : ''}
+            dc:flex dc:items-center dc:justify-between dc:w-full dc:px-2.5 dc:py-1.5 dc:text-sm
+            bg-dc-surface dc:border border-dc-border dc:rounded
+            dc:transition-colors hover:border-dc-primary dc:cursor-pointer
+            ${isOpen ? 'border-dc-primary dc:ring-1 ring-dc-primary' : ''}
           `}
         &gt;
-          &lt;span className={`truncate ${hasValue ? 'text-dc-text' : 'text-dc-text-muted'}`}&gt;
+          &lt;span className={`dc:truncate ${hasValue ? 'text-dc-text' : 'text-dc-text-muted'}`}&gt;
             {hasValue ? options.find(<span class="fstat-no" title="function not covered" >(o</span>) =&gt; <span class="cstat-no" title="statement not covered" >o.dimension === value)</span>?.label || value : placeholder}
           &lt;/span&gt;
-          &lt;span className="flex items-center gap-1 ml-2"&gt;
+          &lt;span className="dc:flex dc:items-center dc:gap-1 dc:ml-2"&gt;
             {hasValue &amp;&amp; (
               &lt;span
                 role="button"
                 tabIndex={0}
                 onClick={handleClear}
                 onKeyDown={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >e.key === 'Enter' &amp;&amp; handleClear(e as unknown as React.MouseEvent)}</span>
-                className="p-0.5 rounded hover:bg-dc-surface-hover text-dc-text-muted hover:text-dc-text"
+                className="dc:p-0.5 dc:rounded hover:bg-dc-surface-hover text-dc-text-muted hover:text-dc-text"
                 title="Clear"
               &gt;
                 ×
@@ -1205,7 +1205,7 @@ const <span class="cstat-no" title="statement not covered" >DropdownSelector = m
             )}
             {ChevronDownIcon &amp;&amp; (
               &lt;ChevronDownIcon
-                className={`w-4 h-4 text-dc-text-muted transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                className={`dc:w-4 dc:h-4 text-dc-text-muted dc:transition-transform ${isOpen ? 'dc:rotate-180' : ''}`}
               /&gt;
             )}
           &lt;/span&gt;
@@ -1213,12 +1213,12 @@ const <span class="cstat-no" title="statement not covered" >DropdownSelector = m
 &nbsp;
         {/* Dropdown */}
         {isOpen &amp;&amp; (
-          &lt;div className="absolute z-50 mt-1 left-0 right-0 min-w-[200px] bg-dc-surface border border-dc-border rounded-md shadow-lg"&gt;
+          &lt;div className="dc:absolute dc:z-50 dc:mt-1 dc:left-0 dc:right-0 dc:min-w-[200px] bg-dc-surface dc:border border-dc-border dc:rounded-md dc:shadow-lg"&gt;
             {/* Search Input */}
-            &lt;div className="p-2 border-b border-dc-border"&gt;
-              &lt;div className="relative"&gt;
+            &lt;div className="dc:p-2 dc:border-b border-dc-border"&gt;
+              &lt;div className="dc:relative"&gt;
                 {SearchIcon &amp;&amp; (
-                  &lt;SearchIcon className="absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 text-dc-text-muted" /&gt;
+                  &lt;SearchIcon className="dc:absolute dc:left-2 dc:top-1/2 dc:-translate-y-1/2 dc:w-4 dc:h-4 text-dc-text-muted" /&gt;
                 )}
                 &lt;input
                   ref={searchInputRef}
@@ -1226,21 +1226,21 @@ const <span class="cstat-no" title="statement not covered" >DropdownSelector = m
                   value={searchQuery}
                   onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >setSearchQuery(e.target.value)}</span>
                   placeholder="Search..."
-                  className="w-full pl-8 pr-3 py-1.5 text-sm bg-dc-surface-secondary border border-dc-border rounded text-dc-text placeholder:text-dc-text-muted focus:outline-none focus:ring-1 focus:ring-dc-primary"
+                  className="dc:w-full dc:pl-8 dc:pr-3 dc:py-1.5 dc:text-sm bg-dc-surface-secondary dc:border border-dc-border dc:rounded text-dc-text placeholder:text-dc-text-muted dc:focus:outline-none dc:focus:ring-1 focus:ring-dc-primary"
                 /&gt;
               &lt;/div&gt;
             &lt;/div&gt;
 &nbsp;
             {/* Options List */}
-            &lt;div className="max-h-48 overflow-y-auto p-1"&gt;
+            &lt;div className="dc:max-h-48 dc:overflow-y-auto dc:p-1"&gt;
               {Object.entries(filteredGroups).length === 0 ? (
-                &lt;div className="px-3 py-4 text-sm text-dc-text-muted text-center"&gt;
+                &lt;div className="dc:px-3 dc:py-4 dc:text-sm text-dc-text-muted text-center"&gt;
                   No matching fields found
                 &lt;/div&gt;
               ) : (
                 Object.entries(filteredGroups).map(<span class="fstat-no" title="function not covered" >([</span>cubeName, dims]) =&gt; (
-<span class="cstat-no" title="statement not covered" >                  &lt;div key={cubeName} className="mb-2 last:mb-0"&gt;</span>
-                    &lt;div className="px-2 py-1 text-xs font-medium text-dc-text-muted uppercase tracking-wide"&gt;
+<span class="cstat-no" title="statement not covered" >                  &lt;div key={cubeName} className="dc:mb-2 dc:last:mb-0"&gt;</span>
+                    &lt;div className="dc:px-2 dc:py-1 dc:text-xs dc:font-medium text-dc-text-muted dc:uppercase dc:tracking-wide"&gt;
                       {cubeName}
                     &lt;/div&gt;
                     {dims.map(<span class="fstat-no" title="function not covered" >(d</span>im) =&gt; (
@@ -1248,8 +1248,8 @@ const <span class="cstat-no" title="statement not covered" >DropdownSelector = m
                         key={dim.dimension}
                         onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleSelect(dim.dimension)}</span>
                         className={`
-                          flex items-center justify-between w-full px-3 py-1.5 text-sm
-                          rounded transition-colors
+                          dc:flex dc:items-center dc:justify-between dc:w-full dc:px-3 dc:py-1.5 dc:text-sm
+                          dc:rounded dc:transition-colors
                           ${value === dim.dimension
                             ? 'bg-dc-primary-bg text-dc-primary'
                             : 'text-dc-text hover:bg-dc-surface-hover'
@@ -1258,7 +1258,7 @@ const <span class="cstat-no" title="statement not covered" >DropdownSelector = m
                       &gt;
                         &lt;span&gt;{dim.label}&lt;/span&gt;
                         {value === dim.dimension &amp;&amp; CheckIcon &amp;&amp; (
-                          &lt;CheckIcon className="w-4 h-4" /&gt;
+                          &lt;CheckIcon className="dc:w-4 dc:h-4" /&gt;
                         )}
                       &lt;/button&gt;
                     ))}
@@ -1268,7 +1268,7 @@ const <span class="cstat-no" title="statement not covered" >DropdownSelector = m
             &lt;/div&gt;
 &nbsp;
             {/* Help Text */}
-            &lt;div className="px-3 py-2 border-t border-dc-border text-xs text-dc-text-muted"&gt;
+            &lt;div className="dc:px-3 dc:py-2 dc:border-t border-dc-border dc:text-xs text-dc-text-muted"&gt;
               {helpText}
             &lt;/div&gt;
           &lt;/div&gt;
@@ -1282,7 +1282,7 @@ const <span class="cstat-no" title="statement not covered" >DropdownSelector = m
  * FunnelConfigPanel displays selectors for cube, binding key and time dimension
  * in a collapsible section that auto-collapses once all fields are configured.
  */
-const <span class="cstat-no" title="statement not covered" >FunnelConfigPanel = memo(function <span class="fstat-no" title="function not covered" >FunnelConfigPanel({</span></span>
+const FunnelConfigPanel = memo(function <span class="fstat-no" title="function not covered" >FunnelConfigPanel({</span>
   selectedCube,
   bindingKey,
   timeDimension,
@@ -1360,30 +1360,30 @@ const <span class="cstat-no" title="statement not covered" >FunnelConfigPanel = 
   const cubeLabel = <span class="cstat-no" title="statement not covered" >availableCubes.find(<span class="fstat-no" title="function not covered" >(c</span>) =&gt; <span class="cstat-no" title="statement not covered" >c.dimension === selectedCube)</span>?.label || selectedCube</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div className="bg-dc-surface-secondary border-b border-dc-border"&gt;
+    &lt;div className="bg-dc-surface-secondary dc:border-b border-dc-border"&gt;
       {/* Collapsible Header */}
       &lt;button
         type="button"
         onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etIsCollapsed(!isCollapsed)}</span>
-        className="flex items-center justify-between w-full px-4 py-2.5 hover:bg-dc-surface-hover transition-colors"
+        className="dc:flex dc:items-center dc:justify-between dc:w-full dc:px-4 dc:py-2.5 hover:bg-dc-surface-hover dc:transition-colors"
       &gt;
-        &lt;div className="flex items-center gap-2"&gt;
+        &lt;div className="dc:flex dc:items-center dc:gap-2"&gt;
           {isCollapsed ? (
-            ChevronRightIcon &amp;&amp; &lt;ChevronRightIcon className="w-4 h-4 text-dc-text-muted" /&gt;
+            ChevronRightIcon &amp;&amp; &lt;ChevronRightIcon className="dc:w-4 dc:h-4 text-dc-text-muted" /&gt;
           ) : (
-            ChevronDownIcon &amp;&amp; &lt;ChevronDownIcon className="w-4 h-4 text-dc-text-muted" /&gt;
+            ChevronDownIcon &amp;&amp; &lt;ChevronDownIcon className="dc:w-4 dc:h-4 text-dc-text-muted" /&gt;
           )}
-          &lt;SectionHeading className="mb-0"&gt;Configuration&lt;/SectionHeading&gt;
+          &lt;SectionHeading className="dc:mb-0"&gt;Configuration&lt;/SectionHeading&gt;
           {isConfigComplete &amp;&amp; (
-            &lt;span className="flex items-center gap-1 text-xs text-dc-success"&gt;
-              {CheckIcon &amp;&amp; &lt;CheckIcon className="w-3.5 h-3.5" /&gt;}
+            &lt;span className="dc:flex dc:items-center dc:gap-1 dc:text-xs text-dc-success"&gt;
+              {CheckIcon &amp;&amp; &lt;CheckIcon className="dc:w-3.5 dc:h-3.5" /&gt;}
             &lt;/span&gt;
           )}
         &lt;/div&gt;
 &nbsp;
         {/* Collapsed Summary */}
         {isCollapsed &amp;&amp; isConfigComplete &amp;&amp; (
-          &lt;span className="text-xs text-dc-text-muted truncate max-w-[200px]"&gt;
+          &lt;span className="dc:text-xs text-dc-text-muted dc:truncate dc:max-w-[200px]"&gt;
             {cubeLabel}
           &lt;/span&gt;
         )}
@@ -1391,7 +1391,7 @@ const <span class="cstat-no" title="statement not covered" >FunnelConfigPanel = 
 &nbsp;
       {/* Collapsible Content */}
       {!isCollapsed &amp;&amp; (
-        &lt;div className="flex flex-col gap-3 px-4 pb-3"&gt;
+        &lt;div className="dc:flex dc:flex-col dc:gap-3 dc:px-4 dc:pb-3"&gt;
           {/* Cube Selector - Only cubes with eventStream metadata */}
           &lt;DropdownSelector
             value={selectedCube}
@@ -1438,7 +1438,7 @@ export default FunnelConfigPanel
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:40.014Z
+                at 2026-01-28T05:21:04.795Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

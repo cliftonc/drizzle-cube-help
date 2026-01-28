@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.63% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.63% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.63% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -202,7 +202,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -213,26 +213,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">47x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">47x</span>
+<span class="cline-any cline-yes">47x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">47x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">47x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -321,22 +321,22 @@ const ConfirmModal: React.FC&lt;ConfirmModalProps&gt; = ({
   confirmVariant = 'primary',
   isLoading = false,
 }) =&gt; {
-  const handleConfirm = <span class="fstat-no" title="function not covered" >async () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    await onConfirm()</span>
-<span class="cstat-no" title="statement not covered" >    onClose()</span>
+  const handleConfirm = async () =&gt; {
+    await onConfirm()
+    onClose()
   }
 &nbsp;
   const getConfirmButtonClasses = () =&gt; {
-    const baseClasses = 'px-4 py-2 text-sm font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
+    const baseClasses = 'dc:px-4 dc:py-2 dc:text-sm dc:font-medium dc:rounded-md dc:transition-colors dc:focus:outline-none dc:focus:ring-2 dc:focus:ring-offset-2 dc:disabled:opacity-50 dc:disabled:cursor-not-allowed'
 &nbsp;
     switch (confirmVariant) {
       case 'danger':
-        return `${baseClasses} bg-dc-danger text-white hover:bg-dc-danger/90 focus:ring-dc-danger`
-<span class="branch-1 cbranch-no" title="branch not covered" >      case 'warning':</span>
-<span class="cstat-no" title="statement not covered" >        return `${baseClasses} bg-dc-warning text-white hover:bg-dc-warning/90 focus:ring-dc-warning`</span>
-<span class="branch-2 cbranch-no" title="branch not covered" >      case 'primary':</span>
-<span class="branch-3 cbranch-no" title="branch not covered" >      default:</span>
-<span class="cstat-no" title="statement not covered" >        return `${baseClasses} bg-dc-primary text-white hover:bg-dc-primary/90 focus:ring-dc-primary`</span>
+        return `${baseClasses} bg-dc-danger dc:text-white dc:hover:bg-dc-danger/90 focus:ring-dc-danger`
+      case 'warning':
+        return `${baseClasses} bg-dc-warning dc:text-white dc:hover:bg-dc-warning/90 focus:ring-dc-warning`
+      case 'primary':
+      default:
+        return `${baseClasses} bg-dc-primary dc:text-white dc:hover:bg-dc-primary/90 focus:ring-dc-primary`
     }
   }
 &nbsp;
@@ -354,7 +354,7 @@ const ConfirmModal: React.FC&lt;ConfirmModalProps&gt; = ({
             type="button"
             onClick={onClose}
             disabled={isLoading}
-            className="px-4 py-2 text-sm font-medium text-dc-text-secondary bg-dc-surface border border-dc-border rounded-md hover:bg-dc-surface-hover transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-dc-primary disabled:opacity-50 disabled:cursor-not-allowed"
+            className="dc:px-4 dc:py-2 dc:text-sm dc:font-medium text-dc-text-secondary bg-dc-surface dc:border border-dc-border dc:rounded-md hover:bg-dc-surface-hover dc:transition-colors dc:focus:outline-none dc:focus:ring-2 dc:focus:ring-offset-2 focus:ring-dc-primary dc:disabled:opacity-50 dc:disabled:cursor-not-allowed"
           &gt;
             {cancelText}
           &lt;/button&gt;
@@ -365,10 +365,10 @@ const ConfirmModal: React.FC&lt;ConfirmModalProps&gt; = ({
             className={getConfirmButtonClasses()}
           &gt;
             {isLoading ? (
-<span class="branch-0 cbranch-no" title="branch not covered" >              &lt;span className="flex items-center gap-2"&gt;</span>
-                &lt;svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"&gt;
-                  &lt;circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"&gt;&lt;/circle&gt;
-                  &lt;path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"&gt;&lt;/path&gt;
+              &lt;span className="dc:flex dc:items-center dc:gap-2"&gt;
+                &lt;svg className="dc:animate-spin dc:h-4 dc:w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"&gt;
+                  &lt;circle className="dc:opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"&gt;&lt;/circle&gt;
+                  &lt;path className="dc:opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"&gt;&lt;/path&gt;
                 &lt;/svg&gt;
                 Processing...
               &lt;/span&gt;
@@ -394,7 +394,7 @@ export default ConfirmModal
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:39.926Z
+                at 2026-01-28T05:21:04.679Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

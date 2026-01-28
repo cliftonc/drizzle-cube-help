@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -109,7 +109,21 @@
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -148,13 +162,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Adapters Index
  *
@@ -175,32 +203,46 @@ export type { QuerySliceState } from './queryModeAdapter'
 export { funnelModeAdapter } from './funnelModeAdapter'
 export type { FunnelSliceState } from './funnelModeAdapter'
 &nbsp;
+export { flowModeAdapter } from './flowModeAdapter'
+&nbsp;
+export { retentionModeAdapter } from './retentionModeAdapter'
+export type { RetentionSliceState } from '../types/retention'
+&nbsp;
 // ============================================================================
-// Adapter Registration
+// Adapter Registration (Optional - Built-in adapters auto-initialize on access)
 // ============================================================================
 &nbsp;
 import { adapterRegistry } from './adapterRegistry'
 import { queryModeAdapter } from './queryModeAdapter'
 import { funnelModeAdapter } from './funnelModeAdapter'
+import { flowModeAdapter } from './flowModeAdapter'
+import { retentionModeAdapter } from './retentionModeAdapter'
 &nbsp;
 /**
- * Initialize and register all adapters.
- * Call this once at application startup.
+ * Manually initialize and register all adapters.
+ *
+ * Note: This function is no longer required to be called. Built-in adapters
+ * (query, funnel) are now automatically initialized on first access to the
+ * registry. This function is kept for backward compatibility and for cases
+ * where explicit early initialization is preferred.
  *
  * @example
- * // In your app's entry point:
+ * // Optional - adapters auto-initialize on first use
  * import { initializeAdapters } from './adapters'
  * initializeAdapters()
  */
-export function initializeAdapters(): void {
+export function <span class="fstat-no" title="function not covered" >initializeAdapters(): void {</span>
   // Register built-in adapters
-  adapterRegistry.register(queryModeAdapter)
-  adapterRegistry.register(funnelModeAdapter)
+  // Safe to call multiple times - registry ignores duplicates
+<span class="cstat-no" title="statement not covered" >  adapterRegistry.register(queryModeAdapter)</span>
+<span class="cstat-no" title="statement not covered" >  adapterRegistry.register(funnelModeAdapter)</span>
+<span class="cstat-no" title="statement not covered" >  adapterRegistry.register(flowModeAdapter)</span>
+<span class="cstat-no" title="statement not covered" >  adapterRegistry.register(retentionModeAdapter)</span>
 }
 &nbsp;
-// Auto-register adapters on import
-// This ensures adapters are available as soon as this module is imported
-initializeAdapters()
+// Note: Auto-registration removed to avoid tree-shaking issues.
+// Adapters now self-initialize on first registry access.
+// See adapterRegistry.ts ensureBuiltInAdaptersInitialized()
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -208,7 +250,7 @@ initializeAdapters()
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:39.926Z
+                at 2026-01-28T05:21:04.679Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

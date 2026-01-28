@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/94</span>
+                <span class='fraction'>0/96</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/155</span>
+                <span class='fraction'>0/166</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/22</span>
+                <span class='fraction'>0/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/89</span>
+                <span class='fraction'>0/91</span>
             </div>
         
             
@@ -428,7 +428,21 @@
 <a name='L363'></a><a href='#L363'>363</a>
 <a name='L364'></a><a href='#L364'>364</a>
 <a name='L365'></a><a href='#L365'>365</a>
-<a name='L366'></a><a href='#L366'>366</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L366'></a><a href='#L366'>366</a>
+<a name='L367'></a><a href='#L367'>367</a>
+<a name='L368'></a><a href='#L368'>368</a>
+<a name='L369'></a><a href='#L369'>369</a>
+<a name='L370'></a><a href='#L370'>370</a>
+<a name='L371'></a><a href='#L371'>371</a>
+<a name='L372'></a><a href='#L372'>372</a>
+<a name='L373'></a><a href='#L373'>373</a>
+<a name='L374'></a><a href='#L374'>374</a>
+<a name='L375'></a><a href='#L375'>375</a>
+<a name='L376'></a><a href='#L376'>376</a>
+<a name='L377'></a><a href='#L377'>377</a>
+<a name='L378'></a><a href='#L378'>378</a>
+<a name='L379'></a><a href='#L379'>379</a>
+<a name='L380'></a><a href='#L380'>380</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -438,7 +452,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -446,6 +462,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -618,7 +635,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -714,10 +730,22 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -797,6 +825,7 @@
 import { ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Cell, Legend } from 'recharts'
 import ChartContainer from './ChartContainer'
 import ChartTooltip from './ChartTooltip'
+import AngledXAxisTick from './AngledXAxisTick'
 import { CHART_COLORS, POSITIVE_COLOR, NEGATIVE_COLOR, CHART_MARGINS } from '../../utils/chartConstants'
 import { transformChartDataWithSeries, isValidNumericValue, formatAxisValue } from '../../utils/chartUtils'
 import { parseTargetValues, spreadTargetValues } from '../../utils/targetUtils'
@@ -809,7 +838,9 @@ const BarChart = <span class="cstat-no" title="statement not covered" >React.mem
   displayConfig = <span class="branch-0 cbranch-no" title="branch not covered" >{},</span>
   queryObject,
   height = <span class="branch-0 cbranch-no" title="branch not covered" >"100%",</span>
-  colorPalette
+  colorPalette,
+  onDataPointClick,
+  drillEnabled
 }: ChartProps) {
   const [hoveredLegend, setHoveredLegend<span class="cstat-no" title="statement not covered" >] = useState&lt;string | null&gt;(null)</span>
   // Use specialized hook to avoid re-renders from unrelated context changes
@@ -914,10 +945,10 @@ const BarChart = <span class="cstat-no" title="statement not covered" >React.mem
 <span class="cstat-no" title="statement not covered" >  try {</span>
 <span class="cstat-no" title="statement not covered" >    if (!data || data.length === 0) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="flex items-center justify-center w-full text-dc-text-muted" style={{ height }}&gt;
+        &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full text-dc-text-muted" style={{ height }}&gt;
           &lt;div className="text-center"&gt;
-            &lt;div className="text-sm font-semibold mb-1"&gt;No data available&lt;/div&gt;
-            &lt;div className="text-xs text-dc-text-secondary"&gt;No data points to display in bar chart&lt;/div&gt;
+            &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;No data available&lt;/div&gt;
+            &lt;div className="dc:text-xs text-dc-text-secondary"&gt;No data points to display in bar chart&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       )
@@ -925,10 +956,10 @@ const BarChart = <span class="cstat-no" title="statement not covered" >React.mem
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (configError) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="flex items-center justify-center w-full text-dc-warning" style={{ height }}&gt;
+        &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full text-dc-warning" style={{ height }}&gt;
           &lt;div className="text-center"&gt;
-            &lt;div className="text-sm font-semibold mb-1"&gt;Configuration Error&lt;/div&gt;
-            &lt;div className="text-xs"&gt;{configError}&lt;/div&gt;
+            &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;Configuration Error&lt;/div&gt;
+            &lt;div className="dc:text-xs"&gt;{configError}&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       )
@@ -973,27 +1004,26 @@ const BarChart = <span class="cstat-no" title="statement not covered" >React.mem
     // Validate transformed data
 <span class="cstat-no" title="statement not covered" >    if (!chartData || chartData.length === 0) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="flex items-center justify-center w-full text-dc-text-muted" style={{ height }}&gt;
+        &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full text-dc-text-muted" style={{ height }}&gt;
           &lt;div className="text-center"&gt;
-            &lt;div className="text-sm font-semibold mb-1"&gt;No valid data&lt;/div&gt;
-            &lt;div className="text-xs text-dc-text-secondary"&gt;No valid data points for bar chart after transformation&lt;/div&gt;
+            &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;No valid data&lt;/div&gt;
+            &lt;div className="dc:text-xs text-dc-text-secondary"&gt;No valid data points for bar chart after transformation&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       )
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      &lt;div className="relative w-full" style={{ height }}&gt;
+      &lt;div className="dc:relative dc:w-full" style={{ height }}&gt;
         &lt;ChartContainer height={skippedCount &gt; 0 ? `calc(100% - 20px)` : "100%"}&gt;
-          &lt;ComposedChart data={enhancedChartData} margin={chartMargins} stackOffset={stackOffset}&gt;
+          &lt;ComposedChart data={enhancedChartData} margin={chartMargins} stackOffset={stackOffset} accessibilityLayer={false}&gt;
           {safeDisplayConfig.showGrid &amp;&amp; (
-            &lt;CartesianGrid strokeDasharray="3 3" /&gt;
+            &lt;CartesianGrid strokeDasharray="3 3" style={{ pointerEvents: 'none' }} /&gt;
           )}
           &lt;XAxis
             dataKey="name"
-            tick={{ fontSize: 12 }}
-            angle={-45}
-            textAnchor="end"
+            type="category"
+            tick={&lt;AngledXAxisTick /&gt;}
             height={60}
           /&gt;
           &lt;YAxis
@@ -1091,6 +1121,18 @@ const BarChart = <span class="cstat-no" title="statement not covered" >React.mem
                       CHART_COLORS[index % CHART_COLORS.length]
                 }
                 fillOpacity={hoveredLegend ? (hoveredLegend === seriesKey ? 1 : 0.3) : 1}
+                cursor={drillEnabled ? 'pointer' : undefined}
+                onClick={<span class="fstat-no" title="function not covered" >(b</span>arData: any, dataIndex: number, event: React.MouseEvent) =&gt; {
+<span class="cstat-no" title="statement not covered" >                  if (onDataPointClick &amp;&amp; drillEnabled &amp;&amp; barData) {</span>
+<span class="cstat-no" title="statement not covered" >                    onDataPointClick({</span>
+                      dataPoint: enhancedChartData[dataIndex] || barData,
+                      clickedField: originalField || seriesKey,
+                      xValue: barData.name,
+                      position: { x: event.clientX, y: event.clientY },
+                      nativeEvent: event
+                    })
+                  }
+                }}
               &gt;
                 {usePositiveNegativeColoring &amp;&amp;
                   chartData.map(<span class="fstat-no" title="function not covered" >(e</span>ntry, entryIndex) =&gt; {
@@ -1138,7 +1180,7 @@ const BarChart = <span class="cstat-no" title="statement not covered" >React.mem
           &lt;/ComposedChart&gt;
         &lt;/ChartContainer&gt;
         {skippedCount &gt; 0 &amp;&amp; (
-          &lt;div className="text-xs text-dc-text-muted text-center mt-1"&gt;
+          &lt;div className="dc:text-xs text-dc-text-muted text-center dc:mt-1"&gt;
             {skippedCount} data point{skippedCount !== 1 ? 's' : ''} with no values hidden
           &lt;/div&gt;
         )}
@@ -1147,11 +1189,11 @@ const BarChart = <span class="cstat-no" title="statement not covered" >React.mem
   } catch (error) {
     // 'BarChart rendering error
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      &lt;div className="flex flex-col items-center justify-center w-full text-dc-error p-4" style={{ height }}&gt;
+      &lt;div className="dc:flex dc:flex-col dc:items-center dc:justify-center dc:w-full text-dc-error dc:p-4" style={{ height }}&gt;
         &lt;div className="text-center"&gt;
-          &lt;div className="text-sm font-semibold mb-1"&gt;Bar Chart Error&lt;/div&gt;
-          &lt;div className="text-xs mb-2"&gt;{error instanceof Error ? error.message : 'Unknown rendering error'}&lt;/div&gt;
-          &lt;div className="text-xs text-dc-text-muted"&gt;Check the data and configuration&lt;/div&gt;
+          &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;Bar Chart Error&lt;/div&gt;
+          &lt;div className="dc:text-xs dc:mb-2"&gt;{error instanceof Error ? error.message : 'Unknown rendering error'}&lt;/div&gt;
+          &lt;div className="dc:text-xs text-dc-text-muted"&gt;Check the data and configuration&lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     )
@@ -1165,7 +1207,7 @@ export default BarChart</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:40.014Z
+                at 2026-01-28T05:21:04.795Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

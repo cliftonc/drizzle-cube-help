@@ -849,7 +849,8 @@
 <a name='L784'></a><a href='#L784'>784</a>
 <a name='L785'></a><a href='#L785'>785</a>
 <a name='L786'></a><a href='#L786'>786</a>
-<a name='L787'></a><a href='#L787'>787</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L787'></a><a href='#L787'>787</a>
+<a name='L788'></a><a href='#L788'>788</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1443,6 +1444,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1997,7 +1999,7 @@ export default function <span class="fstat-no" title="function not covered" >Das
     // No value required for set/notSet
 <span class="cstat-no" title="statement not covered" >    if (!operatorMeta?.requiresValues) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="text-sm text-dc-text-muted italic py-2"&gt;
+        &lt;div className="dc:text-sm text-dc-text-muted dc:italic dc:py-2"&gt;
           No value required
         &lt;/div&gt;
       )
@@ -2006,30 +2008,30 @@ export default function <span class="fstat-no" title="function not covered" >Das
     // Date range selector for inDateRange on time fields
 <span class="cstat-no" title="statement not covered" >    if (shouldShowDateRange) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="space-y-2"&gt;
+        &lt;div className="dc:space-y-2"&gt;
           {/* Range type dropdown */}
-          &lt;div className="relative"&gt;
+          &lt;div className="dc:relative"&gt;
             &lt;button
               onClick={<span class="fstat-no" title="function not covered" >() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                setIsOperatorDropdownOpen(false)</span>
 <span class="cstat-no" title="statement not covered" >                setIsValueDropdownOpen(false)</span>
 <span class="cstat-no" title="statement not covered" >                setIsDateRangeDropdownOpen(!isDateRangeDropdownOpen)</span>
               }}
-              className="w-full flex items-center justify-between text-left text-sm border border-dc-border rounded px-3 py-2 bg-dc-surface text-dc-text hover:bg-dc-surface-hover"
+              className="dc:w-full dc:flex dc:items-center dc:justify-between text-left dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text hover:bg-dc-surface-hover"
             &gt;
-              &lt;span className="truncate"&gt;{dateRangeLabel}&lt;/span&gt;
-              &lt;ChevronDownIcon className={`w-4 h-4 text-dc-text-muted shrink-0 ml-2 transition-transform ${
-                isDateRangeDropdownOpen ? 'rotate-180' : ''
+              &lt;span className="dc:truncate"&gt;{dateRangeLabel}&lt;/span&gt;
+              &lt;ChevronDownIcon className={`dc:w-4 dc:h-4 text-dc-text-muted dc:shrink-0 dc:ml-2 dc:transition-transform ${
+                isDateRangeDropdownOpen ? 'dc:rotate-180' : ''
               }`} /&gt;
             &lt;/button&gt;
 &nbsp;
             {isDateRangeDropdownOpen &amp;&amp; (
-              &lt;div className="absolute z-[60] left-0 right-0 mt-1 bg-dc-surface border border-dc-border rounded shadow-lg max-h-48 overflow-y-auto"&gt;
+              &lt;div className="dc:absolute dc:z-[60] dc:left-0 dc:right-0 dc:mt-1 bg-dc-surface dc:border border-dc-border dc:rounded dc:shadow-lg dc:max-h-48 dc:overflow-y-auto"&gt;
                 {DATE_RANGE_OPTIONS.map(<span class="fstat-no" title="function not covered" >(o</span>ption) =&gt; (
 <span class="cstat-no" title="statement not covered" >                  &lt;button</span>
                     key={option.value}
                     onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleRangeTypeChange(option.value)}</span>
-                    className={`w-full text-left px-3 py-2 text-sm hover:bg-dc-surface-hover ${
+                    className={`dc:w-full text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover ${
                       option.value === rangeType ? 'bg-dc-primary/10 text-dc-primary' : 'text-dc-text'
                     }`}
                   &gt;
@@ -2042,16 +2044,16 @@ export default function <span class="fstat-no" title="function not covered" >Das
 &nbsp;
           {/* Number input for "last N" ranges */}
           {requiresNumberInput(rangeType) &amp;&amp; (
-            &lt;div className="flex items-center gap-2"&gt;
+            &lt;div className="dc:flex dc:items-center dc:gap-2"&gt;
               &lt;input
                 type="number"
                 min="1"
                 max="1000"
                 value={numberValue}
                 onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >handleNumberValueChange(Math.max(1, parseInt(e.target.value) || 1))}</span>
-                className="flex-1 text-sm border border-dc-border rounded px-3 py-2 bg-dc-surface text-dc-text w-20"
+                className="dc:flex-1 dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text dc:w-20"
               /&gt;
-              &lt;span className="text-sm text-dc-text-muted"&gt;
+              &lt;span className="dc:text-sm text-dc-text-muted"&gt;
                 {rangeType.replace('last_n_', '')}
               &lt;/span&gt;
             &lt;/div&gt;
@@ -2059,19 +2061,19 @@ export default function <span class="fstat-no" title="function not covered" >Das
 &nbsp;
           {/* Custom date inputs */}
           {rangeType === 'custom' &amp;&amp; (
-            &lt;div className="flex items-center gap-2"&gt;
+            &lt;div className="dc:flex dc:items-center dc:gap-2"&gt;
               &lt;input
                 type="date"
                 value={Array.isArray(localFilter.dateRange) ? localFilter.dateRange[0] : ''}
                 onChange={handleCustomStartDate}
-                className="flex-1 text-sm border border-dc-border rounded px-2 py-2 bg-dc-surface text-dc-text"
+                className="dc:flex-1 dc:text-sm dc:border border-dc-border dc:rounded dc:px-2 dc:py-2 bg-dc-surface text-dc-text"
               /&gt;
-              &lt;span className="text-sm text-dc-text-muted"&gt;to&lt;/span&gt;
+              &lt;span className="dc:text-sm text-dc-text-muted"&gt;to&lt;/span&gt;
               &lt;input
                 type="date"
                 value={Array.isArray(localFilter.dateRange) ? localFilter.dateRange[1] : ''}
                 onChange={handleCustomEndDate}
-                className="flex-1 text-sm border border-dc-border rounded px-2 py-2 bg-dc-surface text-dc-text"
+                className="dc:flex-1 dc:text-sm dc:border border-dc-border dc:rounded dc:px-2 dc:py-2 bg-dc-surface text-dc-text"
               /&gt;
             &lt;/div&gt;
           )}
@@ -2082,21 +2084,21 @@ export default function <span class="fstat-no" title="function not covered" >Das
     // Between/notBetween range inputs
 <span class="cstat-no" title="statement not covered" >    if (localFilter.operator === 'between' || localFilter.operator === 'notBetween') {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="flex items-center gap-2"&gt;
+        &lt;div className="dc:flex dc:items-center dc:gap-2"&gt;
           &lt;input
             type="number"
             value={localFilter.values?.[0] ?? ''}
             onChange={handleBetweenStartInput}
             placeholder="Min"
-            className="flex-1 text-sm border border-dc-border rounded px-3 py-2 bg-dc-surface text-dc-text"
+            className="dc:flex-1 dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text"
           /&gt;
-          &lt;span className="text-sm text-dc-text-muted"&gt;to&lt;/span&gt;
+          &lt;span className="dc:text-sm text-dc-text-muted"&gt;to&lt;/span&gt;
           &lt;input
             type="number"
             value={localFilter.values?.[1] ?? ''}
             onChange={handleBetweenEndInput}
             placeholder="Max"
-            className="flex-1 text-sm border border-dc-border rounded px-3 py-2 bg-dc-surface text-dc-text"
+            className="dc:flex-1 dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text"
           /&gt;
         &lt;/div&gt;
       )
@@ -2109,7 +2111,7 @@ export default function <span class="fstat-no" title="function not covered" >Das
           type="date"
           value={localFilter.values?.[0] || ''}
           onChange={handleDateInput}
-          className="w-full text-sm border border-dc-border rounded px-3 py-2 bg-dc-surface text-dc-text"
+          className="dc:w-full dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text"
         /&gt;
       )
     }
@@ -2122,7 +2124,7 @@ export default function <span class="fstat-no" title="function not covered" >Das
           value={localFilter.values?.[0] ?? ''}
           onChange={handleDirectInput}
           placeholder="Enter number"
-          className="w-full text-sm border border-dc-border rounded px-3 py-2 bg-dc-surface text-dc-text"
+          className="dc:w-full dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text"
         /&gt;
       )
     }
@@ -2130,21 +2132,21 @@ export default function <span class="fstat-no" title="function not covered" >Das
     // Combo box for equals/notEquals/in/notIn on dimensions
 <span class="cstat-no" title="statement not covered" >    if (shouldShowComboBox) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="space-y-2"&gt;
+        &lt;div className="dc:space-y-2"&gt;
           {/* Selected values as tags */}
           {localFilter.values &amp;&amp; localFilter.values.length &gt; 0 &amp;&amp; (
-            &lt;div className="flex flex-wrap gap-1.5"&gt;
+            &lt;div className="dc:flex dc:flex-wrap dc:gap-1.5"&gt;
               {localFilter.values.map(<span class="fstat-no" title="function not covered" >(v</span>alue: unknown, index: number) =&gt; (
 <span class="cstat-no" title="statement not covered" >                &lt;span</span>
                   key={index}
-                  className="inline-flex items-center gap-1 bg-dc-primary/10 text-dc-primary text-sm px-2 py-1 rounded"
+                  className="dc:inline-flex dc:items-center dc:gap-1 bg-dc-primary/10 text-dc-primary dc:text-sm dc:px-2 dc:py-1 dc:rounded"
                 &gt;
-                  &lt;span className="max-w-[150px] truncate"&gt;{String(value)}&lt;/span&gt;
+                  &lt;span className="dc:max-w-[150px] dc:truncate"&gt;{String(value)}&lt;/span&gt;
                   &lt;button
                     onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleValueRemove(value)}</span>
                     className="hover:text-dc-danger"
                   &gt;
-                    &lt;CloseIcon className="w-3.5 h-3.5" /&gt;
+                    &lt;CloseIcon className="dc:w-3.5 dc:h-3.5" /&gt;
                   &lt;/button&gt;
                 &lt;/span&gt;
               ))}
@@ -2152,45 +2154,45 @@ export default function <span class="fstat-no" title="function not covered" >Das
           )}
 &nbsp;
           {/* Dropdown trigger */}
-          &lt;div className="relative"&gt;
+          &lt;div className="dc:relative"&gt;
             &lt;button
               onClick={<span class="fstat-no" title="function not covered" >() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                setIsOperatorDropdownOpen(false)</span>
 <span class="cstat-no" title="statement not covered" >                setIsDateRangeDropdownOpen(false)</span>
 <span class="cstat-no" title="statement not covered" >                setIsValueDropdownOpen(!isValueDropdownOpen)</span>
               }}
-              className="w-full flex items-center justify-between text-left text-sm border border-dc-border rounded px-3 py-2 bg-dc-surface text-dc-text hover:bg-dc-surface-hover"
+              className="dc:w-full dc:flex dc:items-center dc:justify-between text-left dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text hover:bg-dc-surface-hover"
             &gt;
-              &lt;span className="text-dc-text-muted truncate"&gt;
+              &lt;span className="text-dc-text-muted dc:truncate"&gt;
                 {valuesLoading ? 'Loading...' : 'Select value...'}
               &lt;/span&gt;
-              &lt;ChevronDownIcon className={`w-4 h-4 text-dc-text-muted shrink-0 ml-2 transition-transform ${
-                isValueDropdownOpen ? 'rotate-180' : ''
+              &lt;ChevronDownIcon className={`dc:w-4 dc:h-4 text-dc-text-muted dc:shrink-0 dc:ml-2 dc:transition-transform ${
+                isValueDropdownOpen ? 'dc:rotate-180' : ''
               }`} /&gt;
             &lt;/button&gt;
 &nbsp;
             {isValueDropdownOpen &amp;&amp; (
-              &lt;div className="absolute z-[60] left-0 right-0 mt-1 bg-dc-surface border border-dc-border rounded shadow-lg max-h-56 overflow-hidden"&gt;
+              &lt;div className="dc:absolute dc:z-[60] dc:left-0 dc:right-0 dc:mt-1 bg-dc-surface dc:border border-dc-border dc:rounded dc:shadow-lg dc:max-h-56 dc:overflow-hidden"&gt;
                 {/* Search input */}
-                &lt;div className="p-2 border-b border-dc-border"&gt;
+                &lt;div className="dc:p-2 dc:border-b border-dc-border"&gt;
                   &lt;input
                     type="text"
                     value={searchText}
                     onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >setSearchText(e.target.value)}</span>
                     placeholder="Search..."
-                    className="w-full text-sm border border-dc-border rounded px-3 py-2 bg-dc-surface text-dc-text"
+                    className="dc:w-full dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text"
                     autoFocus
                   /&gt;
                 &lt;/div&gt;
 &nbsp;
                 {/* Values list */}
-                &lt;div className="max-h-40 overflow-y-auto"&gt;
+                &lt;div className="dc:max-h-40 dc:overflow-y-auto"&gt;
                   {valuesLoading ? (
-                    &lt;div className="px-3 py-2 text-sm text-dc-text-muted"&gt;Loading...&lt;/div&gt;
+                    &lt;div className="dc:px-3 dc:py-2 dc:text-sm text-dc-text-muted"&gt;Loading...&lt;/div&gt;
                   ) : valuesError ? (
-                    &lt;div className="px-3 py-2 text-sm text-dc-error"&gt;Error: {valuesError}&lt;/div&gt;
+                    &lt;div className="dc:px-3 dc:py-2 dc:text-sm text-dc-error"&gt;Error: {valuesError}&lt;/div&gt;
                   ) : distinctValues.length === 0 ? (
-                    &lt;div className="px-3 py-2 text-sm text-dc-text-muted"&gt;No values found&lt;/div&gt;
+                    &lt;div className="dc:px-3 dc:py-2 dc:text-sm text-dc-text-muted"&gt;No values found&lt;/div&gt;
                   ) : (
                     distinctValues.map(<span class="fstat-no" title="function not covered" >(v</span>alue, index) =&gt; {
                       const isSelected = <span class="cstat-no" title="statement not covered" >localFilter.values?.includes(value)</span>
@@ -2198,12 +2200,12 @@ export default function <span class="fstat-no" title="function not covered" >Das
                         &lt;button
                           key={`${value}-${index}`}
                           onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleValueSelect(value)}</span>
-                          className={`w-full text-left px-3 py-2 text-sm hover:bg-dc-surface-hover ${
+                          className={`dc:w-full text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover ${
                             isSelected ? 'bg-dc-primary/10 text-dc-primary' : 'text-dc-text'
                           }`}
                         &gt;
                           {String(value)}
-                          {isSelected &amp;&amp; &lt;span className="float-right"&gt;✓&lt;/span&gt;}
+                          {isSelected &amp;&amp; &lt;span className="dc:float-right"&gt;✓&lt;/span&gt;}
                         &lt;/button&gt;
                       )
                     })
@@ -2223,7 +2225,7 @@ export default function <span class="fstat-no" title="function not covered" >Das
         value={localFilter.values?.[0] ?? ''}
         onChange={handleDirectInput}
         placeholder="Enter value..."
-        className="w-full text-sm border border-dc-border rounded px-3 py-2 bg-dc-surface text-dc-text placeholder-dc-text-muted"
+        className="dc:w-full dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text placeholder-dc-text-muted"
       /&gt;
     )
   }
@@ -2232,31 +2234,32 @@ export default function <span class="fstat-no" title="function not covered" >Das
     &lt;&gt;
       {/* Modal overlay */}
       &lt;div
-        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        className="dc:fixed dc:inset-0 dc:z-50 dc:flex dc:items-center dc:justify-center dc:p-4"
         style={{ backgroundColor: 'var(--dc-overlay)' }}
         onClick={onClose}
       &gt;
         &lt;div
           ref={containerRef}
-          className="bg-dc-surface rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-auto"
+          className="bg-dc-surface dc:rounded-lg dc:border border-dc-border dc:max-w-md dc:w-full dc:max-h-[90vh] dc:overflow-auto"
+          style={{ boxShadow: 'var(--dc-shadow-xl)' }}
           onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >e.stopPropagation()}</span>
         &gt;
           {/* Header */}
-          &lt;div className="flex items-center justify-between p-4 border-b border-dc-border"&gt;
-            &lt;h2 className="text-lg font-semibold text-dc-text"&gt;Edit Filter&lt;/h2&gt;
+          &lt;div className="dc:flex dc:items-center dc:justify-between dc:p-4 dc:border-b border-dc-border"&gt;
+            &lt;h2 className="dc:text-lg dc:font-semibold text-dc-text"&gt;Edit Filter&lt;/h2&gt;
             &lt;button
               onClick={onClose}
-              className="p-1 text-dc-text-muted hover:text-dc-text transition-colors"
+              className="dc:p-1 text-dc-text-muted hover:text-dc-text dc:transition-colors"
             &gt;
-              &lt;CloseIcon className="w-5 h-5" /&gt;
+              &lt;CloseIcon className="dc:w-5 dc:h-5" /&gt;
             &lt;/button&gt;
           &lt;/div&gt;
 &nbsp;
           {/* Body */}
-          &lt;div className="p-4 space-y-4"&gt;
+          &lt;div className="dc:p-4 dc:space-y-4"&gt;
             {/* Filter Label */}
             &lt;div&gt;
-              &lt;label className="block text-sm font-medium text-dc-text-secondary mb-2"&gt;
+              &lt;label className="dc:block dc:text-sm dc:font-medium text-dc-text-secondary dc:mb-2"&gt;
                 Filter Label
               &lt;/label&gt;
               &lt;input
@@ -2264,17 +2267,17 @@ export default function <span class="fstat-no" title="function not covered" >Das
                 value={localLabel}
                 onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >setLocalLabel(e.target.value)}</span>
                 placeholder="Enter filter label"
-                className="w-full text-sm border border-dc-border rounded px-3 py-2 bg-dc-surface text-dc-text"
+                className="dc:w-full dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text"
               /&gt;
             &lt;/div&gt;
 &nbsp;
             {/* Info box for universal time filters */}
             {initialFilter.isUniversalTime &amp;&amp; (
-              &lt;div className="p-3 rounded-md bg-dc-info-bg border border-dc-info-border"&gt;
-                &lt;div className="text-sm font-medium text-dc-info mb-1"&gt;
+              &lt;div className="dc:p-3 dc:rounded-md bg-dc-info-bg dc:border border-dc-info-border"&gt;
+                &lt;div className="dc:text-sm dc:font-medium text-dc-info dc:mb-1"&gt;
                   Universal Time Filter
                 &lt;/div&gt;
-                &lt;div className="text-xs text-dc-text-secondary"&gt;
+                &lt;div className="dc:text-xs text-dc-text-secondary"&gt;
                   This filter applies to all time dimensions in mapped portlets.
                   Users can select the date range when viewing the dashboard.
                 &lt;/div&gt;
@@ -2284,23 +2287,23 @@ export default function <span class="fstat-no" title="function not covered" >Das
             {/* Field selection (not for universal time filters) */}
             {!initialFilter.isUniversalTime &amp;&amp; (
               &lt;div&gt;
-                &lt;div className="flex items-center justify-between mb-2"&gt;
-                  &lt;label className="block text-sm font-medium text-dc-text-secondary"&gt;
+                &lt;div className="dc:flex dc:items-center dc:justify-between dc:mb-2"&gt;
+                  &lt;label className="dc:block dc:text-sm dc:font-medium text-dc-text-secondary"&gt;
                     Field
                   &lt;/label&gt;
                   &lt;button
                     onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etShowAllFields(!showAllFields)}</span>
-                    className="flex items-center gap-1 text-xs px-2 py-1 rounded hover:bg-dc-surface-hover text-dc-text-muted"
+                    className="dc:flex dc:items-center dc:gap-1 dc:text-xs dc:px-2 dc:py-1 dc:rounded hover:bg-dc-surface-hover text-dc-text-muted"
                     title={showAllFields ? 'Show dashboard fields only' : 'Show all fields'}
                   &gt;
                     {showAllFields ? (
                       &lt;&gt;
-                        &lt;EyeOffIcon className="w-3.5 h-3.5" /&gt;
+                        &lt;EyeOffIcon className="dc:w-3.5 dc:h-3.5" /&gt;
                         &lt;span&gt;Dashboard&lt;/span&gt;
                       &lt;/&gt;
                     ) : (
                       &lt;&gt;
-                        &lt;EyeIcon className="w-3.5 h-3.5" /&gt;
+                        &lt;EyeIcon className="dc:w-3.5 dc:h-3.5" /&gt;
                         &lt;span&gt;All&lt;/span&gt;
                       &lt;/&gt;
                     )}
@@ -2308,24 +2311,24 @@ export default function <span class="fstat-no" title="function not covered" >Das
                 &lt;/div&gt;
                 &lt;button
                   onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etShowFieldSearch(true)}</span>
-                  className="w-full flex items-center gap-2 p-3 bg-dc-surface-secondary rounded hover:bg-dc-surface-tertiary transition-colors"
+                  className="dc:w-full dc:flex dc:items-center dc:gap-2 dc:p-3 bg-dc-surface-secondary dc:rounded hover:bg-dc-surface-tertiary dc:transition-colors"
                 &gt;
                   {localFilter.member ? (
                     &lt;&gt;
-                      &lt;span className={`w-6 h-6 flex items-center justify-center rounded ${iconBgClass} ${iconTextClass}`}&gt;
-                        {FieldIcon &amp;&amp; &lt;FieldIcon className="w-4 h-4" /&gt;}
+                      &lt;span className={`dc:w-6 dc:h-6 dc:flex dc:items-center dc:justify-center dc:rounded ${iconBgClass} ${iconTextClass}`}&gt;
+                        {FieldIcon &amp;&amp; &lt;FieldIcon className="dc:w-4 dc:h-4" /&gt;}
                       &lt;/span&gt;
-                      &lt;span className="flex-1 text-sm font-medium text-dc-text text-left"&gt;{fieldTitle}&lt;/span&gt;
+                      &lt;span className="dc:flex-1 dc:text-sm dc:font-medium text-dc-text text-left"&gt;{fieldTitle}&lt;/span&gt;
                     &lt;/&gt;
                   ) : (
                     &lt;&gt;
-                      &lt;span className="w-6 h-6 flex items-center justify-center rounded bg-dc-surface-tertiary text-dc-text-muted"&gt;
-                        &lt;DimensionIcon className="w-4 h-4" /&gt;
+                      &lt;span className="dc:w-6 dc:h-6 dc:flex dc:items-center dc:justify-center dc:rounded bg-dc-surface-tertiary text-dc-text-muted"&gt;
+                        &lt;DimensionIcon className="dc:w-4 dc:h-4" /&gt;
                       &lt;/span&gt;
-                      &lt;span className="flex-1 text-sm text-dc-text-muted text-left"&gt;Click to select a field&lt;/span&gt;
+                      &lt;span className="dc:flex-1 dc:text-sm text-dc-text-muted text-left"&gt;Click to select a field&lt;/span&gt;
                     &lt;/&gt;
                   )}
-                  &lt;EditIcon className="w-4 h-4 text-dc-text-muted" /&gt;
+                  &lt;EditIcon className="dc:w-4 dc:h-4 text-dc-text-muted" /&gt;
                 &lt;/button&gt;
               &lt;/div&gt;
             )}
@@ -2333,31 +2336,31 @@ export default function <span class="fstat-no" title="function not covered" >Das
             {/* Operator selector (only if field is selected) */}
             {(localFilter.member || initialFilter.isUniversalTime) &amp;&amp; !initialFilter.isUniversalTime &amp;&amp; (
               &lt;div&gt;
-                &lt;label className="block text-sm font-medium text-dc-text-secondary mb-2"&gt;
+                &lt;label className="dc:block dc:text-sm dc:font-medium text-dc-text-secondary dc:mb-2"&gt;
                   Operator
                 &lt;/label&gt;
-                &lt;div className="relative"&gt;
+                &lt;div className="dc:relative"&gt;
                   &lt;button
                     onClick={<span class="fstat-no" title="function not covered" >() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                      setIsValueDropdownOpen(false)</span>
 <span class="cstat-no" title="statement not covered" >                      setIsDateRangeDropdownOpen(false)</span>
 <span class="cstat-no" title="statement not covered" >                      setIsOperatorDropdownOpen(!isOperatorDropdownOpen)</span>
                     }}
-                    className="w-full flex items-center justify-between text-left text-sm border border-dc-border rounded px-3 py-2 bg-dc-surface text-dc-text hover:bg-dc-surface-hover"
+                    className="dc:w-full dc:flex dc:items-center dc:justify-between text-left dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text hover:bg-dc-surface-hover"
                   &gt;
-                    &lt;span className="truncate"&gt;{operatorLabel}&lt;/span&gt;
-                    &lt;ChevronDownIcon className={`w-4 h-4 text-dc-text-muted shrink-0 ml-2 transition-transform ${
-                      isOperatorDropdownOpen ? 'rotate-180' : ''
+                    &lt;span className="dc:truncate"&gt;{operatorLabel}&lt;/span&gt;
+                    &lt;ChevronDownIcon className={`dc:w-4 dc:h-4 text-dc-text-muted dc:shrink-0 dc:ml-2 dc:transition-transform ${
+                      isOperatorDropdownOpen ? 'dc:rotate-180' : ''
                     }`} /&gt;
                   &lt;/button&gt;
 &nbsp;
                   {isOperatorDropdownOpen &amp;&amp; (
-                    &lt;div className="absolute z-[60] left-0 right-0 mt-1 bg-dc-surface border border-dc-border rounded shadow-lg max-h-48 overflow-y-auto"&gt;
+                    &lt;div className="dc:absolute dc:z-[60] dc:left-0 dc:right-0 dc:mt-1 bg-dc-surface dc:border border-dc-border dc:rounded dc:shadow-lg dc:max-h-48 dc:overflow-y-auto"&gt;
                       {availableOperators.map(<span class="fstat-no" title="function not covered" >(o</span>p) =&gt; (
 <span class="cstat-no" title="statement not covered" >                        &lt;button</span>
                           key={op.operator}
                           onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleOperatorChange(op.operator as FilterOperator)}</span>
-                          className={`w-full text-left px-3 py-2 text-sm hover:bg-dc-surface-hover ${
+                          className={`dc:w-full text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover ${
                             op.operator === localFilter.operator ? 'bg-dc-primary/10 text-dc-primary' : 'text-dc-text'
                           }`}
                         &gt;
@@ -2373,7 +2376,7 @@ export default function <span class="fstat-no" title="function not covered" >Das
             {/* Value input (only if field is selected, not for universal time filters) */}
             {localFilter.member &amp;&amp; !initialFilter.isUniversalTime &amp;&amp; (
               &lt;div&gt;
-                &lt;label className="block text-sm font-medium text-dc-text-secondary mb-2"&gt;
+                &lt;label className="dc:block dc:text-sm dc:font-medium text-dc-text-secondary dc:mb-2"&gt;
                   Default Value
                 &lt;/label&gt;
                 {renderValueInput()}
@@ -2382,23 +2385,23 @@ export default function <span class="fstat-no" title="function not covered" >Das
           &lt;/div&gt;
 &nbsp;
           {/* Footer */}
-          &lt;div className="flex items-center justify-between p-4 border-t border-dc-border"&gt;
+          &lt;div className="dc:flex dc:items-center dc:justify-between dc:p-4 dc:border-t border-dc-border"&gt;
             &lt;button
               onClick={onDelete}
-              className="px-4 py-2 text-sm font-medium text-dc-danger hover:bg-dc-danger-bg rounded transition-colors"
+              className="dc:px-4 dc:py-2 dc:text-sm dc:font-medium text-dc-danger hover:bg-dc-danger-bg dc:rounded dc:transition-colors"
             &gt;
               Delete Filter
             &lt;/button&gt;
-            &lt;div className="flex items-center gap-2"&gt;
+            &lt;div className="dc:flex dc:items-center dc:gap-2"&gt;
               &lt;button
                 onClick={onClose}
-                className="px-4 py-2 text-sm font-medium text-dc-text-secondary hover:text-dc-text transition-colors"
+                className="dc:px-4 dc:py-2 dc:text-sm dc:font-medium text-dc-text-secondary hover:text-dc-text dc:transition-colors"
               &gt;
                 Cancel
               &lt;/button&gt;
               &lt;button
                 onClick={handleSave}
-                className="px-4 py-2 text-sm font-medium text-dc-primary-content bg-dc-primary hover:bg-dc-primary-hover rounded transition-colors"
+                className="dc:px-4 dc:py-2 dc:text-sm dc:font-medium text-dc-primary-content bg-dc-primary hover:bg-dc-primary-hover dc:rounded dc:transition-colors"
               &gt;
                 Done
               &lt;/button&gt;
@@ -2428,7 +2431,7 @@ export default function <span class="fstat-no" title="function not covered" >Das
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:40.014Z
+                at 2026-01-28T05:21:04.795Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

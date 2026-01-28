@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>0/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/5</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
-                <span class="quiet">Functions</span>
                 <span class='fraction'>0/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
-                <span class="quiet">Lines</span>
+                <span class="quiet">Functions</span>
                 <span class='fraction'>0/9</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
@@ -181,7 +181,21 @@
 <a name='L116'></a><a href='#L116'>116</a>
 <a name='L117'></a><a href='#L117'>117</a>
 <a name='L118'></a><a href='#L118'>118</a>
-<a name='L119'></a><a href='#L119'>119</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -205,6 +219,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -304,10 +332,13 @@
  * Simple wrapper for individual portlets
  */
 &nbsp;
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import AnalyticsPortlet from './AnalyticsPortlet'
 import DebugModal from './DebugModal'
 import type { PortletConfig } from '../types'
+import type { FlowChartData } from '../types/flow'
+import type { RetentionChartData } from '../types/retention'
+import { ensureAnalysisConfig } from '../utils/configMigration'
 &nbsp;
 interface PortletContainerProps {
   portlet: PortletConfig
@@ -324,13 +355,24 @@ export default function <span class="fstat-no" title="function not covered" >Por
   onDelete,
   onRefresh
 }: PortletContainerProps) {
+  // Normalize portlet to ensure analysisConfig exists (on-the-fly migration)
+  const <span class="cstat-no" title="statement not covered" >normalizedPortlet = useMemo(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; e</span>nsureAnalysisConfig(portlet), [</span>portlet])</span>
+  const { analysisConfig } = <span class="cstat-no" title="statement not covered" >normalizedPortlet</span>
+&nbsp;
+  // Extract rendering props from analysisConfig
+  const chartModeConfig = <span class="cstat-no" title="statement not covered" >analysisConfig.charts[analysisConfig.analysisType]</span>
+  const <span class="cstat-no" title="statement not covered" >renderQuery = useMemo(<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >J</span>SON.stringify(analysisConfig.query), [</span>analysisConfig.query])</span>
+  const renderChartType = <span class="cstat-no" title="statement not covered" >chartModeConfig?.chartType || 'line'</span>
+  const renderChartConfig = <span class="cstat-no" title="statement not covered" >chartModeConfig?.chartConfig</span>
+  const renderDisplayConfig = <span class="cstat-no" title="statement not covered" >chartModeConfig?.displayConfig</span>
+&nbsp;
   const [debugData, setDebugData<span class="cstat-no" title="statement not covered" >] = useState&lt;{</span>
     chartConfig: any
     displayConfig: any
     queryObject: any
-    data: any[]
+    data: any[] | FlowChartData | RetentionChartData
     chartType: string
-    cacheInfo?: { hit: true; cachedAt: string; ttlMs: number; ttlRemainingMs: number }
+    cacheInfo?: { hit: true; cachedAt: string; ttlMs: number; ttlRemainingMs: number } | null
   } | null&gt;(null)
 &nbsp;
   // Memoize debug data callback to prevent AnalyticsPortlet re-renders
@@ -338,19 +380,19 @@ export default function <span class="fstat-no" title="function not covered" >Por
     chartConfig: any
     displayConfig: any
     queryObject: any
-    data: any[]
+    data: any[] | FlowChartData | RetentionChartData
     chartType: string
-    cacheInfo?: { hit: true; cachedAt: string; ttlMs: number; ttlRemainingMs: number }
+    cacheInfo?: { hit: true; cachedAt: string; ttlMs: number; ttlRemainingMs: number } | null
   }) =&gt; {
 <span class="cstat-no" title="statement not covered" >    setDebugData(data)</span>
   }, [])
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div className="bg-dc-surface border border-dc-border rounded-lg flex flex-col h-full" style={{ boxShadow: 'var(--dc-shadow-sm)' }}&gt;
+    &lt;div className="bg-dc-surface dc:border border-dc-border dc:rounded-lg dc:flex dc:flex-col dc:h-full" style={{ boxShadow: 'var(--dc-shadow-sm)' }}&gt;
       {/* Header */}
-      &lt;div className="flex items-center justify-between border-b border-dc-border shrink-0 bg-dc-surface-secondary rounded-t-lg px-3 py-2 md:px-6 md:py-3"&gt;
-        &lt;div className="flex items-center gap-2 flex-1 min-w-0"&gt;
-          &lt;h3 className="font-semibold text-sm truncate text-dc-text"&gt;{portlet.title}&lt;/h3&gt;
+      &lt;div className="dc:flex dc:items-center dc:justify-between dc:border-b border-dc-border dc:shrink-0 bg-dc-surface-secondary dc:rounded-t-lg dc:px-3 dc:py-2 dc:md:px-6 dc:md:py-3"&gt;
+        &lt;div className="dc:flex dc:items-center dc:gap-2 dc:flex-1 dc:min-w-0"&gt;
+          &lt;h3 className="dc:font-semibold dc:text-sm dc:truncate text-dc-text"&gt;{portlet.title}&lt;/h3&gt;
           {/* Debug button - right next to title */}
           {debugData &amp;&amp; (
             &lt;DebugModal
@@ -364,37 +406,37 @@ export default function <span class="fstat-no" title="function not covered" >Por
           )}
         &lt;/div&gt;
 &nbsp;
-        &lt;div className="flex items-center gap-2 ml-4"&gt;
+        &lt;div className="dc:flex dc:items-center dc:gap-2 dc:ml-4"&gt;
 &nbsp;
           {editable &amp;&amp; (
             &lt;&gt;
               &lt;button
                 onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >o</span>nRefresh?.(portlet.id)}</span>
-                className="p-1.5 hover:bg-dc-surface-hover rounded-sm text-dc-text-secondary"
+                className="dc:p-1.5 hover:bg-dc-surface-hover dc:rounded-sm text-dc-text-secondary"
                 title="Refresh"
               &gt;
-                &lt;svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"&gt;
+                &lt;svg className="dc:h-4 dc:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"&gt;
                   &lt;path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /&gt;
                 &lt;/svg&gt;
               &lt;/button&gt;
               &lt;button
                 onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >o</span>nEdit?.(portlet)}</span>
-                className="p-1.5 hover:bg-dc-surface-hover rounded-sm text-dc-text-secondary"
+                className="dc:p-1.5 hover:bg-dc-surface-hover dc:rounded-sm text-dc-text-secondary"
                 title="Edit"
               &gt;
-                &lt;svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"&gt;
+                &lt;svg className="dc:h-4 dc:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"&gt;
                   &lt;path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /&gt;
                 &lt;/svg&gt;
               &lt;/button&gt;
               &lt;button
                 onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >o</span>nDelete?.(portlet.id)}</span>
-                className="p-1.5 rounded-sm text-dc-danger"
+                className="dc:p-1.5 dc:rounded-sm text-dc-danger"
                 style={{ backgroundColor: 'transparent' }}
                 onMouseEnter={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >e.currentTarget.style.backgroundColor = 'var(--dc-danger-bg)'}</span>
                 onMouseLeave={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >e.currentTarget.style.backgroundColor = 'transparent'}</span>
                 title="Delete"
               &gt;
-                &lt;svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"&gt;
+                &lt;svg className="dc:h-4 dc:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"&gt;
                   &lt;path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /&gt;
                 &lt;/svg&gt;
               &lt;/button&gt;
@@ -404,12 +446,12 @@ export default function <span class="fstat-no" title="function not covered" >Por
       &lt;/div&gt;
 &nbsp;
       {/* Content */}
-      &lt;div className="px-2 py-3 md:px-4 md:pt-6 md:pb-4 flex-1 min-h-0"&gt;
+      &lt;div className="dc:px-2 dc:py-3 dc:md:px-4 dc:md:pt-6 dc:md:pb-4 dc:flex-1 dc:min-h-0"&gt;
         &lt;AnalyticsPortlet
-          query={portlet.query}
-          chartType={portlet.chartType}
-          chartConfig={portlet.chartConfig}
-          displayConfig={portlet.displayConfig}
+          query={renderQuery}
+          chartType={renderChartType}
+          chartConfig={renderChartConfig}
+          displayConfig={renderDisplayConfig}
           title={portlet.title}
           height="100%"
           onDebugDataReady={handleDebugDataReady}
@@ -424,7 +466,7 @@ export default function <span class="fstat-no" title="function not covered" >Por
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:39.926Z
+                at 2026-01-28T05:21:04.679Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

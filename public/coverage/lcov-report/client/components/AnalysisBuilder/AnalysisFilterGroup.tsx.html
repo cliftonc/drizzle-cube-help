@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">3.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/60</span>
+                <span class='fraction'>2/60</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">3.44% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/58</span>
+                <span class='fraction'>2/58</span>
             </div>
         
             
@@ -332,8 +332,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -587,8 +587,8 @@ import type { Filter, SimpleFilter, GroupFilter } from '../../types'
 import type { MetaResponse } from '../../shared/types'
 import AnalysisFilterItem from './AnalysisFilterItem'
 &nbsp;
-const <span class="cstat-no" title="statement not covered" >AddIcon = getIcon('add')</span>
-const <span class="cstat-no" title="statement not covered" >CloseIcon = getIcon('close')</span>
+const AddIcon = getIcon('add')
+const CloseIcon = getIcon('close')
 &nbsp;
 interface AnalysisFilterGroupProps {
   /** The group filter to render */
@@ -713,17 +713,17 @@ export default function <span class="fstat-no" title="function not covered" >Ana
   const conditionLabel = <span class="cstat-no" title="statement not covered" >conditionCount === 1 ? 'condition' : 'conditions'</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div className={`border ${getBorderColor()} rounded-lg bg-dc-surface w-full`}&gt;
+    &lt;div className={`dc:border ${getBorderColor()} dc:rounded-lg bg-dc-surface dc:w-full`}&gt;
       {/* Group Header */}
-      &lt;div className={`flex items-center justify-between px-2 py-1.5 border-b border-dc-border/50 rounded-t-lg ${getGroupBgColor()}`}&gt;
-        &lt;div className="flex items-center gap-2"&gt;
+      &lt;div className={`dc:flex dc:items-center dc:justify-between dc:px-2 dc:py-1.5 dc:border-b border-dc-border/50 dc:rounded-t-lg ${getGroupBgColor()}`}&gt;
+        &lt;div className="dc:flex dc:items-center dc:gap-2"&gt;
           {/* AND/OR Toggle Button */}
           &lt;button
             onClick={handleToggleType}
-            className={`px-2 py-0.5 text-xs font-semibold rounded transition-colors ${
+            className={`dc:px-2 dc:py-0.5 dc:text-xs dc:font-semibold dc:rounded dc:transition-colors ${
               group.type === 'and'
-                ? 'bg-dc-info-bg text-dc-info hover:opacity-80'
-                : 'bg-dc-warning-bg text-dc-warning hover:opacity-80'
+                ? 'bg-dc-info-bg text-dc-info dc:hover:opacity-80'
+                : 'bg-dc-warning-bg text-dc-warning dc:hover:opacity-80'
             }`}
             title={`Click to switch to ${group.type === 'and' ? 'OR' : 'AND'}`}
           &gt;
@@ -731,39 +731,39 @@ export default function <span class="fstat-no" title="function not covered" >Ana
           &lt;/button&gt;
 &nbsp;
           {/* Condition Count */}
-          &lt;span className="text-xs text-dc-text-muted"&gt;
+          &lt;span className="dc:text-xs text-dc-text-muted"&gt;
             {conditionCount} {conditionLabel}
           &lt;/span&gt;
         &lt;/div&gt;
 &nbsp;
-        &lt;div className="flex items-center gap-1"&gt;
+        &lt;div className="dc:flex dc:items-center dc:gap-1"&gt;
           {/* Add Button with Dropdown */}
-          &lt;div className="relative" ref={addMenuRef}&gt;
+          &lt;div className="dc:relative" ref={addMenuRef}&gt;
             &lt;button
               onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etIsAddMenuOpen(!isAddMenuOpen)}</span>
-              className="p-1 text-dc-text-secondary hover:text-dc-primary hover:bg-dc-surface-hover rounded transition-colors"
+              className="dc:p-1 text-dc-text-secondary hover:text-dc-primary hover:bg-dc-surface-hover dc:rounded dc:transition-colors"
               title="Add condition"
             &gt;
-              &lt;AddIcon className="w-4 h-4" /&gt;
+              &lt;AddIcon className="dc:w-4 dc:h-4" /&gt;
             &lt;/button&gt;
 &nbsp;
             {isAddMenuOpen &amp;&amp; (
-              &lt;div className="absolute right-0 mt-1 z-40 bg-dc-surface border border-dc-border rounded shadow-lg py-1 min-w-[120px]"&gt;
+              &lt;div className="dc:absolute dc:right-0 dc:mt-1 dc:z-40 bg-dc-surface dc:border border-dc-border dc:rounded dc:shadow-lg dc:py-1 dc:min-w-[120px]"&gt;
                 &lt;button
                   onClick={handleAddFilterClick}
-                  className="w-full text-left px-3 py-1.5 text-xs text-dc-text hover:bg-dc-surface-hover"
+                  className="dc:w-full text-left dc:px-3 dc:py-1.5 dc:text-xs text-dc-text hover:bg-dc-surface-hover"
                 &gt;
                   Add Filter
                 &lt;/button&gt;
                 &lt;button
                   onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleAddNestedGroup('and')}</span>
-                  className="w-full text-left px-3 py-1.5 text-xs text-dc-text hover:bg-dc-surface-hover"
+                  className="dc:w-full text-left dc:px-3 dc:py-1.5 dc:text-xs text-dc-text hover:bg-dc-surface-hover"
                 &gt;
                   Add AND Group
                 &lt;/button&gt;
                 &lt;button
                   onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleAddNestedGroup('or')}</span>
-                  className="w-full text-left px-3 py-1.5 text-xs text-dc-text hover:bg-dc-surface-hover"
+                  className="dc:w-full text-left dc:px-3 dc:py-1.5 dc:text-xs text-dc-text hover:bg-dc-surface-hover"
                 &gt;
                   Add OR Group
                 &lt;/button&gt;
@@ -775,23 +775,23 @@ export default function <span class="fstat-no" title="function not covered" >Ana
           {!hideRemoveButton &amp;&amp; (
             &lt;button
               onClick={onRemove}
-              className="p-1 text-dc-text-muted hover:text-dc-danger transition-colors"
+              className="dc:p-1 text-dc-text-muted hover:text-dc-danger dc:transition-colors"
               title="Remove group"
             &gt;
-              &lt;CloseIcon className="w-4 h-4" /&gt;
+              &lt;CloseIcon className="dc:w-4 dc:h-4" /&gt;
             &lt;/button&gt;
           )}
         &lt;/div&gt;
       &lt;/div&gt;
 &nbsp;
       {/* Group Body - Filter List */}
-      &lt;div className="p-1.5 flex flex-wrap gap-2"&gt;
+      &lt;div className="dc:p-1.5 dc:flex dc:flex-wrap dc:gap-2"&gt;
         {group.filters.length === 0 ? (
-          &lt;div className="text-center py-3"&gt;
-            &lt;p className="text-xs text-dc-text-muted mb-1"&gt;No conditions in this group&lt;/p&gt;
+          &lt;div className="text-center dc:py-3"&gt;
+            &lt;p className="dc:text-xs text-dc-text-muted dc:mb-1"&gt;No conditions in this group&lt;/p&gt;
             &lt;button
               onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >o</span>nAddFilter([])}</span>
-              className="text-xs text-dc-primary hover:underline"
+              className="dc:text-xs text-dc-primary dc:hover:underline"
             &gt;
               Add a filter
             &lt;/button&gt;
@@ -835,7 +835,7 @@ export default function <span class="fstat-no" title="function not covered" >Ana
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:40.014Z
+                at 2026-01-28T05:21:04.795Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

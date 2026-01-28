@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>8/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>8/9</span>
             </div>
         
             
@@ -110,7 +110,10 @@
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -128,15 +131,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">279x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">242x</span>
+<span class="cline-any cline-yes">210x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">173x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -168,13 +174,14 @@ import { PostgresAdapter } from './adapters/postgres-adapter'
 import { MySQLAdapter } from './adapters/mysql-adapter'
 import { SQLiteAdapter } from './adapters/sqlite-adapter'
 import { SingleStoreAdapter } from './adapters/singlestore-adapter'
+import { DuckDBAdapter } from './adapters/duckdb-adapter'
 &nbsp;
 /**
  * Create a database adapter for the specified engine type
  * @param engineType - The database engine type
  * @returns Database adapter instance
  */
-export function createDatabaseAdapter(engineType: 'postgres' | 'mysql' | 'sqlite' | 'singlestore'): DatabaseAdapter {
+export function createDatabaseAdapter(engineType: 'postgres' | 'mysql' | 'sqlite' | 'singlestore' | 'duckdb'): DatabaseAdapter {
   switch (engineType) {
     case 'postgres':
       return new PostgresAdapter()
@@ -184,6 +191,8 @@ export function createDatabaseAdapter(engineType: 'postgres' | 'mysql' | 'sqlite
       return new SQLiteAdapter()
     case 'singlestore':
       return new SingleStoreAdapter()
+<span class="branch-4 cbranch-no" title="branch not covered" >    case 'duckdb':</span>
+<span class="cstat-no" title="statement not covered" >      return new DuckDBAdapter()</span>
     default:
       throw new Error(`Unsupported database engine: ${engineType}`)
   }
@@ -193,8 +202,8 @@ export function createDatabaseAdapter(engineType: 'postgres' | 'mysql' | 'sqlite
  * Get available database adapters
  * @returns Array of supported engine types
  */
-export function getSupportedEngines(): ('postgres' | 'mysql' | 'sqlite' | 'singlestore')[] {
-  return ['postgres', 'mysql', 'sqlite', 'singlestore']
+export function getSupportedEngines(): ('postgres' | 'mysql' | 'sqlite' | 'singlestore' | 'duckdb')[] {
+  return ['postgres', 'mysql', 'sqlite', 'singlestore', 'duckdb']
 }
 &nbsp;
 /**
@@ -202,8 +211,8 @@ export function getSupportedEngines(): ('postgres' | 'mysql' | 'sqlite' | 'singl
  * @param engineType - Engine type to check
  * @returns True if supported, false otherwise
  */
-export function isEngineSupported(engineType: string): engineType is 'postgres' | 'mysql' | 'sqlite' | 'singlestore' {
-  return ['postgres', 'mysql', 'sqlite', 'singlestore'].includes(engineType)
+export function isEngineSupported(engineType: string): engineType is 'postgres' | 'mysql' | 'sqlite' | 'singlestore' | 'duckdb' {
+  return ['postgres', 'mysql', 'sqlite', 'singlestore', 'duckdb'].includes(engineType)
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -211,7 +220,7 @@ export function isEngineSupported(engineType: string): engineType is 'postgres' 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:40.014Z
+                at 2026-01-28T05:21:04.795Z
             </div>
         <script src="../prettify.js"></script>
         <script>

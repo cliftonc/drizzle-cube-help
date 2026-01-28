@@ -527,21 +527,21 @@ export default function <span class="fstat-no" title="function not covered" >Das
     const dateRangeDisplay = <span class="cstat-no" title="statement not covered" >formatDateRangeDisplay(simpleFilter)</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      &lt;div className="flex items-start gap-2 px-2 py-1.5 bg-dc-surface-secondary rounded-lg group hover:bg-dc-surface-tertiary transition-all duration-150"&gt;
+      &lt;div className="dc:flex dc:items-start dc:gap-2 dc:px-2 dc:py-1.5 bg-dc-surface-secondary dc:rounded-lg dc:group hover:bg-dc-surface-tertiary dc:transition-all dc:duration-150"&gt;
         {/* Time icon for universal filter */}
-        &lt;span className="w-6 h-6 flex items-center justify-center rounded bg-dc-time-dimension text-dc-time-dimension-text flex-shrink-0 mt-0.5"&gt;
-          {TimeDimensionIcon &amp;&amp; &lt;TimeDimensionIcon className="w-4 h-4" /&gt;}
+        &lt;span className="dc:w-6 dc:h-6 dc:flex dc:items-center dc:justify-center dc:rounded bg-dc-time-dimension text-dc-time-dimension-text dc:flex-shrink-0 dc:mt-0.5"&gt;
+          {TimeDimensionIcon &amp;&amp; &lt;TimeDimensionIcon className="dc:w-4 dc:h-4" /&gt;}
         &lt;/span&gt;
 &nbsp;
         {/* Filter description - clickable to edit */}
         &lt;button
           onClick={onClick}
-          className="flex-1 min-w-0 text-left"
+          className="dc:flex-1 dc:min-w-0 text-left"
           title={`${filter.label}: ${dateRangeDisplay}`}
         &gt;
-          &lt;div className="text-sm text-dc-text break-words"&gt;
-            &lt;span className="font-medium"&gt;{filter.label}&lt;/span&gt;
-            &lt;span className="text-dc-text-muted mx-1"&gt;=&lt;/span&gt;
+          &lt;div className="dc:text-sm text-dc-text dc:break-words"&gt;
+            &lt;span className="dc:font-medium"&gt;{filter.label}&lt;/span&gt;
+            &lt;span className="text-dc-text-muted dc:mx-1"&gt;=&lt;/span&gt;
             &lt;span className="text-dc-primary"&gt;{dateRangeDisplay || '(not set)'}&lt;/span&gt;
           &lt;/div&gt;
         &lt;/button&gt;
@@ -552,10 +552,10 @@ export default function <span class="fstat-no" title="function not covered" >Das
 <span class="cstat-no" title="statement not covered" >            e.stopPropagation()</span>
 <span class="cstat-no" title="statement not covered" >            onRemove()</span>
           }}
-          className="p-1 text-dc-text-muted hover:text-dc-danger opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5"
+          className="dc:p-1 text-dc-text-muted hover:text-dc-danger dc:opacity-100 dc:sm:opacity-0 dc:sm:group-hover:opacity-100 dc:transition-opacity dc:flex-shrink-0 dc:mt-0.5"
           title="Remove filter"
         &gt;
-          {CloseIcon &amp;&amp; &lt;CloseIcon className="w-4 h-4" /&gt;}
+          {CloseIcon &amp;&amp; &lt;CloseIcon className="dc:w-4 dc:h-4" /&gt;}
         &lt;/button&gt;
       &lt;/div&gt;
     )
@@ -589,30 +589,30 @@ export default function <span class="fstat-no" title="function not covered" >Das
   const needsConfiguration = <span class="cstat-no" title="statement not covered" >!fieldName || (operatorMeta?.requiresValues &amp;&amp; (!simpleFilter.values || simpleFilter.values.length === 0) &amp;&amp; !simpleFilter.dateRange)</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div className="flex items-start gap-2 px-2 py-1.5 bg-dc-surface-secondary rounded-lg group hover:bg-dc-surface-tertiary transition-all duration-150"&gt;
+    &lt;div className="dc:flex dc:items-start dc:gap-2 dc:px-2 dc:py-1.5 bg-dc-surface-secondary dc:rounded-lg dc:group hover:bg-dc-surface-tertiary dc:transition-all dc:duration-150"&gt;
       {/* Field type icon with appropriate background color */}
-      &lt;span className={`w-6 h-6 flex items-center justify-center rounded ${iconBgClass} ${iconTextClass} flex-shrink-0 mt-0.5`}&gt;
-        {FieldIcon &amp;&amp; &lt;FieldIcon className="w-4 h-4" /&gt;}
+      &lt;span className={`dc:w-6 dc:h-6 dc:flex dc:items-center dc:justify-center dc:rounded ${iconBgClass} ${iconTextClass} dc:flex-shrink-0 dc:mt-0.5`}&gt;
+        {FieldIcon &amp;&amp; &lt;FieldIcon className="dc:w-4 dc:h-4" /&gt;}
       &lt;/span&gt;
 &nbsp;
       {/* Filter description - clickable to edit */}
       &lt;button
         onClick={onClick}
-        className="flex-1 min-w-0 text-left"
+        className="dc:flex-1 dc:min-w-0 text-left"
         title={needsConfiguration ? `${filter.label}: Click to configure` : `${filter.label}: ${fieldTitle} ${operatorLabel} ${valueDisplay}`}
       &gt;
-        &lt;div className="text-sm text-dc-text break-words"&gt;
+        &lt;div className="dc:text-sm text-dc-text dc:break-words"&gt;
           {needsConfiguration ? (
             &lt;&gt;
-              &lt;span className="font-medium"&gt;{filter.label}&lt;/span&gt;
-              &lt;span className="text-dc-text-muted ml-1 italic"&gt;Click to configure&lt;/span&gt;
+              &lt;span className="dc:font-medium"&gt;{filter.label}&lt;/span&gt;
+              &lt;span className="text-dc-text-muted dc:ml-1 dc:italic"&gt;Click to configure&lt;/span&gt;
             &lt;/&gt;
           ) : (
             &lt;&gt;
-              &lt;span className="font-medium"&gt;{filter.label}&lt;/span&gt;
+              &lt;span className="dc:font-medium"&gt;{filter.label}&lt;/span&gt;
               &lt;span className="text-dc-text-muted"&gt;: &lt;/span&gt;
               &lt;span className="text-dc-text-secondary"&gt;{fieldTitle}&lt;/span&gt;
-              &lt;span className="text-dc-text-muted mx-1"&gt;{operatorLabel}&lt;/span&gt;
+              &lt;span className="text-dc-text-muted dc:mx-1"&gt;{operatorLabel}&lt;/span&gt;
               &lt;span className="text-dc-primary"&gt;{valueDisplay}&lt;/span&gt;
             &lt;/&gt;
           )}
@@ -625,10 +625,10 @@ export default function <span class="fstat-no" title="function not covered" >Das
 <span class="cstat-no" title="statement not covered" >          e.stopPropagation()</span>
 <span class="cstat-no" title="statement not covered" >          onRemove()</span>
         }}
-        className="p-1 text-dc-text-muted hover:text-dc-danger opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5"
+        className="dc:p-1 text-dc-text-muted hover:text-dc-danger dc:opacity-100 dc:sm:opacity-0 dc:sm:group-hover:opacity-100 dc:transition-opacity dc:flex-shrink-0 dc:mt-0.5"
         title="Remove filter"
       &gt;
-        {CloseIcon &amp;&amp; &lt;CloseIcon className="w-4 h-4" /&gt;}
+        {CloseIcon &amp;&amp; &lt;CloseIcon className="dc:w-4 dc:h-4" /&gt;}
       &lt;/button&gt;
     &lt;/div&gt;
   )
@@ -700,7 +700,7 @@ function <span class="fstat-no" title="function not covered" >formatDateRangeDis
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:40.014Z
+                at 2026-01-28T05:21:04.795Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

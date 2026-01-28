@@ -516,26 +516,26 @@ export default function <span class="fstat-no" title="function not covered" >Por
 <span class="cstat-no" title="statement not covered" >  if (!isOpen) <span class="cstat-no" title="statement not covered" >return null</span></span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" onClick={handleCancel}&gt;
+    &lt;div className="dc:fixed dc:inset-0 dc:z-50 dc:flex dc:items-center dc:justify-center bg-black bg-opacity-50" onClick={handleCancel}&gt;
       &lt;div
-        className="bg-dc-surface border border-dc-border rounded-lg max-w-2xl w-full mx-4 max-h-[80vh] flex flex-col"
+        className="bg-dc-surface dc:border border-dc-border dc:rounded-lg dc:max-w-2xl dc:w-full dc:mx-4 dc:max-h-[80vh] dc:flex dc:flex-col"
         style={{ boxShadow: 'var(--dc-shadow-lg)' }}
         onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >e.stopPropagation()}</span>
       &gt;
         {/* Header */}
-        &lt;div className="px-6 py-4 border-b border-dc-border bg-dc-surface-secondary rounded-t-lg"&gt;
-          &lt;h2 className="text-lg font-semibold text-dc-text"&gt;Configure Dashboard Filters&lt;/h2&gt;
-          &lt;p className="text-sm text-dc-text-secondary mt-1"&gt;
+        &lt;div className="dc:px-6 dc:py-4 dc:border-b border-dc-border bg-dc-surface-secondary dc:rounded-t-lg"&gt;
+          &lt;h2 className="dc:text-lg dc:font-semibold text-dc-text"&gt;Configure Dashboard Filters&lt;/h2&gt;
+          &lt;p className="dc:text-sm text-dc-text-secondary dc:mt-1"&gt;
             Choose which dashboard filters apply to "{portletTitle}"
           &lt;/p&gt;
         &lt;/div&gt;
 &nbsp;
         {/* Content */}
-        &lt;div className="flex-1 overflow-y-auto px-6 py-4"&gt;
+        &lt;div className="dc:flex-1 dc:overflow-y-auto dc:px-6 dc:py-4"&gt;
           {dashboardFilters.length === 0 ? (
-            &lt;div className="text-center py-8 text-dc-text-muted"&gt;
+            &lt;div className="text-center dc:py-8 text-dc-text-muted"&gt;
               &lt;svg
-                className="mx-auto h-12 w-12 mb-3"
+                className="dc:mx-auto dc:h-12 dc:w-12 dc:mb-3"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -547,14 +547,14 @@ export default function <span class="fstat-no" title="function not covered" >Por
                   d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
                 /&gt;
               &lt;/svg&gt;
-              &lt;p className="text-sm font-medium"&gt;No dashboard filters available&lt;/p&gt;
-              &lt;p className="text-xs mt-1"&gt;Add filters at the dashboard level first&lt;/p&gt;
+              &lt;p className="dc:text-sm dc:font-medium"&gt;No dashboard filters available&lt;/p&gt;
+              &lt;p className="dc:text-xs dc:mt-1"&gt;Add filters at the dashboard level first&lt;/p&gt;
             &lt;/div&gt;
           ) : (
-            &lt;div className="space-y-3"&gt;
-              &lt;div className="flex items-center justify-between mb-4 pb-2 border-b border-dc-border"&gt;
-                &lt;span className="text-sm font-medium text-dc-text"&gt;Available Filters&lt;/span&gt;
-                &lt;span className="text-xs text-dc-text-secondary"&gt;
+            &lt;div className="dc:space-y-3"&gt;
+              &lt;div className="dc:flex dc:items-center dc:justify-between dc:mb-4 dc:pb-2 dc:border-b border-dc-border"&gt;
+                &lt;span className="dc:text-sm dc:font-medium text-dc-text"&gt;Available Filters&lt;/span&gt;
+                &lt;span className="dc:text-xs text-dc-text-secondary"&gt;
                   {selectedFilters.length} of {dashboardFilters.length} selected
                 &lt;/span&gt;
               &lt;/div&gt;
@@ -565,7 +565,7 @@ export default function <span class="fstat-no" title="function not covered" >Por
 <span class="cstat-no" title="statement not covered" >                return (</span>
                   &lt;label
                     key={filter.id}
-                    className={`flex items-start p-3 rounded-md border cursor-pointer transition-colors ${
+                    className={`dc:flex dc:items-start dc:p-3 dc:rounded-md dc:border dc:cursor-pointer dc:transition-colors ${
                       isSelected
                         ? 'border-dc-primary bg-dc-surface-secondary'
                         : 'border-dc-border hover:bg-dc-surface-hover'
@@ -575,19 +575,19 @@ export default function <span class="fstat-no" title="function not covered" >Por
                       type="checkbox"
                       checked={isSelected}
                       onChange={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleToggleFilter(filter.id)}</span>
-                      className="mt-0.5 mr-3 h-4 w-4 rounded border-dc-border focus:ring-2 focus:ring-dc-primary"
+                      className="dc:mt-0.5 dc:mr-3 dc:h-4 dc:w-4 dc:rounded border-dc-border dc:focus:ring-2 focus:ring-dc-primary"
                       style={{
                         accentColor: 'var(--dc-primary)'
                       }}
                     /&gt;
-                    &lt;div className="flex-1 min-w-0"&gt;
-                      &lt;div className="flex items-center gap-2"&gt;
-                        &lt;span className="font-medium text-sm text-dc-text truncate"&gt;
+                    &lt;div className="dc:flex-1 dc:min-w-0"&gt;
+                      &lt;div className="dc:flex dc:items-center dc:gap-2"&gt;
+                        &lt;span className="dc:font-medium dc:text-sm text-dc-text dc:truncate"&gt;
                           {filter.label}
                         &lt;/span&gt;
                         {isSelected &amp;&amp; (
                           &lt;span
-                            className="px-2 py-0.5 text-xs rounded-full"
+                            className="dc:px-2 dc:py-0.5 dc:text-xs dc:rounded-full"
                             style={{
                               backgroundColor: 'var(--dc-primary)',
                               color: 'white'
@@ -597,7 +597,7 @@ export default function <span class="fstat-no" title="function not covered" >Por
                           &lt;/span&gt;
                         )}
                       &lt;/div&gt;
-                      &lt;div className="mt-1 text-xs text-dc-text-secondary break-words"&gt;
+                      &lt;div className="dc:mt-1 dc:text-xs text-dc-text-secondary dc:break-words"&gt;
                         {formatFilterPreview(filter)}
                       &lt;/div&gt;
                     &lt;/div&gt;
@@ -609,16 +609,16 @@ export default function <span class="fstat-no" title="function not covered" >Por
         &lt;/div&gt;
 &nbsp;
         {/* Footer */}
-        &lt;div className="px-6 py-4 border-t border-dc-border bg-dc-surface-secondary rounded-b-lg flex justify-end gap-3"&gt;
+        &lt;div className="dc:px-6 dc:py-4 dc:border-t border-dc-border bg-dc-surface-secondary dc:rounded-b-lg dc:flex dc:justify-end dc:gap-3"&gt;
           &lt;button
             onClick={handleCancel}
-            className="px-4 py-2 text-sm font-medium rounded-md border border-dc-border bg-dc-surface hover:bg-dc-surface-hover transition-colors text-dc-text"
+            className="dc:px-4 dc:py-2 dc:text-sm dc:font-medium dc:rounded-md dc:border border-dc-border bg-dc-surface hover:bg-dc-surface-hover dc:transition-colors text-dc-text"
           &gt;
             Cancel
           &lt;/button&gt;
           &lt;button
             onClick={handleSave}
-            className="px-4 py-2 text-sm font-medium rounded-md text-white transition-colors"
+            className="dc:px-4 dc:py-2 dc:text-sm dc:font-medium dc:rounded-md text-white dc:transition-colors"
             style={{
               backgroundColor: 'var(--dc-primary)'
             }}
@@ -637,7 +637,7 @@ export default function <span class="fstat-no" title="function not covered" >Por
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:39.926Z
+                at 2026-01-28T05:21:04.679Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">6.89% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/29</span>
+                <span class='fraction'>2/29</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">6.89% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/29</span>
+                <span class='fraction'>2/29</span>
             </div>
         
             
@@ -243,7 +243,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -270,7 +270,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -410,7 +410,7 @@ import { getIcon } from '../../icons'
 import FunnelStepCard from './FunnelStepCard'
 import SectionHeading from './SectionHeading'
 &nbsp;
-const <span class="cstat-no" title="statement not covered" >AddIcon = getIcon('add')</span>
+const AddIcon = getIcon('add')
 &nbsp;
 export interface FunnelStepListProps {
   /** Array of funnel steps */
@@ -437,7 +437,7 @@ export interface FunnelStepListProps {
  * FunnelStepList displays a vertical list of funnel steps
  * with drag-and-drop reordering support.
  */
-const <span class="cstat-no" title="statement not covered" >FunnelStepList = memo(function <span class="fstat-no" title="function not covered" >FunnelStepList({</span></span>
+const FunnelStepList = memo(function <span class="fstat-no" title="function not covered" >FunnelStepList({</span>
   steps,
   activeStepIndex,
   schema,
@@ -481,13 +481,13 @@ const <span class="cstat-no" title="statement not covered" >FunnelStepList = mem
   }, [])
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div className="space-y-4"&gt;
+    &lt;div className="dc:space-y-4"&gt;
       {/* Header */}
-      &lt;div className="flex items-center justify-between"&gt;
+      &lt;div className="dc:flex dc:items-center dc:justify-between"&gt;
         &lt;SectionHeading&gt;
           Funnel Steps
           {steps.length &gt; 0 &amp;&amp; (
-            &lt;span className="ml-1.5 text-xs font-normal text-dc-text-muted normal-case tracking-normal"&gt;
+            &lt;span className="dc:ml-1.5 dc:text-xs dc:font-normal text-dc-text-muted dc:normal-case dc:tracking-normal"&gt;
               ({steps.length})
             &lt;/span&gt;
           )}
@@ -496,20 +496,20 @@ const <span class="cstat-no" title="statement not covered" >FunnelStepList = mem
 &nbsp;
       {/* Step List */}
       {steps.length === 0 ? (
-        &lt;div className="text-center py-8"&gt;
-          &lt;p className="text-sm text-dc-text-muted mb-3"&gt;
+        &lt;div className="text-center dc:py-8"&gt;
+          &lt;p className="dc:text-sm text-dc-text-muted dc:mb-3"&gt;
             No steps defined. Add at least 2 steps to create a funnel.
           &lt;/p&gt;
           &lt;button
             onClick={onAddStep}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-dc-primary bg-dc-primary/10 rounded-md hover:bg-dc-primary/20 transition-colors"
+            className="dc:inline-flex dc:items-center dc:gap-1.5 dc:px-3 dc:py-1.5 dc:text-sm dc:font-medium text-dc-primary bg-dc-primary/10 dc:rounded-md hover:bg-dc-primary/20 dc:transition-colors"
           &gt;
-            &lt;AddIcon className="w-4 h-4" /&gt;
+            &lt;AddIcon className="dc:w-4 dc:h-4" /&gt;
             Add First Step
           &lt;/button&gt;
         &lt;/div&gt;
       ) : (
-        &lt;div className="space-y-2"&gt;
+        &lt;div className="dc:space-y-2"&gt;
           {steps.map(<span class="fstat-no" title="function not covered" >(s</span>tep, index) =&gt; (
 <span class="cstat-no" title="statement not covered" >            &lt;div</span>
               key={step.id}
@@ -519,11 +519,11 @@ const <span class="cstat-no" title="statement not covered" >FunnelStepList = mem
               onDragLeave={handleDragLeave}
               onDrop={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >handleDrop(e, index)}</span>
               onDragEnd={handleDragEnd}
-              className={`transition-all ${
-                draggedIndex === index ? 'opacity-50' : ''
+              className={`dc:transition-all ${
+                draggedIndex === index ? 'dc:opacity-50' : ''
               } ${
                 dragOverIndex === index
-                  ? 'border-t-2 border-dc-primary pt-1'
+                  ? 'dc:border-t-2 border-dc-primary dc:pt-1'
                   : ''
               }`}
             &gt;
@@ -546,16 +546,16 @@ const <span class="cstat-no" title="statement not covered" >FunnelStepList = mem
       {steps.length &gt; 0 &amp;&amp; (
         &lt;button
           onClick={onAddStep}
-          className="flex items-center justify-center gap-1.5 w-full py-2 text-sm font-medium text-dc-text-secondary bg-dc-surface border-2 border-dashed border-dc-border rounded-lg hover:border-dc-primary hover:text-dc-primary hover:bg-dc-primary/5 transition-colors"
+          className="dc:flex dc:items-center dc:justify-center dc:gap-1.5 dc:w-full dc:py-2 dc:text-sm dc:font-medium text-dc-text-secondary bg-dc-surface dc:border-2 dc:border-dashed border-dc-border dc:rounded-lg hover:border-dc-primary hover:text-dc-primary hover:bg-dc-primary/5 dc:transition-colors"
         &gt;
-          &lt;AddIcon className="w-4 h-4" /&gt;
+          &lt;AddIcon className="dc:w-4 dc:h-4" /&gt;
           Add Step
         &lt;/button&gt;
       )}
 &nbsp;
       {/* Validation Hint */}
       {steps.length === 1 &amp;&amp; (
-        &lt;p className="text-xs text-dc-warning text-center"&gt;
+        &lt;p className="dc:text-xs text-dc-warning text-center"&gt;
           Add at least one more step to create a valid funnel
         &lt;/p&gt;
       )}
@@ -571,7 +571,7 @@ export default FunnelStepList
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:39.926Z
+                at 2026-01-28T05:21:04.679Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

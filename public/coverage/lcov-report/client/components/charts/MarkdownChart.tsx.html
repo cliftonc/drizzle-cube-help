@@ -924,16 +924,16 @@ const MarkdownChart = <span class="cstat-no" title="statement not covered" >Reac
 &nbsp;
   // Font size mapping
   const fontSizeClasses = <span class="cstat-no" title="statement not covered" >{</span>
-    small: 'text-sm',
-    medium: 'text-lg', 
-    large: 'text-xl'
+    small: 'dc:text-sm',
+    medium: 'dc:text-lg',
+    large: 'dc:text-xl'
   }
 &nbsp;
   // Alignment mapping
   const alignmentClasses = <span class="cstat-no" title="statement not covered" >{</span>
-    left: 'text-left',
-    center: 'text-center',
-    right: 'text-right'
+    left: 'dc:text-left',
+    center: 'dc:text-center',
+    right: 'dc:text-right'
   }
 &nbsp;
   // Simple markdown parser
@@ -1091,10 +1091,10 @@ const MarkdownChart = <span class="cstat-no" title="statement not covered" >Reac
 <span class="cstat-no" title="statement not covered" >        return &lt;span key={key} className="text-dc-text"&gt;{node.content}&lt;/span&gt;</span>
 &nbsp;
       case 'bold':
-<span class="cstat-no" title="statement not covered" >        return &lt;strong key={key} className="font-bold text-dc-text"&gt;{node.content}&lt;/strong&gt;</span>
+<span class="cstat-no" title="statement not covered" >        return &lt;strong key={key} className="dc:font-bold text-dc-text"&gt;{node.content}&lt;/strong&gt;</span>
 &nbsp;
       case 'italic':
-<span class="cstat-no" title="statement not covered" >        return &lt;em key={key} className="italic text-dc-text"&gt;{node.content}&lt;/em&gt;</span>
+<span class="cstat-no" title="statement not covered" >        return &lt;em key={key} className="dc:italic text-dc-text"&gt;{node.content}&lt;/em&gt;</span>
 &nbsp;
       case 'link':
 <span class="cstat-no" title="statement not covered" >        return (</span>
@@ -1103,7 +1103,7 @@ const MarkdownChart = <span class="cstat-no" title="statement not covered" >Reac
             href={node.url}
             target="_blank"
             rel="nofollow noopener noreferrer"
-            className="hover:underline transition-colors"
+            className="dc:hover:underline dc:transition-colors"
             style={{ color: accentColor }}
           &gt;
             {node.content}
@@ -1113,20 +1113,20 @@ const MarkdownChart = <span class="cstat-no" title="statement not covered" >Reac
       case 'header': {
         // Header classes that scale with fontSize setting
         const getHeaderClasses = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(l</span>evel: number, fontSize: string) =&gt; {</span>
-          const baseClasses = <span class="cstat-no" title="statement not covered" >'font-bold'</span>
+          const baseClasses = <span class="cstat-no" title="statement not covered" >'dc:font-bold'</span>
           const marginClasses = <span class="cstat-no" title="statement not covered" >{</span>
-            1: 'mb-4',
-            2: 'mb-3',
-            3: 'mb-2'
+            1: 'dc:mb-4',
+            2: 'dc:mb-3',
+            3: 'dc:mb-2'
           }
 &nbsp;
           let sizeClasses = <span class="cstat-no" title="statement not covered" >''</span>
 <span class="cstat-no" title="statement not covered" >          if (fontSize === 'small') {</span>
-<span class="cstat-no" title="statement not covered" >            sizeClasses = { 1: 'text-lg', 2: 'text-base', 3: 'text-sm' }[level] || 'text-sm'</span>
+<span class="cstat-no" title="statement not covered" >            sizeClasses = { 1: 'dc:text-lg', 2: 'dc:text-base', 3: 'dc:text-sm' }[level] || 'dc:text-sm'</span>
 <span class="cstat-no" title="statement not covered" >          } else if (fontSize === 'large') {</span>
-<span class="cstat-no" title="statement not covered" >            sizeClasses = { 1: 'text-5xl', 2: 'text-4xl', 3: 'text-3xl' }[level] || 'text-3xl'</span>
+<span class="cstat-no" title="statement not covered" >            sizeClasses = { 1: 'dc:text-5xl', 2: 'dc:text-4xl', 3: 'dc:text-3xl' }[level] || 'dc:text-3xl'</span>
           } else { // medium (default)
-<span class="cstat-no" title="statement not covered" >            sizeClasses = { 1: 'text-3xl', 2: 'text-2xl', 3: 'text-xl' }[level] || 'text-xl'</span>
+<span class="cstat-no" title="statement not covered" >            sizeClasses = { 1: 'dc:text-3xl', 2: 'dc:text-2xl', 3: 'dc:text-xl' }[level] || 'dc:text-xl'</span>
           }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >          return `${baseClasses} ${sizeClasses} ${marginClasses[level as keyof typeof marginClasses]}`</span>
@@ -1146,7 +1146,7 @@ const MarkdownChart = <span class="cstat-no" title="statement not covered" >Reac
 &nbsp;
       case 'paragraph':
 <span class="cstat-no" title="statement not covered" >        return (</span>
-          &lt;p key={key} className="mb-3 leading-relaxed"&gt;
+          &lt;p key={key} className="dc:mb-3 dc:leading-relaxed"&gt;
             {node.children?.map(<span class="fstat-no" title="function not covered" >(c</span>hild, i) =&gt; <span class="cstat-no" title="statement not covered" >renderNode(child, i))</span>}
           &lt;/p&gt;
         )
@@ -1178,9 +1178,9 @@ const MarkdownChart = <span class="cstat-no" title="statement not covered" >Reac
             
 <span class="cstat-no" title="statement not covered" >            if (alignment === 'center') {</span>
 <span class="cstat-no" title="statement not covered" >              return (</span>
-                &lt;li key={key} className="mb-1 flex items-center justify-center"&gt;
+                &lt;li key={key} className="dc:mb-1 dc:flex dc:items-center dc:justify-center"&gt;
                   &lt;span 
-                    className={`inline-block mr-2 shrink-0 ${numberSizeClass} font-medium`}
+                    className={`dc:inline-block dc:mr-2 dc:shrink-0 ${numberSizeClass} dc:font-medium`}
                     style={{ color: accentColor }}
                   &gt;
                     {listNumber}.
@@ -1192,12 +1192,12 @@ const MarkdownChart = <span class="cstat-no" title="statement not covered" >Reac
               )
 <span class="cstat-no" title="statement not covered" >            } else if (alignment === 'right') {</span>
 <span class="cstat-no" title="statement not covered" >              return (</span>
-                &lt;li key={key} className="mb-1 flex items-start justify-end"&gt;
+                &lt;li key={key} className="dc:mb-1 dc:flex dc:items-start dc:justify-end"&gt;
                   &lt;span className="text-right"&gt;
                     {node.children.map(<span class="fstat-no" title="function not covered" >(c</span>hild, i) =&gt; <span class="cstat-no" title="statement not covered" >renderNode(child, i))</span>}
                   &lt;/span&gt;
                   &lt;span 
-                    className={`inline-block ml-2 shrink-0 ${numberSizeClass} font-medium`}
+                    className={`dc:inline-block dc:ml-2 dc:shrink-0 ${numberSizeClass} dc:font-medium`}
                     style={{ color: accentColor }}
                   &gt;
                     {listNumber}.
@@ -1206,14 +1206,14 @@ const MarkdownChart = <span class="cstat-no" title="statement not covered" >Reac
               )
             } else {
 <span class="cstat-no" title="statement not covered" >              return (</span>
-                &lt;li key={key} className="mb-1 flex items-start"&gt;
+                &lt;li key={key} className="dc:mb-1 dc:flex dc:items-start"&gt;
                   &lt;span 
-                    className={`inline-block mr-3 shrink-0 ${numberSizeClass} font-medium`}
+                    className={`dc:inline-block dc:mr-3 dc:shrink-0 ${numberSizeClass} dc:font-medium`}
                     style={{ color: accentColor }}
                   &gt;
                     {listNumber}.
                   &lt;/span&gt;
-                  &lt;span className="flex-1"&gt;
+                  &lt;span className="dc:flex-1"&gt;
                     {node.children.map(<span class="fstat-no" title="function not covered" >(c</span>hild, i) =&gt; <span class="cstat-no" title="statement not covered" >renderNode(child, i))</span>}
                   &lt;/span&gt;
                 &lt;/li&gt;
@@ -1224,9 +1224,9 @@ const MarkdownChart = <span class="cstat-no" title="statement not covered" >Reac
           // For unordered lists, use custom bullets with alignment
 <span class="cstat-no" title="statement not covered" >          if (alignment === 'center') {</span>
 <span class="cstat-no" title="statement not covered" >            return (</span>
-              &lt;li key={key} className="mb-1 flex items-center justify-center"&gt;
+              &lt;li key={key} className="dc:mb-1 dc:flex dc:items-center dc:justify-center"&gt;
                 &lt;span 
-                  className="inline-block w-2 h-2 rounded-full mr-2 shrink-0"
+                  className="dc:inline-block dc:w-2 dc:h-2 dc:rounded-full dc:mr-2 dc:shrink-0"
                   style={{ backgroundColor: accentColor }}
                 /&gt;
                 &lt;span className="text-center"&gt;
@@ -1236,24 +1236,24 @@ const MarkdownChart = <span class="cstat-no" title="statement not covered" >Reac
             )
 <span class="cstat-no" title="statement not covered" >          } else if (alignment === 'right') {</span>
 <span class="cstat-no" title="statement not covered" >            return (</span>
-              &lt;li key={key} className="mb-1 flex items-start justify-end"&gt;
+              &lt;li key={key} className="dc:mb-1 dc:flex dc:items-start dc:justify-end"&gt;
                 &lt;span className="text-right"&gt;
                   {node.children.map(<span class="fstat-no" title="function not covered" >(c</span>hild, i) =&gt; <span class="cstat-no" title="statement not covered" >renderNode(child, i))</span>}
                 &lt;/span&gt;
                 &lt;span 
-                  className="inline-block w-2 h-2 rounded-full ml-2 mt-2 shrink-0"
+                  className="dc:inline-block dc:w-2 dc:h-2 dc:rounded-full dc:ml-2 dc:mt-2 dc:shrink-0"
                   style={{ backgroundColor: accentColor }}
                 /&gt;
               &lt;/li&gt;
             )
           } else {
 <span class="cstat-no" title="statement not covered" >            return (</span>
-              &lt;li key={key} className="mb-1 flex items-start"&gt;
+              &lt;li key={key} className="dc:mb-1 dc:flex dc:items-start"&gt;
                 &lt;span 
-                  className="inline-block w-2 h-2 rounded-full mr-3 mt-2 shrink-0"
+                  className="dc:inline-block dc:w-2 dc:h-2 dc:rounded-full dc:mr-3 dc:mt-2 dc:shrink-0"
                   style={{ backgroundColor: accentColor }}
                 /&gt;
-                &lt;span className="flex-1"&gt;
+                &lt;span className="dc:flex-1"&gt;
                   {node.children.map(<span class="fstat-no" title="function not covered" >(c</span>hild, i) =&gt; <span class="cstat-no" title="statement not covered" >renderNode(child, i))</span>}
                 &lt;/span&gt;
               &lt;/li&gt;
@@ -1273,15 +1273,15 @@ const MarkdownChart = <span class="cstat-no" title="statement not covered" >Reac
 <span class="cstat-no" title="statement not covered" >  if (!content.trim()) {</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;div
-        className="flex items-center justify-center w-full h-full"
+        className="dc:flex dc:items-center dc:justify-center dc:w-full dc:h-full"
         style={{
           height: height === "100%" ? "100%" : height,
           minHeight: height === "100%" ? '200px' : undefined
         }}
       &gt;
         &lt;div className="text-center text-dc-text-muted"&gt;
-          &lt;div className="text-sm font-semibold mb-1"&gt;No content&lt;/div&gt;
-          &lt;div className="text-xs text-dc-text-secondary"&gt;Add markdown content in the chart configuration&lt;/div&gt;
+          &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;No content&lt;/div&gt;
+          &lt;div className="dc:text-xs text-dc-text-secondary"&gt;Add markdown content in the chart configuration&lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     )
@@ -1291,7 +1291,7 @@ const MarkdownChart = <span class="cstat-no" title="statement not covered" >Reac
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;div 
-      className={`p-4 w-full h-full overflow-auto ${fontSizeClasses[fontSize as keyof typeof fontSizeClasses]} ${alignmentClasses[alignment as keyof typeof alignmentClasses]}`}
+      className={`dc:p-4 dc:w-full dc:h-full dc:overflow-auto ${fontSizeClasses[fontSize as keyof typeof fontSizeClasses]} ${alignmentClasses[alignment as keyof typeof alignmentClasses]}`}
       style={{ 
         height: height === "100%" ? "100%" : height,
         minHeight: height === "100%" ? '200px' : undefined
@@ -1309,7 +1309,7 @@ export default MarkdownChart</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:40.014Z
+                at 2026-01-28T05:21:04.795Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

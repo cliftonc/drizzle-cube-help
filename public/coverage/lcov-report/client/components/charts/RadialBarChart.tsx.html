@@ -243,7 +243,8 @@
 <a name='L178'></a><a href='#L178'>178</a>
 <a name='L179'></a><a href='#L179'>179</a>
 <a name='L180'></a><a href='#L180'>180</a>
-<a name='L181'></a><a href='#L181'>181</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -359,6 +360,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -450,10 +452,10 @@ const RadialBarChart = <span class="cstat-no" title="statement not covered" >Rea
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (!data || data.length === 0) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="flex items-center justify-center w-full text-dc-text-muted" style={{ height }}&gt;
+        &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full text-dc-text-muted" style={{ height }}&gt;
           &lt;div className="text-center"&gt;
-            &lt;div className="text-sm font-semibold mb-1"&gt;No data available&lt;/div&gt;
-            &lt;div className="text-xs text-dc-text-secondary"&gt;No data points to display in radial bar chart&lt;/div&gt;
+            &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;No data available&lt;/div&gt;
+            &lt;div className="dc:text-xs text-dc-text-secondary"&gt;No data points to display in radial bar chart&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       )
@@ -494,10 +496,10 @@ const RadialBarChart = <span class="cstat-no" title="statement not covered" >Rea
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      if (!valueField) {</span>
 <span class="cstat-no" title="statement not covered" >        return (</span>
-          &lt;div className="flex items-center justify-center w-full text-dc-warning" style={{ height }}&gt;
+          &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full text-dc-warning" style={{ height }}&gt;
             &lt;div className="text-center"&gt;
-              &lt;div className="text-sm font-semibold mb-1"&gt;Configuration Error&lt;/div&gt;
-              &lt;div className="text-xs"&gt;No numeric field found for radial bar chart values&lt;/div&gt;
+              &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;Configuration Error&lt;/div&gt;
+              &lt;div className="dc:text-xs"&gt;No numeric field found for radial bar chart values&lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
         )
@@ -529,10 +531,10 @@ const RadialBarChart = <span class="cstat-no" title="statement not covered" >Rea
     
 <span class="cstat-no" title="statement not covered" >    if (radialData.length === 0) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="flex items-center justify-center w-full text-dc-text-muted" style={{ height }}&gt;
+        &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full text-dc-text-muted" style={{ height }}&gt;
           &lt;div className="text-center"&gt;
-            &lt;div className="text-sm font-semibold mb-1"&gt;No valid data&lt;/div&gt;
-            &lt;div className="text-xs text-dc-text-secondary"&gt;No valid data points for radial bar chart after transformation&lt;/div&gt;
+            &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;No valid data&lt;/div&gt;
+            &lt;div className="dc:text-xs text-dc-text-secondary"&gt;No valid data points for radial bar chart after transformation&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       )
@@ -540,11 +542,12 @@ const RadialBarChart = <span class="cstat-no" title="statement not covered" >Rea
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;ChartContainer height={height}&gt;
-        &lt;RechartsRadialBarChart 
+        &lt;RechartsRadialBarChart
           data={radialData}
           innerRadius="10%"
           outerRadius="80%"
           margin={{ top: 20, right: 30, bottom: 20, left: 30 }}
+          accessibilityLayer={false}
         &gt;
           {safeDisplayConfig.showTooltip &amp;&amp; (
             &lt;ChartTooltip
@@ -592,11 +595,11 @@ const RadialBarChart = <span class="cstat-no" title="statement not covered" >Rea
   } catch (error) {
     // 'RadialBarChart rendering error
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      &lt;div className="flex flex-col items-center justify-center w-full text-dc-error p-4" style={{ height }}&gt;
+      &lt;div className="dc:flex dc:flex-col dc:items-center dc:justify-center dc:w-full text-dc-error dc:p-4" style={{ height }}&gt;
         &lt;div className="text-center"&gt;
-          &lt;div className="text-sm font-semibold mb-1"&gt;Radial Bar Chart Error&lt;/div&gt;
-          &lt;div className="text-xs mb-2"&gt;{error instanceof Error ? error.message : 'Unknown rendering error'}&lt;/div&gt;
-          &lt;div className="text-xs text-dc-text-muted"&gt;Check the data and configuration&lt;/div&gt;
+          &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;Radial Bar Chart Error&lt;/div&gt;
+          &lt;div className="dc:text-xs dc:mb-2"&gt;{error instanceof Error ? error.message : 'Unknown rendering error'}&lt;/div&gt;
+          &lt;div className="dc:text-xs text-dc-text-muted"&gt;Check the data and configuration&lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     )
@@ -610,7 +613,7 @@ export default RadialBarChart</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:40.014Z
+                at 2026-01-28T05:21:04.795Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

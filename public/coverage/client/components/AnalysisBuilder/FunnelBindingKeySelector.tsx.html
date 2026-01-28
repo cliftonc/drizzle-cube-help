@@ -328,9 +328,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -350,7 +350,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -711,31 +711,31 @@ const FunnelBindingKeySelector = memo(function FunnelBindingKeySelector({
 &nbsp;
   return (
     &lt;div className={className}&gt;
-      &lt;div ref={dropdownRef} className="relative"&gt;
+      &lt;div ref={dropdownRef} className="dc:relative"&gt;
         {/* Trigger Button - compact to match select dropdown */}
         &lt;button
         type="button"
         onClick={() =&gt; !disabled &amp;&amp; setIsOpen(!isOpen)}
         disabled={disabled}
         className={`
-          flex items-center justify-between w-full px-2 py-1 text-xs
-          bg-dc-surface border border-dc-border rounded
-          transition-colors
-          ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-dc-primary cursor-pointer'}
-          ${isOpen ? 'border-dc-primary ring-1 ring-dc-primary' : ''}
+          dc:flex dc:items-center dc:justify-between dc:w-full dc:px-2 dc:py-1 dc:text-xs
+          bg-dc-surface dc:border border-dc-border dc:rounded
+          dc:transition-colors
+          ${disabled ? 'dc:opacity-50 dc:cursor-not-allowed' : 'hover:border-dc-primary dc:cursor-pointer'}
+          ${isOpen ? 'border-dc-primary dc:ring-1 ring-dc-primary' : ''}
         `}
       &gt;
-        &lt;span className={`truncate ${hasSelection ? 'text-dc-text' : 'text-dc-text-muted'}`}&gt;
+        &lt;span className={`dc:truncate ${hasSelection ? 'text-dc-text' : 'text-dc-text-muted'}`}&gt;
           {label}
         &lt;/span&gt;
-        &lt;span className="flex items-center gap-1"&gt;
+        &lt;span className="dc:flex dc:items-center dc:gap-1"&gt;
           {hasSelection &amp;&amp; (
             &lt;span
               role="button"
               tabIndex={0}
               onClick={handleClear}
               onKeyDown={(e) =&gt; e.key === 'Enter' &amp;&amp; handleClear(e as unknown as React.MouseEvent)}
-              className="p-0.5 rounded hover:bg-dc-surface-hover text-dc-text-muted hover:text-dc-text"
+              className="dc:p-0.5 dc:rounded hover:bg-dc-surface-hover text-dc-text-muted hover:text-dc-text"
               title="Clear binding key"
             &gt;
               ×
@@ -743,7 +743,7 @@ const FunnelBindingKeySelector = memo(function FunnelBindingKeySelector({
           )}
           {ChevronDownIcon &amp;&amp; (
             &lt;ChevronDownIcon
-              className={`w-4 h-4 text-dc-text-muted transition-transform ${isOpen ? 'rotate-180' : ''}`}
+              className={`dc:w-4 dc:h-4 text-dc-text-muted dc:transition-transform ${isOpen ? 'dc:rotate-180' : ''}`}
             /&gt;
           )}
         &lt;/span&gt;
@@ -751,12 +751,12 @@ const FunnelBindingKeySelector = memo(function FunnelBindingKeySelector({
 &nbsp;
       {/* Dropdown */}
       {isOpen &amp;&amp; (
-        &lt;div className="absolute z-50 mt-1 right-0 w-[280px] bg-dc-surface border border-dc-border rounded-md shadow-lg"&gt;
+        &lt;div className="dc:absolute dc:z-50 dc:mt-1 dc:right-0 dc:w-[280px] bg-dc-surface dc:border border-dc-border dc:rounded-md dc:shadow-lg"&gt;
           {/* Search Input */}
-          &lt;div className="p-2 border-b border-dc-border"&gt;
-            &lt;div className="relative"&gt;
+          &lt;div className="dc:p-2 dc:border-b border-dc-border"&gt;
+            &lt;div className="dc:relative"&gt;
               {SearchIcon &amp;&amp; (
-                &lt;SearchIcon className="absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 text-dc-text-muted" /&gt;
+                &lt;SearchIcon className="dc:absolute dc:left-2 dc:top-1/2 dc:-translate-y-1/2 dc:w-4 dc:h-4 text-dc-text-muted" /&gt;
               )}
               &lt;input
                 ref={searchInputRef}
@@ -764,22 +764,22 @@ const FunnelBindingKeySelector = memo(function FunnelBindingKeySelector({
                 value={searchQuery}
                 onChange={(e) =&gt; setSearchQuery(e.target.value)}
                 placeholder="Search dimensions..."
-                className="w-full pl-8 pr-3 py-1.5 text-sm bg-dc-surface-secondary border border-dc-border rounded text-dc-text placeholder:text-dc-text-muted focus:outline-none focus:ring-1 focus:ring-dc-primary"
+                className="dc:w-full dc:pl-8 dc:pr-3 dc:py-1.5 dc:text-sm bg-dc-surface-secondary dc:border border-dc-border dc:rounded text-dc-text placeholder:text-dc-text-muted dc:focus:outline-none dc:focus:ring-1 focus:ring-dc-primary"
               /&gt;
             &lt;/div&gt;
           &lt;/div&gt;
 &nbsp;
           {/* Dimension List */}
-          &lt;div className="max-h-64 overflow-y-auto p-1"&gt;
+          &lt;div className="dc:max-h-64 dc:overflow-y-auto dc:p-1"&gt;
             {Object.entries(filteredGroups).length === 0 ? (
-              &lt;div className="px-3 py-4 text-sm text-dc-text-muted text-center"&gt;
+              &lt;div className="dc:px-3 dc:py-4 dc:text-sm text-dc-text-muted text-center"&gt;
                 No matching dimensions found
               &lt;/div&gt;
             ) : (
               Object.entries(filteredGroups).map(([cubeName, dims]) =&gt; (
-                &lt;div key={cubeName} className="mb-2 last:mb-0"&gt;
+                &lt;div key={cubeName} className="dc:mb-2 dc:last:mb-0"&gt;
                   {/* Cube Header */}
-                  &lt;div className="px-2 py-1 text-xs font-medium text-dc-text-muted uppercase tracking-wide"&gt;
+                  &lt;div className="dc:px-2 dc:py-1 dc:text-xs dc:font-medium text-dc-text-muted dc:uppercase dc:tracking-wide"&gt;
                     {cubeName}
                   &lt;/div&gt;
                   {/* Dimensions */}
@@ -788,8 +788,8 @@ const FunnelBindingKeySelector = memo(function FunnelBindingKeySelector({
                       key={dim.dimension}
                       onClick={() =&gt; handleSelect(dim.dimension)}
                       className={`
-                        flex items-center justify-between w-full px-3 py-1.5 text-sm
-                        rounded transition-colors
+                        dc:flex dc:items-center dc:justify-between dc:w-full dc:px-3 dc:py-1.5 dc:text-sm
+                        dc:rounded dc:transition-colors
                         ${isSelected(dim.dimension)
                           ? 'bg-dc-primary-bg text-dc-primary'
                           : 'text-dc-text hover:bg-dc-surface-hover'
@@ -798,7 +798,7 @@ const FunnelBindingKeySelector = memo(function FunnelBindingKeySelector({
                     &gt;
                       &lt;span&gt;{dim.label}&lt;/span&gt;
                       {isSelected(dim.dimension) &amp;&amp; CheckIcon &amp;&amp; (
-                        &lt;CheckIcon className="w-4 h-4" /&gt;
+                        &lt;CheckIcon className="dc:w-4 dc:h-4" /&gt;
                       )}
                     &lt;/button&gt;
                   ))}
@@ -808,7 +808,7 @@ const FunnelBindingKeySelector = memo(function FunnelBindingKeySelector({
           &lt;/div&gt;
 &nbsp;
           {/* Help Text */}
-          &lt;div className="px-3 py-2 border-t border-dc-border text-xs text-dc-text-muted"&gt;
+          &lt;div className="dc:px-3 dc:py-2 dc:border-t border-dc-border dc:text-xs text-dc-text-muted"&gt;
             Select a dimension that identifies entities across funnel steps (e.g., user ID, order ID)
           &lt;/div&gt;
         &lt;/div&gt;
@@ -826,7 +826,7 @@ export default FunnelBindingKeySelector
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:39.926Z
+                at 2026-01-28T05:21:04.679Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

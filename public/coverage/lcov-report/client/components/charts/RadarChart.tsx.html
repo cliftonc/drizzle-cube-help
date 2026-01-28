@@ -487,10 +487,10 @@ const RadarChart = <span class="cstat-no" title="statement not covered" >React.m
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (!data || data.length === 0) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="flex items-center justify-center w-full text-dc-text-muted" style={{ height }}&gt;
+        &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full text-dc-text-muted" style={{ height }}&gt;
           &lt;div className="text-center"&gt;
-            &lt;div className="text-sm font-semibold mb-1"&gt;No data available&lt;/div&gt;
-            &lt;div className="text-xs text-dc-text-secondary"&gt;No data points to display in radar chart&lt;/div&gt;
+            &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;No data available&lt;/div&gt;
+            &lt;div className="dc:text-xs text-dc-text-secondary"&gt;No data points to display in radar chart&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       )
@@ -536,10 +536,10 @@ const RadarChart = <span class="cstat-no" title="statement not covered" >React.m
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      if (valueFields.length === 0) {</span>
 <span class="cstat-no" title="statement not covered" >        return (</span>
-          &lt;div className="flex items-center justify-center w-full text-dc-warning" style={{ height }}&gt;
+          &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full text-dc-warning" style={{ height }}&gt;
             &lt;div className="text-center"&gt;
-              &lt;div className="text-sm font-semibold mb-1"&gt;Configuration Error&lt;/div&gt;
-              &lt;div className="text-xs"&gt;No numeric fields found for radar chart values&lt;/div&gt;
+              &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;Configuration Error&lt;/div&gt;
+              &lt;div className="dc:text-xs"&gt;No numeric fields found for radar chart values&lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
         )
@@ -580,10 +580,10 @@ const RadarChart = <span class="cstat-no" title="statement not covered" >React.m
     // Validate transformed data
 <span class="cstat-no" title="statement not covered" >    if (!radarData || radarData.length === 0) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="flex items-center justify-center w-full text-dc-text-muted" style={{ height }}&gt;
+        &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full text-dc-text-muted" style={{ height }}&gt;
           &lt;div className="text-center"&gt;
-            &lt;div className="text-sm font-semibold mb-1"&gt;No valid data&lt;/div&gt;
-            &lt;div className="text-xs text-dc-text-secondary"&gt;No valid data points for radar chart after transformation&lt;/div&gt;
+            &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;No valid data&lt;/div&gt;
+            &lt;div className="dc:text-xs text-dc-text-secondary"&gt;No valid data points for radar chart after transformation&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       )
@@ -591,7 +591,7 @@ const RadarChart = <span class="cstat-no" title="statement not covered" >React.m
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;ChartContainer height={height}&gt;
-        &lt;RechartsRadarChart data={radarData} margin={{ top: 20, right: 80, bottom: 20, left: 80 }}&gt;
+        &lt;RechartsRadarChart data={radarData} margin={{ top: 20, right: 80, bottom: 20, left: 80 }} accessibilityLayer={false}&gt;
           {safeDisplayConfig.showGrid &amp;&amp; (
             &lt;PolarGrid /&gt;
           )}
@@ -646,11 +646,11 @@ const RadarChart = <span class="cstat-no" title="statement not covered" >React.m
   } catch (error) {
     // 'RadarChart rendering error
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      &lt;div className="flex flex-col items-center justify-center w-full text-dc-error p-4" style={{ height }}&gt;
+      &lt;div className="dc:flex dc:flex-col dc:items-center dc:justify-center dc:w-full text-dc-error dc:p-4" style={{ height }}&gt;
         &lt;div className="text-center"&gt;
-          &lt;div className="text-sm font-semibold mb-1"&gt;Radar Chart Error&lt;/div&gt;
-          &lt;div className="text-xs mb-2"&gt;{error instanceof Error ? error.message : 'Unknown rendering error'}&lt;/div&gt;
-          &lt;div className="text-xs text-dc-text-muted"&gt;Check the data and configuration&lt;/div&gt;
+          &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;Radar Chart Error&lt;/div&gt;
+          &lt;div className="dc:text-xs dc:mb-2"&gt;{error instanceof Error ? error.message : 'Unknown rendering error'}&lt;/div&gt;
+          &lt;div className="dc:text-xs text-dc-text-muted"&gt;Check the data and configuration&lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     )
@@ -664,7 +664,7 @@ export default RadarChart</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:40.014Z
+                at 2026-01-28T05:21:04.795Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/142</span>
+                <span class='fraction'>0/143</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/172</span>
+                <span class='fraction'>0/176</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/47</span>
+                <span class='fraction'>0/46</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/131</span>
+                <span class='fraction'>0/133</span>
             </div>
         
             
@@ -717,15 +717,19 @@
 <a name='L652'></a><a href='#L652'>652</a>
 <a name='L653'></a><a href='#L653'>653</a>
 <a name='L654'></a><a href='#L654'>654</a>
-<a name='L655'></a><a href='#L655'>655</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L655'></a><a href='#L655'>655</a>
+<a name='L656'></a><a href='#L656'>656</a>
+<a name='L657'></a><a href='#L657'>657</a>
+<a name='L658'></a><a href='#L658'>658</a>
+<a name='L659'></a><a href='#L659'>659</a>
+<a name='L660'></a><a href='#L660'>660</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -763,9 +767,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -931,11 +932,16 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -944,6 +950,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1352,6 +1361,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1371,15 +1381,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useMemo, useEffect, useState, useCallback } from 'react'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useState, useCallback } from 'react'
 import { getIcon } from '../icons'
 import AxisDropZone from './AxisDropZone'
+import { useChartConfig } from '../charts/lazyChartConfigRegistry'
 &nbsp;
 const <span class="cstat-no" title="statement not covered" >MeasureIcon = getIcon('measure')</span>
 const <span class="cstat-no" title="statement not covered" >DimensionIcon = getIcon('dimension')</span>
 const <span class="cstat-no" title="statement not covered" >TimeDimensionIcon = getIcon('timeDimension')</span>
-import { chartConfigRegistry } from '../charts/chartConfigRegistry'
-import { getChartConfig } from '../charts/chartConfigs'
 import type { ChartType, ChartAxisConfig, ChartDisplayConfig, ColorPalette } from '../types'
 &nbsp;
 interface ChartConfigPanelProps {
@@ -1414,10 +1423,7 @@ export default function <span class="fstat-no" title="function not covered" >Cha
   } | null&gt;(null)
   
   // Get configuration for current chart type
-  const <span class="cstat-no" title="statement not covered" >chartTypeConfig = useMemo(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; </span></span></span>
-    getChartConfig(chartType, chartConfigRegistry),
-    [chartType]
-  )
+  const { config: chartTypeConfig, loaded: chartConfigLoaded <span class="cstat-no" title="statement not covered" >} = useChartConfig(chartType)</span>
   
   // Check if this chart type skips queries
   const shouldSkipQuery = <span class="cstat-no" title="statement not covered" >chartTypeConfig.skipQuery === true</span>
@@ -1431,7 +1437,7 @@ export default function <span class="fstat-no" title="function not covered" >Cha
 &nbsp;
   // Clean up chart config when available fields change
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >    if (!availableFields) <span class="cstat-no" title="statement not covered" >return</span></span>
+<span class="cstat-no" title="statement not covered" >    if (!availableFields || !chartConfigLoaded) <span class="cstat-no" title="statement not covered" >return</span></span>
 &nbsp;
     const allAvailableFields = <span class="cstat-no" title="statement not covered" >[</span>
       ...availableFields.dimensions,
@@ -1465,7 +1471,7 @@ export default function <span class="fstat-no" title="function not covered" >Cha
 <span class="cstat-no" title="statement not covered" >    if (hasChanges) {</span>
 <span class="cstat-no" title="statement not covered" >      onChartConfigChange(newConfig)</span>
     }
-  }, [availableFields, chartConfig, chartTypeConfig.dropZones, onChartConfigChange, getFieldsForDropZone])
+  }, [availableFields, chartConfig, chartTypeConfig.dropZones, onChartConfigChange, getFieldsForDropZone, chartConfigLoaded])
 &nbsp;
   // Helper to determine field type and styling
   const getFieldType = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(f</span>ield: string): 'dimension' | 'timeDimension' | 'measure' =&gt; {</span>
@@ -1597,6 +1603,14 @@ export default function <span class="fstat-no" title="function not covered" >Cha
     }
   }
 &nbsp;
+<span class="cstat-no" title="statement not covered" >  if (!chartConfigLoaded) {</span>
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;div className="text-center text-dc-text-muted dc:text-sm dc:py-4"&gt;
+        Loading chart configuration...
+      &lt;/div&gt;
+    )
+  }
+&nbsp;
   // Get unassigned fields
   const getUnassignedFields = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
 <span class="cstat-no" title="statement not covered" >    if (!availableFields) <span class="cstat-no" title="statement not covered" >return { dimensions: [], timeDimensions: [], measures: [] }</span></span>
@@ -1626,20 +1640,20 @@ export default function <span class="fstat-no" title="function not covered" >Cha
     &lt;div&gt;
       {/* Available Fields - Hidden for skipQuery charts */}
       {!shouldSkipQuery &amp;&amp; availableFields &amp;&amp; (
-        &lt;div className="mb-4"&gt;
-          &lt;h4 className="text-xs font-semibold text-dc-text-secondary mb-2"&gt;Available Fields&lt;/h4&gt;
-          &lt;div className="border border-dc-border rounded-lg p-2 bg-dc-surface-secondary"&gt;
+        &lt;div className="dc:mb-4"&gt;
+          &lt;h4 className="dc:text-xs dc:font-semibold text-dc-text-secondary dc:mb-2"&gt;Available Fields&lt;/h4&gt;
+          &lt;div className="dc:border border-dc-border dc:rounded-lg dc:p-2 bg-dc-surface-secondary"&gt;
             {(unassignedFields.dimensions.length &gt; 0 ||
               unassignedFields.timeDimensions.length &gt; 0 ||
               unassignedFields.measures.length &gt; 0) ? (
-              &lt;div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2 gap-y-4 sm:gap-y-2"&gt;
+              &lt;div className="dc:grid dc:grid-cols-1 dc:sm:grid-cols-3 dc:gap-2 dc:sm:gap-2 dc:gap-y-4 dc:sm:gap-y-2"&gt;
                 {/* Dimensions Column */}
-                &lt;div className="pb-2 sm:pb-0"&gt;
-                  &lt;div className="text-xs text-dc-text-secondary mb-2 sm:mb-1 flex items-center"&gt;
-                    &lt;DimensionIcon className="w-3 h-3 mr-1 text-dc-text-muted" /&gt;
+                &lt;div className="dc:pb-2 dc:sm:pb-0"&gt;
+                  &lt;div className="dc:text-xs text-dc-text-secondary dc:mb-2 dc:sm:mb-1 dc:flex dc:items-center"&gt;
+                    &lt;DimensionIcon className="dc:w-3 dc:h-3 dc:mr-1 text-dc-text-muted" /&gt;
                     Dimensions
                   &lt;/div&gt;
-                  &lt;div className="space-y-1"&gt;
+                  &lt;div className="dc:space-y-1"&gt;
                     {unassignedFields.dimensions.map(<span class="fstat-no" title="function not covered" >dim =&gt; {</span>
                       const isBeingDragged = <span class="cstat-no" title="statement not covered" >draggedItem &amp;&amp; draggedItem.field === dim &amp;&amp; draggedItem.fromAxis === 'available'</span>
 <span class="cstat-no" title="statement not covered" >                      return (</span>
@@ -1648,7 +1662,7 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                           draggable
                           onDragStart={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >handleDragStart(e, dim, 'available')}</span>
                           onDragEnd={handleDragEnd}
-                          className={`bg-dc-dimension text-dc-dimension border border-dc-dimension hover:opacity-80 rounded-sm text-xs cursor-move px-3 py-2 sm:px-2 sm:py-1 truncate ${isBeingDragged ? 'opacity-50 cursor-grabbing' : ''}`}
+                          className={`bg-dc-dimension text-dc-dimension dc:border border-dc-dimension dc:hover:opacity-80 dc:rounded-sm dc:text-xs dc:cursor-move dc:px-3 dc:py-2 dc:sm:px-2 dc:sm:py-1 dc:truncate ${isBeingDragged ? 'dc:opacity-50 dc:cursor-grabbing' : ''}`}
                           title={dim}
                         &gt;
                           {dim}
@@ -1656,18 +1670,18 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                       )
                     })}
                     {unassignedFields.dimensions.length === 0 &amp;&amp; (
-                      &lt;div className="text-xs text-dc-text-muted italic"&gt;None&lt;/div&gt;
+                      &lt;div className="dc:text-xs text-dc-text-muted dc:italic"&gt;None&lt;/div&gt;
                     )}
                   &lt;/div&gt;
                 &lt;/div&gt;
                 
                 {/* Time Dimensions Column */}
-                &lt;div className="pb-2 sm:pb-0"&gt;
-                  &lt;div className="text-xs text-dc-text-secondary mb-2 sm:mb-1 flex items-center"&gt;
-                    &lt;TimeDimensionIcon className="w-3 h-3 mr-1 text-dc-text-muted" /&gt;
+                &lt;div className="dc:pb-2 dc:sm:pb-0"&gt;
+                  &lt;div className="dc:text-xs text-dc-text-secondary dc:mb-2 dc:sm:mb-1 dc:flex dc:items-center"&gt;
+                    &lt;TimeDimensionIcon className="dc:w-3 dc:h-3 dc:mr-1 text-dc-text-muted" /&gt;
                     Time Dimensions
                   &lt;/div&gt;
-                  &lt;div className="space-y-1"&gt;
+                  &lt;div className="dc:space-y-1"&gt;
                     {unassignedFields.timeDimensions.map(<span class="fstat-no" title="function not covered" >dim =&gt; {</span>
                       const isBeingDragged = <span class="cstat-no" title="statement not covered" >draggedItem &amp;&amp; draggedItem.field === dim &amp;&amp; draggedItem.fromAxis === 'available'</span>
 <span class="cstat-no" title="statement not covered" >                      return (</span>
@@ -1676,7 +1690,7 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                           draggable
                           onDragStart={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >handleDragStart(e, dim, 'available')}</span>
                           onDragEnd={handleDragEnd}
-                          className={`bg-dc-time-dimension text-dc-time-dimension border border-dc-time-dimension hover:opacity-80 rounded-sm text-xs cursor-move px-3 py-2 sm:px-2 sm:py-1 truncate ${isBeingDragged ? 'opacity-50 cursor-grabbing' : ''}`}
+                          className={`bg-dc-time-dimension text-dc-time-dimension dc:border border-dc-time-dimension dc:hover:opacity-80 dc:rounded-sm dc:text-xs dc:cursor-move dc:px-3 dc:py-2 dc:sm:px-2 dc:sm:py-1 dc:truncate ${isBeingDragged ? 'dc:opacity-50 dc:cursor-grabbing' : ''}`}
                           title={dim}
                         &gt;
                           {dim}
@@ -1684,18 +1698,18 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                       )
                     })}
                     {unassignedFields.timeDimensions.length === 0 &amp;&amp; (
-                      &lt;div className="text-xs text-dc-text-muted italic"&gt;None&lt;/div&gt;
+                      &lt;div className="dc:text-xs text-dc-text-muted dc:italic"&gt;None&lt;/div&gt;
                     )}
                   &lt;/div&gt;
                 &lt;/div&gt;
                 
                 {/* Measures Column */}
-                &lt;div className="pb-2 sm:pb-0"&gt;
-                  &lt;div className="text-xs text-dc-text-secondary mb-2 sm:mb-1 flex items-center"&gt;
-                    &lt;MeasureIcon className="w-3 h-3 mr-1 text-dc-text-muted" /&gt;
+                &lt;div className="dc:pb-2 dc:sm:pb-0"&gt;
+                  &lt;div className="dc:text-xs text-dc-text-secondary dc:mb-2 dc:sm:mb-1 dc:flex dc:items-center"&gt;
+                    &lt;MeasureIcon className="dc:w-3 dc:h-3 dc:mr-1 text-dc-text-muted" /&gt;
                     Measures
                   &lt;/div&gt;
-                  &lt;div className="space-y-1"&gt;
+                  &lt;div className="dc:space-y-1"&gt;
                     {unassignedFields.measures.map(<span class="fstat-no" title="function not covered" >measure =&gt; {</span>
                       const isBeingDragged = <span class="cstat-no" title="statement not covered" >draggedItem &amp;&amp; draggedItem.field === measure &amp;&amp; draggedItem.fromAxis === 'available'</span>
 <span class="cstat-no" title="statement not covered" >                      return (</span>
@@ -1704,7 +1718,7 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                           draggable
                           onDragStart={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >handleDragStart(e, measure, 'available')}</span>
                           onDragEnd={handleDragEnd}
-                          className={`bg-dc-measure text-dc-measure border border-dc-measure hover:opacity-80 rounded-sm text-xs cursor-move px-3 py-2 sm:px-2 sm:py-1 truncate ${isBeingDragged ? 'opacity-50 cursor-grabbing' : ''}`}
+                          className={`bg-dc-measure text-dc-measure dc:border border-dc-measure dc:hover:opacity-80 dc:rounded-sm dc:text-xs dc:cursor-move dc:px-3 dc:py-2 dc:sm:px-2 dc:sm:py-1 dc:truncate ${isBeingDragged ? 'dc:opacity-50 dc:cursor-grabbing' : ''}`}
                           title={measure}
                         &gt;
                           {measure}
@@ -1712,13 +1726,13 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                       )
                     })}
                     {unassignedFields.measures.length === 0 &amp;&amp; (
-                      &lt;div className="text-xs text-dc-text-muted italic"&gt;None&lt;/div&gt;
+                      &lt;div className="dc:text-xs text-dc-text-muted dc:italic"&gt;None&lt;/div&gt;
                     )}
                   &lt;/div&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
             ) : (
-              &lt;div className="text-xs text-dc-text-muted text-center py-2"&gt;
+              &lt;div className="dc:text-xs text-dc-text-muted text-center dc:py-2"&gt;
                 All fields have been assigned
               &lt;/div&gt;
             )}
@@ -1728,9 +1742,9 @@ export default function <span class="fstat-no" title="function not covered" >Cha
 &nbsp;
       {/* Chart Axis Configuration - Dynamic Drop Zones, Hidden for skipQuery charts */}
       {!shouldSkipQuery &amp;&amp; (
-        &lt;div className="mb-4"&gt;
-        &lt;h4 className="text-xs font-semibold text-dc-text-secondary mb-2"&gt;Chart Configuration&lt;/h4&gt;
-        &lt;div className="space-y-1"&gt;
+        &lt;div className="dc:mb-4"&gt;
+        &lt;h4 className="dc:text-xs dc:font-semibold text-dc-text-secondary dc:mb-2"&gt;Chart Configuration&lt;/h4&gt;
+        &lt;div className="dc:space-y-1"&gt;
           {chartTypeConfig.dropZones.map(<span class="fstat-no" title="function not covered" >dropZone =&gt; (</span>
 <span class="cstat-no" title="statement not covered" >            &lt;AxisDropZone</span>
               key={dropZone.key}
@@ -1753,12 +1767,12 @@ export default function <span class="fstat-no" title="function not covered" >Cha
       {/* Display Options */}
       {((chartTypeConfig.displayOptions &amp;&amp; chartTypeConfig.displayOptions.length &gt; 0) ||
         (chartTypeConfig.displayOptionsConfig &amp;&amp; chartTypeConfig.displayOptionsConfig.length &gt; 0)) &amp;&amp; (
-        &lt;div className="mb-4"&gt;
-          &lt;h4 className="text-xs font-semibold text-dc-text-secondary mb-2"&gt;Display Options&lt;/h4&gt;
-          &lt;div className="space-y-2"&gt;
+        &lt;div className="dc:mb-4"&gt;
+          &lt;h4 className="dc:text-xs dc:font-semibold text-dc-text-secondary dc:mb-2"&gt;Display Options&lt;/h4&gt;
+          &lt;div className="dc:space-y-2"&gt;
             {/* Backward compatibility: Simple boolean display options */}
             {chartTypeConfig.displayOptions?.includes('showLegend') &amp;&amp; (
-              &lt;label className="flex items-center space-x-2"&gt;
+              &lt;label className="dc:flex dc:items-center dc:space-x-2"&gt;
                 &lt;input
                   type="checkbox"
                   checked={displayConfig.showLegend ?? true}
@@ -1766,15 +1780,15 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                     ...displayConfig,
                     showLegend: e.target.checked
                   })}
-                  className="rounded border-dc-border focus:ring-dc-accent"
+                  className="dc:rounded border-dc-border focus:ring-dc-accent"
                   style={{ color: 'var(--dc-primary)' }}
                 /&gt;
-                &lt;span className="text-sm text-dc-text"&gt;Show Legend&lt;/span&gt;
+                &lt;span className="dc:text-sm text-dc-text"&gt;Show Legend&lt;/span&gt;
               &lt;/label&gt;
             )}
 &nbsp;
             {chartTypeConfig.displayOptions?.includes('showGrid') &amp;&amp; (
-              &lt;label className="flex items-center space-x-2"&gt;
+              &lt;label className="dc:flex dc:items-center dc:space-x-2"&gt;
                 &lt;input
                   type="checkbox"
                   checked={displayConfig.showGrid ?? true}
@@ -1782,15 +1796,15 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                     ...displayConfig,
                     showGrid: e.target.checked
                   })}
-                  className="rounded border-dc-border focus:ring-dc-accent"
+                  className="dc:rounded border-dc-border focus:ring-dc-accent"
                   style={{ color: 'var(--dc-primary)' }}
                 /&gt;
-                &lt;span className="text-sm text-dc-text"&gt;Show Grid&lt;/span&gt;
+                &lt;span className="dc:text-sm text-dc-text"&gt;Show Grid&lt;/span&gt;
               &lt;/label&gt;
             )}
 &nbsp;
             {chartTypeConfig.displayOptions?.includes('showTooltip') &amp;&amp; (
-              &lt;label className="flex items-center space-x-2"&gt;
+              &lt;label className="dc:flex dc:items-center dc:space-x-2"&gt;
                 &lt;input
                   type="checkbox"
                   checked={displayConfig.showTooltip ?? true}
@@ -1798,15 +1812,15 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                     ...displayConfig,
                     showTooltip: e.target.checked
                   })}
-                  className="rounded border-dc-border focus:ring-dc-accent"
+                  className="dc:rounded border-dc-border focus:ring-dc-accent"
                   style={{ color: 'var(--dc-primary)' }}
                 /&gt;
-                &lt;span className="text-sm text-dc-text"&gt;Show Tooltip&lt;/span&gt;
+                &lt;span className="dc:text-sm text-dc-text"&gt;Show Tooltip&lt;/span&gt;
               &lt;/label&gt;
             )}
 &nbsp;
             {chartTypeConfig.displayOptions?.includes('stacked') &amp;&amp; (
-              &lt;label className="flex items-center space-x-2"&gt;
+              &lt;label className="dc:flex dc:items-center dc:space-x-2"&gt;
                 &lt;input
                   type="checkbox"
                   checked={displayConfig.stacked ?? false}
@@ -1814,15 +1828,15 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                     ...displayConfig,
                     stacked: e.target.checked
                   })}
-                  className="rounded border-dc-border focus:ring-dc-accent"
+                  className="dc:rounded border-dc-border focus:ring-dc-accent"
                   style={{ color: 'var(--dc-primary)' }}
                 /&gt;
-                &lt;span className="text-sm text-dc-text"&gt;Stacked&lt;/span&gt;
+                &lt;span className="dc:text-sm text-dc-text"&gt;Stacked&lt;/span&gt;
               &lt;/label&gt;
             )}
 &nbsp;
             {chartTypeConfig.displayOptions?.includes('hideHeader') &amp;&amp; (
-              &lt;label className="flex items-center space-x-2"&gt;
+              &lt;label className="dc:flex dc:items-center dc:space-x-2"&gt;
                 &lt;input
                   type="checkbox"
                   checked={displayConfig.hideHeader ?? false}
@@ -1830,18 +1844,18 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                     ...displayConfig,
                     hideHeader: e.target.checked
                   })}
-                  className="rounded border-dc-border focus:ring-dc-accent"
+                  className="dc:rounded border-dc-border focus:ring-dc-accent"
                   style={{ color: 'var(--dc-primary)' }}
                 /&gt;
-                &lt;span className="text-sm text-dc-text"&gt;Hide Header&lt;/span&gt;
+                &lt;span className="dc:text-sm text-dc-text"&gt;Hide Header&lt;/span&gt;
               &lt;/label&gt;
             )}
 &nbsp;
             {/* New structured display options */}
             {chartTypeConfig.displayOptionsConfig?.map(<span class="fstat-no" title="function not covered" >(o</span>ption) =&gt; (
-<span class="cstat-no" title="statement not covered" >              &lt;div key={option.key} className="space-y-1"&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;div key={option.key} className="dc:space-y-1"&gt;</span>
                 {option.type === 'boolean' &amp;&amp; (
-                  &lt;label className="flex items-center space-x-2"&gt;
+                  &lt;label className="dc:flex dc:items-center dc:space-x-2"&gt;
                     &lt;input
                       type="checkbox"
                       checked={displayConfig[option.key as keyof ChartDisplayConfig] ?? option.defaultValue ?? false}
@@ -1849,19 +1863,19 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                         ...displayConfig,
                         [option.key]: e.target.checked
                       })}
-                      className="rounded border-dc-border focus:ring-dc-accent"
+                      className="dc:rounded border-dc-border focus:ring-dc-accent"
                       style={{ color: 'var(--dc-primary)' }}
                     /&gt;
-                    &lt;span className="text-sm text-dc-text"&gt;{option.label}&lt;/span&gt;
+                    &lt;span className="dc:text-sm text-dc-text"&gt;{option.label}&lt;/span&gt;
                   &lt;/label&gt;
                 )}
 &nbsp;
                 {option.type === 'string' &amp;&amp; (
-                  &lt;div className="space-y-1"&gt;
-                    &lt;label className="text-sm text-dc-text-secondary"&gt;
+                  &lt;div className="dc:space-y-1"&gt;
+                    &lt;label className="dc:text-sm text-dc-text-secondary"&gt;
                       {option.label}
                       {option.key === 'content' &amp;&amp; (
-                        &lt;span className="text-xs text-dc-text-muted ml-1"&gt;(only headers, lists and links)&lt;/span&gt;
+                        &lt;span className="dc:text-xs text-dc-text-muted dc:ml-1"&gt;(only headers, lists and links)&lt;/span&gt;
                       )}
                     &lt;/label&gt;
                     {option.key === 'content' ? (
@@ -1873,7 +1887,7 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                         })}
                         placeholder={option.placeholder}
                         rows={8}
-                        className="w-full px-2 py-1 text-sm border border-dc-border rounded-sm focus:ring-dc-accent focus:border-dc-accent font-mono resize-y bg-dc-surface text-dc-text"
+                        className="dc:w-full dc:px-2 dc:py-1 dc:text-sm dc:border border-dc-border dc:rounded-sm focus:ring-dc-accent focus:border-dc-accent font-mono dc:resize-y bg-dc-surface text-dc-text"
                       /&gt;
                     ) : (
                       &lt;input
@@ -1884,19 +1898,19 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                           [option.key]: e.target.value
                         })}
                         placeholder={option.placeholder}
-                        className="w-full px-2 py-1 text-sm border border-dc-border rounded-sm focus:ring-dc-accent focus:border-dc-accent bg-dc-surface text-dc-text"
+                        className="dc:w-full dc:px-2 dc:py-1 dc:text-sm dc:border border-dc-border dc:rounded-sm focus:ring-dc-accent focus:border-dc-accent bg-dc-surface text-dc-text"
                       /&gt;
                     )}
                     {option.description &amp;&amp; (
-                      &lt;p className="text-xs text-dc-text-muted"&gt;{option.description}&lt;/p&gt;
+                      &lt;p className="dc:text-xs text-dc-text-muted"&gt;{option.description}&lt;/p&gt;
                     )}
                   &lt;/div&gt;
                 )}
 &nbsp;
                 {option.type === 'paletteColor' &amp;&amp; (
-                  &lt;div className="space-y-1"&gt;
-                    &lt;label className="text-sm text-dc-text-secondary"&gt;{option.label}&lt;/label&gt;
-                    &lt;div className="flex flex-wrap gap-2"&gt;
+                  &lt;div className="dc:space-y-1"&gt;
+                    &lt;label className="dc:text-sm text-dc-text-secondary"&gt;{option.label}&lt;/label&gt;
+                    &lt;div className="dc:flex dc:flex-wrap dc:gap-2"&gt;
                       {colorPalette?.colors.map(<span class="fstat-no" title="function not covered" >(c</span>olor, index) =&gt; {
                         const <span class="cstat-no" title="statement not covered" >isSelected = (displayConfig[option.key as keyof ChartDisplayConfig] ?? option.defaultValue ?? 0) === index</span>
 <span class="cstat-no" title="statement not covered" >                        return (</span>
@@ -1907,9 +1921,9 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                               ...displayConfig,
                               [option.key]: index
                             })}
-                            className={`w-8 h-8 rounded border-2 transition-all duration-200 hover:scale-110 focus:outline-hidden focus:ring-2 focus:ring-dc-accent focus:ring-offset-1 ${
+                            className={`dc:w-8 dc:h-8 dc:rounded dc:border-2 dc:transition-all dc:duration-200 dc:hover:scale-110 focus:outline-hidden dc:focus:ring-2 focus:ring-dc-accent dc:focus:ring-offset-1 ${
                               isSelected
-                                ? 'ring-2 ring-offset-1 scale-110'
+                                ? 'dc:ring-2 dc:ring-offset-1 dc:scale-110'
                                 : 'hover:border-dc-text-muted'
                             }`}
                             style={{
@@ -1928,7 +1942,7 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                             ...displayConfig,
                             [option.key]: 0
                           })}
-                          className="w-8 h-8 rounded-sm border-2 ring-2 ring-offset-1"
+                          className="dc:w-8 dc:h-8 dc:rounded-sm dc:border-2 dc:ring-2 dc:ring-offset-1"
                           style={{
                             backgroundColor: '#8884d8',
                             borderColor: 'var(--dc-primary)',
@@ -1939,14 +1953,14 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                       ]}
                     &lt;/div&gt;
                     {option.description &amp;&amp; (
-                      &lt;p className="text-xs text-dc-text-muted"&gt;{option.description}&lt;/p&gt;
+                      &lt;p className="dc:text-xs text-dc-text-muted"&gt;{option.description}&lt;/p&gt;
                     )}
                   &lt;/div&gt;
                 )}
 &nbsp;
                 {option.type === 'number' &amp;&amp; (
-                  &lt;div className="space-y-1"&gt;
-                    &lt;label className="text-sm text-dc-text-secondary"&gt;{option.label}&lt;/label&gt;
+                  &lt;div className="dc:space-y-1"&gt;
+                    &lt;label className="dc:text-sm text-dc-text-secondary"&gt;{option.label}&lt;/label&gt;
                     &lt;input
                       type="number"
                       value={displayConfig[option.key as keyof ChartDisplayConfig] ?? option.defaultValue ?? 0}
@@ -1958,24 +1972,24 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                       min={option.min}
                       max={option.max}
                       step={option.step}
-                      className="w-full px-2 py-1 text-sm border border-dc-border rounded-sm focus:ring-dc-accent focus:border-dc-accent bg-dc-surface text-dc-text"
+                      className="dc:w-full dc:px-2 dc:py-1 dc:text-sm dc:border border-dc-border dc:rounded-sm focus:ring-dc-accent focus:border-dc-accent bg-dc-surface text-dc-text"
                     /&gt;
                     {option.description &amp;&amp; (
-                      &lt;p className="text-xs text-dc-text-muted"&gt;{option.description}&lt;/p&gt;
+                      &lt;p className="dc:text-xs text-dc-text-muted"&gt;{option.description}&lt;/p&gt;
                     )}
                   &lt;/div&gt;
                 )}
 &nbsp;
                 {option.type === 'select' &amp;&amp; (
-                  &lt;div className="space-y-1"&gt;
-                    &lt;label className="text-sm text-dc-text-secondary"&gt;{option.label}&lt;/label&gt;
+                  &lt;div className="dc:space-y-1"&gt;
+                    &lt;label className="dc:text-sm text-dc-text-secondary"&gt;{option.label}&lt;/label&gt;
                     &lt;select
                       value={displayConfig[option.key as keyof ChartDisplayConfig] ?? option.defaultValue ?? ''}
                       onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >onDisplayConfigChange({</span>
                         ...displayConfig,
                         [option.key]: e.target.value
                       })}
-                      className="w-full px-2 py-1 text-sm border border-dc-border rounded-sm focus:ring-dc-accent focus:border-dc-accent bg-dc-surface text-dc-text"
+                      className="dc:w-full dc:px-2 dc:py-1 dc:text-sm dc:border border-dc-border dc:rounded-sm focus:ring-dc-accent focus:border-dc-accent bg-dc-surface text-dc-text"
                     &gt;
                       {option.options?.map(<span class="fstat-no" title="function not covered" >(o</span>pt) =&gt; (
 <span class="cstat-no" title="statement not covered" >                        &lt;option key={opt.value} value={opt.value}&gt;</span>
@@ -1984,15 +1998,15 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                       ))}
                     &lt;/select&gt;
                     {option.description &amp;&amp; (
-                      &lt;p className="text-xs text-dc-text-muted"&gt;{option.description}&lt;/p&gt;
+                      &lt;p className="dc:text-xs text-dc-text-muted"&gt;{option.description}&lt;/p&gt;
                     )}
                   &lt;/div&gt;
                 )}
 &nbsp;
                 {option.type === 'color' &amp;&amp; (
-                  &lt;div className="space-y-1"&gt;
-                    &lt;label className="text-sm text-dc-text-secondary"&gt;{option.label}&lt;/label&gt;
-                    &lt;div className="flex items-center space-x-2"&gt;
+                  &lt;div className="dc:space-y-1"&gt;
+                    &lt;label className="dc:text-sm text-dc-text-secondary"&gt;{option.label}&lt;/label&gt;
+                    &lt;div className="dc:flex dc:items-center dc:space-x-2"&gt;
                       &lt;input
                         type="color"
                         value={displayConfig[option.key as keyof ChartDisplayConfig] ?? option.defaultValue ?? '#8884d8'}
@@ -2000,7 +2014,7 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                           ...displayConfig,
                           [option.key]: e.target.value
                         })}
-                        className="w-12 h-8 border border-dc-border rounded-sm cursor-pointer"
+                        className="dc:w-12 dc:h-8 dc:border border-dc-border dc:rounded-sm dc:cursor-pointer"
                       /&gt;
                       &lt;input
                         type="text"
@@ -2010,11 +2024,11 @@ export default function <span class="fstat-no" title="function not covered" >Cha
                           [option.key]: e.target.value
                         })}
                         placeholder={option.placeholder || '#8884d8'}
-                        className="flex-1 px-2 py-1 text-sm border border-dc-border rounded-sm focus:ring-dc-accent focus:border-dc-accent bg-dc-surface text-dc-text"
+                        className="dc:flex-1 dc:px-2 dc:py-1 dc:text-sm dc:border border-dc-border dc:rounded-sm focus:ring-dc-accent focus:border-dc-accent bg-dc-surface text-dc-text"
                       /&gt;
                     &lt;/div&gt;
                     {option.description &amp;&amp; (
-                      &lt;p className="text-xs text-dc-text-muted"&gt;{option.description}&lt;/p&gt;
+                      &lt;p className="dc:text-xs text-dc-text-muted"&gt;{option.description}&lt;/p&gt;
                     )}
                   &lt;/div&gt;
                 )}
@@ -2025,14 +2039,15 @@ export default function <span class="fstat-no" title="function not covered" >Cha
       )}
     &lt;/div&gt;
   )
-}</pre></td></tr></table></pre>
+}
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:40.014Z
+                at 2026-01-28T05:21:04.795Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">74.37% </span>
+                <span class="strong">74.76% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>238/320</span>
+                <span class='fraction'>243/325</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.71% </span>
+                <span class="strong">61.32% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>153/252</span>
+                <span class='fraction'>157/256</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">74.91% </span>
+                <span class="strong">75.24% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>230/307</span>
+                <span class='fraction'>234/311</span>
             </div>
         
             
@@ -1013,7 +1013,19 @@
 <a name='L948'></a><a href='#L948'>948</a>
 <a name='L949'></a><a href='#L949'>949</a>
 <a name='L950'></a><a href='#L950'>950</a>
-<a name='L951'></a><a href='#L951'>951</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L951'></a><a href='#L951'>951</a>
+<a name='L952'></a><a href='#L952'>952</a>
+<a name='L953'></a><a href='#L953'>953</a>
+<a name='L954'></a><a href='#L954'>954</a>
+<a name='L955'></a><a href='#L955'>955</a>
+<a name='L956'></a><a href='#L956'>956</a>
+<a name='L957'></a><a href='#L957'>957</a>
+<a name='L958'></a><a href='#L958'>958</a>
+<a name='L959'></a><a href='#L959'>959</a>
+<a name='L960'></a><a href='#L960'>960</a>
+<a name='L961'></a><a href='#L961'>961</a>
+<a name='L962'></a><a href='#L962'>962</a>
+<a name='L963'></a><a href='#L963'>963</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1077,16 +1089,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">133x</span>
-<span class="cline-any cline-yes">133x</span>
-<span class="cline-any cline-yes">133x</span>
+<span class="cline-any cline-yes">136x</span>
+<span class="cline-any cline-yes">136x</span>
+<span class="cline-any cline-yes">136x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1744x</span>
+<span class="cline-any cline-yes">1811x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1875,6 +1887,16 @@
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1942,6 +1964,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -2824,9 +2848,19 @@ export class FunnelQueryBuilder {
 &nbsp;
     const joinQuery = sql`SELECT ${sql.join(selectParts, sql`, `)} FROM ${joinClause}`
 &nbsp;
-    // Wrap in Drizzle CTE
+    // Build explicit column references for the CTE select
+    // This fixes DuckDB compatibility - using SELECT * loses column aliases in DuckDB
+    const cteSelectFields: Record&lt;string, any&gt; = {
+      binding_key: sql`binding_key`.as('binding_key'),
+      step_0_time: sql`step_0_time`.as('step_0_time')
+    }
+    for (let i = 1; i &lt; steps.length; i++) {
+      cteSelectFields[`step_${i}_time`] = sql`${sql.identifier(`step_${i}_time`)}`.as(`step_${i}_time`)
+    }
+&nbsp;
+    // Wrap in Drizzle CTE with explicit column selection
     return context.db.$with('funnel_joined').as(
-      context.db.select({ _all: sql`*` }).from(sql`(${joinQuery}) as _inner`)
+      context.db.select(cteSelectFields).from(sql`(${joinQuery}) as _inner`)
     )
   }
 &nbsp;
@@ -2892,14 +2926,16 @@ export class FunnelQueryBuilder {
           .as(`step_${i}_max_seconds`)
 &nbsp;
         // Median (if supported) - keep subquery since PERCENTILE_CONT with FILTER is non-standard
+        // Skip percentile subqueries for databases that don't support them (e.g., DuckDB)
+        const capabilities = this.databaseAdapter.getCapabilities()
         const medianExpr = this.databaseAdapter.buildPercentile(timeDiff, 50)
-        <span class="missing-if-branch" title="else path not taken" >E</span>if (medianExpr) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (medianExpr &amp;&amp; capabilities.supportsPercentileSubqueries) {
           selectFields[`step_${i}_median_seconds`] = sql`(SELECT ${medianExpr} FROM ${sql.identifier('funnel_joined')} WHERE ${currentStepTime} IS NOT NULL)`.as(`step_${i}_median_seconds`)
         }
 &nbsp;
         // P90 (if supported) - keep subquery since PERCENTILE_CONT with FILTER is non-standard
         const p90Expr = this.databaseAdapter.buildPercentile(timeDiff, 90)
-        <span class="missing-if-branch" title="else path not taken" >E</span>if (p90Expr) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (p90Expr &amp;&amp; capabilities.supportsPercentileSubqueries) {
           selectFields[`step_${i}_p90_seconds`] = sql`(SELECT ${p90Expr} FROM ${sql.identifier('funnel_joined')} WHERE ${currentStepTime} IS NOT NULL)`.as(`step_${i}_p90_seconds`)
         }
       }
@@ -2920,7 +2956,7 @@ export class FunnelQueryBuilder {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:40.014Z
+                at 2026-01-28T05:21:04.795Z
             </div>
         <script src="../prettify.js"></script>
         <script>

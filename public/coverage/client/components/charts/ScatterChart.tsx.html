@@ -677,10 +677,10 @@ const ScatterChart = <span class="cstat-no" title="statement not covered" >React
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (!data || data.length === 0) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="flex items-center justify-center w-full text-dc-text-muted" style={{ height }}&gt;
+        &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full text-dc-text-muted" style={{ height }}&gt;
           &lt;div className="text-center"&gt;
-            &lt;div className="text-sm font-semibold mb-1"&gt;No data available&lt;/div&gt;
-            &lt;div className="text-xs text-dc-text-secondary"&gt;No data points to display in scatter chart&lt;/div&gt;
+            &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;No data available&lt;/div&gt;
+            &lt;div className="dc:text-xs text-dc-text-secondary"&gt;No data points to display in scatter chart&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       )
@@ -704,10 +704,10 @@ const ScatterChart = <span class="cstat-no" title="statement not covered" >React
 <span class="cstat-no" title="statement not covered" >      yAxisField = Array.isArray(chartConfig.y) ? chartConfig.y[0] : chartConfig.y</span>
     } else {
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="flex items-center justify-center w-full text-dc-warning" style={{ height }}&gt;
+        &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full text-dc-warning" style={{ height }}&gt;
           &lt;div className="text-center"&gt;
-            &lt;div className="text-sm font-semibold mb-1"&gt;Configuration Error&lt;/div&gt;
-            &lt;div className="text-xs"&gt;Invalid or missing chart axis configuration&lt;/div&gt;
+            &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;Configuration Error&lt;/div&gt;
+            &lt;div className="dc:text-xs"&gt;Invalid or missing chart axis configuration&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       )
@@ -715,10 +715,10 @@ const ScatterChart = <span class="cstat-no" title="statement not covered" >React
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (!xAxisField || !yAxisField) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="flex items-center justify-center w-full text-dc-warning" style={{ height }}&gt;
+        &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full text-dc-warning" style={{ height }}&gt;
           &lt;div className="text-center"&gt;
-            &lt;div className="text-sm font-semibold mb-1"&gt;Configuration Error&lt;/div&gt;
-            &lt;div className="text-xs"&gt;Missing required X-axis or Y-axis fields&lt;/div&gt;
+            &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;Configuration Error&lt;/div&gt;
+            &lt;div className="dc:text-xs"&gt;Missing required X-axis or Y-axis fields&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       )
@@ -805,10 +805,10 @@ const ScatterChart = <span class="cstat-no" title="statement not covered" >React
     // Validate transformed data
 <span class="cstat-no" title="statement not covered" >    if (!scatterData || scatterData.length === 0) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;div className="flex items-center justify-center w-full text-dc-text-muted" style={{ height }}&gt;
+        &lt;div className="dc:flex dc:items-center dc:justify-center dc:w-full text-dc-text-muted" style={{ height }}&gt;
           &lt;div className="text-center"&gt;
-            &lt;div className="text-sm font-semibold mb-1"&gt;No valid data&lt;/div&gt;
-            &lt;div className="text-xs text-dc-text-secondary"&gt;No valid data points for scatter chart after transformation&lt;/div&gt;
+            &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;No valid data&lt;/div&gt;
+            &lt;div className="dc:text-xs text-dc-text-secondary"&gt;No valid data points for scatter chart after transformation&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       )
@@ -831,7 +831,7 @@ const ScatterChart = <span class="cstat-no" title="statement not covered" >React
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;ChartContainer height={height}&gt;
-        &lt;RechartsScatterChart margin={chartMargins}&gt;
+        &lt;RechartsScatterChart margin={chartMargins} accessibilityLayer={false}&gt;
           {safeDisplayConfig.showGrid &amp;&amp; (
             &lt;CartesianGrid strokeDasharray="3 3" /&gt;
           )}
@@ -922,11 +922,11 @@ const ScatterChart = <span class="cstat-no" title="statement not covered" >React
   } catch (error) {
     // 'ScatterChart rendering error
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      &lt;div className="flex flex-col items-center justify-center w-full text-dc-error p-4" style={{ height }}&gt;
+      &lt;div className="dc:flex dc:flex-col dc:items-center dc:justify-center dc:w-full text-dc-error dc:p-4" style={{ height }}&gt;
         &lt;div className="text-center"&gt;
-          &lt;div className="text-sm font-semibold mb-1"&gt;Scatter Chart Error&lt;/div&gt;
-          &lt;div className="text-xs mb-2"&gt;{error instanceof Error ? error.message : 'Unknown rendering error'}&lt;/div&gt;
-          &lt;div className="text-xs text-dc-text-muted"&gt;Check the data and configuration&lt;/div&gt;
+          &lt;div className="dc:text-sm dc:font-semibold dc:mb-1"&gt;Scatter Chart Error&lt;/div&gt;
+          &lt;div className="dc:text-xs dc:mb-2"&gt;{error instanceof Error ? error.message : 'Unknown rendering error'}&lt;/div&gt;
+          &lt;div className="dc:text-xs text-dc-text-muted"&gt;Check the data and configuration&lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     )
@@ -940,7 +940,7 @@ export default ScatterChart</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:39.926Z
+                at 2026-01-28T05:21:04.679Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

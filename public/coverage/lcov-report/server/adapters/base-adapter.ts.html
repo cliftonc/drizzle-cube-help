@@ -419,7 +419,71 @@
 <a name='L354'></a><a href='#L354'>354</a>
 <a name='L355'></a><a href='#L355'>355</a>
 <a name='L356'></a><a href='#L356'>356</a>
-<a name='L357'></a><a href='#L357'>357</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L357'></a><a href='#L357'>357</a>
+<a name='L358'></a><a href='#L358'>358</a>
+<a name='L359'></a><a href='#L359'>359</a>
+<a name='L360'></a><a href='#L360'>360</a>
+<a name='L361'></a><a href='#L361'>361</a>
+<a name='L362'></a><a href='#L362'>362</a>
+<a name='L363'></a><a href='#L363'>363</a>
+<a name='L364'></a><a href='#L364'>364</a>
+<a name='L365'></a><a href='#L365'>365</a>
+<a name='L366'></a><a href='#L366'>366</a>
+<a name='L367'></a><a href='#L367'>367</a>
+<a name='L368'></a><a href='#L368'>368</a>
+<a name='L369'></a><a href='#L369'>369</a>
+<a name='L370'></a><a href='#L370'>370</a>
+<a name='L371'></a><a href='#L371'>371</a>
+<a name='L372'></a><a href='#L372'>372</a>
+<a name='L373'></a><a href='#L373'>373</a>
+<a name='L374'></a><a href='#L374'>374</a>
+<a name='L375'></a><a href='#L375'>375</a>
+<a name='L376'></a><a href='#L376'>376</a>
+<a name='L377'></a><a href='#L377'>377</a>
+<a name='L378'></a><a href='#L378'>378</a>
+<a name='L379'></a><a href='#L379'>379</a>
+<a name='L380'></a><a href='#L380'>380</a>
+<a name='L381'></a><a href='#L381'>381</a>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a>
+<a name='L384'></a><a href='#L384'>384</a>
+<a name='L385'></a><a href='#L385'>385</a>
+<a name='L386'></a><a href='#L386'>386</a>
+<a name='L387'></a><a href='#L387'>387</a>
+<a name='L388'></a><a href='#L388'>388</a>
+<a name='L389'></a><a href='#L389'>389</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -799,6 +863,10 @@ export interface DatabaseCapabilities {
   supportsWindowFunctions: boolean
   /** Whether the database supports frame clauses (ROWS BETWEEN, RANGE BETWEEN) */
   supportsFrameClause: boolean
+  /** Whether the database supports LATERAL joins (PostgreSQL 9.3+, MySQL 8.0.14+) */
+  supportsLateralJoins: boolean
+  /** Whether percentile functions work in subqueries against CTEs (false for DuckDB) */
+  supportsPercentileSubqueries: boolean
 }
 &nbsp;
 /**
@@ -838,7 +906,14 @@ export interface DatabaseAdapter {
   /**
    * Get the database engine type this adapter supports
    */
-  getEngineType(): 'postgres' | 'mysql' | 'sqlite' | 'singlestore'
+  getEngineType(): 'postgres' | 'mysql' | 'sqlite' | 'singlestore' | 'duckdb'
+&nbsp;
+  /**
+   * Check if the database supports LATERAL joins
+   * Required for optimized flow queries with index-backed seeks
+   * @returns true for PostgreSQL 9.3+, MySQL 8.0.14+, SingleStore; false for SQLite
+   */
+  supportsLateralJoins(): boolean
 &nbsp;
   // ============================================
   // Funnel Analysis Methods
@@ -884,6 +959,24 @@ export interface DatabaseAdapter {
     expr: SQL | null,
     condition: SQL
   ): SQL
+&nbsp;
+  /**
+   * Build date difference expression in specified periods
+   * Used for retention analysis to calculate period numbers
+   * @param startDate - Start date expression
+   * @param endDate - End date expression
+   * @param unit - Unit for difference ('day' | 'week' | 'month')
+   * @returns SQL expression for date difference in periods
+   */
+  buildDateDiffPeriods(startDate: SQL, endDate: SQL, unit: 'day' | 'week' | 'month'): SQL
+&nbsp;
+  /**
+   * Build a subquery that generates a series of period numbers (0 to maxPeriod)
+   * Used for retention analysis to cross-join with user data
+   * @param maxPeriod - Maximum period number to generate
+   * @returns SQL expression for period series subquery with alias 'p' containing 'period_number' column
+   */
+  buildPeriodSeriesSubquery(maxPeriod: number): SQL
 &nbsp;
   /**
    * Build time dimension expression with granularity truncation
@@ -1024,13 +1117,16 @@ export interface DatabaseAdapter {
  * Provides common functionality that can be shared across database implementations
  */
 export abstract class BaseDatabaseAdapter implements DatabaseAdapter {
-  abstract getEngineType(): 'postgres' | 'mysql' | 'sqlite' | 'singlestore'
+  abstract getEngineType(): 'postgres' | 'mysql' | 'sqlite' | 'singlestore' | 'duckdb'
+  abstract supportsLateralJoins(): boolean
 &nbsp;
   // Funnel analysis methods
   abstract buildIntervalFromISO(duration: string): SQL
   abstract buildTimeDifferenceSeconds(end: SQL, start: SQL): SQL
   abstract buildDateAddInterval(timestamp: SQL, duration: string): SQL
   abstract buildConditionalAggregation(aggFn: 'count' | 'avg' | 'min' | 'max' | 'sum', expr: SQL | null, condition: SQL): SQL
+  abstract buildDateDiffPeriods(startDate: SQL, endDate: SQL, unit: 'day' | 'week' | 'month'): SQL
+  abstract buildPeriodSeriesSubquery(maxPeriod: number): SQL
 &nbsp;
   abstract buildTimeDimension(granularity: TimeGranularity, fieldExpr: AnyColumn | SQL): SQL
   abstract buildStringCondition(fieldExpr: AnyColumn | SQL, operator: 'contains' | 'notContains' | 'startsWith' | 'endsWith' | 'like' | 'notLike' | 'ilike' | 'regex' | 'notRegex', value: string): SQL
@@ -1138,7 +1234,7 @@ export abstract class BaseDatabaseAdapter implements DatabaseAdapter {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:40.014Z
+                at 2026-01-28T05:21:04.795Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

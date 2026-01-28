@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>1/6</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>1/6</span>
             </div>
         
             
@@ -290,7 +290,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -453,7 +453,7 @@ export interface FunnelModeContentProps {
  * - Steps tab: Config panel (binding key + time dimension) + step list
  * - Display tab: Funnel chart display options
  */
-const <span class="cstat-no" title="statement not covered" >FunnelModeContent = memo(function <span class="fstat-no" title="function not covered" >FunnelModeContent({</span></span>
+const FunnelModeContent = memo(function <span class="fstat-no" title="function not covered" >FunnelModeContent({</span>
   funnelCube,
   funnelSteps,
   activeFunnelStepIndex,
@@ -480,14 +480,14 @@ const <span class="cstat-no" title="statement not covered" >FunnelModeContent = 
   const hasDisplayTab = <span class="cstat-no" title="statement not covered" >displayConfig &amp;&amp; onDisplayConfigChange</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div className="flex flex-col h-full"&gt;
+    &lt;div className="dc:flex dc:flex-col dc:h-full"&gt;
       {/* Tab Bar */}
-      &lt;div className="flex border-b border-dc-border flex-shrink-0"&gt;
+      &lt;div className="dc:flex dc:border-b border-dc-border dc:flex-shrink-0"&gt;
         &lt;button
           onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etActiveTab('steps')}</span>
-          className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
+          className={`dc:flex-1 dc:px-4 dc:py-3 dc:text-sm dc:font-medium dc:transition-colors ${
             activeTab === 'steps'
-              ? 'text-dc-primary border-b-2 border-dc-primary'
+              ? 'text-dc-primary dc:border-b-2 border-dc-primary'
               : 'text-dc-text-secondary hover:text-dc-text'
           }`}
         &gt;
@@ -496,11 +496,11 @@ const <span class="cstat-no" title="statement not covered" >FunnelModeContent = 
         &lt;button
           onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>asDisplayTab &amp;&amp; setActiveTab('display')}</span>
           disabled={!hasDisplayTab}
-          className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
+          className={`dc:flex-1 dc:px-4 dc:py-3 dc:text-sm dc:font-medium dc:transition-colors ${
             activeTab === 'display'
-              ? 'text-dc-primary border-b-2 border-dc-primary'
+              ? 'text-dc-primary dc:border-b-2 border-dc-primary'
               : !hasDisplayTab
-                ? 'text-dc-text-muted cursor-not-allowed opacity-50'
+                ? 'text-dc-text-muted dc:cursor-not-allowed dc:opacity-50'
                 : 'text-dc-text-secondary hover:text-dc-text'
           }`}
           title={!hasDisplayTab ? 'Display options not available' : 'Display options'}
@@ -511,7 +511,7 @@ const <span class="cstat-no" title="statement not covered" >FunnelModeContent = 
 &nbsp;
       {/* Tab Content */}
       {activeTab === 'steps' ? (
-        &lt;div className="flex flex-col flex-1 min-h-0"&gt;
+        &lt;div className="dc:flex dc:flex-col dc:flex-1 dc:min-h-0"&gt;
           {/* Configuration Panel - Cube + Binding Key + Time Dimension */}
           &lt;FunnelConfigPanel
             selectedCube={funnelCube}
@@ -524,7 +524,7 @@ const <span class="cstat-no" title="statement not covered" >FunnelModeContent = 
           /&gt;
 &nbsp;
           {/* Step List - scrollable with extra bottom padding for "Add step" button */}
-          &lt;div className="flex-1 min-h-0 overflow-auto p-4 pb-24"&gt;
+          &lt;div className="dc:flex-1 dc:min-h-0 dc:overflow-auto dc:p-4 dc:pb-24"&gt;
             &lt;FunnelStepList
               steps={funnelSteps}
               activeStepIndex={activeFunnelStepIndex}
@@ -538,7 +538,7 @@ const <span class="cstat-no" title="statement not covered" >FunnelModeContent = 
           &lt;/div&gt;
         &lt;/div&gt;
       ) : activeTab === 'display' &amp;&amp; displayConfig &amp;&amp; onDisplayConfigChange ? (
-        &lt;div className="flex-1 min-h-0 overflow-auto p-4"&gt;
+        &lt;div className="dc:flex-1 dc:min-h-0 dc:overflow-auto dc:p-4"&gt;
           &lt;AnalysisDisplayConfigPanel
             chartType={chartType}
             displayConfig={displayConfig}
@@ -559,7 +559,7 @@ export default FunnelModeContent
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-10T03:46:39.926Z
+                at 2026-01-28T05:21:04.679Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
