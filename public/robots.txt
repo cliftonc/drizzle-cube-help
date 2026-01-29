@@ -1,0 +1,11 @@
+# Drizzle Cube Documentation
+# https://www.drizzle-cube.dev
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.drizzle-cube.dev/sitemap-index.xml
+
+# Related sites
+# Demo: https://try.drizzle-cube.dev
