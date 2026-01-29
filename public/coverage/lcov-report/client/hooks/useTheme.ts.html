@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -131,45 +131,45 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">56x</span>
+<span class="cline-any cline-yes">56x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">80x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">61x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">56x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">56x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">56x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * useTheme - External Theme State Hook
@@ -185,22 +185,22 @@ import { useSyncExternalStore, useCallback } from 'react'
 import { getTheme, setTheme as setThemeUtil, watchThemeChanges, type Theme } from '../theme'
 &nbsp;
 // External store for theme state
-const themeStore = <span class="cstat-no" title="statement not covered" >{</span>
+const themeStore = {
   listeners: new Set&lt;() =&gt; void&gt;(),
 &nbsp;
-<span class="fstat-no" title="function not covered" >  subscribe(l</span>istener: () =&gt; void) {
-<span class="cstat-no" title="statement not covered" >    this.listeners.add(listener)</span>
-<span class="cstat-no" title="statement not covered" >    return <span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >t</span>his.listeners.delete(listener)</span></span>
+  subscribe(listener: () =&gt; void) {
+    this.listeners.add(listener)
+    return () =&gt; this.listeners.delete(listener)
   },
 &nbsp;
-<span class="fstat-no" title="function not covered" >  notify() {</span>
-<span class="cstat-no" title="statement not covered" >    this.listeners.forEach(<span class="fstat-no" title="function not covered" >listener =&gt; <span class="cstat-no" title="statement not covered" >l</span>istener())</span></span>
+  notify() {
+    this.listeners.forEach(listener =&gt; listener())
   }
 }
 &nbsp;
 // Watch theme changes from DOM/system and notify subscribers
-<span class="cstat-no" title="statement not covered" >watchThemeChanges(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >  themeStore.notify()</span>
+watchThemeChanges(() =&gt; {
+  themeStore.notify()
 })
 &nbsp;
 /**
@@ -209,21 +209,21 @@ const themeStore = <span class="cstat-no" title="statement not covered" >{</span
  * Returns current theme and a setter function.
  * Only components using this hook will re-render on theme changes.
  */
-export function <span class="fstat-no" title="function not covered" >useTheme() {</span>
+export function useTheme() {
   // Subscribe to external theme store
-  const <span class="cstat-no" title="statement not covered" >theme = useSyncExternalStore(</span>
+  const theme = useSyncExternalStore(
     themeStore.subscribe.bind(themeStore),
     getTheme,      // Client-side snapshot
     getTheme       // Server-side snapshot (SSR)
   )
 &nbsp;
   // Stable setter function
-  const <span class="cstat-no" title="statement not covered" >setTheme = useCallback(<span class="fstat-no" title="function not covered" >(n</span>ewTheme: Theme) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setThemeUtil(newTheme)</span>
-<span class="cstat-no" title="statement not covered" >    themeStore.notify()</span>
+  const setTheme = useCallback((newTheme: Theme) =&gt; {
+    setThemeUtil(newTheme)
+    themeStore.notify()
   }, [])
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return { theme, setTheme }</span>
+  return { theme, setTheme }
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -232,7 +232,7 @@ export function <span class="fstat-no" title="function not covered" >useTheme() 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-28T05:21:04.795Z
+                at 2026-01-29T06:41:53.642Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
