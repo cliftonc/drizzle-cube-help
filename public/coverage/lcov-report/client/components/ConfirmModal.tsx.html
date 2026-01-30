@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -202,7 +202,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -213,26 +213,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">47x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">47x</span>
-<span class="cline-any cline-yes">47x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">47x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">47x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -310,37 +310,37 @@ export interface ConfirmModalProps {
  * /&gt;
  * ```
  */
-const ConfirmModal: React.FC&lt;ConfirmModalProps&gt; = ({
+const ConfirmModal: React.FC&lt;ConfirmModalProps&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span></span>
   isOpen,
   onClose,
   onConfirm,
-  title = 'Confirm',
+  title = <span class="branch-0 cbranch-no" title="branch not covered" >'Confirm',</span>
   message,
-  confirmText = 'Confirm',
-  cancelText = 'Cancel',
-  confirmVariant = 'primary',
-  isLoading = false,
+  confirmText = <span class="branch-0 cbranch-no" title="branch not covered" >'Confirm',</span>
+  cancelText = <span class="branch-0 cbranch-no" title="branch not covered" >'Cancel',</span>
+  confirmVariant = <span class="branch-0 cbranch-no" title="branch not covered" >'primary',</span>
+  isLoading = <span class="branch-0 cbranch-no" title="branch not covered" >false,</span>
 }) =&gt; {
-  const handleConfirm = async () =&gt; {
-    await onConfirm()
-    onClose()
+  const handleConfirm = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async () =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >    await onConfirm()</span>
+<span class="cstat-no" title="statement not covered" >    onClose()</span>
   }
 &nbsp;
-  const getConfirmButtonClasses = () =&gt; {
-    const baseClasses = 'dc:px-4 dc:py-2 dc:text-sm dc:font-medium dc:rounded-md dc:transition-colors dc:focus:outline-none dc:focus:ring-2 dc:focus:ring-offset-2 dc:disabled:opacity-50 dc:disabled:cursor-not-allowed'
+  const getConfirmButtonClasses = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+    const baseClasses = <span class="cstat-no" title="statement not covered" >'dc:px-4 dc:py-2 dc:text-sm dc:font-medium dc:rounded-md dc:transition-colors dc:focus:outline-none dc:focus:ring-2 dc:focus:ring-offset-2 dc:disabled:opacity-50 dc:disabled:cursor-not-allowed'</span>
 &nbsp;
-    switch (confirmVariant) {
+<span class="cstat-no" title="statement not covered" >    switch (confirmVariant) {</span>
       case 'danger':
-        return `${baseClasses} bg-dc-danger dc:text-white dc:hover:bg-dc-danger/90 focus:ring-dc-danger`
+<span class="cstat-no" title="statement not covered" >        return `${baseClasses} bg-dc-danger dc:text-white dc:hover:bg-dc-danger/90 focus:ring-dc-danger`</span>
       case 'warning':
-        return `${baseClasses} bg-dc-warning dc:text-white dc:hover:bg-dc-warning/90 focus:ring-dc-warning`
+<span class="cstat-no" title="statement not covered" >        return `${baseClasses} bg-dc-warning dc:text-white dc:hover:bg-dc-warning/90 focus:ring-dc-warning`</span>
       case 'primary':
       default:
-        return `${baseClasses} bg-dc-primary dc:text-white dc:hover:bg-dc-primary/90 focus:ring-dc-primary`
+<span class="cstat-no" title="statement not covered" >        return `${baseClasses} bg-dc-primary dc:text-white dc:hover:bg-dc-primary/90 focus:ring-dc-primary`</span>
     }
   }
 &nbsp;
-  return (
+<span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;Modal
       isOpen={isOpen}
       onClose={onClose}
@@ -394,7 +394,7 @@ export default ConfirmModal
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-30T03:03:55.762Z
+                at 2026-01-30T03:49:47.093Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -69,6 +69,15 @@ if (fs.existsSync(coverageSource)) {
 
   // Copy entire coverage directory
   fs.cpSync(coverageSource, coverageTarget, { recursive: true });
+
+  // Remove the Istanbul-generated index.html to avoid overwriting the Starlight coverage page
+  // The custom dashboard is at dashboard.html which the Starlight page iframes
+  const istanbulIndex = path.join(coverageTarget, 'index.html');
+  if (fs.existsSync(istanbulIndex)) {
+    fs.rmSync(istanbulIndex);
+    console.log('  ✓ Removed Istanbul index.html (using dashboard.html instead)');
+  }
+
   console.log('  ✓ Coverage report synced to public/coverage/');
 } else {
   console.log('  ⚠ Coverage folder not found at', coverageSource);

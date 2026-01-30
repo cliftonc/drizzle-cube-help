@@ -232,18 +232,17 @@ img[src*="schema.png"] {
 }
 
 
-/* Coverage page - full width content */
+/* Coverage page - full width content within the main content area (respects sidebar) */
 body:has(.coverage-container) .main-pane {
   width: 100% !important;
   max-width: none !important;
 }
 
+body:has(.coverage-container) .content-panel,
+body:has(.coverage-container) .sl-container,
 body:has(.coverage-container) .sl-markdown-content {
-  max-width: none !important;
-}
-
-body:has(.coverage-container) [data-has-toc] .main-pane {
   width: 100% !important;
+  max-width: none !important;
 }
 
 .coverage-container {

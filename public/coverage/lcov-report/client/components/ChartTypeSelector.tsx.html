@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48.64% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/37</span>
+                <span class='fraction'>0/37</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/54</span>
+                <span class='fraction'>0/54</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/10</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/36</span>
+                <span class='fraction'>0/36</span>
             </div>
         
             
@@ -282,7 +282,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -314,15 +314,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -332,25 +337,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">27x</span>
-<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">651x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">682x</span>
-<span class="cline-any cline-yes">682x</span>
-<span class="cline-any cline-yes">682x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -483,7 +483,7 @@ interface ChartTypeSelectorProps {
 }
 &nbsp;
 // Chart type display names (defined outside component to avoid recreation)
-const chartTypeLabels: Record&lt;ChartType, string&gt; = {
+const chartTypeLabels: Record&lt;ChartType, string&gt; = <span class="cstat-no" title="statement not covered" >{</span>
   activityGrid: 'Activity Grid',
   area: 'Area Chart',
   bar: 'Bar Chart',
@@ -507,23 +507,23 @@ const chartTypeLabels: Record&lt;ChartType, string&gt; = {
   treemap: 'TreeMap'
 }
 &nbsp;
-export default function ChartTypeSelector({
+export default function <span class="fstat-no" title="function not covered" >ChartTypeSelector({</span>
   selectedType,
   onTypeChange,
-  className = '',
-  compact = false,
+  className = <span class="branch-0 cbranch-no" title="branch not covered" >'',</span>
+  compact = <span class="branch-0 cbranch-no" title="branch not covered" >false,</span>
   availability,
-  excludeTypes = []
+  excludeTypes = <span class="branch-0 cbranch-no" title="branch not covered" >[]</span>
 }: ChartTypeSelectorProps) {
-  const [isOpen, setIsOpen] = useState(false)
-  const [configRegistry, setConfigRegistry] = useState&lt;ChartConfigRegistry | null&gt;(null)
+  const [isOpen, setIsOpen<span class="cstat-no" title="statement not covered" >] = useState(false)</span>
+  const [configRegistry, setConfigRegistry<span class="cstat-no" title="statement not covered" >] = useState&lt;ChartConfigRegistry | null&gt;(null)</span>
 &nbsp;
-  useEffect(() =&gt; {
-    let isActive = true
+<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+    let isActive = <span class="cstat-no" title="statement not covered" >true</span>
 &nbsp;
-    import('../charts/chartConfigRegistry')
-      .then((module) =&gt; {
-        <span class="missing-if-branch" title="if path not taken" >I</span>if (isActive) {
+<span class="cstat-no" title="statement not covered" >    import('../charts/chartConfigRegistry')</span>
+      .then((module) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >        if (isActive) {</span>
 <span class="cstat-no" title="statement not covered" >          setConfigRegistry(module.chartConfigRegistry)</span>
         }
       })
@@ -533,25 +533,25 @@ export default function ChartTypeSelector({
         }
       })
 &nbsp;
-    return () =&gt; {
-      isActive = false
+<span class="cstat-no" title="statement not covered" >    return <span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >      isActive = false</span>
     }
   }, [])
 &nbsp;
   // Get chart types, filter excluded ones, and sort alphabetically by label
-  const chartTypes = (Object.keys(chartTypeLabels) as ChartType[])
-    .filter((type) =&gt; !excludeTypes.includes(type))
-    .sort((a, b) =&gt; {
-      const labelA = chartTypeLabels[a] || <span class="branch-1 cbranch-no" title="branch not covered" >a</span>
-      const labelB = chartTypeLabels[b] || <span class="branch-1 cbranch-no" title="branch not covered" >b</span>
-      return labelA.localeCompare(labelB)
+  const chartTypes = (<span class="cstat-no" title="statement not covered" >Object.keys(chartTypeLabels) as ChartType[])</span>
+    .filter(<span class="fstat-no" title="function not covered" >(t</span>ype) =&gt; <span class="cstat-no" title="statement not covered" >!excludeTypes.includes(type))</span>
+    .sort(<span class="fstat-no" title="function not covered" >(a</span>, b) =&gt; {
+      const labelA = <span class="cstat-no" title="statement not covered" >chartTypeLabels[a] || a</span>
+      const labelB = <span class="cstat-no" title="statement not covered" >chartTypeLabels[b] || b</span>
+<span class="cstat-no" title="statement not covered" >      return labelA.localeCompare(labelB)</span>
     })
 &nbsp;
-  const selectedConfig = configRegistry?.[selectedType]
-  const SelectedIcon = selectedConfig?.icon
-  const selectedLabel = chartTypeLabels[selectedType]
+  const selectedConfig = <span class="cstat-no" title="statement not covered" >configRegistry?.[selectedType]</span>
+  const SelectedIcon = <span class="cstat-no" title="statement not covered" >selectedConfig?.icon</span>
+  const selectedLabel = <span class="cstat-no" title="statement not covered" >chartTypeLabels[selectedType]</span>
 &nbsp;
-  return (
+<span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;div className={`${className} dc:relative`}&gt;
       {/* Dropdown Button */}
       &lt;button
@@ -561,12 +561,12 @@ export default function ChartTypeSelector({
       &gt;
         &lt;div className="dc:flex dc:items-center dc:space-x-2"&gt;
           {SelectedIcon &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >            &lt;SelectedIcon className="dc:h-5 dc:w-5 text-dc-text-secondary" /&gt;</span>
+            &lt;SelectedIcon className="dc:h-5 dc:w-5 text-dc-text-secondary" /&gt;
           )}
           &lt;span className="dc:text-sm dc:font-medium text-dc-text"&gt;{selectedLabel}&lt;/span&gt;
         &lt;/div&gt;
         &lt;svg
-          className={`dc:h-4 dc:w-4 text-dc-text-muted dc:transform dc:transition-transform ${isOpen ? <span class="branch-0 cbranch-no" title="branch not covered" >'dc:rotate-180' : '</span>'}`}
+          className={`dc:h-4 dc:w-4 text-dc-text-muted dc:transform dc:transition-transform ${isOpen ? 'dc:rotate-180' : ''}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -577,7 +577,7 @@ export default function ChartTypeSelector({
 &nbsp;
       {/* Dropdown Menu - Grid Layout */}
       {isOpen &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >        &lt;div className={`dc:absolute dc:z-10 dc:mt-1 dc:w-full bg-dc-surface dc:border border-dc-border dc:rounded-md dc:shadow-lg dc:max-h-80 dc:overflow-auto ${compact ? '' : 'dc:min-w-max'}`}&gt;</span>
+        &lt;div className={`dc:absolute dc:z-10 dc:mt-1 dc:w-full bg-dc-surface dc:border border-dc-border dc:rounded-md dc:shadow-lg dc:max-h-80 dc:overflow-auto ${compact ? '' : 'dc:min-w-max'}`}&gt;
           &lt;div className="dc:p-2"&gt;
             &lt;div className={`dc:grid dc:gap-1.5 ${compact ? 'dc:grid-cols-2' : 'dc:grid-cols-2 dc:sm:grid-cols-3 dc:lg:grid-cols-4'}`}&gt;
               {chartTypes.map(<span class="fstat-no" title="function not covered" >(t</span>ype) =&gt; {
@@ -673,7 +673,7 @@ export default function ChartTypeSelector({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-30T03:03:55.762Z
+                at 2026-01-30T03:49:47.093Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

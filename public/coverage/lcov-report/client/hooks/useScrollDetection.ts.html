@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/21</span>
+                <span class='fraction'>0/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.36% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/11</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.57% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/19</span>
+                <span class='fraction'>0/19</span>
             </div>
         
             
@@ -191,13 +191,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">23x</span>
-<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -231,7 +231,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * useScrollDetection - Debounced Scroll Detection Hook
@@ -272,17 +272,17 @@ interface UseScrollDetectionOptions {
  *   {isScrolled &amp;&amp; &lt;div&gt;Shadow visible&lt;/div&gt;}
  * &lt;/div&gt;
  */
-export function useScrollDetection(
+export function <span class="fstat-no" title="function not covered" >useScrollDetection(</span>
   containerRef: RefObject&lt;HTMLElement | null&gt;,
-  { threshold = 20, debounceMs = 150, container }: UseScrollDetectionOptions = {}
+  { threshold = <span class="branch-0 cbranch-no" title="branch not covered" >20, d</span>ebounceMs = <span class="branch-0 cbranch-no" title="branch not covered" >150, c</span>ontainer }: UseScrollDetectionOptions = <span class="branch-0 cbranch-no" title="branch not covered" >{}</span>
 ) {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const timeoutRef = useRef&lt;number&gt;()
+  const [isScrolled, setIsScrolled<span class="cstat-no" title="statement not covered" >] = useState(false)</span>
+  const <span class="cstat-no" title="statement not covered" >timeoutRef = useRef&lt;number&gt;()</span>
 &nbsp;
-  useEffect(() =&gt; {
+<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
     // Note: containerRef is intentionally not in deps - refs are stable and we access .current inside
-    const scrollContainer = containerRef.current
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (!scrollContainer) return
+    const scrollContainer = <span class="cstat-no" title="statement not covered" >containerRef.current</span>
+<span class="cstat-no" title="statement not covered" >    if (!scrollContainer) <span class="cstat-no" title="statement not covered" >return</span></span>
 &nbsp;
     const handleScroll = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
       // Clear existing timeout
@@ -316,7 +316,7 @@ export function useScrollDetection(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [threshold, debounceMs, container]) // containerRef is stable, container triggers re-init
 &nbsp;
-  return isScrolled
+<span class="cstat-no" title="statement not covered" >  return isScrolled</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -325,7 +325,7 @@ export function useScrollDetection(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-30T03:03:55.762Z
+                at 2026-01-30T03:49:47.093Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
