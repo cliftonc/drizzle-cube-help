@@ -1,10 +1,302 @@
 /* Custom styles for Drizzle Cube documentation */
 
+/* Map drizzle-cube theme vars to Starlight vars */
+:root {
+  --dc-bg-primary: var(--sl-color-bg);
+  --dc-bg-secondary: var(--sl-color-bg-nav);
+  --dc-text-primary: var(--sl-color-text);
+  --dc-text-secondary: var(--sl-color-text-accent);
+  --dc-border: var(--sl-color-hairline);
+  --dc-surface: var(--sl-color-bg);
+  --dc-surface-secondary: var(--sl-color-bg-nav);
+}
+
+/* Chart demo containers - full width with interactive config panel */
+.chart-demo-wrapper {
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.chart-demo-interactive {
+  background: var(--sl-color-bg);
+}
+
+/* Chart area - allow horizontal scroll for wide charts like activity grid */
+.chart-demo-interactive > div:first-child {
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+}
+
+/* Override global image styles inside chart demos - charts use SVG not img */
+.chart-demo-wrapper svg,
+.chart-demo-wrapper img,
+.chart-demo-interactive svg,
+.chart-demo-interactive img {
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  display: block !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* SVG elements inside charts should not have height:auto which can cause layout issues */
+.chart-demo-wrapper .recharts-wrapper svg,
+.chart-demo-interactive .recharts-wrapper svg {
+  overflow: visible !important;
+}
+
+/* Reset any inherited styles on SVG child elements that could affect positioning */
+.chart-demo-wrapper svg *,
+.chart-demo-interactive svg * {
+  text-decoration: none !important;
+}
+
+/* Ensure recharts containers have proper dimensions and overflow */
+.chart-demo-wrapper .recharts-wrapper,
+.chart-demo-wrapper .recharts-surface,
+.chart-demo-interactive .recharts-wrapper,
+.chart-demo-interactive .recharts-surface,
+.chart-demo-wrapper .recharts-responsive-container,
+.chart-demo-interactive .recharts-responsive-container {
+  overflow: visible !important;
+}
+
+/* Radial charts need extra overflow handling */
+.chart-demo-wrapper .recharts-radial-bar,
+.chart-demo-wrapper .recharts-radial-bar-sectors,
+.chart-demo-interactive .recharts-radial-bar,
+.chart-demo-interactive .recharts-radial-bar-sectors,
+.chart-demo-wrapper svg,
+.chart-demo-interactive svg {
+  overflow: visible !important;
+}
+
+/* Override markdown content styling inside chart demos */
+.sl-markdown-content .chart-demo-wrapper,
+.sl-markdown-content .chart-demo-interactive {
+  /* Reset any inherited margin/padding from markdown styles */
+}
+
+.sl-markdown-content .chart-demo-wrapper *,
+.sl-markdown-content .chart-demo-interactive * {
+  /* Prevent markdown styling from affecting chart internals */
+}
+
+/* CRITICAL: Override Starlight's markdown content margin rule that adds margin-top: 1rem
+   between adjacent block elements. Only apply to HTML elements, NOT SVG internals. */
+.sl-markdown-content .chart-demo-wrapper > *,
+.sl-markdown-content .chart-demo-wrapper > * + *,
+.sl-markdown-content .chart-demo-wrapper div,
+.sl-markdown-content .chart-demo-wrapper div + div,
+.sl-markdown-content .chart-demo-interactive > *,
+.sl-markdown-content .chart-demo-interactive > * + *,
+.sl-markdown-content .chart-demo-interactive div,
+.sl-markdown-content .chart-demo-interactive div + div {
+  margin-top: 0 !important;
+}
+
+/* SVG elements should NEVER have margin applied - exclude from above rules */
+.chart-demo-wrapper svg *,
+.chart-demo-interactive svg * {
+  margin: unset !important;
+}
+
+/* Specifically prevent image margin rules from affecting chart SVGs */
+.sl-markdown-content .chart-demo-wrapper img,
+.sl-markdown-content .chart-demo-wrapper svg,
+.sl-markdown-content .chart-demo-interactive img,
+.sl-markdown-content .chart-demo-interactive svg {
+  margin: 0 !important;
+  display: block !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/*
+ * Fix drizzle-cube component styling in Starlight
+ * Override specific Starlight base styles that conflict with drizzle-cube
+ */
+.chart-demo-interactive {
+  /* Map drizzle-cube CSS variables to Starlight variables */
+  --dc-border: var(--sl-color-hairline);
+  --dc-surface: var(--sl-color-bg);
+  --dc-surface-secondary: var(--sl-color-bg-nav);
+  --dc-text: var(--sl-color-text);
+  --dc-text-secondary: var(--sl-color-text-accent);
+  --dc-text-muted: var(--sl-color-gray-3);
+  --dc-primary: #3b82f6;
+}
+
+/* Prevent Starlight link styling on labels and buttons */
+.chart-demo-interactive label,
+.chart-demo-interactive button,
+.chart-demo-interactive span {
+  text-decoration: none !important;
+}
+
+/* Labels should NOT be styled as links */
+.chart-demo-interactive label {
+  color: var(--sl-color-text) !important;
+  cursor: default;
+}
+
+.chart-demo-interactive label[class*="text-dc-text-secondary"],
+.chart-demo-interactive .text-dc-text-secondary,
+.chart-demo-interactive [class*="text-dc-text-secondary"] {
+  color: var(--sl-color-text-accent) !important;
+}
+
+/* Override Starlight's button reset - let drizzle-cube styles apply */
+.chart-demo-interactive button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Button groups need proper styling */
+.chart-demo-interactive [class*="dc:flex"][class*="dc:border"][class*="dc:rounded"],
+.chart-demo-interactive [class*="dc:overflow-hidden"] {
+  border: 1px solid var(--sl-color-hairline) !important;
+  border-radius: 0.375rem !important;
+  overflow: hidden !important;
+}
+
+/* Buttons inside button groups */
+.chart-demo-interactive [class*="dc:flex"][class*="dc:border"] > button,
+.chart-demo-interactive [class*="dc:overflow-hidden"] > button {
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0.375rem 0.75rem !important;
+  font-size: 0.875rem !important;
+  transition: background-color 0.15s ease !important;
+}
+
+/* Add border between buttons in group */
+.chart-demo-interactive [class*="dc:flex"][class*="dc:border"] > button + button,
+.chart-demo-interactive [class*="dc:overflow-hidden"] > button + button {
+  border-left: 1px solid var(--sl-color-hairline) !important;
+}
+
+/* Active/selected button state */
+.chart-demo-interactive button[class*="bg-dc-primary"],
+.chart-demo-interactive button.bg-dc-primary {
+  background-color: var(--dc-primary, #3b82f6) !important;
+  color: white !important;
+}
+
+/* Override Starlight's input styling */
+.chart-demo-interactive input:not([type="checkbox"]):not([type="radio"]),
+.chart-demo-interactive select,
+.chart-demo-interactive textarea {
+  background: var(--dc-surface, var(--sl-color-bg));
+  color: var(--dc-text, var(--sl-color-text));
+  border: 1px solid var(--dc-border, var(--sl-color-hairline));
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font: inherit;
+  width: 100%;
+}
+
+.chart-demo-interactive input:not([type="checkbox"]):not([type="radio"]):focus,
+.chart-demo-interactive select:focus,
+.chart-demo-interactive textarea:focus {
+  outline: 2px solid var(--dc-primary, #3b82f6);
+  outline-offset: 1px;
+}
+
+/* Checkbox styling */
+.chart-demo-interactive input[type="checkbox"] {
+  accent-color: var(--dc-primary, #3b82f6);
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+/* Fix section headers in config panel - much smaller */
+.chart-demo-interactive h3,
+.chart-demo-interactive h4,
+.chart-demo-interactive [class*="font-medium"],
+.chart-demo-interactive [class*="font-semibold"] {
+  color: var(--sl-color-text) !important;
+}
+
+/* Config panel specific styling */
+.chart-demo-interactive > div:last-child {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+/* Section headers in config panel */
+.chart-demo-interactive > div:last-child h3,
+.chart-demo-interactive > div:last-child h4,
+.chart-demo-interactive > div:last-child [class*="uppercase"],
+.chart-demo-interactive > div:last-child [class*="tracking-wide"] {
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  margin-bottom: 0.5rem !important;
+  margin-top: 0.75rem !important;
+  color: var(--sl-color-text) !important;
+}
+
+/* First header doesn't need top margin */
+.chart-demo-interactive > div:last-child > div:first-child [class*="uppercase"],
+.chart-demo-interactive > div:last-child > div:first-child [class*="tracking-wide"] {
+  margin-top: 0 !important;
+}
+
+/* All labels in config panel should not be blue */
+.chart-demo-interactive > div:last-child label,
+.chart-demo-interactive > div:last-child span,
+.chart-demo-interactive > div:last-child div {
+  color: var(--sl-color-text) !important;
+}
+
+/* Secondary/muted text */
+.chart-demo-interactive > div:last-child [class*="text-dc-text-secondary"],
+.chart-demo-interactive > div:last-child [class*="text-dc-text-muted"] {
+  color: var(--sl-color-gray-3) !important;
+}
+
+/* Add some spacing between form groups */
+.chart-demo-interactive > div:last-child > div > div {
+  margin-bottom: 0.625rem;
+}
+
 :root {
   /* Custom brand colors */
   --sl-color-accent-low: #1e40af;
   --sl-color-accent: #3b82f6;
   --sl-color-accent-high: #60a5fa;
+
+  /* Adjust Starlight layout - narrower right sidebar, wider content */
+  --sl-sidebar-width: 18rem;
+  --sl-content-width: 55rem;
+}
+
+/* Make right sidebar (table of contents) narrower on desktop */
+@media (min-width: 72rem) {
+  .right-sidebar {
+    width: 14rem !important;
+  }
+
+  /* Expand main content area to use the extra space */
+  .main-frame {
+    --sl-content-pad-x: 1.5rem;
+  }
+
+  /* Adjust the grid to give more space to content */
+  .content-panel {
+    max-width: calc(var(--sl-content-width) + 5rem) !important;
+  }
 }
 
 /* Gradient background wrapper for home page gallery */

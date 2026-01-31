@@ -1,12 +1,14 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.drizzle-cube.dev",
   trailingSlash: "always",
   integrations: [
+    react(),
     starlight({
       title: "Drizzle Cube",
       description: "Drizzle Cube: Open Source Embedded Analytics",
@@ -213,7 +215,10 @@ export default defineConfig({
           ],
         },
       ],
-      customCss: ["./src/styles/custom.css"],
+      customCss: [
+        "./src/styles/custom.css",
+        "drizzle-cube/client/styles.css",
+      ],
     }),
   ],
 });

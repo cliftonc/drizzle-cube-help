@@ -2,6 +2,8 @@
 title: Charts
 ---
 
+import ChartDemoWrapper from '../../../components/ChartDemoWrapper.astro';
+
 Drizzle Cube provides a comprehensive set of chart components for data visualization in your analytics dashboards. All charts are designed to work seamlessly with Cube.js-compatible data and provide interactive, responsive visualizations.
 
 ## Available Chart Types
@@ -10,7 +12,7 @@ Drizzle Cube provides a comprehensive set of chart components for data visualiza
 
 Compare values across categories
 
-![Bar Chart](/charts/bar.png)
+<ChartDemoWrapper chartType="bar" />
 
 **Use Case:** Best for comparing discrete categories, showing rankings, or displaying changes over time
 
@@ -30,7 +32,7 @@ Compare values across categories
 
 Show trends and changes over time
 
-![Line Chart](/charts/line.png)
+<ChartDemoWrapper chartType="line" />
 
 **Use Case:** Best for continuous data, trends, time series, and showing relationships between multiple series
 
@@ -50,7 +52,7 @@ Show trends and changes over time
 
 Emphasize magnitude of change over time
 
-![Area Chart](/charts/area.png)
+<ChartDemoWrapper chartType="area" />
 
 **Use Case:** Best for showing cumulative totals, volume changes, or stacked comparisons over time
 
@@ -71,7 +73,7 @@ Emphasize magnitude of change over time
 
 Show proportions of a whole
 
-![Pie Chart](/charts/pie.png)
+<ChartDemoWrapper chartType="pie" />
 
 **Use Case:** Best for showing percentage distribution or composition of a total (limit to 5-7 slices)
 
@@ -88,7 +90,7 @@ Show proportions of a whole
 
 Reveal correlations between variables
 
-![Scatter Chart](/charts/scatter.png)
+<ChartDemoWrapper chartType="scatter" />
 
 **Use Case:** Best for identifying patterns, correlations, outliers, and relationships between two measures
 
@@ -106,7 +108,7 @@ Reveal correlations between variables
 
 Compare multiple metrics across categories
 
-![Radar Chart](/charts/radar.png)
+<ChartDemoWrapper chartType="radar" />
 
 **Use Case:** Best for multivariate comparisons, performance metrics, strengths/weaknesses analysis
 
@@ -124,7 +126,7 @@ Compare multiple metrics across categories
 
 Circular progress and KPI visualization
 
-![Radial Bar Chart](/charts/radial.png)
+<ChartDemoWrapper chartType="radialBar" height={350} />
 
 **Use Case:** Best for showing progress toward goals, KPIs, or comparing percentages in a compact form
 
@@ -141,7 +143,7 @@ Circular progress and KPI visualization
 
 Visualize hierarchical data with nested rectangles
 
-![Tree Map Chart](/charts/treemap.png)
+<ChartDemoWrapper chartType="treemap" />
 
 **Use Case:** Best for showing part-to-whole relationships in hierarchical data, disk usage, budget allocation
 
@@ -158,7 +160,7 @@ Visualize hierarchical data with nested rectangles
 
 Compare three dimensions of data
 
-![Bubble Chart](/charts/bubble.png)
+<ChartDemoWrapper chartType="bubble" />
 
 **Use Case:** Best for showing relationships between three variables (X, Y, and size), market analysis
 
@@ -179,7 +181,7 @@ Compare three dimensions of data
 
 GitHub-style activity grid showing temporal patterns
 
-![Activity Grid Chart](/charts/activity.png)
+<ChartDemoWrapper chartType="activityGrid" />
 
 **Use Case:** Best for visualizing activity patterns over time, contribution calendars, and temporal heatmaps
 
@@ -197,7 +199,7 @@ GitHub-style activity grid showing temporal patterns
 
 Display detailed tabular data
 
-![Data Table](/charts/table.png)
+<ChartDemoWrapper chartType="table" />
 
 **Use Case:** Best for precise values, detailed analysis, sortable/filterable data exploration
 
@@ -213,7 +215,7 @@ Display detailed tabular data
 
 Display key performance indicators as large numbers
 
-![KPI Number](/charts/kpi_number.png)
+<ChartDemoWrapper chartType="kpiNumber" />
 
 **Use Case:** Perfect for showing important metrics like revenue, user count, or other key business metrics in a prominent, easy-to-read format
 
@@ -246,7 +248,7 @@ When either option filters out data, an info icon (ℹ️) appears next to the m
 
 Display change between periods with trend indicators
 
-![KPI Delta](/charts/kpi_delta.png)
+<ChartDemoWrapper chartType="kpiDelta" />
 
 **Use Case:** Perfect for showing performance changes over time, such as revenue growth, user acquisition changes, or metrics where the trend and delta are more important than the absolute value
 
@@ -290,7 +292,7 @@ The same period handling options available in KPI Number apply here:
 
 Display key performance indicators as customizable text
 
-![KPI Text](/charts/kpi_text.png)
+<ChartDemoWrapper chartType="kpiText" />
 
 **Use Case:** Perfect for showing metrics with custom formatting, combining multiple values, or displaying contextual KPI information using templates
 
@@ -298,7 +300,7 @@ Display key performance indicators as customizable text
 
 | Option | Type | Description |
 |--------|------|-------------|
-| template | string | Template for displaying text. Use ${value} to insert measure value |
+| template | string | Template for displaying text. Use ${"{"}value{"}"} to insert measure value |
 | decimals | number | Number of decimal places to display for numeric values |
 | formatValue | function | Custom value formatter for numeric values in templates |
 | valueColorIndex | number | Color from dashboard palette for the KPI value text |
@@ -309,7 +311,7 @@ Display key performance indicators as customizable text
 
 Display custom markdown content with formatting
 
-![Markdown Chart](/charts/markdown.png)
+<ChartDemoWrapper chartType="markdown" />
 
 **Use Case:** Perfect for adding documentation, notes, instructions, or formatted text to dashboards
 
@@ -328,7 +330,7 @@ Display custom markdown content with formatting
 
 Visualize multi-step conversion flows
 
-![Funnel Chart](/charts/funnel.png)
+<ChartDemoWrapper chartType="funnel" />
 
 **Use Case:** Perfect for user journey analysis, sales pipelines, onboarding flows, and any multi-step process where you want to track drop-off between stages
 
@@ -413,6 +415,113 @@ bindingKey: {
   dimension: [
     { cube: 'Signups', dimension: 'Signups.userId' },
     { cube: 'Purchases', dimension: 'Purchases.customerId' }
+  ]
+}
+```
+
+---
+
+### Heatmap Chart
+
+Visualize data intensity across two dimensions
+
+<ChartDemoWrapper chartType="heatmap" height={350} />
+
+**Use Case:** Best for showing patterns and correlations across two categorical dimensions, such as activity by day and hour, or performance across regions and products.
+
+**Display Options:**
+
+| Option | Type | Description |
+|--------|------|-------------|
+| showTooltip | boolean | Show/hide hover tooltips |
+
+**Note:** Heatmap requires the `@nivo/heatmap` package: `npm install @nivo/heatmap`
+
+---
+
+### Sankey Chart
+
+Visualize flow data showing paths between states
+
+<ChartDemoWrapper chartType="sankey" height={400} />
+
+**Use Case:** Perfect for user journey analysis, showing how users flow through different states in your application. Works with Flow Analysis queries.
+
+**Display Options:**
+
+| Option | Type | Description |
+|--------|------|-------------|
+| showTooltip | boolean | Show/hide hover tooltips |
+
+**Data Format:**
+
+Sankey charts require flow data with `nodes` and `links`:
+
+```typescript
+{
+  nodes: [
+    { id: "signup", name: "Sign Up", layer: 0, value: 1000 },
+    { id: "onboarding", name: "Onboarding", layer: 1, value: 800 },
+    // ...
+  ],
+  links: [
+    { source: "signup", target: "onboarding", value: 800 },
+    // ...
+  ]
+}
+```
+
+---
+
+### Sunburst Chart
+
+Radial hierarchical visualization of flow data
+
+<ChartDemoWrapper chartType="sunburst" height={400} />
+
+**Use Case:** Alternative to Sankey for visualizing user journeys. Shows paths radiating outward from a starting point, making it easy to see the distribution of paths at each level.
+
+**Display Options:**
+
+| Option | Type | Description |
+|--------|------|-------------|
+| showTooltip | boolean | Show/hide hover tooltips |
+
+**Note:** Sunburst uses the same data format as Sankey but only displays "after" steps (positive layers) for cleaner visualization.
+
+---
+
+### Retention Heatmap
+
+Cohort retention analysis visualization
+
+<ChartDemoWrapper chartType="retentionHeatmap" height={350} />
+
+**Use Case:** Perfect for understanding user retention over time. Shows cohorts as rows and retention periods as columns, with color intensity indicating retention rate.
+
+**Display Options:**
+
+| Option | Type | Description |
+|--------|------|-------------|
+| showTooltip | boolean | Show/hide hover tooltips with detailed stats |
+
+**Data Format:**
+
+Retention charts require cohort data with periods:
+
+```typescript
+{
+  cohorts: [
+    {
+      cohort: "2024-01",
+      cohortSize: 1000,
+      periods: [
+        { period: 0, retainedUsers: 1000, retentionRate: 1.0 },
+        { period: 1, retainedUsers: 650, retentionRate: 0.65 },
+        // ...
+      ]
+    },
+    // ...
   ]
 }
 ```
@@ -550,4 +659,3 @@ Use **prefix/suffix/decimals** when:
 - You just need simple static text before/after numbers
 - The formatting is straightforward
 - You want to configure it via the UI without code
-

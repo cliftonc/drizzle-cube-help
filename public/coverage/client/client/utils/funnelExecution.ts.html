@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.38% </span>
+                <span class="strong">61.53% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>72/130</span>
+                <span class='fraction'>80/130</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64.28% </span>
+                <span class="strong">70.71% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>90/140</span>
+                <span class='fraction'>99/140</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">65.38% </span>
+                <span class="strong">69.23% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>17/26</span>
+                <span class='fraction'>18/26</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">54.47% </span>
+                <span class="strong">60.97% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>67/123</span>
+                <span class='fraction'>75/123</span>
             </div>
         
             
@@ -763,7 +763,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1416,26 +1416,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Funnel Query Execution Utilities
@@ -2102,27 +2102,27 @@ export function <span class="fstat-no" title="function not covered" >transformSe
  * @param seconds - Duration in seconds
  * @returns Formatted string (e.g., "45s", "2.5m", "1.3h", "3.2d")
  */
-export function <span class="fstat-no" title="function not covered" >formatDuration(s</span>econds: number | null | undefined): string {
-<span class="cstat-no" title="statement not covered" >  if (seconds === null || seconds === undefined) {</span>
+export function formatDuration(seconds: number | null | undefined): string {
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (seconds === null || seconds === undefined) {
 <span class="cstat-no" title="statement not covered" >    return '-'</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (seconds &lt; 60) {</span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (seconds &lt; 60) {
 <span class="cstat-no" title="statement not covered" >    return `${Math.round(seconds)}s`</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (seconds &lt; 3600) {</span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (seconds &lt; 3600) {
     const minutes = <span class="cstat-no" title="statement not covered" >seconds / 60</span>
 <span class="cstat-no" title="statement not covered" >    return minutes &lt; 10 ? `${minutes.toFixed(1)}m` : `${Math.round(minutes)}m`</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (seconds &lt; 86400) {</span>
-    const hours = <span class="cstat-no" title="statement not covered" >seconds / 3600</span>
-<span class="cstat-no" title="statement not covered" >    return hours &lt; 10 ? `${hours.toFixed(1)}h` : `${Math.round(hours)}h`</span>
+  if (seconds &lt; 86400) {
+    const hours = seconds / 3600
+    return hours &lt; 10 ? <span class="branch-0 cbranch-no" title="branch not covered" >`${hours.toFixed(1)}h` : `</span>${Math.round(hours)}h`
   }
 &nbsp;
-  const days = <span class="cstat-no" title="statement not covered" >seconds / 86400</span>
-<span class="cstat-no" title="statement not covered" >  return days &lt; 10 ? `${days.toFixed(1)}d` : `${Math.round(days)}d`</span>
+  const days = seconds / 86400
+  return days &lt; 10 ? `${days.toFixed(1)}d` : <span class="branch-1 cbranch-no" title="branch not covered" >`${Math.round(days)}d`</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -2131,7 +2131,7 @@ export function <span class="fstat-no" title="function not covered" >formatDurat
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-30T03:59:18.933Z
+                at 2026-01-30T10:09:59.634Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -1,0 +1,48 @@
+---
+/**
+ * Astro wrapper component for chart demos
+ * Uses client:visible for lazy hydration when the chart scrolls into view
+ */
+
+import ChartDemo from "./ChartDemo";
+import { chartDemoRegistry } from "../data/chartDemoRegistry";
+
+interface Props {
+  chartType: string;
+  height?: number;
+}
+
+const { chartType, height = 300 } = Astro.props;
+
+const config = chartDemoRegistry[chartType];
+
+if (!config) {
+  throw new Error(`Unknown chart type: ${chartType}. Available types: ${Object.keys(chartDemoRegistry).join(", ")}`);
+}
+---
+
+<div class="chart-demo-wrapper">
+  <ChartDemo client:only="react" config={config} height={height} />
+</div>
+
+<style>
+  .chart-demo-wrapper {
+    width: 100%;
+    margin: 1.5rem 0;
+  }
+
+  /* Responsive: stack on smaller screens */
+  @media (max-width: 768px) {
+    .chart-demo-wrapper :global(.chart-demo-interactive) {
+      grid-template-columns: 1fr !important;
+    }
+
+    .chart-demo-wrapper :global(.chart-demo-interactive > div:last-child) {
+      border-left: none !important;
+      border-top: 1px solid var(--sl-color-hairline);
+      padding-left: 0 !important;
+      padding-top: 1rem;
+      max-height: none !important;
+    }
+  }
+</style>

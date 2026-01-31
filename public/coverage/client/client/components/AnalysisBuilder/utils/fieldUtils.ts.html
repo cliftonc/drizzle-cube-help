@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.97% </span>
+                <span class="strong">65.85% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>50/82</span>
+                <span class='fraction'>54/82</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">49.39% </span>
+                <span class="strong">54.21% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>41/83</span>
+                <span class='fraction'>45/83</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.17% </span>
+                <span class="strong">70.58% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>45/68</span>
+                <span class='fraction'>48/68</span>
             </div>
         
             
@@ -361,38 +361,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">152x</span>
+<span class="cline-any cline-yes">356x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">152x</span>
+<span class="cline-any cline-yes">352x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">304x</span>
-<span class="cline-any cline-yes">152x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">264x</span>
-<span class="cline-any cline-yes">152x</span>
-<span class="cline-any cline-yes">152x</span>
+<span class="cline-any cline-yes">414x</span>
+<span class="cline-any cline-yes">352x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">506x</span>
+<span class="cline-any cline-yes">350x</span>
+<span class="cline-any cline-yes">328x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">76x</span>
-<span class="cline-any cline-yes">76x</span>
-<span class="cline-any cline-yes">76x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">178x</span>
+<span class="cline-any cline-yes">178x</span>
+<span class="cline-any cline-yes">165x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -628,18 +628,18 @@ export function findFieldInSchema(
   fieldName: string,
   schema: MetaResponse | null
 ): { field: MetaField; cubeName: string; fieldType: FieldType } | null {
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (!schema) <span class="cstat-no" title="statement not covered" >return null</span>
+  if (!schema) return null
 &nbsp;
   for (const cube of schema.cubes) {
     // Check measures
     const measure = cube.measures.find((m) =&gt; m.name === fieldName)
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (measure) {
-<span class="cstat-no" title="statement not covered" >      return { field: measure, cubeName: cube.name, fieldType: 'measure' }</span>
+    if (measure) {
+      return { field: measure, cubeName: cube.name, fieldType: 'measure' }
     }
 &nbsp;
     // Check dimensions
     const dimension = cube.dimensions.find((d) =&gt; d.name === fieldName)
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (dimension) {
+    if (dimension) {
       return {
         field: dimension,
         cubeName: cube.name,
@@ -648,7 +648,7 @@ export function findFieldInSchema(
     }
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return null</span>
+  return null
 }
 &nbsp;
 /**
@@ -656,10 +656,10 @@ export function findFieldInSchema(
  */
 export function getFieldTitle(fieldName: string, schema: MetaResponse | null): string {
   const found = findFieldInSchema(fieldName, schema)
-  <span class="missing-if-branch" title="else path not taken" >E</span>if (found) {
+  if (found) {
     return found.field.title || <span class="branch-1 cbranch-no" title="branch not covered" >found.field.shortTitle || <span class="branch-2 cbranch-no" title="branch not covered" >f</span>ieldName</span>
   }
-<span class="cstat-no" title="statement not covered" >  return fieldName</span>
+  return fieldName
 }
 &nbsp;
 /**
@@ -871,7 +871,7 @@ export function <span class="fstat-no" title="function not covered" >getRelatedC
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-30T03:59:18.933Z
+                at 2026-01-30T10:09:59.634Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
