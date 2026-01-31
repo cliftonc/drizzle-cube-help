@@ -277,24 +277,28 @@
   --sl-color-accent: #3b82f6;
   --sl-color-accent-high: #60a5fa;
 
-  /* Adjust Starlight layout - narrower right sidebar, wider content */
   --sl-sidebar-width: 18rem;
-  --sl-content-width: 55rem;
 }
 
-/* Make right sidebar (table of contents) narrower on desktop */
+/* Make right sidebar (table of contents) narrower and content wider on doc pages only
+   (not on the home page which doesn't have .right-sidebar) */
 @media (min-width: 72rem) {
+  /* Only apply to pages with right sidebar (doc pages) */
+  body:has(.right-sidebar) {
+    --sl-content-width: 55rem;
+  }
+
   .right-sidebar {
     width: 14rem !important;
   }
 
-  /* Expand main content area to use the extra space */
-  .main-frame {
+  /* Expand main content area on doc pages */
+  body:has(.right-sidebar) .main-frame {
     --sl-content-pad-x: 1.5rem;
   }
 
-  /* Adjust the grid to give more space to content */
-  .content-panel {
+  /* Adjust the grid to give more space to content on doc pages */
+  body:has(.right-sidebar) .content-panel {
     max-width: calc(var(--sl-content-width) + 5rem) !important;
   }
 }
