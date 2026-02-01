@@ -241,7 +241,7 @@ import { lazy, Suspense } from 'react'
 
 // Lazy load chart components
 const LazyBarChart = lazy(() => 
-  import('drizzle-cube/client').then(m => ({ default: m.RechartsBarChart }))
+  import('drizzle-cube/client/charts').then(m => ({ default: m.RechartsBarChart }))
 )
 
 // Lazy load heavy dashboards

@@ -21,7 +21,7 @@ npm install drizzle-cube react react-dom
 import { useCubeQuery, useCubeMeta } from 'drizzle-cube/client';
 
 // Hooks-only import (smaller bundle)
-import { useCubeQuery, useCubeMeta } from 'drizzle-cube/client/hooks';
+import { useCubeQuery, useCubeMetaQuery } from 'drizzle-cube/client/hooks';
 ```
 
 ## Overview
@@ -352,6 +352,7 @@ The `useFunnelQuery` hook executes sequential funnel queries where each step fil
 
 ```tsx
 import { useFunnelQuery } from 'drizzle-cube/client'
+import { FunnelChart } from 'drizzle-cube/client/charts'
 
 function SignupFunnel() {
   const {

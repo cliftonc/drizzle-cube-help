@@ -583,7 +583,7 @@ const result = await response.json();
 The FunnelChart component automatically handles funnel data:
 
 ```tsx
-import { FunnelChart } from 'drizzle-cube/client';
+import { FunnelChart } from 'drizzle-cube/client/charts';
 
 function MyFunnel({ data }) {
   return (

@@ -117,7 +117,7 @@ For completely custom UI implementations:
 
 ```tsx
 // App.tsx
-import { useCubeQuery, useCubeMeta } from 'drizzle-cube/client/hooks';
+import { useCubeQuery, useCubeMetaQuery } from 'drizzle-cube/client/hooks';
 import { CubeProvider } from 'drizzle-cube/client/providers';
 
 function HeadlessAnalytics() {
@@ -159,7 +159,7 @@ Combine modular imports for optimal bundle size:
 
 ```tsx
 // Import only what you need
-import { AnalysisBuilder } from 'drizzle-cube/client/components'; // Dashboard builder
+import { AnalysisBuilder } from 'drizzle-cube/client'; // Dashboard builder
 import { RechartsBarChart, RechartsLineChart } from 'drizzle-cube/client/charts'; // Specific charts
 import { useCubeQuery } from 'drizzle-cube/client/hooks'; // Data fetching
 import { CubeProvider } from 'drizzle-cube/client/providers'; // Context

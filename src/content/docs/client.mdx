@@ -122,17 +122,19 @@ function CustomDashboard() {
 For completely custom UI implementations:
 
 ```tsx
-import { useCubeQuery, useCubeMeta } from 'drizzle-cube/client/hooks';
+import { useCubeQuery, useCubeMetaQuery } from 'drizzle-cube/client/hooks';
 
 function CustomAnalytics() {
   const { data, isLoading } = useCubeQuery({
     measures: ['Sales.revenue'],
     dimensions: ['Sales.category']
   });
+  const { meta } = useCubeMetaQuery();
 
   // Build your own UI with the data
   return (
     <div>
+      <div>Available cubes: {meta?.cubes?.length ?? 0}</div>
       {data?.map(row => (
         <div key={row.category}>
           {row.category}: ${row.revenue}
@@ -175,13 +177,14 @@ Import only what you need for smaller bundle sizes:
 import { RechartsBarChart, RechartsLineChart } from 'drizzle-cube/client/charts';
 
 // Hooks only (~3.2KB)
-import { useCubeQuery, useCubeMeta } from 'drizzle-cube/client/hooks';
+import { useCubeQuery, useCubeMetaQuery } from 'drizzle-cube/client/hooks';
 
 // Providers only (~190 bytes + shared chunks)
 import { CubeProvider, createCubeClient } from 'drizzle-cube/client/providers';
 
 // UI Components without charts (~218KB)
-import { AnalysisBuilder, AnalyticsDashboard } from 'drizzle-cube/client/components';
+import { AnalyticsDashboard } from 'drizzle-cube/client/components';
+import { AnalysisBuilder } from 'drizzle-cube/client';
 
 // Utilities only (~40 bytes)
 import { formatChartData, validateCubeQuery } from 'drizzle-cube/client/utils';
@@ -768,10 +771,10 @@ import { ChartErrorBoundary } from 'drizzle-cube/client';
 Validate queries before execution:
 
 ```tsx
-import { validateQuery } from 'drizzle-cube/client';
+import { validateCubeQuery } from 'drizzle-cube/client';
 
 function AnalysisBuilder({ query, onChange }) {
-  const validation = validateQuery(query);
+  const validation = validateCubeQuery(query);
 
   if (!validation.isValid) {
     return (

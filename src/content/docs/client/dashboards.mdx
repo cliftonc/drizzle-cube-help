@@ -57,11 +57,10 @@ import {
   AnalyticsDashboard,
   DashboardGrid,
   AnalyticsPortlet,
-  AnalysisBuilder,
   Modal,
-  PortletEditModal,
   DashboardEditModal
 } from 'drizzle-cube/client/components';
+import { AnalysisBuilder, PortletAnalysisModal } from 'drizzle-cube/client';
 
 // Combined modular approach
 import { AnalyticsDashboard, DashboardGrid } from 'drizzle-cube/client/components';
@@ -493,10 +492,10 @@ Display single metrics or key performance indicators:
 
 ### Portlet Editing Modal
 
-Built-in modal for configuring portlets:
+Built-in modal for configuring portlets (uses the modern Analysis Builder):
 
 ```tsx
-import { PortletEditModal } from 'drizzle-cube/client'
+import { PortletAnalysisModal } from 'drizzle-cube/client'
 
 function DashboardEditor() {
   const [editingPortlet, setEditingPortlet] = useState<PortletConfig | null>(null)
@@ -510,16 +509,16 @@ function DashboardEditor() {
       />
 
       {editingPortlet && (
-        <PortletEditModal
+        <PortletAnalysisModal
           portlet={editingPortlet}
           isOpen={!!editingPortlet}
+          title="Edit portlet"
+          submitText="Save"
           onClose={() => setEditingPortlet(null)}
           onSave={(updatedPortlet) => {
             updatePortletConfig(updatedPortlet)
             setEditingPortlet(null)
           }}
-          availableCubes={cubeNames}
-          apiUrl="/cubejs-api/v1"
         />
       )}
     </>

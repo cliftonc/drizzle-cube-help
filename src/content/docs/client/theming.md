@@ -21,7 +21,7 @@ Drizzle Cube uses CSS custom properties (variables) prefixed with `--dc-` for al
 The simplest way to implement theming is to use the built-in theme functions:
 
 ```tsx
-import { getTheme, setTheme, watchThemeChanges } from '@drizzle-cube/client'
+import { getTheme, setTheme, watchThemeChanges } from '@drizzledrizzle-cube/client'
 
 // Get the current theme
 const currentTheme = getTheme() // Returns: 'light' | 'dark' | 'neon'
@@ -44,7 +44,7 @@ Here's a complete example of a theme toggle component:
 
 ```tsx
 import { useEffect, useState } from 'react'
-import { getTheme, setTheme, watchThemeChanges, type Theme } from '@drizzle-cube/client'
+import { getTheme, setTheme, watchThemeChanges, type Theme } from '@drizzledrizzle-cube/client'
 
 export default function ThemeToggle() {
   const [currentTheme, setCurrentTheme] = useState<Theme>('light')
@@ -147,7 +147,7 @@ You can customize any theme by overriding the CSS custom properties in your appl
 Use the `applyTheme` function to apply a custom theme configuration:
 
 ```tsx
-import { applyTheme, type ThemeConfig } from '@drizzle-cube/client'
+import { applyTheme, type ThemeConfig } from '@drizzledrizzle-cube/client'
 
 const customTheme: ThemeConfig = {
   name: 'corporate',
@@ -170,7 +170,7 @@ applyTheme(customTheme)
 Drizzle Cube exports preset configurations you can use as a starting point:
 
 ```tsx
-import { THEME_PRESETS, applyTheme } from '@drizzle-cube/client'
+import { THEME_PRESETS, applyTheme } from '@drizzledrizzle-cube/client'
 
 // Apply a preset
 applyTheme(THEME_PRESETS.dark)
@@ -363,7 +363,7 @@ const theme = getTheme()
 Monitor theme changes from any source (user action, system preference change, etc.):
 
 ```tsx
-import { watchThemeChanges } from '@drizzle-cube/client'
+import { watchThemeChanges } from '@drizzledrizzle-cube/client'
 
 const unwatch = watchThemeChanges((newTheme) => {
   console.log('Theme changed to:', newTheme)
@@ -379,7 +379,7 @@ unwatch()
 Theme preferences are automatically saved to `localStorage`:
 
 ```tsx
-import { setTheme } from '@drizzle-cube/client'
+import { setTheme } from '@drizzledrizzle-cube/client'
 
 // This will save 'dark' to localStorage
 setTheme('dark')
@@ -392,7 +392,7 @@ setTheme('dark')
 Remove all custom theme properties and reset to the built-in theme:
 
 ```tsx
-import { resetTheme } from '@drizzle-cube/client'
+import { resetTheme } from '@drizzledrizzle-cube/client'
 
 // Removes all --dc-* custom properties from inline styles
 resetTheme()
@@ -403,7 +403,7 @@ resetTheme()
 Get the current value of any theme variable:
 
 ```tsx
-import { getThemeVariable } from '@drizzle-cube/client'
+import { getThemeVariable } from '@drizzledrizzle-cube/client'
 
 const primaryColor = getThemeVariable('primary')
 // Returns the computed value, e.g., '#3b82f6'
@@ -414,7 +414,7 @@ const primaryColor = getThemeVariable('primary')
 Set specific theme variables programmatically:
 
 ```tsx
-import { setThemeVariable } from '@drizzle-cube/client'
+import { setThemeVariable } from '@drizzledrizzle-cube/client'
 
 setThemeVariable('primary', '#ff00ff')
 setThemeVariable('surface', '#ffffff')
@@ -474,7 +474,7 @@ Available utility classes:
 Sync Drizzle Cube themes with your application's theme system:
 
 ```tsx
-import { watchThemeChanges, setTheme } from '@drizzle-cube/client'
+import { watchThemeChanges, setTheme } from '@drizzledrizzle-cube/client'
 
 // Watch your app's theme changes
 appTheme.onChange((theme) => {
@@ -498,7 +498,7 @@ watchThemeChanges((dcTheme) => {
 All theme functions and types are fully typed:
 
 ```tsx
-import type { Theme, ThemeConfig, ThemeColorTokens } from '@drizzle-cube/client'
+import type { Theme, ThemeConfig, ThemeColorTokens } from '@drizzledrizzle-cube/client'
 
 // Theme type is a union of valid theme names
 const myTheme: Theme = 'dark' // ✓ Valid
@@ -537,7 +537,7 @@ Set the theme as early as possible to avoid flash of unstyled content:
 ```tsx
 // In your app's entry point or root component
 import { useEffect } from 'react'
-import { getTheme, setTheme } from '@drizzle-cube/client'
+import { getTheme, setTheme } from '@drizzledrizzle-cube/client'
 
 export function App() {
   useEffect(() => {
@@ -569,7 +569,7 @@ Always give users control over the theme:
 Consider respecting the user's system preferences by default:
 
 ```tsx
-import { getTheme, setTheme } from '@drizzle-cube/client'
+import { getTheme, setTheme } from '@drizzledrizzle-cube/client'
 
 // On app load
 const theme = getTheme() // Automatically checks system preference
@@ -611,11 +611,11 @@ If you're using the deprecated `isDarkMode()` function:
 
 ```tsx
 // Old way (deprecated)
-import { isDarkMode } from '@drizzle-cube/client'
+import { isDarkMode } from '@drizzledrizzle-cube/client'
 const dark = isDarkMode()
 
 // New way
-import { getTheme } from '@drizzle-cube/client'
+import { getTheme } from '@drizzledrizzle-cube/client'
 const theme = getTheme()
 const dark = theme === 'dark' || theme === 'neon'
 ```
@@ -626,7 +626,7 @@ If you're adding theming to an existing Drizzle Cube integration:
 
 1. Import the theme utilities:
    ```tsx
-   import { getTheme, setTheme, watchThemeChanges } from '@drizzle-cube/client'
+   import { getTheme, setTheme, watchThemeChanges } from '@drizzledrizzle-cube/client'
    ```
 
 2. Create a theme toggle component (see example above)
@@ -653,7 +653,7 @@ import {
   type Theme,
   CubeProvider,
   AnalyticsDashboard
-} from '@drizzle-cube/client'
+} from '@drizzledrizzle-cube/client'
 
 export function ThemedDashboardApp() {
   const [theme, setThemeState] = useState<Theme>('light')
@@ -704,7 +704,7 @@ export function ThemedDashboardApp() {
 ### Custom Brand Theme
 
 ```tsx
-import { applyTheme, type ThemeConfig } from '@drizzle-cube/client'
+import { applyTheme, type ThemeConfig } from '@drizzledrizzle-cube/client'
 
 // Define your brand colors
 const brandTheme: ThemeConfig = {
