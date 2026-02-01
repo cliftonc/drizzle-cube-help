@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/23</span>
+                <span class='fraction'>23/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -225,8 +225,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -257,17 +257,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -308,7 +308,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -377,8 +377,8 @@
 import { useCallback, KeyboardEvent } from 'react'
 import { getIcon } from '../../icons'
 &nbsp;
-const <span class="cstat-no" title="statement not covered" >SparklesIcon = getIcon('sparkles')</span>
-const <span class="cstat-no" title="statement not covered" >ErrorIcon = getIcon('error')</span>
+const SparklesIcon = getIcon('sparkles')
+const ErrorIcon = getIcon('error')
 &nbsp;
 export interface AnalysisAIPanelProps {
   /** User's natural language prompt */
@@ -399,7 +399,7 @@ export interface AnalysisAIPanelProps {
   onCancel: () =&gt; void
 }
 &nbsp;
-export default function <span class="fstat-no" title="function not covered" >AnalysisAIPanel({</span>
+export default function AnalysisAIPanel({
   userPrompt,
   onPromptChange,
   isGenerating,
@@ -409,17 +409,17 @@ export default function <span class="fstat-no" title="function not covered" >Ana
   onAccept,
   onCancel
 }: AnalysisAIPanelProps) {
-  const <span class="cstat-no" title="statement not covered" >handleKeyDown = useCallback(</span>
-<span class="fstat-no" title="function not covered" >    (e</span>: KeyboardEvent&lt;HTMLTextAreaElement&gt;) =&gt; {
-<span class="cstat-no" title="statement not covered" >      if (e.key === 'Enter' &amp;&amp; !e.shiftKey) {</span>
-<span class="cstat-no" title="statement not covered" >        e.preventDefault()</span>
-<span class="cstat-no" title="statement not covered" >        onGenerate()</span>
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent&lt;HTMLTextAreaElement&gt;) =&gt; {
+      if (e.key === 'Enter' &amp;&amp; !e.shiftKey) {
+        e.preventDefault()
+        onGenerate()
       }
     },
     [onGenerate]
   )
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;div
       className="dc:border-b border-dc-border"
       style={{ background: 'linear-gradient(to right, var(--dc-ai-gradient-start), var(--dc-ai-gradient-end))' }}
@@ -460,7 +460,7 @@ export default function <span class="fstat-no" title="function not covered" >Ana
           &lt;div className="dc:flex-1"&gt;
             &lt;textarea
               value={userPrompt}
-              onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >onPromptChange(e.target.value)}</span>
+              onChange={(e) =&gt; onPromptChange(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Describe your query in natural language... (e.g., 'Show total sales by month for the last year')"
               className="dc:w-full dc:px-3 dc:py-2 dc:text-sm dc:border border-dc-border dc:rounded-md dc:shadow-sm dc:focus:outline-none dc:focus:ring-2 focus:ring-dc-accent focus:border-dc-accent dc:resize-none bg-dc-surface text-dc-text placeholder-dc-text-muted"
@@ -526,7 +526,7 @@ export default function <span class="fstat-no" title="function not covered" >Ana
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-01T03:47:05.025Z
+                at 2026-02-01T04:56:24.340Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

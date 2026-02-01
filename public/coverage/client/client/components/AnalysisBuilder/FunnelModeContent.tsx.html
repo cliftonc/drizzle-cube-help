@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">95% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>19/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -290,7 +290,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -311,27 +311,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -453,7 +453,7 @@ export interface FunnelModeContentProps {
  * - Steps tab: Config panel (binding key + time dimension) + step list
  * - Display tab: Funnel chart display options
  */
-const FunnelModeContent = memo(function <span class="fstat-no" title="function not covered" >FunnelModeContent({</span>
+const FunnelModeContent = memo(function FunnelModeContent({
   funnelCube,
   funnelSteps,
   activeFunnelStepIndex,
@@ -469,17 +469,17 @@ const FunnelModeContent = memo(function <span class="fstat-no" title="function n
   onTimeDimensionChange,
   onBindingKeyChange,
   // Display props
-  chartType = <span class="branch-0 cbranch-no" title="branch not covered" >'funnel',</span>
+  chartType = 'funnel',
   displayConfig,
   colorPalette,
   onDisplayConfigChange,
 }: FunnelModeContentProps) {
-  const [activeTab, setActiveTab<span class="cstat-no" title="statement not covered" >] = useState&lt;FunnelPanelTab&gt;('steps')</span>
+  const [activeTab, setActiveTab] = useState&lt;FunnelPanelTab&gt;('steps')
 &nbsp;
   // Check if display tab is available
-  const hasDisplayTab = <span class="cstat-no" title="statement not covered" >displayConfig &amp;&amp; onDisplayConfigChange</span>
+  const hasDisplayTab = displayConfig &amp;&amp; onDisplayConfigChange
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;div className="dc:flex dc:flex-col dc:h-full"&gt;
       {/* Tab Bar */}
       &lt;div className="dc:flex dc:border-b border-dc-border dc:flex-shrink-0"&gt;
@@ -494,7 +494,7 @@ const FunnelModeContent = memo(function <span class="fstat-no" title="function n
           Steps
         &lt;/button&gt;
         &lt;button
-          onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>asDisplayTab &amp;&amp; setActiveTab('display')}</span>
+          onClick={() =&gt; hasDisplayTab &amp;&amp; setActiveTab('display')}
           disabled={!hasDisplayTab}
           className={`dc:flex-1 dc:px-4 dc:py-3 dc:text-sm dc:font-medium dc:transition-colors ${
             activeTab === 'display'
@@ -546,7 +546,7 @@ const FunnelModeContent = memo(function <span class="fstat-no" title="function n
             onDisplayConfigChange={onDisplayConfigChange}
           /&gt;
         &lt;/div&gt;
-      ) : null}
+      ) : <span class="branch-1 cbranch-no" title="branch not covered" >null}</span>
     &lt;/div&gt;
   )
 })
@@ -559,7 +559,7 @@ export default FunnelModeContent
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-01T03:47:04.940Z
+                at 2026-02-01T04:56:24.254Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
