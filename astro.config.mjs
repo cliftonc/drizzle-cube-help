@@ -163,9 +163,9 @@ export default defineConfig({
           items: [
             { label: "React Client", slug: "client" },
             { label: "Analysis Builder", slug: "client/analysis-builder" },
+            { label: "Dashboards", slug: "client/dashboards" },
             { label: "Funnel Analysis", slug: "client/funnel-analysis" },
             { label: "Charts", slug: "client/charts" },
-            { label: "Dashboards", slug: "client/dashboards" },
             { label: "Drill-Down Navigation", slug: "client/drill-down" },
             { label: "Dashboard Persistence", slug: "client/dashboard-persistence" },
             { label: "Hooks", slug: "client/hooks" },

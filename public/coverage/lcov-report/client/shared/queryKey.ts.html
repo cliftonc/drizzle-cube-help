@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">93.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>15/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>7/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">92.85% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>13/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -89,54 +89,54 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1066x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1066x</span>
+<span class="cline-any cline-yes">7711x</span>
+<span class="cline-any cline-yes">4381x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3330x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3330x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3330x</span>
+<span class="cline-any cline-yes">1455x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export function <span class="fstat-no" title="function not covered" >stableStringify(v</span>alue: unknown): string {
-  const seen = <span class="cstat-no" title="statement not covered" >new WeakSet&lt;object&gt;()</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2011x</span>
+<span class="cline-any cline-yes">2011x</span>
+<span class="cline-any cline-yes">5190x</span>
+<span class="cline-any cline-yes">2011x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1066x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export function stableStringify(value: unknown): string {
+  const seen = new WeakSet&lt;object&gt;()
 &nbsp;
-  const stringify = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(i</span>nput: unknown): string =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (input === null || typeof input !== 'object') {</span>
-<span class="cstat-no" title="statement not covered" >      return JSON.stringify(input)</span>
+  const stringify = (input: unknown): string =&gt; {
+    if (input === null || typeof input !== 'object') {
+      return JSON.stringify(input)
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (seen.has(input as object)) {</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (seen.has(input as object)) {
 <span class="cstat-no" title="statement not covered" >      return '"[Circular]"'</span>
     }
-<span class="cstat-no" title="statement not covered" >    seen.add(input as object)</span>
+    seen.add(input as object)
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (Array.isArray(input)) {</span>
-<span class="cstat-no" title="statement not covered" >      return `[${input.map(<span class="fstat-no" title="function not covered" >(i</span>tem) =&gt; <span class="cstat-no" title="statement not covered" >stringify(item))</span>.join(',')}]`</span>
+    if (Array.isArray(input)) {
+      return `[${input.map((item) =&gt; stringify(item)).join(',')}]`
     }
 &nbsp;
-    const record = <span class="cstat-no" title="statement not covered" >input as Record&lt;string, unknown&gt;</span>
-    const keys = <span class="cstat-no" title="statement not covered" >Object.keys(record).sort()</span>
-    const props = <span class="cstat-no" title="statement not covered" >keys.map(<span class="fstat-no" title="function not covered" >(k</span>ey) =&gt; <span class="cstat-no" title="statement not covered" >`${JSON.stringify(key)}:${stringify(record[key])}`)</span></span>
-<span class="cstat-no" title="statement not covered" >    return `{${props.join(',')}}`</span>
+    const record = input as Record&lt;string, unknown&gt;
+    const keys = Object.keys(record).sort()
+    const props = keys.map((key) =&gt; `${JSON.stringify(key)}:${stringify(record[key])}`)
+    return `{${props.join(',')}}`
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return stringify(value)</span>
+  return stringify(value)
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -145,7 +145,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-30T03:49:47.093Z
+                at 2026-01-31T08:23:31.003Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

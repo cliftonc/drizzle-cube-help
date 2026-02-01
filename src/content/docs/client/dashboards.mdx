@@ -2,7 +2,36 @@
 title: Dashboards
 ---
 
-Drizzle Cube provides flexible dashboard components for creating interactive analytics interfaces. Built with React and `react-grid-layout`, the dashboard system supports drag-and-drop layouts, responsive design, and configurable analytics portlets.
+import { Image } from 'astro:assets';
+import dashboardHero from '../../../assets/dashboard-hero.png';
+import Lightbox from '../../../components/Lightbox.astro';
+
+<div class="dashboard-landing-split">
+  <div class="dashboard-landing-image-col lightbox-trigger">
+    <Image src={dashboardHero} alt="Drizzle Cube Dashboard - Embeddable analytics dashboard with drag-and-drop layout" class="dashboard-landing-image" />
+  </div>
+  <div class="dashboard-landing-content">
+    <p>Embed production-ready analytics dashboards into your application with minimal code. Built on React and react-grid-layout, Drizzle Cube dashboards integrate directly with your semantic layer—giving your users the power to create, customize, and save their own dashboard layouts without backend changes.</p>
+    <ul class="dashboard-quick-links">
+      <li><a href="/client/charts/">Charts</a> — Bar, line, area, pie, and more</li>
+      <li><a href="/client/dashboard-persistence/">Persistence</a> — Save & load with your backend</li>
+      <li><a href="/client/analysis-builder/">Analysis Builder</a> — Query building UI</li>
+      <li><a href="/client/theming/">Theming</a> — Customize appearance</li>
+      <li><a href="/semantic-layer/security/">Security</a> — Multi-tenant isolation</li>
+      <li><a href="/getting-started/quick-start/">Quick Start</a> — Get started fast</li>
+    </ul>
+  </div>
+</div>
+
+### Why Drizzle Cube Dashboards?
+
+- **Type-safe configuration** — Full TypeScript support with `DashboardConfig` and `PortletConfig` interfaces
+- **Semantic layer integration** — Queries use your cube definitions, ensuring consistent business logic
+- **Drag-and-drop layouts** — Users can rearrange, resize, and customize their view
+- **Flexible layout modes** — Grid-based or row-based layouts to match your UX patterns
+- **Built-in persistence** — Save and restore dashboard configurations with your own backend
+- **Multi-tenant ready** — Security context flows through from your semantic layer
+- **Modular imports** — Import only what you need (~218KB for dashboard-only builds)
 
 ## Installation
 
@@ -24,14 +53,14 @@ npm install drizzle-cube react react-dom recharts react-grid-layout
 import { AnalyticsDashboard, DashboardGrid, AnalyticsPortlet } from 'drizzle-cube/client';
 
 // Components-only import (dashboard without built-in charts)
-import { 
-  AnalyticsDashboard, 
-  DashboardGrid, 
+import {
+  AnalyticsDashboard,
+  DashboardGrid,
   AnalyticsPortlet,
   AnalysisBuilder,
   Modal,
   PortletEditModal,
-  DashboardEditModal 
+  DashboardEditModal
 } from 'drizzle-cube/client/components';
 
 // Combined modular approach
@@ -407,7 +436,7 @@ Display various chart types with full interactivity:
 
 // Time Series Line Chart
 {
-  chartType: 'line', 
+  chartType: 'line',
   chartConfig: {
     xAxis: ['Orders.createdAt'],
     yAxis: ['Orders.totalRevenue']
@@ -479,7 +508,7 @@ function DashboardEditor() {
         editable={true}
         onPortletEdit={setEditingPortlet}
       />
-      
+
       {editingPortlet && (
         <PortletEditModal
           portlet={editingPortlet}
@@ -516,7 +545,7 @@ const portletActions = [
     onClick: () => setEditingPortlet(portlet)
   },
   {
-    icon: 'delete', 
+    icon: 'delete',
     label: 'Delete',
     onClick: () => deletePortlet(portletId)
   }
@@ -531,14 +560,14 @@ Define custom responsive breakpoints:
 
 ```typescript
 const customLayout = {
-  breakpoints: { 
+  breakpoints: {
     xl: 1400,    // Extra large screens
     lg: 1200,    // Large screens
     md: 996,     // Medium screens
     sm: 768,     // Small screens (tablets)
     xs: 480      // Extra small screens (phones)
   },
-  cols: { 
+  cols: {
     xl: 16,      // 16 columns on XL screens
     lg: 12,      // 12 columns on large screens
     md: 8,       // 8 columns on medium screens
@@ -655,8 +684,8 @@ Load portlets on demand for better performance:
 ```tsx
 import { lazy, Suspense } from 'react'
 
-const LazyAnalyticsPortlet = lazy(() => import('drizzle-cube/client').then(m => ({ 
-  default: m.AnalyticsPortlet 
+const LazyAnalyticsPortlet = lazy(() => import('drizzle-cube/client').then(m => ({
+  default: m.AnalyticsPortlet
 })))
 
 function OptimizedDashboard({ config }: { config: DashboardConfig }) {
@@ -720,25 +749,25 @@ const mockConfig: DashboardConfig = {
 
 test('renders dashboard with portlets', () => {
   render(<DashboardGrid config={mockConfig} />)
-  
+
   expect(screen.getByText('Test Chart')).toBeInTheDocument()
 })
 
 test('handles portlet editing', () => {
   const onConfigChange = jest.fn()
-  
+
   render(
-    <DashboardGrid 
+    <DashboardGrid
       config={mockConfig}
       editable={true}
       onConfigChange={onConfigChange}
     />
   )
-  
+
   // Test editing interactions
   const editButton = screen.getByRole('button', { name: /edit/i })
   fireEvent.click(editButton)
-  
+
   // Verify edit modal opens
   expect(screen.getByRole('dialog')).toBeInTheDocument()
 })
@@ -794,7 +823,7 @@ const executiveDashboard: DashboardConfig = {
 
 ```typescript
 const operationsDashboard: DashboardConfig = {
-  id: 'operations-dashboard', 
+  id: 'operations-dashboard',
   name: 'Operations Metrics',
   portlets: [
     // Employee Productivity

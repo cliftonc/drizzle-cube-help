@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/22</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -179,23 +179,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1006x</span>
+<span class="cline-any cline-yes">1006x</span>
+<span class="cline-any cline-yes">1006x</span>
+<span class="cline-any cline-yes">1006x</span>
+<span class="cline-any cline-yes">1006x</span>
+<span class="cline-any cline-yes">1006x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1006x</span>
+<span class="cline-any cline-yes">1006x</span>
+<span class="cline-any cline-yes">1006x</span>
+<span class="cline-any cline-yes">1006x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">279x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">279x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -252,25 +252,25 @@ export interface UseAnalysisUIStateResult {
   setActiveTableIndex: (index: number) =&gt; void
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >useAnalysisUIState(): UseAnalysisUIStateResult {</span>
+export function useAnalysisUIState(): UseAnalysisUIStateResult {
   // Store state
-  const <span class="cstat-no" title="statement not covered" >activeTab = useAnalysisBuilderStore(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.activeTab)</span></span>
-  const <span class="cstat-no" title="statement not covered" >activeView = useAnalysisBuilderStore(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.activeView)</span></span>
-  const <span class="cstat-no" title="statement not covered" >displayLimit = useAnalysisBuilderStore(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.displayLimit)</span></span>
-  const <span class="cstat-no" title="statement not covered" >showFieldModal = useAnalysisBuilderStore(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.showFieldModal)</span></span>
-  const <span class="cstat-no" title="statement not covered" >fieldModalMode = useAnalysisBuilderStore(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.fieldModalMode)</span></span>
-  const <span class="cstat-no" title="statement not covered" >userManuallySelectedChart = useAnalysisBuilderStore(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.userManuallySelectedChart)</span></span>
+  const activeTab = useAnalysisBuilderStore((state) =&gt; state.activeTab)
+  const activeView = useAnalysisBuilderStore((state) =&gt; state.activeView)
+  const displayLimit = useAnalysisBuilderStore((state) =&gt; state.displayLimit)
+  const showFieldModal = useAnalysisBuilderStore((state) =&gt; state.showFieldModal)
+  const fieldModalMode = useAnalysisBuilderStore((state) =&gt; state.fieldModalMode)
+  const userManuallySelectedChart = useAnalysisBuilderStore((state) =&gt; state.userManuallySelectedChart)
 &nbsp;
   // Store actions
-  const <span class="cstat-no" title="statement not covered" >setActiveTab = useAnalysisBuilderStore(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.setActiveTab)</span></span>
-  const <span class="cstat-no" title="statement not covered" >setActiveView = useAnalysisBuilderStore(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.setActiveView)</span></span>
-  const <span class="cstat-no" title="statement not covered" >setDisplayLimit = useAnalysisBuilderStore(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.setDisplayLimit)</span></span>
-  const <span class="cstat-no" title="statement not covered" >closeFieldModal = useAnalysisBuilderStore(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.closeFieldModal)</span></span>
+  const setActiveTab = useAnalysisBuilderStore((state) =&gt; state.setActiveTab)
+  const setActiveView = useAnalysisBuilderStore((state) =&gt; state.setActiveView)
+  const setDisplayLimit = useAnalysisBuilderStore((state) =&gt; state.setDisplayLimit)
+  const closeFieldModal = useAnalysisBuilderStore((state) =&gt; state.closeFieldModal)
 &nbsp;
   // Local state for table index (not persisted)
-  const [activeTableIndex, setActiveTableIndex<span class="cstat-no" title="statement not covered" >] = useState(0)</span>
+  const [activeTableIndex, setActiveTableIndex] = useState(0)
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return {</span>
+  return {
     // State
     activeTab,
     activeView,
@@ -295,7 +295,7 @@ export function <span class="fstat-no" title="function not covered" >useAnalysis
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-30T03:49:47.093Z
+                at 2026-01-31T08:23:31.003Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

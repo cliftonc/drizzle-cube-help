@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -104,8 +104,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-yes">60x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -113,15 +113,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">120x</span>
+<span class="cline-any cline-yes">120x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
 import { getMeasureTypeIcon } from '../icons'
@@ -130,28 +130,28 @@ import { getMeasureTypeIcon } from '../icons'
  * Get the appropriate icon component for a given measure type
  * All icons use amber coloring for consistency
  */
-export function <span class="fstat-no" title="function not covered" >getMeasureIcon(</span>
+export function getMeasureIcon(
   measureType: string | undefined,
-  className: string = <span class="branch-0 cbranch-no" title="branch not covered" >'w-4 h-4'</span>
+  className: string = 'w-4 h-4'
 ): React.ReactElement {
-  const <span class="cstat-no" title="statement not covered" >IconComponent = getMeasureTypeIcon(measureType)</span>
-<span class="cstat-no" title="statement not covered" >  return &lt;IconComponent className={className} /&gt;</span>
+  const IconComponent = getMeasureTypeIcon(measureType)
+  return &lt;IconComponent className={className} /&gt;
 }
 &nbsp;
 /**
  * Get all available measure type icons
  * Useful for documentation or UI that shows all measure types
  */
-export function <span class="fstat-no" title="function not covered" >getAllMeasureIcons(): Record&lt;string, React.ReactElement&gt; {</span>
-  const types = <span class="cstat-no" title="statement not covered" >['count', 'countDistinct', 'countDistinctApprox', 'sum', 'avg', 'min', 'max', 'runningTotal', 'calculated', 'number']</span>
-  const icons: Record&lt;string, React.ReactElement&gt; = <span class="cstat-no" title="statement not covered" >{}</span>
+export function getAllMeasureIcons(): Record&lt;string, React.ReactElement&gt; {
+  const types = ['count', 'countDistinct', 'countDistinctApprox', 'sum', 'avg', 'min', 'max', 'runningTotal', 'calculated', 'number']
+  const icons: Record&lt;string, React.ReactElement&gt; = {}
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  for (const type of types) {</span>
-    const <span class="cstat-no" title="statement not covered" >IconComponent = getMeasureTypeIcon(type)</span>
-<span class="cstat-no" title="statement not covered" >    icons[type] = &lt;IconComponent className="dc:w-4 dc:h-4" /&gt;</span>
+  for (const type of types) {
+    const IconComponent = getMeasureTypeIcon(type)
+    icons[type] = &lt;IconComponent className="dc:w-4 dc:h-4" /&gt;
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return icons</span>
+  return icons
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -160,7 +160,7 @@ export function <span class="fstat-no" title="function not covered" >getAllMeasu
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-30T03:49:47.093Z
+                at 2026-01-31T08:23:31.003Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

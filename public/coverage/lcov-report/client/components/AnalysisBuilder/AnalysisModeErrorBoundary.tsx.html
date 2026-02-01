@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>6/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">8.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>1/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>3/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>6/15</span>
             </div>
         
             
@@ -204,8 +204,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -228,16 +228,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -250,6 +242,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -271,8 +271,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">38x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -316,7 +316,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">38x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -333,8 +333,8 @@ import React, { Component, ReactNode } from 'react'
 import { getIcon } from '../../icons'
 import type { AnalysisType } from '../../types'
 &nbsp;
-const <span class="cstat-no" title="statement not covered" >WarningIcon = getIcon('warning')</span>
-const <span class="cstat-no" title="statement not covered" >RefreshIcon = getIcon('refresh')</span>
+const WarningIcon = getIcon('warning')
+const RefreshIcon = getIcon('refresh')
 &nbsp;
 interface Props {
   children: ReactNode
@@ -356,16 +356,16 @@ interface State {
  * and offers to switch back to query mode.
  */
 export class AnalysisModeErrorBoundary extends Component&lt;Props, State&gt; {
-<span class="fstat-no" title="function not covered" >  constructor(p</span>rops: Props) {
-<span class="cstat-no" title="statement not covered" >    super(props)</span>
-<span class="cstat-no" title="statement not covered" >    this.state = {</span>
+  constructor(props: Props) {
+    super(props)
+    this.state = {
       hasError: false,
       error: null,
       errorInfo: null,
     }
   }
 &nbsp;
-  static <span class="fstat-no" title="function not covered" >getDerivedStateFromError(e</span>rror: Error): State {
+  static getDerivedStateFromError(error: Error): State {
 <span class="cstat-no" title="statement not covered" >    return {</span>
       hasError: true,
       error,
@@ -399,8 +399,8 @@ export class AnalysisModeErrorBoundary extends Component&lt;Props, State&gt; {
 <span class="cstat-no" title="statement not covered" >    this.props.onSwitchToSafeMode?.()</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  render() {</span>
-<span class="cstat-no" title="statement not covered" >    if (this.state.hasError) {</span>
+  render() {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (this.state.hasError) {
 <span class="cstat-no" title="statement not covered" >      return (</span>
         &lt;div className="dc:flex dc:flex-col dc:items-center dc:justify-center dc:w-full dc:h-full dc:p-6 text-center bg-dc-surface"&gt;
           &lt;div className="dc:h-10 dc:w-10 dc:mb-3 text-dc-warning"&gt;
@@ -445,7 +445,7 @@ export class AnalysisModeErrorBoundary extends Component&lt;Props, State&gt; {
       )
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return this.props.children</span>
+    return this.props.children
   }
 }
 &nbsp;
@@ -457,7 +457,7 @@ export default AnalysisModeErrorBoundary
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-30T03:49:47.093Z
+                at 2026-01-31T08:23:31.003Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

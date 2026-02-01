@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.63% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -818,7 +818,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1506,26 +1506,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">91x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">212x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">91x</span>
-<span class="cline-any cline-yes">91x</span>
+<span class="cline-any cline-yes">406x</span>
+<span class="cline-any cline-yes">205x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1544,9 +1531,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Unified Color Palette System
  * Each palette contains coordinated series and gradient colors that work well together
@@ -2248,26 +2248,26 @@ export const COLOR_PALETTES: ColorPalette[] = [
  * Get a color palette by name, with fallback to default
  */
 export function getColorPalette(paletteName?: string): ColorPalette {
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (!paletteName) {
-<span class="cstat-no" title="statement not covered" >    return COLOR_PALETTES[0] // default palette</span>
+  if (!paletteName) {
+    return COLOR_PALETTES[0] // default palette
   }
   
   const palette = COLOR_PALETTES.find(p =&gt; p.name === paletteName)
-  return palette || <span class="branch-1 cbranch-no" title="branch not covered" >COLOR_PALETTES[0] // fallback to default</span>
+  return palette || COLOR_PALETTES[0] // fallback to default
 }
 &nbsp;
 /**
  * Get just the series colors for a palette
  */
-export function <span class="fstat-no" title="function not covered" >getSeriesColors(p</span>aletteName?: string): string[] {
-<span class="cstat-no" title="statement not covered" >  return getColorPalette(paletteName).colors</span>
+export function getSeriesColors(paletteName?: string): string[] {
+  return getColorPalette(paletteName).colors
 }
 &nbsp;
 /**
  * Get just the gradient colors for a palette
  */
-export function <span class="fstat-no" title="function not covered" >getGradientColors(p</span>aletteName?: string): string[] {
-<span class="cstat-no" title="statement not covered" >  return getColorPalette(paletteName).gradient</span>
+export function getGradientColors(paletteName?: string): string[] {
+  return getColorPalette(paletteName).gradient
 }
 &nbsp;
 /**
@@ -2287,8 +2287,8 @@ export const GRADIENT_CHART_TYPES = [
 /**
  * Determine if a chart type uses gradient colors
  */
-export function <span class="fstat-no" title="function not covered" >usesGradientColors(c</span>hartType: string): boolean {
-<span class="cstat-no" title="statement not covered" >  return GRADIENT_CHART_TYPES.includes(chartType as any)</span>
+export function usesGradientColors(chartType: string): boolean {
+  return GRADIENT_CHART_TYPES.includes(chartType as any)
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -2296,7 +2296,7 @@ export function <span class="fstat-no" title="function not covered" >usesGradien
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-31T04:39:48.663Z
+                at 2026-02-01T03:47:05.025Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

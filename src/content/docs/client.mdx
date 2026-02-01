@@ -2,6 +2,32 @@
 title: React Client Overview
 ---
 
+import { Image } from 'astro:assets';
+import dashboardHero from '../../assets/dashboard-hero.png';
+import analysisHero from '../../assets/analysis-builder-hero.png';
+import Lightbox from '../../components/Lightbox.astro';
+
+<div class="client-hero-grid">
+  <div class="client-hero-card">
+    <a href="/client/analysis-builder/" class="lightbox-trigger">
+      <Image src={analysisHero} alt="Analysis Builder - Interactive query builder" class="client-hero-image" />
+    </a>
+    <div class="client-hero-info">
+      <h3><a href="/client/analysis-builder/">Analysis Builder</a></h3>
+      <p>Interactive query builder with auto-execute, AI generation, and shareable URLs</p>
+    </div>
+  </div>
+  <div class="client-hero-card">
+    <a href="/client/dashboards/" class="lightbox-trigger">
+      <Image src={dashboardHero} alt="Dashboards - Drag-and-drop analytics" class="client-hero-image" />
+    </a>
+    <div class="client-hero-info">
+      <h3><a href="/client/dashboards/">Dashboards</a></h3>
+      <p>Drag-and-drop layouts with configurable portlets and persistence</p>
+    </div>
+  </div>
+</div>
+
 The Drizzle Cube React client provides pre-built components and hooks for creating analytics dashboards and data visualizations with minimal code.
 
 ## Installation
@@ -78,11 +104,11 @@ function CustomDashboard() {
   return (
     <CubeProvider apiOptions={{ apiUrl: '/api/cube' }}>
       <div className="grid grid-cols-2 gap-4">
-        <RechartsBarChart 
-          data={data} 
+        <RechartsBarChart
+          data={data}
           chartConfig={{ x: 'category', y: ['revenue'] }}
         />
-        <RechartsLineChart 
+        <RechartsLineChart
           data={timeData}
           chartConfig={{ x: 'date', y: ['sales'] }}
         />
@@ -172,8 +198,8 @@ import { CubeProvider, AnalyticsDashboard } from 'drizzle-cube/client';
 
 function App() {
   return (
-    <CubeProvider 
-      apiOptions={{ 
+    <CubeProvider
+      apiOptions={{
         apiUrl: '/api/cube',
         headers: {
           'Authorization': 'your-token', // Token is used as-is, no 'Bearer' prefix needed
@@ -356,7 +382,7 @@ import { AnalyticsDashboard } from 'drizzle-cube/client';
   initialLayout={[
     {
       id: 'sales-overview',
-      title: 'Sales Overview', 
+      title: 'Sales Overview',
       chartType: 'bar',
       query: {
         measures: ['Sales.totalRevenue', 'Sales.orderCount'],
@@ -367,7 +393,7 @@ import { AnalyticsDashboard } from 'drizzle-cube/client';
     {
       id: 'sales-trend',
       title: 'Sales Trend',
-      chartType: 'line', 
+      chartType: 'line',
       query: {
         measures: ['Sales.totalRevenue'],
         timeDimensions: [{
@@ -378,12 +404,12 @@ import { AnalyticsDashboard } from 'drizzle-cube/client';
       layout: { x: 6, y: 0, w: 6, h: 4 }
     }
   ]}
-  
+
   onLayoutChange={(layout) => {
     // Save layout to user preferences
     localStorage.setItem('dashboard-layout', JSON.stringify(layout));
   }}
-  
+
   showEditControls={true}
   allowResize={true}
   allowDrag={true}
@@ -400,7 +426,7 @@ import { AnalyticsPage } from 'drizzle-cube/client';
 <AnalyticsPage
   title="Sales Analytics"
   description="Comprehensive sales performance metrics"
-  
+
   filters={[
     {
       member: 'Sales.productCategory',
@@ -409,11 +435,11 @@ import { AnalyticsPage } from 'drizzle-cube/client';
     },
     {
       member: 'Sales.orderDate',
-      title: 'Date Range', 
+      title: 'Date Range',
       type: 'dateRange'
     }
   ]}
-  
+
   charts={[
     {
       id: 'revenue-by-category',
@@ -445,11 +471,11 @@ import { AnalyticsPortlet } from 'drizzle-cube/client';
       granularity: 'month'
     }]
   }}
-  
+
   showControls={true}
   allowExport={true}
   refreshInterval={30000} // Refresh every 30 seconds
-  
+
   onDataLoad={(data) => {
     console.log('Chart data loaded:', data);
   }}
@@ -468,10 +494,10 @@ import { AnalysisBuilder } from 'drizzle-cube/client';
     measures: ['Sales.totalRevenue'],
     dimensions: ['Sales.productCategory']
   }}
-  
+
   // Optional: disable localStorage persistence
   disableLocalStorage={false}
-  
+
   // Optional: hide settings panel
   hideSettings={false}
 />
@@ -481,7 +507,7 @@ import { AnalysisBuilder } from 'drizzle-cube/client';
 
 **AnalysisBuilder Features:**
 - **Interactive Cube Explorer**: Browse available cubes, measures, and dimensions
-- **Drag & Drop Query Building**: Visual query construction interface  
+- **Drag & Drop Query Building**: Visual query construction interface
 - **API Configuration Panel**: Configure endpoint URL and authentication
 - **Real-time Query Execution**: Execute queries and view results instantly
 - **SQL Preview**: View generated SQL for debugging
@@ -497,15 +523,15 @@ Perfect for time series data:
   chartType="line"
   query={{
     measures: ['Sales.totalRevenue'],
-    timeDimensions: [{ 
-      dimension: 'Sales.orderDate', 
-      granularity: 'day' 
+    timeDimensions: [{
+      dimension: 'Sales.orderDate',
+      granularity: 'day'
     }]
   }}
 />
 ```
 
-### Bar Charts  
+### Bar Charts
 Great for comparing categories:
 
 ```tsx
@@ -541,7 +567,7 @@ Detailed data views:
     measures: ['Sales.totalRevenue', 'Sales.orderCount'],
     dimensions: ['Sales.customerName', 'Sales.productCategory']
   }}
-  
+
   pageSize={20}
   sortable={true}
   searchable={true}
@@ -600,9 +626,9 @@ function MetricSelector() {
 
   return (
     <select>
-      {cubes.map(cube => 
+      {cubes.map(cube =>
         cube.measures.map(measure => (
-          <option key={`${cube.name}.${measure.name}`} 
+          <option key={`${cube.name}.${measure.name}`}
                   value={`${cube.name}.${measure.name}`}>
             {measure.title || measure.name}
           </option>
@@ -651,7 +677,7 @@ import { CubeProvider } from 'drizzle-cube/client';
 const theme = {
   colors: {
     primary: '#3b82f6',
-    secondary: '#64748b', 
+    secondary: '#64748b',
     success: '#10b981',
     warning: '#f59e0b',
     error: '#ef4444'
@@ -662,7 +688,7 @@ const theme = {
   }
 };
 
-<CubeProvider 
+<CubeProvider
   apiOptions={{ apiUrl: '/api/cube' }}
   theme={theme}
 >
@@ -677,7 +703,7 @@ const theme = {
 Enable real-time data updates:
 
 ```tsx
-<CubeProvider 
+<CubeProvider
   apiOptions={{
     apiUrl: '/api/cube',
     websocketUrl: 'ws://localhost:3000/ws',
@@ -746,7 +772,7 @@ import { validateQuery } from 'drizzle-cube/client';
 
 function AnalysisBuilder({ query, onChange }) {
   const validation = validateQuery(query);
-  
+
   if (!validation.isValid) {
     return (
       <div className="validation-errors">
@@ -783,6 +809,7 @@ function AnalysisBuilder({ query, onChange }) {
 
 ## Next Steps
 
+- [**Analysis Builder**](/client/analysis-builder/) - Interactive query builder
+- [**Dashboards**](/client/dashboards/) - Dashboard customization
 - [**Charts**](/client/charts/) - Detailed chart documentation
-- [**Dashboards**](/client/dashboards/) - Dashboard customization  
 - [**Hooks**](/client/hooks/) - Advanced hook usage

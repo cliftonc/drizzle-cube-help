@@ -2,16 +2,34 @@
 title: Analysis Builder
 ---
 
-The `AnalysisBuilder` is a modern, redesigned query builder component that provides an intuitive interface for exploring and visualizing data from your semantic layer.
+import { Image } from 'astro:assets';
+import analysisHero from '../../../assets/analysis-builder-hero.png';
+import Lightbox from '../../../components/Lightbox.astro';
 
-## Overview
+<div class="dashboard-landing-split">
+  <div class="dashboard-landing-image-col lightbox-trigger">
+    <Image src={analysisHero} alt="Drizzle Cube Analysis Builder - Interactive query builder with metrics, breakdowns, and visualizations" class="dashboard-landing-image" />
+  </div>
+  <div class="dashboard-landing-content">
+    <p>The <code>AnalysisBuilder</code> is a modern query builder component that provides an intuitive interface for exploring and visualizing data from your semantic layer. Auto-execute queries, AI-powered natural language generation, and shareable URLs—all in a clean split-panel layout.</p>
+    <ul class="dashboard-quick-links">
+      <li><a href="/client/dashboards/">Dashboards</a> — Embed analytics dashboards</li>
+      <li><a href="/client/funnel-analysis/">Funnel Analysis</a> — Track user journeys</li>
+      <li><a href="/client/charts/">Charts</a> — Visualization components</li>
+      <li><a href="/client/theming/">Theming</a> — Customize appearance</li>
+      <li><a href="/api-reference/analysis-config/">AnalysisConfig</a> — Config reference</li>
+      <li><a href="/getting-started/quick-start/">Quick Start</a> — Get started fast</li>
+    </ul>
+  </div>
+</div>
 
-AnalysisBuilder features:
+### Key Features
+
 - **Split Layout**: Results panel on the left (large), query builder on the right
-- **Metrics & Breakdowns**: Add measures (metrics) and dimensions (breakdowns) to build queries
+- **Metrics & Breakdowns**: Add measures and dimensions to build queries
 - **Filters**: Apply filters with a visual filter builder
 - **Auto-Execute**: Queries run automatically as you make changes
-- **Smart Chart Selection**: Automatically suggests appropriate chart types based on your data
+- **Smart Chart Selection**: Automatically suggests appropriate chart types
 - **AI Integration**: Optional AI-powered natural language query generation
 - **Shareable URLs**: Share analysis via URL hash parameters
 - **Local Storage Persistence**: Remembers your last analysis

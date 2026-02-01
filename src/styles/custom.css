@@ -442,7 +442,7 @@ img {
 }
 
 /* Content area images should be responsive but respect smaller explicit sizes */
-.sl-markdown-content img:not(.w-10):not([style*="width: 20px"]):not([src*="simple-icons"]) {
+.sl-markdown-content img:not(.w-10):not([style*="width: 20px"]):not([src*="simple-icons"]):not(.client-hero-image):not(.dashboard-landing-image) {
   max-width: 100% !important;
   height: auto !important;
   margin: 1rem auto !important;
@@ -569,5 +569,157 @@ table td {
 
 table th {
   background-color: var(--sl-color-bg-nav);
+}
+
+/* Client overview page - two-column hero grid */
+.client-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0 2rem 0;
+  align-items: start;
+}
+
+.client-hero-card {
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.client-hero-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
+}
+
+.client-hero-card a {
+  text-decoration: none;
+}
+
+.client-hero-card > a {
+  display: block;
+  height: 280px;
+  max-height: 280px;
+  overflow: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0;
+}
+
+.client-hero-card > a > *,
+.client-hero-card > a picture,
+.client-hero-card > a picture img {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 280px !important;
+  max-height: 280px !important;
+}
+
+.client-hero-image {
+  width: 100% !important;
+  height: 280px !important;
+  max-height: 280px !important;
+  object-fit: cover !important;
+  object-position: top left !important;
+  display: block !important;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.client-hero-info {
+  padding: 1rem;
+  background: var(--sl-color-bg-nav);
+  margin-top: auto;
+  min-height: 5.5rem;
+}
+
+.client-hero-info h3 {
+  margin: 0 0 0.5rem 0 !important;
+  font-size: 1.1rem;
+}
+
+.client-hero-info p {
+  margin: 0 !important;
+  font-size: 0.875rem;
+  color: var(--sl-color-text-accent);
+}
+
+@media (max-width: 768px) {
+  .client-hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dashboard landing page - side by side layout */
+.dashboard-landing-split {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin: 1.5rem 0 2rem 0;
+}
+
+.dashboard-landing-image-col {
+  flex: 0 0 55%;
+  cursor: pointer;
+}
+
+.dashboard-landing-image {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 0.75rem !important;
+  filter: drop-shadow(0 15px 30px rgba(139, 92, 246, 0.25)) !important;
+  transition: transform 0.3s ease, filter 0.3s ease !important;
+}
+
+.dashboard-landing-image-col:hover .dashboard-landing-image {
+  transform: scale(1.02) !important;
+  filter: drop-shadow(0 20px 40px rgba(139, 92, 246, 0.35)) !important;
+}
+
+.dashboard-landing-content {
+  flex: 1;
+}
+
+.dashboard-landing-content p {
+  margin: 0 0 1rem 0 !important;
+  line-height: 1.6;
+}
+
+.dashboard-quick-links {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.dashboard-quick-links li {
+  padding: 0.4rem 0 !important;
+  margin: 0 !important;
+  border-bottom: 1px solid var(--sl-color-hairline);
+}
+
+.dashboard-quick-links li:last-child {
+  border-bottom: none;
+}
+
+.dashboard-quick-links a {
+  font-weight: 600;
+}
+
+/* Stack on mobile */
+@media (max-width: 768px) {
+  .dashboard-landing-split {
+    flex-direction: column;
+  }
+
+  .dashboard-landing-image-col {
+    flex: none;
+    width: 100%;
+  }
 }
 

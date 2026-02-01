@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">94.73% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/19</span>
+                <span class='fraction'>18/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -193,37 +193,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">316x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1135x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">316x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">316x</span>
+<span class="cline-any cline-yes">131x</span>
+<span class="cline-any cline-yes">131x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">131x</span>
+<span class="cline-any cline-yes">131x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">316x</span>
+<span class="cline-any cline-yes">183x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">316x</span>
+<span class="cline-any cline-yes">184x</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -268,7 +268,7 @@ export interface UseAnalysisInitializationOptions {
 /**
  * Handles initialization effects - no return value (side-effect only hook)
  */
-export function <span class="fstat-no" title="function not covered" >useAnalysisInitialization(o</span>ptions: UseAnalysisInitializationOptions): void {
+export function useAnalysisInitialization(options: UseAnalysisInitializationOptions): void {
   const {
     currentQuery,
     isValidQuery,
@@ -277,37 +277,37 @@ export function <span class="fstat-no" title="function not covered" >useAnalysis
     displayConfig,
     onQueryChange,
     onChartConfigChange,
-  } = <span class="cstat-no" title="statement not covered" >options</span>
+  } = options
 &nbsp;
   // Get store action for loading from share URL
-  const <span class="cstat-no" title="statement not covered" >load = useAnalysisBuilderStore(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.load)</span></span>
+  const load = useAnalysisBuilderStore((state) =&gt; state.load)
 &nbsp;
   // URL share loading (on mount only)
-  const <span class="cstat-no" title="statement not covered" >hasInitializedShareRef = useRef(false)</span>
+  const hasInitializedShareRef = useRef(false)
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >    if (hasInitializedShareRef.current) <span class="cstat-no" title="statement not covered" >return</span></span>
-<span class="cstat-no" title="statement not covered" >    hasInitializedShareRef.current = true</span>
+  useEffect(() =&gt; {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (hasInitializedShareRef.current) <span class="cstat-no" title="statement not covered" >return</span>
+    hasInitializedShareRef.current = true
 &nbsp;
     // parseShareUrl returns AnalysisConfig | null
-    const <span class="cstat-no" title="statement not covered" >config = parseShareUrl()</span>
-<span class="cstat-no" title="statement not covered" >    if (!config) <span class="cstat-no" title="statement not covered" >return</span></span>
+    const config = parseShareUrl()
+    if (!config) return
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    load(config)</span>
-<span class="cstat-no" title="statement not covered" >    clearShareHash()</span>
+    load(config)
+    clearShareHash()
   }, [load])
 &nbsp;
   // Query change callback
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >    if (onQueryChange &amp;&amp; isValidQuery) {</span>
-<span class="cstat-no" title="statement not covered" >      onQueryChange(currentQuery)</span>
+  useEffect(() =&gt; {
+    if (onQueryChange &amp;&amp; isValidQuery) {
+      onQueryChange(currentQuery)
     }
   }, [currentQuery, isValidQuery, onQueryChange])
 &nbsp;
   // Chart config change callback
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >    if (onChartConfigChange) {</span>
-<span class="cstat-no" title="statement not covered" >      onChartConfigChange({</span>
+  useEffect(() =&gt; {
+    if (onChartConfigChange) {
+      onChartConfigChange({
         chartType,
         chartConfig,
         displayConfig,
@@ -322,7 +322,7 @@ export function <span class="fstat-no" title="function not covered" >useAnalysis
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-30T03:49:47.093Z
+                at 2026-01-31T08:23:31.003Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

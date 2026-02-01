@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -148,32 +148,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">742x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">742x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">742x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">742x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">742x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">742x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -197,7 +197,7 @@ interface CubeMetaProviderProps {
   children: ReactNode
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >CubeMetaProvider({</span> children }: CubeMetaProviderProps) {
+export function CubeMetaProvider({ children }: CubeMetaProviderProps) {
   // Use TanStack Query hook for metadata fetching
   const {
     meta,
@@ -206,23 +206,23 @@ export function <span class="fstat-no" title="function not covered" >CubeMetaPro
     error,
     refetch,
     getFieldLabel: getFieldLabelFromQuery
-<span class="cstat-no" title="statement not covered" >  } = useCubeMetaQuery()</span>
+  } = useCubeMetaQuery()
 &nbsp;
   // Convert error to string for backward compatibility
-  const metaError = <span class="cstat-no" title="statement not covered" >error ? (error instanceof Error ? error.message : String(error)) : null</span>
+  const metaError = error ? (error instanceof Error ? error.message : String(error)) : null
 &nbsp;
   // Wrap refetch to match expected signature
-  const <span class="cstat-no" title="statement not covered" >refetchMeta = useCallback(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >    refetch()</span>
+  const refetchMeta = useCallback(() =&gt; {
+    refetch()
   }, [refetch])
 &nbsp;
   // Create stable getFieldLabel that reads from current labelMap
-  const <span class="cstat-no" title="statement not covered" >getFieldLabel = useCallback(<span class="fstat-no" title="function not covered" >(f</span>ieldName: string): string =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    return getFieldLabelFromQuery(fieldName)</span>
+  const getFieldLabel = useCallback((fieldName: string): string =&gt; {
+    return getFieldLabelFromQuery(fieldName)
   }, [getFieldLabelFromQuery])
 &nbsp;
   // Memoize context value to prevent unnecessary re-renders
-  const <span class="cstat-no" title="statement not covered" >value = useMemo(<span class="fstat-no" title="function not covered" >() =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span></span>
+  const value = useMemo(() =&gt; ({
     meta,
     labelMap,
     metaLoading,
@@ -231,7 +231,7 @@ export function <span class="fstat-no" title="function not covered" >CubeMetaPro
     refetchMeta
   }), [meta, labelMap, metaLoading, metaError, getFieldLabel, refetchMeta])
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;CubeMetaContext.Provider value={value}&gt;
       {children}
     &lt;/CubeMetaContext.Provider&gt;
@@ -244,7 +244,7 @@ export function <span class="fstat-no" title="function not covered" >CubeMetaPro
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-30T03:49:47.093Z
+                at 2026-01-31T08:23:31.003Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

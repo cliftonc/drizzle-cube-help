@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -230,9 +230,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">534x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -248,7 +248,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -300,10 +300,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">546x</span>
+<span class="cline-any cline-yes">546x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">546x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -334,11 +334,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">62x</span>
+<span class="cline-any cline-yes">62x</span>
+<span class="cline-any cline-yes">62x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">62x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -374,9 +374,9 @@ import type { CubeQueryOptions, CubeApiOptions, FeaturesConfig, DashboardLayoutM
 import type { CubeClient } from '../client/CubeClient'
 import type { BatchCoordinator } from '../client/BatchCoordinator'
 &nbsp;
-const DEFAULT_API_OPTIONS: CubeApiOptions = <span class="cstat-no" title="statement not covered" >{ apiUrl: '/cubejs-api/v1' }</span>
+const DEFAULT_API_OPTIONS: CubeApiOptions = { apiUrl: '/cubejs-api/v1' }
 &nbsp;
-export const createCubeQueryClient = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >n</span>ew QueryClient({</span></span>
+export const createCubeQueryClient = () =&gt; new QueryClient({
   defaultOptions: {
     queries: {
       // Stale time: 5 minutes (matches existing cache duration)
@@ -392,7 +392,7 @@ export const createCubeQueryClient = <span class="cstat-no" title="statement not
 })
 &nbsp;
 // Legacy default client (useful for tests or explicit injection)
-export const queryClient = <span class="cstat-no" title="statement not covered" >createCubeQueryClient()</span>
+export const queryClient = createCubeQueryClient()
 &nbsp;
 // Backward compatible interface - merges all three contexts
 interface CubeContextValue {
@@ -432,7 +432,7 @@ interface CubeProviderProps {
  * 2. CubeMetaProvider - Metadata layer (changes on metadata load)
  * 3. CubeFeaturesProvider - Feature flags layer (changes on feature updates)
  */
-export function <span class="fstat-no" title="function not covered" >CubeProvider({</span>
+export function CubeProvider({
   cubeApi: _initialCubeApi, // Intentionally unused - for backward compatibility
   apiOptions,
   token,
@@ -444,10 +444,10 @@ export function <span class="fstat-no" title="function not covered" >CubeProvide
   queryClient: providedQueryClient,
   children
 }: CubeProviderProps) {
-  const [internalQueryClient<span class="cstat-no" title="statement not covered" >] = useState(<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >c</span>reateCubeQueryClient())</span></span>
-  const queryClient = <span class="cstat-no" title="statement not covered" >providedQueryClient ?? internalQueryClient</span>
+  const [internalQueryClient] = useState(() =&gt; createCubeQueryClient())
+  const queryClient = providedQueryClient ?? internalQueryClient
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;QueryClientProvider client={queryClient}&gt;
       &lt;CubeApiProvider
         apiOptions={apiOptions || DEFAULT_API_OPTIONS}
@@ -477,12 +477,12 @@ export function <span class="fstat-no" title="function not covered" >CubeProvide
  * - useCubeMeta() - Only re-renders on metadata changes
  * - useCubeFeatures() - Only re-renders on feature changes
  */
-export function <span class="fstat-no" title="function not covered" >useCubeContext(): CubeContextValue {</span>
-  const <span class="cstat-no" title="statement not covered" >api = useCubeApi()</span>
-  const <span class="cstat-no" title="statement not covered" >meta = useCubeMeta()</span>
-  const <span class="cstat-no" title="statement not covered" >featuresCtx = useCubeFeatures()</span>
+export function useCubeContext(): CubeContextValue {
+  const api = useCubeApi()
+  const meta = useCubeMeta()
+  const featuresCtx = useCubeFeatures()
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return useMemo(<span class="fstat-no" title="function not covered" >() =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span></span>
+  return useMemo(() =&gt; ({
     ...api,
     ...meta,
     features: featuresCtx.features,
@@ -502,7 +502,7 @@ export { createCubeQueryClient as createQueryClient }
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-30T03:49:47.093Z
+                at 2026-01-31T08:23:31.003Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
