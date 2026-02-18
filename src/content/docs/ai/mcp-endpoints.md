@@ -5,6 +5,12 @@ description: Connect AI agents to your semantic layer using the Model Context Pr
 
 Drizzle Cube includes a **built-in MCP server** that lets AI agents like Claude, ChatGPT, and n8n query your semantic layer directly. The server follows the [Model Context Protocol specification](https://modelcontextprotocol.io/) and exposes tools for discovering cubes, validating queries, and executing them.
 
+:::caution[No Built-in Authentication]
+The MCP server does **not** include built-in authentication. Your application is responsible for authenticating requests before they reach the MCP endpoint, just as with the standard Cube API routes. Without authentication middleware, **all MCP tools are publicly accessible** — including query execution via `drizzle_cube_load`.
+
+See [Security — Authentication Requirements](/semantic-layer/security/#authentication-requirements) and the [framework-specific examples](#protecting-mcp-endpoints) below.
+:::
+
 ## MCP Server Endpoint
 
 All framework adapters expose an MCP server at `/mcp`:
@@ -43,17 +49,47 @@ Add to your `claude_desktop_config.json`:
 }
 ```
 
+**With authentication** (recommended for production):
+
+```json
+{
+  "mcpServers": {
+    "your-app-analytics": {
+      "command": "npx",
+      "args": [
+        "-y", "@anthropic/mcp-remote",
+        "https://your-app.com/mcp",
+        "--header", "Authorization: Bearer YOUR_TOKEN"
+      ]
+    }
+  }
+}
+```
+
+### Claude Code
+
+```bash
+claude mcp add --transport http analytics https://your-app.com/mcp \
+  --header "Authorization: Bearer YOUR_TOKEN"
+```
+
 ### Claude.ai (Web)
 
 1. Go to **Settings → Connectors → Add Connector**
 2. Enter your MCP server URL: `https://your-app.com/mcp`
 3. The tools will be available in your conversations
 
+Claude.ai connectors support **OAuth 2.1** — if your MCP endpoint has an OAuth discovery document, Claude.ai will handle the auth flow automatically. You can also pass an `authorization_token` via the Messages API MCP connector for programmatic access.
+
 ### ChatGPT
 
 1. Go to **Settings → Connectors → Advanced → Developer Mode**
 2. Add your MCP server URL: `https://your-app.com/mcp`
 3. The tools will be available in ChatGPT
+
+:::note
+ChatGPT connectors require **OAuth authentication** — static API keys are not supported. Configure an OAuth provider (Auth0, Okta, etc.) for your MCP endpoint.
+:::
 
 ### n8n
 
@@ -237,21 +273,91 @@ createCubeRouter({
 
 > **Important**: The MCP server does **not** include built-in authentication. You are responsible for adding authentication middleware, just like with the standard Cube API routes.
 
-### Authentication Is Your Responsibility
+### How It Works
 
-Apply authentication middleware **before** mounting the cube router:
+The MCP endpoint (`/mcp`) is just an HTTP POST route — standard auth middleware protects it exactly like any other route. The complete flow is:
+
+1. **Middleware authenticates** the request (validates token, session, etc.)
+2. **`extractSecurityContext`** extracts the user's identity and permissions
+3. **Cube security filters** scope all data access to the authenticated user's tenant
+
+### Protecting MCP Endpoints
+
+Apply authentication middleware **before** mounting the cube router. Here are examples for each framework:
+
+#### Express
 
 ```typescript
+import express from 'express'
 import { createCubeRouter } from 'drizzle-cube/adapters/express'
-import { authMiddleware } from './auth'
 
 const app = express()
 
-// Apply authentication BEFORE mounting the cube router
-app.use(authMiddleware)
+// Auth middleware protects ALL routes including /mcp
+app.use(async (req, res, next) => {
+  const token = req.headers.authorization?.replace('Bearer ', '')
+  if (!token) return res.status(401).json({ error: 'Unauthorized' })
+  req.user = await validateToken(token)
+  next()
+})
 
-// Now both /cubejs-api/v1/* AND /mcp require authentication
-const cubeRouter = createCubeRouter({
+// Both /cubejs-api/v1/* AND /mcp are now protected
+app.use('/', createCubeRouter({
+  cubes: [employeesCube],
+  drizzle: db,
+  schema,
+  extractSecurityContext: async (req) => ({
+    organisationId: req.user.orgId,
+    userId: req.user.id
+  })
+}))
+```
+
+#### Hono
+
+```typescript
+import { Hono } from 'hono'
+import { createCubeRoutes } from 'drizzle-cube/adapters/hono'
+
+const app = new Hono()
+
+// Auth middleware protects ALL routes including /mcp
+app.use('*', async (c, next) => {
+  const token = c.req.header('Authorization')?.replace('Bearer ', '')
+  if (!token) return c.json({ error: 'Unauthorized' }, 401)
+  const user = await validateToken(token)
+  c.set('user', user)
+  await next()
+})
+
+// Cube routes (including MCP) are now protected
+app.route('/', createCubeRoutes({
+  cubes: [employeesCube],
+  drizzle: db,
+  schema,
+  extractSecurityContext: async (c) => ({
+    organisationId: c.get('user').orgId,
+    userId: c.get('user').id
+  })
+}))
+```
+
+#### Fastify
+
+```typescript
+import Fastify from 'fastify'
+import { registerCubeRoutes } from 'drizzle-cube/adapters/fastify'
+
+const fastify = Fastify()
+
+// Auth hook protects ALL routes including /mcp
+fastify.addHook('onRequest', async (request, reply) => {
+  const token = request.headers.authorization?.replace('Bearer ', '')
+  if (!token) return reply.code(401).send({ error: 'Unauthorized' })
+  request.user = await validateToken(token)
+})
+
+await registerCubeRoutes(fastify, {
   cubes: [employeesCube],
   drizzle: db,
   schema,
@@ -260,17 +366,37 @@ const cubeRouter = createCubeRouter({
     userId: req.user.id
   })
 })
+```
 
-app.use('/', cubeRouter)
+#### Next.js
+
+```typescript
+// In Next.js, validate auth inside extractSecurityContext
+// since there's no separate middleware layer for API routes
+
+export const cubeHandlers = createCubeHandlers({
+  cubes: [employeesCube],
+  drizzle: db,
+  schema,
+  extractSecurityContext: async (req) => {
+    const token = req.headers.authorization?.replace('Bearer ', '')
+    if (!token) throw new Error('Unauthorized')
+    const user = await validateToken(token)
+    return {
+      organisationId: user.orgId,
+      userId: user.id
+    }
+  }
+})
 ```
 
 ### Security Context Enforcement
 
 All MCP tools respect your security context:
 
-- `drizzle_cube_load` executes queries with the security context
-- `drizzle_cube_discover` only returns cubes the user has access to
-- Multi-tenant isolation is enforced on all data access
+- `drizzle_cube_load` executes queries with the authenticated user's security context
+- `drizzle_cube_discover` returns cube metadata (schema information) — access is gated by your auth middleware
+- Multi-tenant isolation is enforced on all data access via cube `sql` filters
 
 ## Enhancing AI Discovery
 

@@ -105,6 +105,10 @@ You can also connect Claude.ai directly to your MCP server using Connectors:
 2. Enter your MCP server URL: `http://localhost:3001/mcp`
 3. The tools will be available in your conversations
 
+:::note[Authentication]
+Claude.ai connectors support **OAuth 2.1** for authentication. If your MCP endpoint publishes an OAuth discovery document, Claude.ai handles the auth flow automatically. For programmatic access via the Messages API, you can pass an `authorization_token` in the MCP connector configuration.
+:::
+
 ### Available MCP Tools
 
 Your Drizzle Cube MCP server exposes these tools:
@@ -137,9 +141,43 @@ app.use(authMiddleware)
 app.use('/', createCubeRouter({ ... }))
 ```
 
-### Bearer Token
+See [MCP Server — Protecting MCP Endpoints](/ai/mcp-endpoints/#protecting-mcp-endpoints) for framework-specific middleware examples.
 
-If using bearer tokens, the MCP server will use them for authentication. For the plugin, add to `.drizzle-cube.json`:
+### Passing Auth from MCP Clients
+
+When connecting to a **remote** server that requires authentication, MCP clients need to send credentials with each request. Here's how to configure auth for each client:
+
+#### Claude Desktop (remote server with `mcp-remote`)
+
+```json
+{
+  "mcpServers": {
+    "analytics": {
+      "command": "npx",
+      "args": [
+        "-y", "@anthropic/mcp-remote",
+        "https://your-app.com/mcp",
+        "--header", "Authorization: Bearer YOUR_TOKEN"
+      ]
+    }
+  }
+}
+```
+
+#### Claude Code
+
+```bash
+claude mcp add --transport http analytics https://your-app.com/mcp \
+  --header "Authorization: Bearer YOUR_TOKEN"
+```
+
+#### Claude.ai Connectors
+
+Claude.ai supports **OAuth 2.1** for connector authentication. If your MCP endpoint publishes an OAuth discovery document, Claude.ai handles the flow automatically. For the Messages API, pass `authorization_token` in the MCP connector config.
+
+#### Plugin (Local Development)
+
+For the Drizzle Cube plugin, add your token to `.drizzle-cube.json`:
 
 ```json
 {
