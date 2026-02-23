@@ -12,7 +12,7 @@ A minimal Fastify application demonstrating drizzle-cube integration with a simp
 ## Features
 
 - **Fastify Backend**: Simple server using drizzle-cube Fastify adapter
-- **React Frontend**: Two-tab interface with dashboard and query builder
+- **React Frontend**: Two-tab interface with dashboard and analysis builder
 - **PostgreSQL Database**: Self-contained with Docker
 - **Sample Data**: Employee and productivity analytics
 
@@ -72,7 +72,7 @@ Visit:
 ### Frontend (`client/`)
 - React app with Vite (port 4010)
 - Vite proxy forwards `/cubejs-api/*` to backend (port 4011)
-- Two tabs: Dashboard view and Query Builder
+- Two tabs: Dashboard view and Analysis Builder
 - Uses `drizzle-cube/client` components with proper CSS imports
 - Includes react-grid-layout and recharts for dashboard functionality
 
@@ -121,9 +121,9 @@ The example includes an editable 4-chart dashboard:
 - Add sharing and versioning capabilities
 - Use proper authentication to control edit permissions
 
-## Query Builder
+## Analysis Builder
 
-Interactive query builder for:
+Interactive analysis builder for:
 - Selecting measures and dimensions
 - Adding time dimensions with granularity
 - Applying filters

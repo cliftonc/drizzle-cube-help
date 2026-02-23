@@ -2017,7 +2017,7 @@ export default function DashboardFilterConfigModal({
 <span class="cstat-no" title="statement not covered" >                setIsValueDropdownOpen(false)</span>
 <span class="cstat-no" title="statement not covered" >                setIsDateRangeDropdownOpen(!isDateRangeDropdownOpen)</span>
               }}
-              className="dc:w-full dc:flex dc:items-center dc:justify-between text-left dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text hover:bg-dc-surface-hover"
+              className="dc:w-full dc:flex dc:items-center dc:justify-between dc:text-left dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text hover:bg-dc-surface-hover"
             &gt;
               &lt;span className="dc:truncate"&gt;{dateRangeLabel}&lt;/span&gt;
               &lt;ChevronDownIcon className={`dc:w-4 dc:h-4 text-dc-text-muted dc:shrink-0 dc:ml-2 dc:transition-transform ${
@@ -2031,7 +2031,7 @@ export default function DashboardFilterConfigModal({
 <span class="cstat-no" title="statement not covered" >                  &lt;button</span>
                     key={option.value}
                     onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleRangeTypeChange(option.value)}</span>
-                    className={`dc:w-full text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover ${
+                    className={`dc:w-full dc:text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover ${
                       option.value === rangeType ? 'bg-dc-primary/10 text-dc-primary' : 'text-dc-text'
                     }`}
                   &gt;
@@ -2161,7 +2161,7 @@ export default function DashboardFilterConfigModal({
 <span class="cstat-no" title="statement not covered" >                setIsDateRangeDropdownOpen(false)</span>
 <span class="cstat-no" title="statement not covered" >                setIsValueDropdownOpen(!isValueDropdownOpen)</span>
               }}
-              className="dc:w-full dc:flex dc:items-center dc:justify-between text-left dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text hover:bg-dc-surface-hover"
+              className="dc:w-full dc:flex dc:items-center dc:justify-between dc:text-left dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text hover:bg-dc-surface-hover"
             &gt;
               &lt;span className="text-dc-text-muted dc:truncate"&gt;
                 {valuesLoading ? <span class="branch-0 cbranch-no" title="branch not covered" >'Loading...' : '</span>Select value...'}
@@ -2200,7 +2200,7 @@ export default function DashboardFilterConfigModal({
                         &lt;button
                           key={`${value}-${index}`}
                           onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleValueSelect(value)}</span>
-                          className={`dc:w-full text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover ${
+                          className={`dc:w-full dc:text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover ${
                             isSelected ? 'bg-dc-primary/10 text-dc-primary' : 'text-dc-text'
                           }`}
                         &gt;
@@ -2318,14 +2318,14 @@ export default function DashboardFilterConfigModal({
                       &lt;span className={`dc:w-6 dc:h-6 dc:flex dc:items-center dc:justify-center dc:rounded ${iconBgClass} ${iconTextClass}`}&gt;
                         {FieldIcon &amp;&amp; &lt;FieldIcon className="dc:w-4 dc:h-4" /&gt;}
                       &lt;/span&gt;
-                      &lt;span className="dc:flex-1 dc:text-sm dc:font-medium text-dc-text text-left"&gt;{fieldTitle}&lt;/span&gt;
+                      &lt;span className="dc:flex-1 dc:text-sm dc:font-medium text-dc-text dc:text-left"&gt;{fieldTitle}&lt;/span&gt;
                     &lt;/&gt;
                   ) : (
                     &lt;&gt;
                       &lt;span className="dc:w-6 dc:h-6 dc:flex dc:items-center dc:justify-center dc:rounded bg-dc-surface-tertiary text-dc-text-muted"&gt;
                         &lt;DimensionIcon className="dc:w-4 dc:h-4" /&gt;
                       &lt;/span&gt;
-                      &lt;span className="dc:flex-1 dc:text-sm text-dc-text-muted text-left"&gt;Click to select a field&lt;/span&gt;
+                      &lt;span className="dc:flex-1 dc:text-sm text-dc-text-muted dc:text-left"&gt;Click to select a field&lt;/span&gt;
                     &lt;/&gt;
                   )}
                   &lt;EditIcon className="dc:w-4 dc:h-4 text-dc-text-muted" /&gt;
@@ -2346,7 +2346,7 @@ export default function DashboardFilterConfigModal({
 <span class="cstat-no" title="statement not covered" >                      setIsDateRangeDropdownOpen(false)</span>
 <span class="cstat-no" title="statement not covered" >                      setIsOperatorDropdownOpen(!isOperatorDropdownOpen)</span>
                     }}
-                    className="dc:w-full dc:flex dc:items-center dc:justify-between text-left dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text hover:bg-dc-surface-hover"
+                    className="dc:w-full dc:flex dc:items-center dc:justify-between dc:text-left dc:text-sm dc:border border-dc-border dc:rounded dc:px-3 dc:py-2 bg-dc-surface text-dc-text hover:bg-dc-surface-hover"
                   &gt;
                     &lt;span className="dc:truncate"&gt;{operatorLabel}&lt;/span&gt;
                     &lt;ChevronDownIcon className={`dc:w-4 dc:h-4 text-dc-text-muted dc:shrink-0 dc:ml-2 dc:transition-transform ${
@@ -2360,7 +2360,7 @@ export default function DashboardFilterConfigModal({
 <span class="cstat-no" title="statement not covered" >                        &lt;button</span>
                           key={op.operator}
                           onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleOperatorChange(op.operator as FilterOperator)}</span>
-                          className={`dc:w-full text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover ${
+                          className={`dc:w-full dc:text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover ${
                             op.operator === localFilter.operator ? 'bg-dc-primary/10 text-dc-primary' : 'text-dc-text'
                           }`}
                         &gt;
@@ -2431,7 +2431,7 @@ export default function DashboardFilterConfigModal({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-31T08:23:31.003Z
+                at 2026-02-22T10:01:00.103Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

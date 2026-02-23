@@ -327,18 +327,26 @@ joins: {
 }
 ```
 
-Without `preferredFor`, the query planner uses BFS and may choose either path. With `preferredFor: ['Teams']`, queries involving Teams will always route through EmployeeTeams, ensuring semantically correct results.
+Without `preferredFor`, the query planner may choose a structurally valid path that is not the semantic path you want for the query grain.
+
+`preferredFor` is applied as a **first-hop preference** from the current source cube. In this example it biases `Employees -> EmployeeTeams` when routing to `Teams`, which keeps team-level membership queries semantically correct.
 
 **When to use `preferredFor`:**
-- Junction tables that represent the "true" relationship (e.g., employee team memberships vs department assignments)
+- Junction tables that represent the canonical relationship (e.g., employee team memberships vs department assignments)
 - When multiple paths exist but one is semantically more appropriate for the domain
-- To ensure consistent query behavior across different query combinations
+- When you need deterministic routing from a specific source cube to a specific target cube
 
 **Path Selection Priority:**
 1. Paths using joins with `preferredFor` targeting the destination cube (+10 priority)
-2. Paths through cubes with measures in the current query (+1 per cube)
+2. Paths through cubes used by query members (+1 per cube)
 3. Paths reusing already-joined cubes
 4. Shorter paths
+
+**`preferredFor` vs Cube join hints:**
+- `preferredFor` is **schema-level and edge-local**: you annotate a join edge with preferred targets
+- Cube join hints are **query-level path hints** derived from members and can carry ordered path segments
+- `preferredFor` is simpler and usually sufficient for single-canonical routing decisions
+- In highly ambiguous graphs, add `preferredFor` on each relevant first hop and verify with Dry Run / Query Analysis `Path scoring` output
 
 **Multi-Column Joins** - Join on multiple columns:
 ```typescript
@@ -505,24 +513,27 @@ const query = {
 
 ### Manual Join Path Control
 
-Control join resolution explicitly:
+Drizzle Cube does **not** currently support query-level manual join path hints (for example, a `joinHints` parameter on the query object).
+
+Join paths are resolved automatically from cube relationships. To guide path selection in ambiguous graphs:
+
+- Use `preferredFor` on the relevant first-hop join in your cube schema
+- Model explicit cube-level relationships for canonical business paths (for example, membership/junction routes)
+- Validate path selection in Dry Run / Query Analysis (`Path scoring`). In Analysis Builder, the Debug panel shows scoring outcomes for each join path (strategy, selected rank/score, and candidate score breakdown).
 
 ```typescript
-// Force specific join path with multi-column conditions
+// Schema-level guidance (supported): prefer membership path when routing to Teams
 joins: {
-  Departments: {
-    targetCube: () => departmentsCube,
-    relationship: 'belongsTo',
-    on: [
-      // Multi-step join conditions
-      { source: productivity.employeeId, target: employees.id },
-      { source: employees.departmentId, target: departments.id }
-    ],
-    // Optional: override SQL join type
-    sqlJoinType: 'left'
+  EmployeeTeams: {
+    targetCube: () => employeeTeamsCube,
+    relationship: 'hasMany',
+    preferredFor: ['Teams'],
+    on: [{ source: employees.id, target: employeeTeams.employeeId }]
   }
 }
 ```
+
+If query-level join hints are added in the future, they will be documented here.
 
 ## Performance Optimization
 
@@ -658,7 +669,7 @@ joins: {
   EmployeeTeams: {
     targetCube: () => employeeTeamsCube,
     relationship: 'hasMany',
-    preferredFor: ['Teams'], // Always use this path to reach Teams
+    preferredFor: ['Teams'], // Prefer this path from Employees when target is Teams
     on: [
       { source: employees.id, target: employeeTeams.employeeId }
     ]

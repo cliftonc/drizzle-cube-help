@@ -13,7 +13,7 @@ A full-stack Next.js 15 application demonstrating drizzle-cube integration with 
 
 **[View Live Demo →](https://nextjs.drizzle-cube.dev/)**
 
-See this example running live with the full dashboard and query builder functionality.
+See this example running live with the full dashboard and analysis builder functionality.
 
 ## Features
 
@@ -21,7 +21,7 @@ See this example running live with the full dashboard and query builder function
 - **drizzle-cube Integration**: Semantic layer with Cube.js-compatible API endpoints
 - **PostgreSQL Database**: Self-contained with Docker
 - **Analytics Dashboard**: Interactive charts with drag-and-drop editing
-- **Query Builder**: Real-time query construction and execution
+- **Analysis Builder**: Real-time query construction and execution
 - **TypeScript**: Full type safety from database to UI
 
 ## Quick Start
@@ -64,7 +64,7 @@ examples/nextjs/
 │       └── route.ts           # Cube.js API endpoints
 ├── components/
 │   ├── DashboardTab.tsx       # Dashboard with localStorage persistence
-│   └── QueryBuilderTab.tsx    # Interactive query builder
+│   └── AnalysisBuilderTab.tsx  # Interactive analysis builder
 ├── lib/
 │   ├── db.ts                  # Database connection
 │   └── dashboard-config.ts    # Default dashboard configuration
@@ -148,9 +148,9 @@ const saveDashboard = async (config) => {
 }
 ```
 
-## Query Builder
+## Analysis Builder
 
-Interactive query construction with:
+Interactive analysis builder with:
 
 - **Measures**: Select count, sum, average aggregations
 - **Dimensions**: Choose grouping fields

@@ -1373,7 +1373,7 @@ const FilterItem: React.FC&lt;FilterItemProps&gt; = ({
             &lt;div className="dc:relative dc:flex-1 dc:min-w-0"&gt;
             &lt;button
               onClick={handleFieldDropdownToggle}
-              className="dc:w-full dc:flex dc:items-center dc:justify-between text-left dc:text-sm dc:border border-dc-border dc:rounded-sm dc:px-2 dc:py-1 bg-dc-surface text-dc-text hover:bg-dc-surface-hover dc:focus:ring-2 focus:ring-dc-accent focus:border-dc-accent dc:min-w-0"
+              className="dc:w-full dc:flex dc:items-center dc:justify-between dc:text-left dc:text-sm dc:border border-dc-border dc:rounded-sm dc:px-2 dc:py-1 bg-dc-surface text-dc-text hover:bg-dc-surface-hover dc:focus:ring-2 focus:ring-dc-accent focus:border-dc-accent dc:min-w-0"
             &gt;
               &lt;span className="dc:truncate"&gt;
                 {selectedField ? (
@@ -1416,7 +1416,7 @@ const FilterItem: React.FC&lt;FilterItemProps&gt; = ({
                         &lt;button
                           key={`query-${field.name}`}
                           onClick={() =&gt; handleFieldChange(field.name)}
-                          className={`dc:w-full text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover dc:focus:outline-none focus:bg-dc-surface-hover ${
+                          className={`dc:w-full dc:text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover dc:focus:outline-none focus:bg-dc-surface-hover ${
                             field.name === filter.member ? 'bg-dc-accent-bg text-dc-accent' : 'text-dc-text-secondary'
                           }`}
                         &gt;
@@ -1448,7 +1448,7 @@ const FilterItem: React.FC&lt;FilterItemProps&gt; = ({
                       &lt;button
                         key={`all-${field.name}`}
                         onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleFieldChange(field.name)}</span>
-                        className={`dc:w-full text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover dc:focus:outline-none focus:bg-dc-surface-hover ${
+                        className={`dc:w-full dc:text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover dc:focus:outline-none focus:bg-dc-surface-hover ${
                           field.name === filter.member ? 'bg-dc-accent-bg text-dc-accent' : 'text-dc-text-secondary'
                         }`}
                       &gt;
@@ -1470,7 +1470,7 @@ const FilterItem: React.FC&lt;FilterItemProps&gt; = ({
 &nbsp;
                   {/* No results message */}
                   {filteredAllFields.length === 0 &amp;&amp; (
-                    &lt;div className="dc:px-3 dc:py-4 dc:text-sm text-dc-text-muted text-center"&gt;
+                    &lt;div className="dc:px-3 dc:py-4 dc:text-sm text-dc-text-muted dc:text-center"&gt;
                       No fields found matching "{fieldSearchTerm}"
                     &lt;/div&gt;
                   )}
@@ -1489,7 +1489,7 @@ const FilterItem: React.FC&lt;FilterItemProps&gt; = ({
               &lt;div className="dc:relative dc:shrink-0"&gt;
               &lt;button
                 onClick={handleOperatorDropdownToggle}
-                className="dc:w-full dc:sm:w-32 dc:flex dc:items-center dc:justify-between text-left dc:text-sm dc:border border-dc-border dc:rounded-sm dc:px-2 dc:py-1 bg-dc-surface text-dc-text hover:bg-dc-surface-hover dc:focus:ring-2 focus:ring-dc-accent focus:border-dc-accent"
+                className="dc:w-full dc:sm:w-32 dc:flex dc:items-center dc:justify-between dc:text-left dc:text-sm dc:border border-dc-border dc:rounded-sm dc:px-2 dc:py-1 bg-dc-surface text-dc-text hover:bg-dc-surface-hover dc:focus:ring-2 focus:ring-dc-accent focus:border-dc-accent"
               &gt;
                 &lt;span className="dc:truncate"&gt;
                   {availableOperators.find(op =&gt; op.operator === filter.operator)?.label || <span class="branch-1 cbranch-no" title="branch not covered" >filter.operator}</span>
@@ -1505,7 +1505,7 @@ const FilterItem: React.FC&lt;FilterItemProps&gt; = ({
                     &lt;button
                       key={operator.operator}
                       onClick={() =&gt; handleOperatorChange(operator.operator)}
-                      className={`dc:w-full text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover dc:focus:outline-none focus:bg-dc-surface-hover ${
+                      className={`dc:w-full dc:text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover dc:focus:outline-none focus:bg-dc-surface-hover ${
                         operator.operator === filter.operator ? 'bg-dc-accent-bg text-dc-accent' : 'text-dc-text-secondary'
                       }`}
                     &gt;
@@ -1529,7 +1529,7 @@ const FilterItem: React.FC&lt;FilterItemProps&gt; = ({
 <span class="cstat-no" title="statement not covered" >                        setIsOperatorDropdownOpen(false)</span>
 <span class="cstat-no" title="statement not covered" >                        setIsDateRangeDropdownOpen(!isDateRangeDropdownOpen)</span>
                       }}
-                      className="dc:w-full dc:sm:w-40 dc:flex dc:items-center dc:justify-between text-left dc:text-sm dc:border border-dc-border dc:rounded-sm dc:px-2 dc:py-1 bg-dc-surface text-dc-text hover:bg-dc-surface-hover dc:focus:ring-2 focus:ring-dc-accent focus:border-dc-accent"
+                      className="dc:w-full dc:sm:w-40 dc:flex dc:items-center dc:justify-between dc:text-left dc:text-sm dc:border border-dc-border dc:rounded-sm dc:px-2 dc:py-1 bg-dc-surface text-dc-text hover:bg-dc-surface-hover dc:focus:ring-2 focus:ring-dc-accent focus:border-dc-accent"
                     &gt;
                       &lt;span className="dc:truncate"&gt;{selectedRangeLabel}&lt;/span&gt;
                       &lt;ChevronDownIcon className={`dc:w-4 dc:h-4 text-dc-text-muted dc:shrink-0 dc:ml-1 dc:transition-transform ${
@@ -1543,7 +1543,7 @@ const FilterItem: React.FC&lt;FilterItemProps&gt; = ({
 <span class="cstat-no" title="statement not covered" >                          &lt;button</span>
                             key={option.value}
                             onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleRangeTypeChange(option.value)}</span>
-                            className={`dc:w-full text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover dc:focus:outline-none focus:bg-dc-surface-hover ${
+                            className={`dc:w-full dc:text-left dc:px-3 dc:py-2 dc:text-sm hover:bg-dc-surface-hover dc:focus:outline-none focus:bg-dc-surface-hover ${
                               option.value === rangeType ? 'bg-dc-accent-bg text-dc-accent' : 'text-dc-text-secondary'
                             }`}
                           &gt;
@@ -1627,7 +1627,7 @@ export default FilterItem</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-31T08:23:31.003Z
+                at 2026-02-22T10:01:00.103Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
