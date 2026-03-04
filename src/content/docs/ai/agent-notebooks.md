@@ -19,7 +19,7 @@ User Message → Adapter Endpoint → Claude (Anthropic API)
               SSE Stream → Client Notebook
 ```
 
-The agent has access to five tools:
+The agent has access to six tools:
 
 | Tool | Purpose |
 |------|---------|
@@ -28,6 +28,7 @@ The agent has access to five tools:
 | `execute_query` | Run a semantic query and return results |
 | `add_portlet` | Create a chart visualization block |
 | `add_markdown` | Create a text/analysis block |
+| `save_as_dashboard` | Convert notebook portlets into a persistent dashboard layout |
 
 ## Prerequisites
 
@@ -232,9 +233,29 @@ The `/agent/chat` endpoint streams Server-Sent Events. Each event is a JSON obje
 | `tool_use_result` | Tool returned a result |
 | `add_portlet` | Agent created a chart visualization |
 | `add_markdown` | Agent created a text/analysis block |
+| `dashboard_saved` | Agent saved a dashboard (title, description, config) |
 | `turn_complete` | An agentic turn finished (multi-turn conversations) |
 | `done` | Agent finished, includes `sessionId` for follow-up |
 | `error` | An error occurred |
+
+## Save as Dashboard
+
+The agent can convert a notebook's visualizations into a persistent dashboard. When the user asks to "save as a dashboard", the agent uses the `save_as_dashboard` tool to construct a `DashboardConfig` with proper layout, section headers, and filters.
+
+The dashboard config is emitted to the client via the `dashboard_saved` SSE event. Your client-side code handles persistence — see [Client Integration](/client/agent-notebooks/#save-as-dashboard) for details.
+
+The agent automatically:
+- Arranges portlets in a professional grid layout (KPIs at top, charts below)
+- Adds section headers as markdown portlets
+- Creates universal date filters and dimension filters from the conversation context
+- Maps filters to portlets via `dashboardFilterMapping`
+- Supports all analysis types (standard query, funnel, flow, retention)
+
+## Conversation History
+
+The agent supports conversation history for session continuity. When a notebook is reloaded from a saved config, the client sends the prior chat messages as `history` in the request body. The server converts this into Anthropic API message format so the agent has full context of the previous conversation.
+
+This happens automatically when using the `AgenticNotebook` component — no additional server configuration is needed.
 
 ## Environment Variables
 
@@ -276,7 +297,7 @@ npm install @anthropic-ai/sdk
 
 ### Agent responses are slow
 
-- Try a faster model: `model: 'claude-haiku-4-5-20251001'`
+- Try a faster/cheaper model: `model: 'claude-haiku-4-5'`
 - Reduce `maxTurns` to limit the number of tool-use rounds
 - Reduce `maxTokens` to limit response length
 

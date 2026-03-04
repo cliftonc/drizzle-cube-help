@@ -65,11 +65,24 @@ interface AgenticNotebookProps {
   /** Callback when dirty state changes */
   onDirtyStateChange?: (isDirty: boolean) => void
 
+  /** Called when the agent saves a dashboard. Presence enables the "Save as Dashboard" button. */
+  onDashboardSaved?: (data: {
+    title: string
+    description?: string
+    dashboardConfig: DashboardConfig
+  }) => void
+
+  /** Custom loading indicator for tool call spinners (defaults to LoadingIndicator) */
+  loadingComponent?: React.ReactNode
+
   /** Color palette for charts */
   colorPalette?: ColorPalette
 
   /** Additional CSS class name */
   className?: string
+
+  /** Initial prompt to auto-send on mount */
+  initialPrompt?: string
 }
 ```
 
@@ -139,6 +152,58 @@ The agent maintains context across turns using a session ID. Follow-up questions
 > **User:** Now add average salary to that
 >
 > **Agent:** *updates chart with both measures*
+
+### Save as Dashboard
+
+When `onDashboardSaved` is provided, a **Save as Dashboard** button appears in the chat panel header. Clicking it sends a prompt to the agent asking it to convert the current notebook into a professional dashboard layout with section headers, filters, and a grid arrangement.
+
+The agent constructs a `DashboardConfig` and emits it via SSE. Your callback receives the config and can persist it however you like:
+
+```tsx
+<AgenticNotebook
+  onDashboardSaved={(data) => {
+    // data.title - Dashboard title chosen by the agent
+    // data.description - Optional description
+    // data.dashboardConfig - Full DashboardConfig ready to persist
+    await saveDashboard(data)
+    navigate(`/dashboards/${newId}`)
+  }}
+/>
+```
+
+The button only appears when all conditions are met:
+- `onDashboardSaved` callback is provided
+- Agent is not currently streaming
+- At least one portlet block exists in the notebook
+- At least one message exchange has occurred
+
+If `onDashboardSaved` is not provided, the button is hidden and the feature is fully disabled.
+
+### Custom Loading Indicator
+
+Override the default spinner shown during tool calls with your own component:
+
+```tsx
+const BrandedSpinner = () => (
+  <img src="/logo.png" alt="Loading..." className="h-full w-full animate-spin" />
+)
+
+<AgenticNotebook loadingComponent={<BrandedSpinner />} />
+```
+
+The component is rendered at the size of the tool call indicator (12x12px). It's also used inside `AnalyticsDashboard` portlets if you thread it through there separately.
+
+### Initial Prompt
+
+Auto-send a prompt when the notebook mounts. Useful for pre-configured notebook templates or guided experiences:
+
+```tsx
+<AgenticNotebook
+  initialPrompt="Show me employee productivity trends by department for the last 6 months"
+/>
+```
+
+The prompt is sent once on mount only if the notebook has no existing messages.
 
 ## Persistence
 
@@ -329,13 +394,20 @@ interface UseAgentChatOptions {
   onToolStart: (id: string, name: string, input?: unknown) => void
 
   /** Tool call completed */
-  onToolResult: (id: string, name: string, result?: unknown) => void
+  onToolResult: (id: string, name: string, result?: unknown, isError?: boolean) => void
 
   /** Agent created a chart block */
   onAddPortlet: (data: PortletBlock) => void
 
   /** Agent created a markdown block */
   onAddMarkdown: (data: MarkdownBlock) => void
+
+  /** Agent saved a dashboard */
+  onDashboardSaved?: (data: {
+    title: string
+    description?: string
+    dashboardConfig: DashboardConfig
+  }) => void
 
   /** Agent finished (returns sessionId for follow-up) */
   onDone: (sessionId: string) => void
@@ -348,16 +420,19 @@ interface UseAgentChatOptions {
 }
 
 interface UseAgentChatResult {
-  /** Send a message to the agent */
-  sendMessage: (content: string, sessionId?: string | null) => Promise<void>
-
-  /** Whether the agent is currently streaming */
-  isStreaming: boolean
+  /** Send a message to the agent, optionally with conversation history */
+  sendMessage: (
+    content: string,
+    sessionId?: string | null,
+    history?: AgentHistoryMessage[]
+  ) => Promise<void>
 
   /** Abort the current stream */
   abort: () => void
 }
 ```
+
+The `history` parameter allows you to send prior conversation messages for session continuity (e.g. after reloading a saved notebook). The `AgenticNotebook` component handles this automatically.
 
 ### Store State Reference
 
@@ -474,6 +549,15 @@ function NotebookPage({ notebookId }: { notebookId: string }) {
           config={config}
           onSave={handleSave}
           onDirtyStateChange={setIsDirty}
+          onDashboardSaved={async (data) => {
+            const res = await fetch('/api/dashboards', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            })
+            const dashboard = await res.json()
+            window.location.href = `/dashboards/${dashboard.id}`
+          }}
           className="dc:flex-1"
         />
       </div>

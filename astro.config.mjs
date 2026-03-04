@@ -94,6 +94,11 @@ export default defineConfig({
       ],
       social: [
         {
+          icon: "discord",
+          label: "Discord",
+          href: "https://discord.gg/kFvT97hZsv",
+        },
+        {
           icon: "github",
           label: "GitHub",
           href: "https://github.com/cliftonc/drizzle-cube",
