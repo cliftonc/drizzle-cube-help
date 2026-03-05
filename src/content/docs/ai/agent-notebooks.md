@@ -5,12 +5,12 @@ description: Enable agentic AI notebooks with built-in data discovery, query exe
 
 Agent Notebooks add an agentic AI chat interface to your application. Users ask questions in natural language, and the agent autonomously discovers cubes, executes queries, and creates chart and markdown blocks — all within a notebook canvas.
 
-The agent uses Claude (via `@anthropic-ai/sdk`) and streams results back to the client via Server-Sent Events (SSE). All queries run through your existing security context, so multi-tenant isolation is preserved automatically.
+The agent supports multiple LLM providers — **Anthropic Claude**, **OpenAI**, **Google Gemini**, and any **OpenAI-compatible** service (Groq, Together, Mistral, Ollama, etc.). Results stream back to the client via Server-Sent Events (SSE). All queries run through your existing security context, so multi-tenant isolation is preserved automatically.
 
 ## How It Works
 
 ```
-User Message → Adapter Endpoint → Claude (Anthropic API)
+User Message → Adapter Endpoint → LLM Provider (Anthropic / OpenAI / Google)
                      ↓                    ↓
             Security Context        Tool Use Loop
                      ↓                    ↓
@@ -32,12 +32,22 @@ The agent has access to six tools:
 
 ## Prerequisites
 
-1. **An Anthropic API key** — Get one at [console.anthropic.com](https://console.anthropic.com/)
+1. **An API key** for your chosen provider:
+   - **Anthropic** — [console.anthropic.com](https://console.anthropic.com/)
+   - **OpenAI** — [platform.openai.com](https://platform.openai.com/)
+   - **Google** — [aistudio.google.com](https://aistudio.google.com/)
 2. **Working Cube API** — Your semantic layer and adapter should already be functional
-3. **Install the Anthropic SDK** (optional peer dependency):
+3. **Install the provider SDK** (optional peer dependency — install only the one you need):
 
 ```bash
+# Anthropic (default)
 npm install @anthropic-ai/sdk
+
+# OpenAI (also covers Groq, Together, Mistral, Ollama)
+npm install openai
+
+# Google Gemini
+npm install @google/generative-ai
 ```
 
 ## Server Configuration
@@ -48,10 +58,32 @@ Add the `agent` option to your adapter configuration. This enables the `POST /cu
 
 ```typescript
 interface AgentConfig {
-  /** Server-side Anthropic API key */
+  /**
+   * LLM provider to use (default: 'anthropic').
+   * - 'anthropic': Claude models via @anthropic-ai/sdk
+   * - 'openai': OpenAI models via openai SDK (also Groq, Together, Mistral, Ollama via baseURL)
+   * - 'google': Gemini models via @google/generative-ai
+   */
+  provider?: 'anthropic' | 'openai' | 'google'
+
+  /**
+   * Base URL for OpenAI-compatible providers.
+   * Only used when provider is 'openai'. Examples:
+   * - Groq: 'https://api.groq.com/openai/v1'
+   * - Together: 'https://api.together.xyz/v1'
+   * - Ollama: 'http://localhost:11434/v1'
+   */
+  baseURL?: string
+
+  /** Server-side API key for the selected provider */
   apiKey?: string
 
-  /** Model to use (default: 'claude-sonnet-4-6') */
+  /**
+   * Model to use. Default depends on provider:
+   * - Anthropic: 'claude-sonnet-4-6'
+   * - OpenAI: 'gpt-4.1-mini'
+   * - Google: 'gemini-3-flash-preview'
+   */
   model?: string
 
   /** Maximum agentic turns per request (default: 25) */
@@ -62,6 +94,9 @@ interface AgentConfig {
 
   /** Allow X-Agent-Api-Key header to override server apiKey */
   allowClientApiKey?: boolean
+
+  /** Build per-request system context from the authenticated security context */
+  buildSystemContext?: (securityContext: Record<string, unknown>) => string | undefined
 }
 ```
 
@@ -166,9 +201,53 @@ import { handlers } from '@/lib/cube'
 export const POST = handlers.agentChat
 ```
 
+### Provider Examples
+
+The examples above all use the default Anthropic provider. Here's how to configure other providers:
+
+```typescript
+// OpenAI
+agent: {
+  provider: 'openai',
+  apiKey: process.env.OPENAI_API_KEY,
+  model: 'gpt-4.1-mini',  // optional — this is the default
+}
+
+// Google Gemini
+agent: {
+  provider: 'google',
+  apiKey: process.env.GOOGLE_AI_API_KEY,
+  model: 'gemini-3-flash-preview',  // optional — this is the default
+}
+
+// Groq (OpenAI-compatible)
+agent: {
+  provider: 'openai',
+  apiKey: process.env.GROQ_API_KEY,
+  baseURL: 'https://api.groq.com/openai/v1',
+  model: 'llama-3.3-70b-versatile',
+}
+
+// Together AI (OpenAI-compatible)
+agent: {
+  provider: 'openai',
+  apiKey: process.env.TOGETHER_API_KEY,
+  baseURL: 'https://api.together.xyz/v1',
+  model: 'meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo',
+}
+
+// Ollama (local, OpenAI-compatible)
+agent: {
+  provider: 'openai',
+  baseURL: 'http://localhost:11434/v1',
+  apiKey: 'ollama',  // Ollama doesn't need a real key
+  model: 'llama3.1',
+}
+```
+
 ## API Key Management
 
-There are two ways to provide the Anthropic API key:
+There are two ways to provide the API key:
 
 ### Server-Side Key (Recommended for Production)
 
@@ -182,7 +261,7 @@ agent: {
 
 ### Client-Side Key Override (Development / Demo)
 
-Allow the client to send its own API key via the `X-Agent-Api-Key` header. Useful for development or demo sites where users bring their own key:
+Allow the client to send its own API key via the `X-Agent-Api-Key` header. Useful for development or demo sites where users bring their own key. The client can also override the provider, model, and base URL via headers (`X-Agent-Provider`, `X-Agent-Model`, `X-Agent-Base-URL`):
 
 ```typescript
 agent: {
@@ -203,12 +282,15 @@ Only enable `allowClientApiKey` when you trust the client environment. In produc
 
 ## CORS Configuration
 
-If your client runs on a different origin, make sure `X-Agent-Api-Key` is in your CORS allowed headers:
+If your client runs on a different origin, make sure the agent headers are in your CORS allowed headers:
 
 ```typescript
 cors: {
   origin: ['http://localhost:5173'],
-  allowHeaders: ['Content-Type', 'Authorization', 'X-Agent-Api-Key'],
+  allowHeaders: [
+    'Content-Type', 'Authorization',
+    'X-Agent-Api-Key', 'X-Agent-Provider', 'X-Agent-Model', 'X-Agent-Base-URL'
+  ],
   credentials: true
 }
 ```
@@ -219,8 +301,31 @@ Agent notebooks inherit your existing security architecture:
 
 1. **Authentication** — Every request to `/agent/chat` passes through `extractSecurityContext`, the same function used by `/load`, `/meta`, and all other endpoints
 2. **Multi-tenant isolation** — The security context is passed to every tool call. When the agent runs `execute_query`, the query is filtered by your cube's `sql` function just like any other query
-3. **API key gating** — Requests without a valid Anthropic API key return `401`
+3. **API key gating** — Requests without a valid API key for the configured provider return `401`
 4. **Turn limits** — `maxTurns` prevents runaway agent loops (default: 25)
+
+## Per-Request System Context
+
+Use `buildSystemContext` to give the agent user-specific context — such as the user's name, role, or preferences — derived from the authenticated security context. The returned string is appended to the LLM system prompt on every request.
+
+```typescript
+agent: {
+  apiKey: process.env.ANTHROPIC_API_KEY,
+  buildSystemContext: (securityContext) =>
+    `User: ${securityContext.userName}, Role: ${securityContext.role}, Org: ${securityContext.organisationName}`
+}
+```
+
+The callback is defined once at startup (static config) but executes per-request with the security context returned by `extractSecurityContext`. This keeps user-specific data out of shared config while giving the agent awareness of who it's talking to.
+
+Common uses:
+- **Personalization** — Address the user by name, tailor language to their role
+- **Access hints** — Tell the agent which cubes or features the user can access
+- **Locale/timezone** — Pass user preferences for date formatting
+
+:::tip
+Return `undefined` to skip adding context for a particular request.
+:::
 
 ## SSE Event Types
 
@@ -253,15 +358,18 @@ The agent automatically:
 
 ## Conversation History
 
-The agent supports conversation history for session continuity. When a notebook is reloaded from a saved config, the client sends the prior chat messages as `history` in the request body. The server converts this into Anthropic API message format so the agent has full context of the previous conversation.
+The agent supports conversation history for session continuity. When a notebook is reloaded from a saved config, the client sends the prior chat messages as `history` in the request body. The server converts this into the provider's message format so the agent has full context of the previous conversation.
 
 This happens automatically when using the `AgenticNotebook` component — no additional server configuration is needed.
 
 ## Environment Variables
 
 ```bash
-# Required for agent notebooks
-ANTHROPIC_API_KEY=sk-ant-api03-...
+# Set the key for your chosen provider
+ANTHROPIC_API_KEY=sk-ant-api03-...   # Anthropic
+OPENAI_API_KEY=sk-...                # OpenAI
+GOOGLE_AI_API_KEY=AIza...            # Google Gemini
+GROQ_API_KEY=gsk_...                 # Groq (OpenAI-compatible)
 ```
 
 ## Disabling the Endpoint
@@ -283,23 +391,26 @@ const router = createCubeRouter({
 
 ### "No API key configured" (401)
 
-The endpoint requires an Anthropic API key. Either:
+The endpoint requires an API key for the configured provider. Either:
 - Set `agent.apiKey` in your server config
 - Enable `agent.allowClientApiKey` and send `X-Agent-Api-Key` header from the client
 
-### "@anthropic-ai/sdk not found"
+### "SDK not found"
 
-Install the optional peer dependency:
+Install the optional peer dependency for your provider:
 
 ```bash
-npm install @anthropic-ai/sdk
+npm install @anthropic-ai/sdk      # Anthropic
+npm install openai                  # OpenAI / OpenAI-compatible
+npm install @google/generative-ai   # Google Gemini
 ```
 
 ### Agent responses are slow
 
-- Try a faster/cheaper model: `model: 'claude-haiku-4-5'`
+- Try a faster/cheaper model: `model: 'claude-haiku-4-5'` (Anthropic), `model: 'gpt-4.1-mini'` (OpenAI), `model: 'gemini-3-flash-preview'` (Google)
 - Reduce `maxTurns` to limit the number of tool-use rounds
 - Reduce `maxTokens` to limit response length
+- Avoid reasoning/thinking models (e.g. `gpt-5-mini`, `o3-mini`) as defaults — they add latency from forced chain-of-thought
 
 ### Agent can't find my cubes
 

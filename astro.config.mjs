@@ -161,6 +161,7 @@ export default defineConfig({
             { label: "Query Generation", slug: "ai/query-generation" },
             { label: "Query Analysis", slug: "ai/query-analysis" },
             { label: "Agent Notebooks", slug: "ai/agent-notebooks" },
+            { label: "Observability (Langfuse)", slug: "ai/observability" },
             { label: "Adding AI Endpoints", slug: "ai/adding-ai-endpoints" },
           ],
         },
