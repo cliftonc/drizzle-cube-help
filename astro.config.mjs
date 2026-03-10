@@ -173,6 +173,7 @@ export default defineConfig({
             { label: "Dashboards", slug: "client/dashboards" },
             { label: "Funnel Analysis", slug: "client/funnel-analysis" },
             { label: "Charts", slug: "client/charts" },
+            { label: "Schema Visualization", slug: "client/schema-visualization" },
             { label: "Drill-Down Navigation", slug: "client/drill-down" },
             { label: "Dashboard Persistence", slug: "client/dashboard-persistence" },
             { label: "Hooks", slug: "client/hooks" },
