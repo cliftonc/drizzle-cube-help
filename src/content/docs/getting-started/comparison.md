@@ -8,18 +8,18 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 
 ## At a Glance
 
-| Platform | Type | Embedding | Semantic Layer | Open Source | Best For |
-|----------|------|-----------|----------------|-------------|----------|
-| **Drizzle Cube** | Library | Native React | TypeScript + Drizzle ORM | Yes | Developers who love type safety |
-| **Metabase** | BI Platform | iFrame/SDK | Limited | Yes (OSS) | Teams wanting visual query builder |
-| **Redash** | SQL Tool | iFrame | None | Yes | SQL-savvy analysts |
-| **Apache Superset** | BI Platform | iFrame | SQL transforms | Yes | SQL power users, many viz types |
-| **Embeddable** | Dev Toolkit | React components | Cube.js | No | Commercial no-code embedding |
-| **Luzmo** | SaaS Platform | SDK/iFrame | Built-in | No | Enterprise SaaS dashboards |
-| **Omni** | BI Platform | iFrame + SDK | YAML (3-layer model) | No | Teams migrating from Looker |
-| **Cube.dev** | Semantic Layer | API/Playground | YAML/JS | Core (OSS) | Large-scale enterprise analytics |
-| **Mitzu** | Product Analytics | Dashboard | None | No | Warehouse-native funnel analysis |
-| **Recharts DIY** | Chart Library | Native React | None | Yes | Full custom control |
+| Platform | Type | Embedding | Semantic Layer | AI / Chat | Open Source | Best For |
+|----------|------|-----------|----------------|-----------|-------------|----------|
+| **Drizzle Cube** | Library | Native React | TypeScript + Drizzle ORM | Agentic notebooks, MCP, BYOK | Yes | Developers who love type safety |
+| **Metabase** | BI Platform | iFrame/SDK | Limited | Basic (paid) | Yes (OSS) | Teams wanting visual query builder |
+| **Redash** | SQL Tool | iFrame | None | None | Yes | SQL-savvy analysts |
+| **Apache Superset** | BI Platform | iFrame | SQL transforms | None | Yes | SQL power users, many viz types |
+| **Embeddable** | Dev Toolkit | React components | Cube.js | None | No | Commercial no-code embedding |
+| **Luzmo** | SaaS Platform | SDK/iFrame | Built-in | Limited | No | Enterprise SaaS dashboards |
+| **Omni** | BI Platform | iFrame + SDK | YAML (3-layer model) | Built-in chat + forecasting | No | Teams migrating from Looker |
+| **Cube.dev** | Semantic Layer | API/Playground | YAML/JS | None built-in | Core (OSS) | Large-scale enterprise analytics |
+| **Mitzu** | Product Analytics | Dashboard | None | None | No | Warehouse-native funnel analysis |
+| **Recharts DIY** | Chart Library | Native React | None | Build your own | Yes | Full custom control |
 
 ---
 
@@ -35,6 +35,7 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 | Embedding | Native React | iFrame or SDK |
 | Deployment | Part of your app | Separate service |
 | Query Building | Programmatic + UI | Visual drag-drop |
+| AI / Chat | Agentic notebooks, MCP (BYOK) | Basic AI (paid tier) |
 | Runtime | Node.js | Java (JVM) |
 
 **Choose Metabase if:**
@@ -114,6 +115,7 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 | Components | Chart library | Pre-built dashboards |
 | Dashboard Builder | Analysis Builder | Drag-drop no-code |
 | Data Modeling | TypeScript | Cube.js YAML/JS |
+| AI / Chat | Agentic notebooks, MCP (BYOK) | None |
 
 **Choose Embeddable if:**
 - You want a fully managed commercial solution
@@ -166,8 +168,8 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 | Embedding | Native React components | iFrame with SSO SDK |
 | Deployment | Part of your app | Cloud-hosted platform |
 | Semantic Layer | Code-first, compile-time types | YAML-defined, hosted service |
+| AI / Chat | Agentic notebooks, MCP, multi-provider BYOK | Built-in AI chat and forecasting |
 | dbt Integration | Not applicable | Bi-directional sync |
-| AI Features | Optional Claude integration | Built-in AI chat and forecasting |
 
 **Choose Omni if:**
 - You're migrating from Looker (direct LookML converter available)
@@ -195,6 +197,7 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 | Infrastructure | Runs in your app | Separate Cube Store service |
 | Scale | Small to medium | Enterprise-scale |
 | Pre-aggregations | Materialized views (manual) | Built-in Cube Store |
+| AI / Chat | Agentic notebooks, MCP, multi-provider BYOK | None built-in |
 | API Compatibility | Cube.js API compatible | Native |
 
 **Choose Cube.dev if:**
@@ -248,6 +251,7 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 | Data Layer | Semantic layer included | Build your own |
 | SQL Generation | Automatic, type-safe | Manual queries |
 | Multi-tenancy | Built-in security context | Implement yourself |
+| AI / Chat | Agentic notebooks, MCP (BYOK) | Build your own |
 | Time Handling | Granularity, period comparisons | Custom logic |
 | Maintenance | Library updates | Everything is on you |
 
