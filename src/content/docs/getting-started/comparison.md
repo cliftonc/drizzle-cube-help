@@ -16,15 +16,16 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 | **Apache Superset** | BI Platform | iFrame | SQL transforms | Yes | SQL power users, many viz types |
 | **Embeddable** | Dev Toolkit | React components | Cube.js | No | Commercial no-code embedding |
 | **Luzmo** | SaaS Platform | SDK/iFrame | Built-in | No | Enterprise SaaS dashboards |
+| **Omni** | BI Platform | iFrame + SDK | YAML (3-layer model) | No | Teams migrating from Looker |
 | **Cube.dev** | Semantic Layer | API/Playground | YAML/JS | Core (OSS) | Large-scale enterprise analytics |
 | **Mitzu** | Product Analytics | Dashboard | None | No | Warehouse-native funnel analysis |
 | **Recharts DIY** | Chart Library | Native React | None | Yes | Full custom control |
 
 ---
 
-## vs Metabase
+## Is Drizzle Cube an Open Source Alternative to Metabase?
 
-[Metabase](https://www.metabase.com/) is an open-source BI platform used by over 90,000 companies. It offers a visual query builder and can be deployed via JAR file, Docker, or their cloud service.
+[Metabase](https://www.metabase.com/) is an open-source BI platform used by over 90,000 companies. It offers a visual query builder and can be deployed via JAR file, Docker, or their cloud service. If you're looking for an open source Metabase alternative that embeds natively in React without iframes, Drizzle Cube takes a different approach.
 
 **Key Differences:**
 
@@ -48,9 +49,9 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 
 ---
 
-## vs Redash
+## Is Drizzle Cube an Open Source Alternative to Redash?
 
-[Redash](https://redash.io/) is an open-source tool for connecting to data sources, writing SQL queries, and creating visualizations. It focuses on SQL-first analytics.
+[Redash](https://redash.io/) is an open-source tool for connecting to data sources, writing SQL queries, and creating visualizations. It focuses on SQL-first analytics. If you need an open source Redash alternative with a semantic layer and embeddable React components, Drizzle Cube offers a code-first approach.
 
 **Key Differences:**
 
@@ -74,9 +75,9 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 
 ---
 
-## vs Apache Superset
+## Is Drizzle Cube an Open Source Alternative to Apache Superset?
 
-[Apache Superset](https://superset.apache.org/) is an open-source data exploration and visualization platform under the Apache Foundation. It offers 40+ visualization types and a powerful SQL Lab for custom queries.
+[Apache Superset](https://superset.apache.org/) is an open-source data exploration and visualization platform under the Apache Foundation. It offers 40+ visualization types and a powerful SQL Lab for custom queries. If you're evaluating open source Superset alternatives that embed directly in React apps without a separate Python service, Drizzle Cube is worth considering.
 
 **Key Differences:**
 
@@ -100,9 +101,9 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 
 ---
 
-## vs Embeddable.com
+## Is Drizzle Cube an Open Source Alternative to Embeddable?
 
-[Embeddable](https://embeddable.com/) is a developer toolkit for building customer-facing analytics. It provides React components (not iframes) and a drag-and-drop dashboard builder, powered by Cube.js on the backend.
+[Embeddable](https://embeddable.com/) is a developer toolkit for building customer-facing analytics. It provides React components (not iframes) and a drag-and-drop dashboard builder, powered by Cube.js on the backend. If you're looking for an open source Embeddable alternative with native TypeScript data modeling, Drizzle Cube provides a self-hosted option.
 
 **Key Differences:**
 
@@ -126,9 +127,9 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 
 ---
 
-## vs Luzmo
+## Is Drizzle Cube an Open Source Alternative to Luzmo?
 
-[Luzmo](https://www.luzmo.com/) (formerly Cumul.io) is an embedded analytics platform for SaaS companies. It offers a low-code dashboard builder and Flex SDK for custom implementations.
+[Luzmo](https://www.luzmo.com/) (formerly Cumul.io) is an embedded analytics platform for SaaS companies. It offers a low-code dashboard builder and Flex SDK for custom implementations. If you're evaluating open source Luzmo alternatives that give you full code control over your analytics stack, Drizzle Cube offers a developer-first approach.
 
 **Key Differences:**
 
@@ -152,9 +153,39 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 
 ---
 
-## vs Cube.dev
+## Is Drizzle Cube an Open Source Alternative to Omni?
 
-[Cube](https://cube.dev/) is an agentic analytics platform with a universal semantic layer. It uses YAML or JavaScript for data modeling and targets enterprise-scale deployments with built-in caching via Cube Store.
+[Omni](https://omni.co/) is a commercial BI and analytics platform built by former Looker leadership. It features a three-layer semantic model (schema, shared, workbook), bi-directional dbt integration, and AI-powered data exploration. Embedding is iframe-based with a server-side SDK for SSO authentication. If you're looking for an open source Omni alternative with native React embedding and TypeScript data modeling, Drizzle Cube takes a code-first approach.
+
+**Key Differences:**
+
+| Aspect | Drizzle Cube | Omni |
+|--------|--------------|------|
+| Pricing | Open source | Commercial SaaS |
+| Data Modeling | TypeScript + Drizzle ORM | YAML (3-layer model) |
+| Embedding | Native React components | iFrame with SSO SDK |
+| Deployment | Part of your app | Cloud-hosted platform |
+| Semantic Layer | Code-first, compile-time types | YAML-defined, hosted service |
+| dbt Integration | Not applicable | Bi-directional sync |
+| AI Features | Optional Claude integration | Built-in AI chat and forecasting |
+
+**Choose Omni if:**
+- You're migrating from Looker (direct LookML converter available)
+- Your data stack is warehouse-centric (Snowflake, BigQuery, Databricks)
+- You want a managed platform with built-in AI and dbt integration
+- Enterprise compliance (SOC 2, HIPAA) is a requirement out of the box
+
+**Choose Drizzle Cube if:**
+- You want analytics embedded as native React components, not iframes
+- Type-safe, code-first data modeling fits your development workflow
+- You prefer open source with zero platform costs
+- Your data lives in an operational database alongside your app
+
+---
+
+## Is Drizzle Cube an Open Source Alternative to Cube.dev?
+
+[Cube](https://cube.dev/) is an agentic analytics platform with a universal semantic layer. It uses YAML or JavaScript for data modeling and targets enterprise-scale deployments with built-in caching via Cube Store. If you're looking for an open source Cube.js alternative with TypeScript-native data modeling and zero additional infrastructure, Drizzle Cube offers a lightweight option.
 
 **Key Differences:**
 
@@ -180,9 +211,9 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 
 ---
 
-## vs Mitzu.io
+## Is Drizzle Cube an Open Source Alternative to Mitzu?
 
-[Mitzu](https://www.mitzu.io/) is warehouse-native product analytics that runs directly on your data warehouse. It specializes in funnel, retention, and cohort analysis without moving data.
+[Mitzu](https://www.mitzu.io/) is warehouse-native product analytics that runs directly on your data warehouse. It specializes in funnel, retention, and cohort analysis without moving data. If you need an open source Mitzu alternative that supports funnel and retention analysis while also embedding general-purpose analytics in your product, Drizzle Cube covers both use cases.
 
 **Key Differences:**
 
@@ -190,7 +221,7 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 |--------|--------------|-------|
 | Architecture | Direct database queries | Warehouse-native |
 | Focus | General analytics embedding | Product analytics |
-| Analysis Types | Flexible cubes | Funnels, retention, cohorts |
+| Analysis Types | Flexible cubes + funnels + retention | Funnels, retention, cohorts |
 | Data Movement | None (same database) | None (warehouse) |
 | Target Users | Developers | Product and growth teams |
 
@@ -206,9 +237,9 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 
 ---
 
-## vs Building Your Own with Recharts
+## Is Drizzle Cube an Alternative to Building Your Own with Recharts?
 
-[Recharts](https://recharts.org/) is a popular React charting library built on D3. You could build analytics yourself by writing SQL queries and rendering charts directly.
+[Recharts](https://recharts.org/) is a popular React charting library built on D3. You could build analytics yourself by writing SQL queries and rendering charts directly. If you've been considering building a custom analytics layer on top of Recharts, Drizzle Cube provides the semantic layer, security, and query infrastructure so you can skip the plumbing.
 
 **Key Differences:**
 
@@ -238,13 +269,13 @@ This page offers a factual comparison with popular alternatives. No shade thrown
 
 **Need no-code dashboard building?** Consider Metabase, Embeddable, or Luzmo depending on your budget and embedding needs.
 
-**Have a data warehouse already?** Mitzu might be perfect for product analytics; Cube.dev for general semantic layer needs.
+**Have a data warehouse already?** Mitzu might be perfect for product analytics; Cube.dev or Omni for general semantic layer needs.
 
 **SQL-first team?** Redash or Superset let analysts write raw SQL. Drizzle Cube adds a semantic layer for safer, reusable queries.
 
 **Budget-conscious?** Drizzle Cube, Metabase (self-hosted), Redash, and Superset are all open source.
 
-**Enterprise requirements?** Cube.dev and Luzmo offer commercial support and SLAs.
+**Enterprise requirements?** Cube.dev, Luzmo, and Omni offer commercial support and SLAs.
 
 ---
 
