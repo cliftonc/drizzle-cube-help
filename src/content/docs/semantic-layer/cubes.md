@@ -102,7 +102,7 @@ export const productivityCube: Cube<Schema> = defineCube('Productivity', {
   // Cross-cube joins for multi-cube queries
   joins: {
     Employees: {
-      targetCube: () => employeesCube,
+      targetCube: 'Employees',
       relationship: 'belongsTo',
       on: [
         { source: productivity.employeeId, target: employees.id }
@@ -327,8 +327,8 @@ Register cubes with the semantic layer compiler:
 import { SemanticLayerCompiler, createDatabaseExecutor } from 'drizzle-cube/server'
 
 const executor = createDatabaseExecutor(db, schema, 'postgres')
-const semanticLayer = new SemanticLayerCompiler({ 
-  databaseExecutor: executor 
+const semanticLayer = new SemanticLayerCompiler({
+  databaseExecutor: executor
 })
 
 // Register individual cubes
@@ -338,6 +338,10 @@ semanticLayer.registerCube(productivityCube)
 // Or register multiple cubes
 const allCubes = [employeesCube, productivityCube, departmentsCube]
 allCubes.forEach(cube => semanticLayer.registerCube(cube))
+
+// Optional: validate that all string cube references resolve
+// (throws with a clear error listing any unresolved references)
+semanticLayer.validateCubeReferences()
 ```
 
 ## Best Practices

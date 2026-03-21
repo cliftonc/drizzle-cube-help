@@ -155,7 +155,7 @@ export const employeesCube = defineCube({
 
   joins: {
     Departments: {
-      targetCube: () => departmentsCube,
+      targetCube: 'Departments',
       relationship: 'belongsTo',
       on: [{ source: employees.departmentId, target: departments.id }]
     }

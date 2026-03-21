@@ -161,7 +161,7 @@ Cube-level joins define relationships between different cubes, enabling multi-cu
 // In the Employees cube
 joins: {
   Departments: {
-    targetCube: () => departmentsCube,
+    targetCube: 'Departments',
     relationship: 'belongsTo',
     on: [
       { source: employees.departmentId, target: departments.id }
@@ -169,17 +169,17 @@ joins: {
   }
 }
 
-// In the Productivity cube  
+// In the Productivity cube
 joins: {
   Employees: {
-    targetCube: () => employeesCube,
+    targetCube: 'Employees',
     relationship: 'belongsTo',
     on: [
       { source: productivity.employeeId, target: employees.id }
     ]
   },
   Departments: {
-    targetCube: () => departmentsCube,
+    targetCube: 'Departments',
     relationship: 'belongsTo',
     on: [
       { source: productivity.employeeId, target: employees.id },
@@ -189,18 +189,83 @@ joins: {
 }
 ```
 
-### Lazy Reference Pattern
+### Cube Reference Types
 
-Cube-level joins use **lazy references** with arrow functions `() => cubeName` to avoid circular dependency issues:
+The `targetCube` property supports three reference styles:
+
+**String reference** (recommended) — resolved from the compiler's cube registry at query time. No imports needed, works across files:
+```typescript
+targetCube: 'Departments'
+```
+
+**Lazy function reference** — arrow function that returns a cube object. Useful when cubes are defined in the same file and you want compile-time type checking:
+```typescript
+targetCube: () => departmentsCube
+```
+
+**Direct object reference** — the cube object itself. Only works when the target is already defined (no forward references):
+```typescript
+targetCube: departmentsCube
+```
+
+### String References (Recommended)
+
+String references are the simplest way to define cross-cube joins. Cubes reference each other by name and the compiler resolves them from its registry at query time:
 
 ```typescript
-// Forward declarations prevent circular imports
+// employees-cube.ts — no import of departmentsCube needed
+export const employeesCube = defineCube('Employees', {
+  // ... cube definition
+  joins: {
+    Departments: {
+      targetCube: 'Departments',  // Resolved from registry
+      relationship: 'belongsTo',
+      on: [{ source: employees.departmentId, target: departments.id }]
+    }
+  }
+})
+
+// departments-cube.ts — no import of employeesCube needed
+export const departmentsCube = defineCube('Departments', {
+  // ... cube definition
+  joins: {
+    Employees: {
+      targetCube: 'Employees',  // Bidirectional, no circular imports
+      relationship: 'hasMany',
+      on: [{ source: departments.id, target: employees.departmentId }]
+    }
+  }
+})
+```
+
+**Key Benefits:**
+- **No Circular Dependencies**: Cubes can freely reference each other across files
+- **No Imports Needed**: Reference cubes by name — no need to import cube objects
+- **Bidirectional Joins**: Define A→B and B→A without any special patterns
+- **Mixed Usage**: String and function refs can coexist in the same cube
+
+**Validation:** After registering all cubes, you can optionally validate that every string reference resolves:
+
+```typescript
+semanticLayer.registerCube(employeesCube)
+semanticLayer.registerCube(departmentsCube)
+
+// Optional: strict validation at startup (throws if any string ref is unresolved)
+semanticLayer.validateCubeReferences()
+```
+
+Unresolved string references at query time are gracefully skipped with a console warning — the cube still works, it just won't have that join path available.
+
+### Lazy Function References
+
+Function references use arrow functions to delay resolution until runtime. This is useful when cubes are defined in the same file and you want TypeScript to validate the reference at compile time:
+
+```typescript
+// Forward declarations prevent circular references within one file
 let employeesCube: Cube<Schema>
 let departmentsCube: Cube<Schema>
 
-// Cubes can reference each other bidirectionally
 employeesCube = defineCube('Employees', {
-  // ... cube definition
   joins: {
     Departments: {
       targetCube: () => departmentsCube,  // Lazy reference
@@ -211,10 +276,9 @@ employeesCube = defineCube('Employees', {
 })
 
 departmentsCube = defineCube('Departments', {
-  // ... cube definition  
   joins: {
     Employees: {
-      targetCube: () => employeesCube,  // Bidirectional reference
+      targetCube: () => employeesCube,  // Bidirectional
       relationship: 'hasMany',
       on: [{ source: departments.id, target: employees.departmentId }]
     }
@@ -222,10 +286,9 @@ departmentsCube = defineCube('Departments', {
 })
 ```
 
-**Key Benefits:**
-- **Type Safety**: Full compile-time validation of cube references
-- **No Circular Dependencies**: Arrow functions delay resolution until runtime
-- **Bidirectional Joins**: Cubes can reference each other in both directions
+**When to use function refs over string refs:**
+- All cubes are in the same file and you want compile-time type safety
+- You prefer TypeScript to catch renamed cubes at build time
 
 ### Relationship Types
 
@@ -233,7 +296,7 @@ departmentsCube = defineCube('Departments', {
 ```typescript
 // Employee belongs to Department
 Departments: {
-  targetCube: () => departmentsCube,
+  targetCube: 'Departments',
   relationship: 'belongsTo',
   on: [
     { source: employees.departmentId, target: departments.id }
@@ -245,7 +308,7 @@ Departments: {
 ```typescript
 // Department has many Employees
 Employees: {
-  targetCube: () => employeesCube,
+  targetCube: 'Employees',
   relationship: 'hasMany',
   on: [
     { source: departments.id, target: employees.departmentId }
@@ -257,7 +320,7 @@ Employees: {
 ```typescript
 // Employee has one Profile
 UserProfiles: {
-  targetCube: () => userProfilesCube,
+  targetCube: 'UserProfiles',
   relationship: 'hasOne',
   on: [
     { source: employees.id, target: userProfiles.employeeId }
@@ -269,7 +332,7 @@ UserProfiles: {
 ```typescript
 // Employees connected to Departments through TimeEntries junction table
 DepartmentsViaTimeEntries: {
-  targetCube: () => departmentsCube,
+  targetCube: 'Departments',
   relationship: 'belongsToMany',
   on: [], // Not used for belongsToMany
   through: {
@@ -313,12 +376,12 @@ const result = await semanticLayer.execute({
 
 joins: {
   Departments: {
-    targetCube: () => departmentsCube,
+    targetCube: 'Departments',
     relationship: 'belongsTo',
     on: [{ source: employees.departmentId, target: departments.id }]
   },
   EmployeeTeams: {
-    targetCube: () => employeeTeamsCube,
+    targetCube: 'EmployeeTeams',
     relationship: 'hasMany',
     // Prefer this path when reaching Teams - uses junction table
     preferredFor: ['Teams'],
@@ -352,7 +415,7 @@ Without `preferredFor`, the query planner may choose a structurally valid path t
 ```typescript
 joins: {
   ProjectTasks: {
-    targetCube: () => projectTasksCube,
+    targetCube: 'ProjectTasks',
     relationship: 'hasMany',
     on: [
       { source: projects.id, target: tasks.projectId },
@@ -366,12 +429,12 @@ joins: {
 ```typescript
 joins: {
   Activities: {
-    targetCube: () => activitiesCube,
+    targetCube: 'Activities',
     relationship: 'hasMany',
     on: [
       { source: users.id, target: activities.userId },
-      { 
-        source: users.createdAt, 
+      {
+        source: users.createdAt,
         target: activities.timestamp,
         as: (source, target) => gte(target, source) // timestamp >= user.createdAt
       }
@@ -384,7 +447,7 @@ joins: {
 ```typescript
 joins: {
   Departments: {
-    targetCube: () => departmentsCube,
+    targetCube: 'Departments',
     relationship: 'belongsTo',
     on: [
       { source: employees.departmentId, target: departments.id }
@@ -525,7 +588,7 @@ Join paths are resolved automatically from cube relationships. To guide path sel
 // Schema-level guidance (supported): prefer membership path when routing to Teams
 joins: {
   EmployeeTeams: {
-    targetCube: () => employeeTeamsCube,
+    targetCube: 'EmployeeTeams',
     relationship: 'hasMany',
     preferredFor: ['Teams'],
     on: [{ source: employees.id, target: employeeTeams.employeeId }]
@@ -653,7 +716,7 @@ joins: [
 ```typescript
 joins: {
   Departments: {
-    targetCube: () => departmentsCube,
+    targetCube: 'Departments',
     relationship: 'belongsTo',
     on: [
       { source: employees.departmentId, target: departments.id }
@@ -667,7 +730,7 @@ joins: {
 // Use preferredFor when a junction table is the canonical path
 joins: {
   EmployeeTeams: {
-    targetCube: () => employeeTeamsCube,
+    targetCube: 'EmployeeTeams',
     relationship: 'hasMany',
     preferredFor: ['Teams'], // Prefer this path from Employees when target is Teams
     on: [

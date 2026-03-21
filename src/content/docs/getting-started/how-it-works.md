@@ -73,12 +73,12 @@ Each cube defines its relationships in the `joins` configuration:
 employeesCube = defineCube('Employees', {
   joins: {
     Departments: {
-      targetCube: () => departmentsCube,
+      targetCube: 'Departments',
       relationship: 'belongsTo',
       on: [{ source: employees.departmentId, target: departments.id }]
     },
     Productivity: {
-      targetCube: () => productivityCube, 
+      targetCube: 'Productivity',
       relationship: 'hasMany',
       on: [{ source: employees.id, target: productivity.employeeId }]
     }
