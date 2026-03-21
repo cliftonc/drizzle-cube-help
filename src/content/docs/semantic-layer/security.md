@@ -494,6 +494,183 @@ joins: [{
 }]
 ```
 
+## Database-Level Row Level Security (RLS)
+
+As an alternative to application-level `where` clauses, you can delegate security enforcement to the database itself using **Row Level Security (RLS)**. This is supported by PostgreSQL (9.5+) and platforms built on it like Supabase.
+
+With database-level RLS, the database guarantees that queries can only see rows permitted by the active policy — regardless of what SQL is executed. This provides defence-in-depth: even if a cube definition accidentally omits a security filter, RLS prevents data leakage.
+
+### How It Works
+
+1. You define RLS **policies** on your database tables (done once, outside of Drizzle Cube)
+2. You provide an `rlsSetup` function that runs **session-level commands** inside a transaction before each query
+3. Your cube definitions can omit `where` clauses — the database handles filtering
+4. Drizzle Cube recognises that `rlsSetup` is configured and suppresses the "no security filtering" warning
+
+### When to Use RLS vs Application-Level Filtering
+
+| Approach | Best for | Trade-offs |
+|---|---|---|
+| **Application-level** (`where` in cubes) | All databases, simple setups | Security logic in app code; must be applied to every cube |
+| **Database-level RLS** (`rlsSetup`) | PostgreSQL, Supabase | Security enforced by database; requires DB-level policy setup |
+| **Both** | High-security environments | Defence-in-depth; RLS as safety net even with app-level filtering |
+
+### PostgreSQL RLS Setup
+
+#### 1. Configure Database Policies (one-time setup)
+
+```sql
+-- Create a restricted role for analytics queries
+CREATE ROLE analytics_reader NOLOGIN;
+GRANT SELECT ON employees, departments, productivity TO analytics_reader;
+
+-- Enable RLS on tables
+ALTER TABLE employees ENABLE ROW LEVEL SECURITY;
+ALTER TABLE departments ENABLE ROW LEVEL SECURITY;
+ALTER TABLE productivity ENABLE ROW LEVEL SECURITY;
+
+-- Create policies that read the organisation_id from a session variable
+CREATE POLICY tenant_isolation ON employees
+  USING (organisation_id = current_setting('app.organisation_id')::int);
+
+CREATE POLICY tenant_isolation ON departments
+  USING (organisation_id = current_setting('app.organisation_id')::int);
+
+CREATE POLICY tenant_isolation ON productivity
+  USING (organisation_id = current_setting('app.organisation_id')::int);
+```
+
+#### 2. Configure rlsSetup in Drizzle Cube
+
+```typescript
+import { sql } from 'drizzle-orm'
+import { SemanticLayerCompiler } from 'drizzle-cube'
+import type { RLSSetupFn } from 'drizzle-cube'
+
+const rlsSetup: RLSSetupFn = async (tx, securityContext) => {
+  const orgId = String(securityContext.organisationId)
+
+  // SET LOCAL scopes these settings to the current transaction only
+  await tx.execute!(sql.raw(`SET LOCAL app.organisation_id = '${orgId}'`))
+  await tx.execute!(sql.raw(`SET LOCAL ROLE analytics_reader`))
+}
+
+const semanticLayer = new SemanticLayerCompiler({
+  drizzle: db,
+  schema,
+  rlsSetup
+})
+```
+
+#### 3. Define Cubes Without Security Filters
+
+```typescript
+// No where clause needed — PostgreSQL RLS enforces tenant isolation
+export const employeesCube = defineCube('Employees', {
+  sql: () => ({ from: employees }),
+
+  measures: {
+    count: { name: 'count', type: 'count', sql: employees.id },
+    avgSalary: { name: 'avgSalary', type: 'avg', sql: employees.salary }
+  },
+
+  dimensions: {
+    name: { name: 'name', type: 'string', sql: employees.name },
+    createdAt: { name: 'createdAt', type: 'time', sql: employees.createdAt }
+  }
+})
+```
+
+### Supabase RLS Setup
+
+Supabase uses PostgreSQL RLS natively and provides a built-in `auth.uid()` function for policy definitions.
+
+#### 1. Configure Policies via Supabase Dashboard or SQL
+
+```sql
+-- Enable RLS (can also be done via Supabase Dashboard → Table Editor → RLS)
+ALTER TABLE employees ENABLE ROW LEVEL SECURITY;
+
+-- Policy using Supabase's auth context
+-- This reads the JWT claims set by Supabase Auth
+CREATE POLICY tenant_isolation ON employees
+  FOR SELECT
+  USING (
+    organisation_id = (current_setting('request.jwt.claims', true)::json->>'organisation_id')::int
+  );
+```
+
+#### 2. Configure rlsSetup for Supabase
+
+```typescript
+import { sql } from 'drizzle-orm'
+import type { RLSSetupFn } from 'drizzle-cube'
+
+const rlsSetup: RLSSetupFn = async (tx, securityContext) => {
+  // Set the JWT claims that Supabase RLS policies read
+  const claims = JSON.stringify({
+    organisation_id: String(securityContext.organisationId),
+    sub: securityContext.userId,
+    role: securityContext.userRole
+  })
+
+  await tx.execute!(sql.raw(`SET LOCAL request.jwt.claims = '${claims}'`))
+  await tx.execute!(sql.raw(`SET LOCAL ROLE authenticated`))
+}
+
+const semanticLayer = new SemanticLayerCompiler({
+  drizzle: db,
+  schema,
+  rlsSetup
+})
+```
+
+### Using RLS with Framework Adapters
+
+All framework adapters support the `rlsSetup` option:
+
+```typescript
+// Express
+const router = createCubeRouter({
+  semanticLayer,
+  drizzle: db,
+  schema,
+  rlsSetup,
+  getSecurityContext: async (req) => ({
+    organisationId: req.user.organisationId,
+    userId: req.user.id
+  })
+})
+
+// Hono
+const app = createCubeApp({
+  semanticLayer,
+  drizzle: db,
+  schema,
+  rlsSetup,
+  getSecurityContext: async (c) => ({
+    organisationId: c.get('user').organisationId,
+    userId: c.get('user').id
+  })
+})
+```
+
+### Important Notes
+
+:::caution[Cache Key Must Reflect RLS Context]
+The cache key includes the full `securityContext` by default, ensuring that cached results are never shared across tenants. Make sure your `securityContext` contains **all values** that your `rlsSetup` function uses to configure RLS — otherwise one user's cached results could be served to another.
+:::
+
+:::note[Database Support]
+The `rlsSetup` hook runs transaction-level commands using `SET LOCAL`. This pattern is supported by **PostgreSQL** and databases built on it (Supabase, Neon, etc.). Other databases may support similar session-variable patterns — check your database documentation.
+
+Dry-run and SQL generation endpoints do **not** trigger `rlsSetup`, since they don't execute queries against the database.
+:::
+
+:::tip[Defence-in-Depth]
+You can combine both approaches — use application-level `where` clauses in your cubes AND configure `rlsSetup` for database-level RLS. This provides defence-in-depth: the application filters data at the query level, and the database enforces isolation as a safety net.
+:::
+
 ## Next Steps
 
 - Review [Cubes](/semantic-layer/cubes/) for complete security implementation
