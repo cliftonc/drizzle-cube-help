@@ -147,6 +147,7 @@ export default defineConfig({
               slug: "semantic-layer/statistical-functions",
             },
             { label: "Joins", slug: "semantic-layer/joins" },
+            { label: "Ungrouped Queries", slug: "semantic-layer/ungrouped-queries" },
             { label: "Security", slug: "semantic-layer/security" },
           ],
         },
@@ -170,6 +171,7 @@ export default defineConfig({
           items: [
             { label: "React Client", slug: "client" },
             { label: "Analysis Builder", slug: "client/analysis-builder" },
+            { label: "Data Browser", slug: "client/data-browser" },
             { label: "Dashboards", slug: "client/dashboards" },
             { label: "Funnel Analysis", slug: "client/funnel-analysis" },
             { label: "Charts", slug: "client/charts" },
