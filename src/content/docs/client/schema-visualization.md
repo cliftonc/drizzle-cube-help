@@ -19,7 +19,8 @@ These packages are **not bundled** with drizzle-cube — they are loaded on dema
 ### Standalone Page
 
 ```tsx
-import { CubeProvider, SchemaVisualization } from 'drizzle-cube/client'
+import { CubeProvider } from 'drizzle-cube/client'
+import { SchemaVisualization } from 'drizzle-cube/client/schema'
 import 'drizzle-cube/client/styles.css'
 
 function SchemaPage() {
