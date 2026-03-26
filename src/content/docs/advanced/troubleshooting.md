@@ -76,7 +76,7 @@ console.log('Available tables:', Object.keys(schema))
 
 ```typescript
 // Ensure security context extraction is correct
-export const getSecurityContext = async (c: any): Promise<SecurityContext> => {
+export const extractSecurityContext = async (c: any): Promise<SecurityContext> => {
   const authHeader = c.req.header('Authorization')
   if (!authHeader) {
     throw new Error('Missing Authorization header')
@@ -106,7 +106,7 @@ export const getSecurityContext = async (c: any): Promise<SecurityContext> => {
 
 ```typescript
 // Add debug logging
-export const getSecurityContext = async (c: any): Promise<SecurityContext> => {
+export const extractSecurityContext = async (c: any): Promise<SecurityContext> => {
   try {
     const context = await extractContext(c)
     console.log('Security context:', context) // Debug log

@@ -17,13 +17,13 @@ Drizzle Cube adapters **do not include built-in authentication**. Your applicati
 Before security context can be applied, requests must be authenticated. If adapter routes are mounted without prior authentication:
 
 - Analytics endpoints become publicly accessible
-- `getSecurityContext` / `extractSecurityContext` receives unauthenticated requests
+- `extractSecurityContext` / `extractSecurityContext` receives unauthenticated requests
 - Data may be exposed if security context defaults are unsafe
 
 ### Implementation Requirements
 
 1. **Mount authentication middleware before adapter routes** (Express, Fastify, Hono)
-2. **Validate authentication in `getSecurityContext`** (Next.js)
+2. **Validate authentication in `extractSecurityContext`** (Next.js)
 3. **Reject unauthenticated requests** before returning security context
 
 Each framework adapter documentation includes specific guidance:
@@ -61,7 +61,7 @@ const app = createCubeApp({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (c) => {
+  extractSecurityContext: async (c) => {
     const token = c.req.header('Authorization')?.replace('Bearer ', '')
     const user = await validateToken(token)
     
@@ -636,7 +636,7 @@ const router = createCubeRouter({
   drizzle: db,
   schema,
   rlsSetup,
-  getSecurityContext: async (req) => ({
+  extractSecurityContext: async (req) => ({
     organisationId: req.user.organisationId,
     userId: req.user.id
   })
@@ -648,7 +648,7 @@ const app = createCubeApp({
   drizzle: db,
   schema,
   rlsSetup,
-  getSecurityContext: async (c) => ({
+  extractSecurityContext: async (c) => ({
     organisationId: c.get('user').organisationId,
     userId: c.get('user').id
   })

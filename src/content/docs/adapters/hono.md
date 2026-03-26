@@ -269,7 +269,7 @@ const cubeApp = createCubeApp({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (c) => {
+  extractSecurityContext: async (c) => {
     const payload = c.get('jwtPayload')
     return {
       organisationId: payload.orgId,
@@ -313,7 +313,7 @@ const cubeApp = createCubeApp({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (c) => {
+  extractSecurityContext: async (c) => {
     const user = c.get('user')
     return {
       organisationId: user.organisationId,
@@ -336,7 +336,7 @@ const app = createCubeApp({
   semanticLayer,
   drizzle: db, // Use edge-compatible database
   schema,
-  getSecurityContext: async (c) => {
+  extractSecurityContext: async (c) => {
     // Optimized for edge runtime
     const orgId = c.req.header('x-org-id')
     return { organisationId: orgId }
@@ -449,7 +449,7 @@ const options: HonoAdapterOptions<typeof schema> = {
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (c: Context) => ({
+  extractSecurityContext: async (c: Context) => ({
     organisationId: c.get('user')?.organisationId
   })
 }
@@ -486,7 +486,7 @@ const cubeApp = createCubeApp({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext
+  extractSecurityContext
 })
 
 app.route('/api', cubeApp)
@@ -511,7 +511,7 @@ const cubeApp = createCubeApp({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext
+  extractSecurityContext
 })
 
 app.route('/api', cubeApp)
@@ -549,7 +549,7 @@ const app = createCubeApp({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (c) => {
+  extractSecurityContext: async (c) => {
     const token = c.req.header('Authorization')?.replace('Bearer ', '')
     return await getContextFromToken(token)
   }
@@ -571,7 +571,7 @@ const app = createCubeApp({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext
+  extractSecurityContext
 })
 
 export const GET = handle(app)
@@ -588,7 +588,7 @@ const app = createCubeApp({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext
+  extractSecurityContext
 })
 
 Deno.serve(app.fetch)
@@ -604,7 +604,7 @@ const app = createCubeApp({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext
+  extractSecurityContext
 })
 
 export default {
@@ -626,7 +626,7 @@ describe('Cube API', () => {
     semanticLayer,
     drizzle: db,
     schema,
-    getSecurityContext: async () => ({ organisationId: 'test-org' })
+    extractSecurityContext: async () => ({ organisationId: 'test-org' })
   })
   
   const client = testClient(app)
@@ -698,7 +698,7 @@ const db = drizzle(neon(process.env.DATABASE_URL))
 **Context access:**
 ```typescript
 // Access context correctly
-const getSecurityContext = async (c) => {
+const extractSecurityContext = async (c) => {
   const user = c.get('user') // From middleware
   const header = c.req.header('x-org-id') // From headers
   return { organisationId: user?.orgId || header }

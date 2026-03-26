@@ -263,10 +263,10 @@ This example implements organization-based multi-tenancy:
 
 ### Custom Security Context
 
-Modify the `getSecurityContext` function in `app.ts` to integrate with your authentication system:
+Modify the `extractSecurityContext` function in `app.ts` to integrate with your authentication system:
 
 ```typescript
-async function getSecurityContext(c: any): Promise<SecurityContext> {
+async function extractSecurityContext(c: any): Promise<SecurityContext> {
   // Your auth logic here
   const user = await validateJWT(c.req.header('Authorization'))
   

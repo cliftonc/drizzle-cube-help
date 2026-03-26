@@ -286,7 +286,7 @@ const loadHandler = createLoadHandler({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (request, context) => ({ 
+  extractSecurityContext: async (request, context) => ({ 
     organisationId: 'org-123' 
   })
 })
@@ -303,7 +303,7 @@ const metaHandler = createMetaHandler({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (request, context) => ({ 
+  extractSecurityContext: async (request, context) => ({ 
     organisationId: 'org-123' 
   })
 })
@@ -320,7 +320,7 @@ const sqlHandler = createSqlHandler({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (request, context) => ({ 
+  extractSecurityContext: async (request, context) => ({ 
     organisationId: 'org-123' 
   })
 })
@@ -337,7 +337,7 @@ const dryRunHandler = createDryRunHandler({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (request, context) => ({ 
+  extractSecurityContext: async (request, context) => ({ 
     organisationId: 'org-123' 
   })
 })
@@ -354,7 +354,7 @@ const { load, meta, sql, dryRun } = createCubeHandlers({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (request, context) => ({ 
+  extractSecurityContext: async (request, context) => ({ 
     organisationId: 'org-123' 
   })
 })
@@ -373,7 +373,7 @@ interface NextAdapterOptions<TSchema> {
   semanticLayer: SemanticLayerCompiler<TSchema>  // Semantic layer instance with registered cubes
   drizzle: DrizzleDatabase<TSchema>              // Fully connected Drizzle database instance
   schema?: TSchema                               // Database schema for type inference (recommended)
-  getSecurityContext: (request: NextRequest, context?: RouteContext) => SecurityContext | Promise<SecurityContext>
+  extractSecurityContext: (request: NextRequest, context?: RouteContext) => SecurityContext | Promise<SecurityContext>
   cors?: NextCorsOptions                         // CORS configuration
   runtime?: 'edge' | 'nodejs'                   // Runtime environment
 }
@@ -462,7 +462,7 @@ const handlers = createCubeHandlers({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (request) => {
+  extractSecurityContext: async (request) => {
     const session = await getServerSession(authOptions)
     
     if (!session?.user) {
@@ -487,7 +487,7 @@ const handlers = createCubeHandlers({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (request) => {
+  extractSecurityContext: async (request) => {
     const token = request.headers.get('authorization')?.replace('Bearer ', '')
     
     if (!token) {
@@ -514,7 +514,7 @@ const handlers = createCubeHandlers({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (request, context) => {
+  extractSecurityContext: async (request, context) => {
     // Extract from custom headers
     const orgId = request.headers.get('x-organization-id')
     const userId = request.headers.get('x-user-id')
@@ -594,7 +594,7 @@ const handler = createLoadHandler({
   drizzle: db,
   schema,
   runtime: 'edge', // Must match the export above
-  getSecurityContext: async (request) => {
+  extractSecurityContext: async (request) => {
     // Use only Web APIs in Edge Runtime
     const token = request.headers.get('authorization')
     return await validateTokenEdge(token)
@@ -716,7 +716,7 @@ const handlers = createCubeHandlers({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (request) => {
+  extractSecurityContext: async (request) => {
     try {
       return await getContext(request)
     } catch (error) {
@@ -860,7 +860,7 @@ const handlers = createCubeHandlers({
   semanticLayer,
   drizzle: db,
   schema,
-  getSecurityContext: async (request) => ({ organisationId: 'org-123' })
+  extractSecurityContext: async (request) => ({ organisationId: 'org-123' })
 })
 ```
 
@@ -883,9 +883,9 @@ cors: {
 ```
 
 **Issue**: Authentication context not available
-**Solution**: Ensure `getSecurityContext` returns the required context:
+**Solution**: Ensure `extractSecurityContext` returns the required context:
 ```typescript
-getSecurityContext: async (request) => {
+extractSecurityContext: async (request) => {
   // Must return an object with organisationId
   return { organisationId: 'required-field' }
 }
@@ -897,7 +897,7 @@ getSecurityContext: async (request) => {
 // Enable debug logging
 const handlers = createCubeHandlers({
   // ... other options
-  getSecurityContext: async (request, context) => {
+  extractSecurityContext: async (request, context) => {
     console.log('Request headers:', Object.fromEntries(request.headers))
     console.log('Route context:', context)
     

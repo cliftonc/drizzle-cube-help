@@ -309,7 +309,7 @@ app.use('/cubejs-api/*', async (c) => {
     cubes: allCubes,
     drizzle: db,
     schema,
-    extractSecurityContext: getSecurityContext,
+    extractSecurityContext: extractSecurityContext,
     cache: {
       provider: new CloudflareKVProvider(c.env.CACHE, {
         defaultTtlMs: 3600000  // 60 minutes
