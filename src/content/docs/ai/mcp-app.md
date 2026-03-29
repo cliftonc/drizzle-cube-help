@@ -96,10 +96,12 @@ The `chart` tool accepts an optional `chart` field that lets the AI control the 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `type` | `string` | Chart type: `bar`, `line`, `area`, `pie`, `scatter`, `kpiNumber`, `table`, `treemap` |
-| `xAxis` | `string` | Field for X axis (dimension or measure for scatter) |
-| `yAxis` | `string[]` | Fields for Y axis (measures) |
+| `type` | `string` | Chart type (see [Available Chart Types](#available-chart-types)) |
 | `title` | `string` | Chart title displayed above the chart |
+| `chartConfig` | `object` | Axis configuration: `xAxis`, `yAxis`, `series`, `yAxisAssignment`, `sizeField`, `colorField` |
+| `displayConfig` | `object` | Display options: `showLegend`, `showGrid`, `showTooltip`, `stacked`, `stackType`, `orientation` |
+| `xAxis` | `string` | *(deprecated)* Flat alias — use `chartConfig.xAxis` instead |
+| `yAxis` | `string[]` | *(deprecated)* Flat alias — use `chartConfig.yAxis` instead |
 
 If no `chart` hint is provided, the app auto-selects based on the query shape:
 
