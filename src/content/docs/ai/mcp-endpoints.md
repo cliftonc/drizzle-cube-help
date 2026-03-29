@@ -390,6 +390,24 @@ export const cubeHandlers = createCubeHandlers({
 })
 ```
 
+### OAuth 2.1 Authentication (Reference Implementation)
+
+For production MCP servers that need to work with Claude.ai connectors, ChatGPT, or other clients requiring OAuth, see [drizby](https://github.com/cliftonc/drizby) — an open-source analytics app built on drizzle-cube that implements full OAuth 2.1 for MCP authentication.
+
+The implementation includes:
+
+- **OAuth 2.1 with PKCE** (S256 required) via [`@jmondi/oauth2-server`](https://jmondi.dev/oauth2-server/)
+- **Dynamic Client Registration** ([RFC 7591](https://tools.ietf.org/html/rfc7591))
+- **Authorization Server Metadata** ([RFC 8414](https://tools.ietf.org/html/rfc8414))
+- **Protected Resource Metadata** ([RFC 9728](https://tools.ietf.org/html/rfc9728))
+- **Token revocation** and **refresh tokens**
+
+Key files:
+- [`src/routes/oauth.ts`](https://github.com/cliftonc/drizby/blob/main/src/routes/oauth.ts) — OAuth endpoints (authorize, token, register, revoke)
+- [`src/auth/oauth-repositories.ts`](https://github.com/cliftonc/drizby/blob/main/src/auth/oauth-repositories.ts) — Drizzle-backed token/client storage
+- [`src/auth/middleware.ts`](https://github.com/cliftonc/drizby/blob/main/src/auth/middleware.ts) — Unified auth middleware (OAuth Bearer + session cookies)
+- [`app.ts`](https://github.com/cliftonc/drizby/blob/main/app.ts) — MCP + OAuth integration with `extractSecurityContext`
+
 ### Security Context Enforcement
 
 All MCP tools respect your security context:
