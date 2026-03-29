@@ -30,7 +30,8 @@ This endpoint implements the full MCP specification including:
 |------|---------|
 | `drizzle_cube_discover` | Find relevant cubes based on topic or intent |
 | `drizzle_cube_validate` | Validate queries and get auto-corrections |
-| `drizzle_cube_load` | Execute queries and return results |
+| `drizzle_cube_load` | Execute queries and return data |
+| `drizzle_cube_chart` | Execute queries with interactive chart visualization |
 
 ## Connecting AI Tools
 
@@ -133,9 +134,13 @@ User: "Show me average salary by department"
          │
          ▼
 ┌─────────────────────────────────────────────────────┐
-│  4. drizzle_cube_load                               │
-│     Execute query with security context             │
-│     → Returns: { data: [...], annotation: {...} }   │
+│  4a. drizzle_cube_load                              │
+│      Execute query, return data as text             │
+│      → Returns: { data: [...], annotation: {...} }  │
+│                                                     │
+│  4b. drizzle_cube_chart (alternative)               │
+│      Execute query + render interactive chart       │
+│      → Returns: data + MCP App visualization        │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -226,6 +231,30 @@ Execute a query and return results.
 }
 ```
 
+### drizzle_cube_chart
+
+Execute a query and render an interactive chart. Same query format as `load`, with an optional `chart` hint to control the visualization.
+
+```json
+// Parameters
+{
+  "query": {
+    "measures": ["Employees.count"],
+    "dimensions": ["Departments.name"]
+  },
+  "chart": {
+    "type": "pie",
+    "title": "Employees by Department",
+    "chartConfig": {
+      "xAxis": ["Departments.name"],
+      "yAxis": ["Employees.count"]
+    }
+  }
+}
+```
+
+If no `chart` hint is provided, the chart type is auto-selected based on the query shape. See [MCP App](/ai/mcp-app/) for chart types and configuration details.
+
 ## Configuration
 
 ### Disabling MCP
@@ -250,7 +279,7 @@ createCubeRouter({
   // ... other options
   mcp: {
     enabled: true,
-    tools: ['discover', 'validate', 'load']  // Only expose these
+    tools: ['discover', 'validate', 'load', 'chart']  // Only expose these
   }
 })
 ```
@@ -412,7 +441,7 @@ Key files:
 
 All MCP tools respect your security context:
 
-- `drizzle_cube_load` executes queries with the authenticated user's security context
+- `drizzle_cube_load` and `drizzle_cube_chart` execute queries with the authenticated user's security context
 - `drizzle_cube_discover` returns cube metadata (schema information) — access is gated by your auth middleware
 - Multi-tenant isolation is enforced on all data access via cube `sql` filters
 
@@ -434,7 +463,7 @@ https://try.drizzle-cube.dev/mcp
 
 ## Adding Tools to an Existing MCP Server
 
-If you already have an MCP server (e.g., a PostgREST MCP for CRUD operations) and want to add drizzle-cube's analytics tools alongside your existing tools, see [Composable MCP Tools](/ai/composable-mcp-tools/). This lets you register `discover`, `validate`, and `load` on any MCP server without running the built-in `/mcp` endpoint.
+If you already have an MCP server (e.g., a PostgREST MCP for CRUD operations) and want to add drizzle-cube's analytics tools alongside your existing tools, see [Composable MCP Tools](/ai/composable-mcp-tools/). This lets you register `discover`, `validate`, `load`, and `chart` on any MCP server without running the built-in `/mcp` endpoint.
 
 ## Next Steps
 

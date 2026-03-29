@@ -164,7 +164,7 @@ Creates a composable tools object.
 | `semanticLayer` | `SemanticLayerCompiler` | *required* | Semantic layer with registered cubes |
 | `getSecurityContext` | `(meta?) => SecurityContext` | *required* | Extracts security context for `load` tool |
 | `toolPrefix` | `string` | `'drizzle_cube_'` | Prefix for tool names |
-| `tools` | `string[]` | `['discover', 'validate', 'load']` | Which tools to expose |
+| `tools` | `string[]` | `['discover', 'validate', 'load', 'chart']` | Which tools to expose |
 | `prompts` | `MCPPrompt[]` | built-in | Custom MCP prompts |
 | `resources` | `MCPResource[]` | built-in | Custom MCP resources |
 
@@ -188,17 +188,18 @@ By default, tools are prefixed with `drizzle_cube_`:
 | discover | `drizzle_cube_discover` |
 | validate | `drizzle_cube_validate` |
 | load | `drizzle_cube_load` |
+| chart | `drizzle_cube_chart` |
 
 Customize the prefix:
 
 ```typescript
 // No prefix
 const cubeTools = getCubeTools({ ..., toolPrefix: '' })
-// → discover, validate, load
+// → discover, validate, load, chart
 
 // Custom prefix
 const cubeTools = getCubeTools({ ..., toolPrefix: 'analytics_' })
-// → analytics_discover, analytics_validate, analytics_load
+// → analytics_discover, analytics_validate, analytics_load, analytics_chart
 ```
 
 The `handles()` and `handle()` methods accept tool names both with and without the prefix.
@@ -233,7 +234,7 @@ const cubeTools = getCubeTools({
 cubeTools.handle(name, args, { authToken: request.headers.authorization })
 ```
 
-The `discover` and `validate` tools don't execute queries, so they don't invoke `getSecurityContext`. Access to these tools is gated by whatever authentication your MCP server applies.
+The `discover` and `validate` tools don't execute queries, so they don't invoke `getSecurityContext`. Access to these tools is gated by whatever authentication your MCP server applies. The `chart` tool works identically to `load` but renders an interactive chart via MCP App.
 
 ## Compared to Built-in MCP Server
 
@@ -241,7 +242,7 @@ The `discover` and `validate` tools don't execute queries, so they don't invoke 
 |---------|---------------------------|--------------------------------|
 | Setup | Zero-config with any adapter | Manual registration |
 | Use case | Standalone MCP server | Add to existing MCP server |
-| Tools | Same 3 tools | Same 3 tools |
+| Tools | Same 4 tools | Same 4 tools |
 | Prompts & Resources | Included | Included |
 | Protocol handling | Built-in JSON-RPC, SSE | You provide (or use SDK) |
 | Auth | Framework middleware | Your MCP server's auth |

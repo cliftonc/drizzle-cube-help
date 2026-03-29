@@ -3,14 +3,16 @@ title: MCP App (Interactive Charts)
 description: Return interactive chart visualisations from MCP tool calls using the MCP Apps protocol
 ---
 
-When AI agents call the `load` tool, drizzle-cube can return an **interactive chart** directly inside the conversation. The chart renders in a sandboxed iframe using the [MCP Apps protocol](https://modelcontextprotocol.io/docs/extensions/apps), supported by Claude Desktop, Claude.ai, ChatGPT, and other MCP-compatible hosts.
+When AI agents call the `chart` tool, drizzle-cube returns an **interactive chart** directly inside the conversation. The chart renders in a sandboxed iframe using the [MCP Apps protocol](https://modelcontextprotocol.io/docs/extensions/apps), supported by Claude Desktop, Claude.ai, ChatGPT, and other MCP-compatible hosts.
+
+The `load` tool returns data as text only (no chart UI). Use `chart` when you want visualization.
 
 The AI chooses the best chart type based on context — no hardcoded rules needed.
 
 ## How It Works
 
 ```
-AI calls load tool → data returned + chart hint
+AI calls chart tool → data returned + chart hint
                          ↓
 Host renders ui://drizzle-cube/visualization.html in iframe
                          ↓
@@ -19,9 +21,11 @@ App auto-selects chart type (or uses AI's hint) → interactive chart
 User can switch chart types via toolbar
 ```
 
-The `load` tool's response includes both:
-- **Text content** — JSON data for text-only clients (unchanged)
-- **UI resource** — an interactive React app with 8 chart types
+The `chart` tool's response includes both:
+- **Text content** — JSON data for text-only clients
+- **UI resource** — an interactive React app with 20+ chart types
+
+The `load` tool returns text content only — use it when you need raw data without visualization.
 
 ## Enabling MCP App
 
@@ -71,7 +75,7 @@ const cubeTools = getCubeTools({
 
 ## AI Chart Hints
 
-The `load` tool accepts an optional `chart` field that lets the AI control the rendered chart. The AI already understands the user's intent and the data shape — it's the best judge of what chart to show.
+The `chart` tool accepts an optional `chart` field that lets the AI control the rendered chart. The AI already understands the user's intent and the data shape — it's the best judge of what chart to show.
 
 ```json
 {
@@ -109,7 +113,7 @@ If no `chart` hint is provided, the app auto-selects based on the query shape:
 
 ### AI Chart Selection Guidelines
 
-The `load` tool description includes guidelines so the AI knows when to use each chart type:
+The `chart` tool description includes guidelines so the AI knows when to use each chart type:
 
 | Intent | Chart Type | Example |
 |--------|-----------|---------|
@@ -124,7 +128,7 @@ The `load` tool description includes guidelines so the AI knows when to use each
 
 ## Available Chart Types
 
-The MCP App bundles 8 chart types using [Recharts](https://recharts.org):
+The MCP App uses the same chart components as the drizzle-cube dashboard, supporting 20+ chart types:
 
 | Type | Best For |
 |------|----------|
@@ -133,15 +137,26 @@ The MCP App bundles 8 chart types using [Recharts](https://recharts.org):
 | `area` | Cumulative trends, filled line charts |
 | `pie` | Part-of-whole with ≤10 categories |
 | `scatter` | Correlation between two measures |
+| `bubble` | Three-variable scatter plots |
 | `kpiNumber` | Single headline metric |
+| `kpiDelta` | Metric with change indicator |
 | `table` | Detailed data, many columns |
 | `treemap` | Hierarchical size comparison |
+| `radar` | Multi-dimensional comparison |
+| `funnel` | Conversion funnel stages |
+| `waterfall` | Incremental positive/negative values |
+| `gauge` | Single value against a target |
+| `boxPlot` | Statistical distribution |
+| `candlestick` | Financial OHLC data |
+| `activityGrid` | Calendar-style activity heatmap |
+| `radialBar` | Circular bar comparison |
+| `measureProfile` | Statistical measure overview |
 
-Users can switch between available chart types using the toolbar at the top of the chart.
+Users can switch between available chart types using a dropdown at the top of the chart. Only chart types suitable for the current data shape are enabled.
 
 ## Security
 
-- **Security context preserved** — when the MCP App calls `load` via `callServerTool` for re-queries, it goes through the same MCP endpoint, so `extractSecurityContext` is called as normal
+- **Security context preserved** — when the MCP App calls `chart` via `callServerTool` for re-queries, it goes through the same MCP endpoint, so `extractSecurityContext` is called as normal
 - **Sandboxed iframe** — the app runs in a host-enforced sandboxed iframe with no DOM/cookie access
 - **Static HTML** — the chart app is bundled at build time; no user input is used in HTML generation
 - **Opt-in only** — `app: false` by default, no behaviour change unless explicitly enabled
@@ -156,7 +171,7 @@ The MCP App renders in any host that supports the [MCP Apps protocol](https://mo
 - VS Code GitHub Copilot
 - Any host implementing the MCP Apps spec
 
-For text-only clients (terminals, APIs), the `load` tool continues to return JSON data as before — the UI is an enhancement, not a replacement.
+For text-only clients (terminals, APIs), use the `load` tool which returns JSON data without UI. The `chart` tool adds visualization as an enhancement.
 
 ## Theming
 
