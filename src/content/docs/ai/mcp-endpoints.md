@@ -414,8 +414,13 @@ Connect to the demo MCP server to try it out:
 https://try.drizzle-cube.dev/mcp
 ```
 
+## Adding Tools to an Existing MCP Server
+
+If you already have an MCP server (e.g., a PostgREST MCP for CRUD operations) and want to add drizzle-cube's analytics tools alongside your existing tools, see [Composable MCP Tools](/ai/composable-mcp-tools/). This lets you register `discover`, `validate`, and `load` on any MCP server without running the built-in `/mcp` endpoint.
+
 ## Next Steps
 
+- [Composable MCP Tools](/ai/composable-mcp-tools/) - Add cube tools to your own MCP server
 - [Adding Semantic Metadata](/ai/semantic-metadata/) - Make your cubes more discoverable
 - [Claude Desktop Setup](/ai/claude-desktop-setup/) - Connect Claude Desktop to your data
 - [Claude Code Plugin](/ai/claude-code-plugin/) - Query from Claude Code
