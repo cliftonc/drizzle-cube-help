@@ -139,6 +139,7 @@ AI features respect your security context at every step:
 
 ### Getting Started with AI
 - [MCP Endpoints](/ai/mcp-endpoints/) - Built-in AI-ready endpoints (no LLM required)
+- [MCP App (Interactive Charts)](/ai/mcp-app/) - Return interactive chart visualisations from tool calls
 - [Adding Semantic Metadata](/ai/semantic-metadata/) - Make your cubes AI-friendly
 - [Connect Claude Desktop](/ai/claude-desktop-setup/) - Step-by-step connection guide
 

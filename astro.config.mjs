@@ -156,6 +156,7 @@ export default defineConfig({
           items: [
             { label: "Overview", slug: "ai" },
             { label: "MCP Endpoints", slug: "ai/mcp-endpoints" },
+            { label: "MCP App (Interactive Charts)", slug: "ai/mcp-app" },
             { label: "Composable MCP Tools", slug: "ai/composable-mcp-tools" },
             { label: "Semantic Metadata", slug: "ai/semantic-metadata" },
             { label: "Claude Desktop Setup", slug: "ai/claude-desktop-setup" },
