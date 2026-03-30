@@ -247,9 +247,10 @@ When displaying time series data in charts, gaps in the data (dates with no reco
 
 ### Default Behavior
 
-Gap filling is **enabled by default** for time dimensions with both `granularity` and `dateRange` specified:
+Gap filling is **enabled by default** for time dimensions with `granularity` and a date range. The date range can come from either the `timeDimension` itself or a matching `inDateRange` filter:
 
 ```typescript
+// Option 1: dateRange on the timeDimension
 const query = {
   measures: ["Sales.revenue"],
   timeDimensions: [{
@@ -260,9 +261,25 @@ const query = {
   }]
 }
 
-// Returns 7 rows - one for each day
+// Option 2: dateRange via an inDateRange filter (same result)
+const queryWithFilter = {
+  measures: ["Sales.revenue"],
+  timeDimensions: [{
+    dimension: "Sales.date",
+    granularity: "day"
+  }],
+  filters: [{
+    member: "Sales.date",
+    operator: "inDateRange",
+    values: ["2024-01-01", "2024-01-07"]
+  }]
+}
+
+// Both return 7 rows - one for each day
 // Days without data have revenue: 0
 ```
+
+Both relative date strings (`"this month"`, `"last 30 days"`) and absolute date arrays are supported in either location.
 
 ### Disabling Gap Filling
 
@@ -331,7 +348,7 @@ const query = {
 
 Gap filling is automatically skipped when:
 - No `granularity` is specified (raw timestamp queries)
-- No `dateRange` is specified (unbounded queries)
+- No date range is available — neither on the `timeDimension` nor via a matching `inDateRange` filter
 - `fillMissingDates: false` is explicitly set
 
 ```typescript
@@ -345,13 +362,13 @@ const rawQuery = {
   }]
 }
 
-// No gap filling - missing dateRange
+// No gap filling - no dateRange anywhere
 const unboundedQuery = {
   measures: ["Sales.revenue"],
   timeDimensions: [{
     dimension: "Sales.date",
     granularity: "day"
-    // No dateRange - cannot determine bounds
+    // No dateRange on timeDimension and no inDateRange filter
   }]
 }
 ```
