@@ -222,6 +222,13 @@ export default defineConfig({
           ],
         },
         {
+          label: "Guides",
+          items: [
+            { label: "Internationalisation", slug: "guides/internationalisation" },
+            { label: "Config Migration", slug: "guides/config-migration" },
+          ],
+        },
+        {
           label: "Contributing",
           items: [
             { label: "Helping with the project", slug: "contributing/helping" },
