@@ -6,7 +6,7 @@ description: Connect AI agents to your semantic layer using the Model Context Pr
 Drizzle Cube includes a **built-in MCP server** that lets AI agents like Claude, ChatGPT, and n8n query your semantic layer directly. The server follows the [Model Context Protocol specification](https://modelcontextprotocol.io/) and exposes tools for discovering cubes, validating queries, and executing them.
 
 :::caution[No Built-in Authentication]
-The MCP server does **not** include built-in authentication. Your application is responsible for authenticating requests before they reach the MCP endpoint, just as with the standard Cube API routes. Without authentication middleware, **all MCP tools are publicly accessible** — including query execution via `drizzle_cube_load`.
+The MCP server does **not** include built-in authentication. Your application is responsible for authenticating requests before they reach the MCP endpoint, just as with the standard Cube API routes. Without authentication middleware, **all MCP tools are publicly accessible** — including query execution via `load`.
 
 See [Security — Authentication Requirements](/semantic-layer/security/#authentication-requirements) and the [framework-specific examples](#protecting-mcp-endpoints) below.
 :::
@@ -26,12 +26,38 @@ This endpoint implements the full MCP specification including:
 
 ## Available MCP Tools
 
+The built-in `/mcp` endpoint exposes these tools:
+
 | Tool | Purpose |
 |------|---------|
-| `drizzle_cube_discover` | Find relevant cubes based on topic or intent |
-| `drizzle_cube_validate` | Validate queries and get auto-corrections |
-| `drizzle_cube_load` | Execute queries and return data |
-| `drizzle_cube_chart` | Execute queries with interactive chart visualization |
+| `discover` | Find relevant cubes based on topic or intent. Also returns the full query language reference and date-filtering guide (see [How guidance reaches the model](#how-guidance-reaches-the-model) below). |
+| `validate` | Validate queries and get auto-corrections |
+| `load` | Execute queries and return data |
+| `chart` | Execute queries with interactive chart visualization (only registered when [MCP App](/ai/mcp-app/) is enabled) |
+
+:::note[Tool naming]
+These are the names used by the built-in `/mcp` endpoint. If you're using the [composable `getCubeTools()` API](/ai/composable-mcp-tools/) to add cube tools to your own MCP server, the tools default to a `drizzle_cube_` prefix (e.g. `drizzle_cube_discover`) — that prefix is configurable per-deployment.
+:::
+
+## How guidance reaches the model
+
+A common surprise: the model often *ignores* MCP prompts and resources. That isn't a Drizzle Cube bug — it's how most clients work. Claude Desktop, Claude Code, and many other MCP clients treat `prompts/*` and `resources/*` as **user-triggered slash commands**, not as actions the LLM can invoke mid-turn. So if you put critical query rules into a prompt and hope the model fetches it, you'll be disappointed.
+
+Drizzle Cube uses two channels that are guaranteed to reach the model:
+
+1. **`InitializeResult.instructions`** — a short, authoritative string returned during the MCP `initialize` handshake. Per the [MCP spec](https://modelcontextprotocol.io/specification/draft/schema#initializeresult-instructions), clients merge this into the LLM system prompt. The default content mandates the discover-first workflow and inlines the most-violated rule (use `inDateRange` for aggregated totals, **not** `timeDimensions`). You can customise it — see the [`instructions` option](#instructions).
+2. **The `discover` tool response itself** — `discover` always returns three fields: `cubes`, `queryLanguageReference`, and `dateFilteringGuide`. Because the workflow mandates calling `discover` first, the model receives the full TypeScript DSL on its very first tool call without an extra round-trip:
+
+   ```jsonc
+   // tools/call name=discover { topic: "salary" }
+   {
+     "cubes": [ /* matched cubes with measures, dimensions, joins */ ],
+     "queryLanguageReference": "// === DRIZZLE CUBE QUERY LANGUAGE (TypeScript DSL) ===\n…",
+     "dateFilteringGuide": "# Date Filtering vs Time Grouping\n…"
+   }
+   ```
+
+The existing `prompts/*` and `resources/*` endpoints are still exposed for clients (and end-users) that *do* consume them, but query correctness no longer depends on them.
 
 ## Connecting AI Tools
 
@@ -104,51 +130,52 @@ See [n8n MCP Client documentation](https://docs.n8n.io/integrations/builtin/clus
 
 ## The AI Workflow
 
-When an AI agent connects to your MCP server, it typically follows this workflow:
+When an AI agent connects to your MCP server, it follows this workflow (mandated by the default `instructions` and reinforced by every tool description):
 
 ```
 User: "Show me average salary by department"
          │
          ▼
-┌─────────────────────────────────────────────────────┐
-│  1. drizzle_cube_discover                           │
-│     Find cubes related to "salary" and "department" │
-│     → Returns: Employees, Departments cubes with    │
-│       suggested measures and dimensions             │
-└─────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────┐
+│  1. discover  ← MANDATORY first call                   │
+│     Find cubes related to "salary" and "department"    │
+│     → Returns: matched cubes (measures, dimensions,    │
+│       joins) + queryLanguageReference (full DSL)       │
+│       + dateFilteringGuide (decision tree)             │
+└────────────────────────────────────────────────────────┘
          │
          ▼
-┌─────────────────────────────────────────────────────┐
-│  2. AI builds query using metadata                  │
-│     The AI uses cube metadata to construct a query  │
-│     → Query: { measures: ['Employees.avgSalary'],   │
-│                dimensions: ['Departments.name'] }   │
-└─────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────┐
+│  2. AI builds query using the discover response        │
+│     Uses cube metadata + queryLanguageReference        │
+│     → Query: { measures: ['Employees.avgSalary'],      │
+│                dimensions: ['Departments.name'] }      │
+└────────────────────────────────────────────────────────┘
          │
          ▼
-┌─────────────────────────────────────────────────────┐
-│  3. drizzle_cube_validate (optional)                │
-│     Check query validity, get corrections if needed │
-│     → Returns: { isValid: true, correctedQuery }    │
-└─────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────┐
+│  3. validate (optional)                                │
+│     Check query validity, get corrections if needed    │
+│     → Returns: { isValid: true, correctedQuery }       │
+└────────────────────────────────────────────────────────┘
          │
          ▼
-┌─────────────────────────────────────────────────────┐
-│  4a. drizzle_cube_load                              │
-│      Execute query, return data as text             │
-│      → Returns: { data: [...], annotation: {...} }  │
-│                                                     │
-│  4b. drizzle_cube_chart (alternative)               │
-│      Execute query + render interactive chart       │
-│      → Returns: data + MCP App visualization        │
-└─────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────┐
+│  4a. load                                              │
+│      Execute query, return data as text                │
+│      → Returns: { data: [...], annotation: {...} }     │
+│                                                        │
+│  4b. chart  (when MCP App is enabled)                  │
+│      Execute query + render interactive chart          │
+│      → Returns: data + MCP App visualization           │
+└────────────────────────────────────────────────────────┘
 ```
 
 ## Tool Reference
 
-### drizzle_cube_discover
+### `discover`
 
-Find cubes relevant to a topic or intent.
+Find cubes relevant to a topic or intent. **The first call any agent should make** — and the only way the model receives the full query language reference.
 
 ```json
 // Parameters
@@ -167,13 +194,18 @@ Find cubes relevant to a topic or intent.
       "relevanceScore": 0.85,
       "matchedOn": ["measure:avgSalary", "measure:totalSalary"],
       "suggestedMeasures": ["Employees.avgSalary", "Employees.totalSalary"],
-      "suggestedDimensions": ["Employees.department", "Employees.location"]
+      "suggestedDimensions": ["Employees.department", "Employees.location"],
+      "capabilities": { "query": true, "funnel": false, "flow": false, "retention": false }
     }
-  ]
+  ],
+  "queryLanguageReference": "// === DRIZZLE CUBE QUERY LANGUAGE (TypeScript DSL) ===\n…",
+  "dateFilteringGuide": "# Date Filtering vs Time Grouping\n…"
 }
 ```
 
-### drizzle_cube_validate
+The `queryLanguageReference` and `dateFilteringGuide` fields are always included so the model has the full DSL and the date-filtering decision tree available before constructing a query. See [How guidance reaches the model](#how-guidance-reaches-the-model).
+
+### `validate`
 
 Validate a query and get helpful corrections.
 
@@ -200,9 +232,9 @@ Validate a query and get helpful corrections.
 }
 ```
 
-### drizzle_cube_load
+### `load`
 
-Execute a query and return results.
+Execute a query and return results. The tool description gates this on `discover` having been called first.
 
 ```json
 // Parameters
@@ -231,9 +263,9 @@ Execute a query and return results.
 }
 ```
 
-### drizzle_cube_chart
+### `chart`
 
-Execute a query and render an interactive chart. Same query format as `load`, with an optional `chart` hint to control the visualization.
+Execute a query and render an interactive chart. Same query format as `load`, with an optional `chart` hint to control the visualization. Only registered when [MCP App](/ai/mcp-app/) is enabled (`mcp: { app: true }`).
 
 ```json
 // Parameters
@@ -257,9 +289,24 @@ If no `chart` hint is provided, the chart type is auto-selected based on the que
 
 ## Configuration
 
-### Disabling MCP
+The built-in MCP server is configured via the `mcp` option on every adapter (`createCubeRouter` for Express, `cubePlugin` for Fastify, `createCubeRoutes` for Hono, `createCubeHandlers` for Next.js). All fields are optional — pass `mcp: { enabled: false }` to disable the endpoint entirely.
 
-If you don't want the MCP server exposed:
+### Options reference
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `enabled` | `boolean` | `true` | Disable to remove the `/mcp` endpoint entirely. |
+| `basePath` | `string` | `'/mcp'` | URL path the endpoint is mounted at. |
+| `tools` | `Array<'discover' \| 'validate' \| 'load'>` | all | Selectively expose tools (the `chart` tool is controlled by the `app` option below). |
+| `allowedOrigins` | `string[]` | unrestricted | Origin allowlist enforced per the MCP 2025-11-25 spec. Recommended in production. |
+| `serverName` | `string` | `'drizzle-cube'` | Returned in `serverInfo.name` during the MCP `initialize` handshake. Override to match your product branding. |
+| `instructions` | `string \| (defaults: string) => string` | built-in | Override or extend the `InitializeResult.instructions` returned during `initialize`. **This is the only string the MCP spec expects clients to merge into the LLM system prompt** — see [Customising the model's instructions](#customising-the-models-instructions). |
+| `prompts` | `MCPPrompt[] \| (defaults: MCPPrompt[]) => MCPPrompt[]` | built-in | Override or extend the prompts exposed via `prompts/list` and `prompts/get`. Useful for clients (or end-users) that consume prompts as slash commands. |
+| `resources` | `MCPResource[] \| (defaults: MCPResource[]) => MCPResource[]` | built-in | Override or extend the resources exposed via `resources/list` and `resources/read`. The live cube schema (`drizzle-cube://schema`) is appended automatically. |
+| `app` | `boolean \| McpAppConfig` | `false` | Enable the [MCP App](/ai/mcp-app/) interactive chart visualisation and register the `chart` tool. Pass an object to set locale options. |
+| `resourceMetadataUrl` | `string` | — | OAuth 2.1 Protected Resource Metadata URL ([RFC 9728](https://tools.ietf.org/html/rfc9728)). When set, requests without a Bearer token receive `401` with a `WWW-Authenticate` challenge pointing here. Token validation remains the responsibility of `extractSecurityContext`. |
+
+### Disabling MCP
 
 ```typescript
 createCubeRouter({
@@ -270,33 +317,142 @@ createCubeRouter({
 })
 ```
 
-### Selective Tool Exposure
-
-Expose only specific MCP tools:
+### Selective tool exposure
 
 ```typescript
 createCubeRouter({
   // ... other options
   mcp: {
     enabled: true,
-    tools: ['discover', 'validate', 'load', 'chart']  // Only expose these
+    tools: ['discover', 'validate', 'load']  // hide chart, etc.
   }
 })
 ```
 
-### Origin Restrictions
+### Origin restrictions
 
-Restrict which origins can connect to your MCP server:
+Restrict which origins can connect to your MCP server (per MCP 2025-11-25 — required when serving browsers in production):
 
 ```typescript
 createCubeRouter({
-  // ... other options
   mcp: {
     enabled: true,
     allowedOrigins: ['https://claude.ai', 'https://chat.openai.com']
   }
 })
 ```
+
+### Branding the server name
+
+```typescript
+createCubeRouter({
+  mcp: {
+    enabled: true,
+    serverName: 'Acme Analytics'  // appears as serverInfo.name in initialize
+  }
+})
+```
+
+### Customising the model's instructions
+
+Per the [MCP spec](https://modelcontextprotocol.io/specification/draft/schema#initializeresult-instructions), the server returns an `instructions` string during `initialize` that clients merge into the LLM system prompt. Drizzle Cube ships with sensible defaults that mandate the discover-first workflow and inline the most-violated date-filtering rule, but you'll often want to add **project-specific** guidance (cube semantics, naming conventions, business rules).
+
+**Append to the defaults** (recommended — keeps the built-in workflow rules in place):
+
+```typescript
+createCubeRouter({
+  mcp: {
+    instructions: (defaults) => `${defaults}
+
+## Acme-specific rules
+- Always join Sales with Customers via customerId for revenue analysis.
+- The "Region" cube has been deprecated — use "Territories" instead.
+- Quarterly reports use fiscal-year quarters, not calendar quarters.`
+  }
+})
+```
+
+**Replace the defaults entirely** (advanced — you take full responsibility for telling the model how to use the server):
+
+```typescript
+createCubeRouter({
+  mcp: {
+    instructions: 'You are an analytics agent for Acme. Always call discover first…'
+  }
+})
+```
+
+:::tip[Keep instructions short]
+Some clients truncate long instruction blocks. Aim for under ~2 KB. Put the most important rules first. Anything you can't fit here can go in the cube descriptions, the [`semantic-metadata`](/ai/semantic-metadata/) on each measure/dimension, or as a custom MCP prompt.
+:::
+
+### Customising prompts and resources
+
+The `prompts/*` and `resources/*` endpoints are useful for clients that surface prompts as user-triggered slash commands (and for introspection). Override or extend them with the same resolver pattern:
+
+```typescript
+import type { MCPPrompt, MCPResource } from 'drizzle-cube/adapters/mcp-transport'
+
+createCubeRouter({
+  mcp: {
+    prompts: (defaults) => [
+      ...defaults,
+      {
+        name: 'acme-revenue-report',
+        description: 'Build the standard monthly revenue report',
+        messages: [{
+          role: 'user',
+          content: { type: 'text', text: 'Generate a revenue report grouped by region…' }
+        }]
+      }
+    ],
+    resources: (defaults) => [
+      ...defaults,
+      {
+        uri: 'acme://kpis',
+        name: 'Acme KPI definitions',
+        description: 'Plain-language definitions of every Acme KPI',
+        mimeType: 'text/markdown',
+        text: '# Acme KPIs\n…'
+      }
+    ]
+  }
+})
+```
+
+:::caution[Don't rely on prompts for correctness]
+Most clients (including Claude Desktop and Claude Code) do **not** forward `prompts/*` content to the model — they expose them as user-triggered slash commands instead. Use prompts for end-user discoverability, but keep your **mandatory** rules in `instructions` (or in the cube metadata) so the model actually sees them. See [How guidance reaches the model](#how-guidance-reaches-the-model).
+:::
+
+### Enabling interactive charts (MCP App)
+
+Enable the `chart` tool and serve the interactive visualisation UI to compatible clients:
+
+```typescript
+createCubeRouter({
+  mcp: {
+    enabled: true,
+    app: true  // or { defaultLocale: 'nl-NL', detectBrowserLocale: false }
+  }
+})
+```
+
+See [MCP App](/ai/mcp-app/) for the full guide.
+
+### OAuth Protected Resource Metadata
+
+Point clients at your authorisation server via [RFC 9728](https://tools.ietf.org/html/rfc9728):
+
+```typescript
+createCubeRouter({
+  mcp: {
+    enabled: true,
+    resourceMetadataUrl: 'https://your-app.com/.well-known/oauth-protected-resource'
+  }
+})
+```
+
+When `resourceMetadataUrl` is set, requests without a `Authorization: Bearer …` token receive `401` with a `WWW-Authenticate` header pointing at the metadata document. Token validation itself is up to your `extractSecurityContext`. See [drizby](https://github.com/cliftonc/drizby) for a complete OAuth 2.1 reference implementation.
 
 ## Security & Authentication
 
@@ -441,8 +597,8 @@ Key files:
 
 All MCP tools respect your security context:
 
-- `drizzle_cube_load` and `drizzle_cube_chart` execute queries with the authenticated user's security context
-- `drizzle_cube_discover` returns cube metadata (schema information) — access is gated by your auth middleware
+- `load` and `chart` execute queries with the authenticated user's security context
+- `discover` returns cube metadata (schema information) — access is gated by your auth middleware
 - Multi-tenant isolation is enforced on all data access via cube `sql` filters
 
 ## Enhancing AI Discovery

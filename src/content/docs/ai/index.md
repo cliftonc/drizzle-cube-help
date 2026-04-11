@@ -14,10 +14,10 @@ All framework adapters include a **built-in MCP server** at `/mcp` that lets AI 
 
 | Tool | Purpose |
 |------|---------|
-| `drizzle_cube_discover` | Find relevant cubes based on topic or intent |
-| `drizzle_cube_validate` | Validate queries and get auto-corrections |
-| `drizzle_cube_load` | Execute queries and return data |
-| `drizzle_cube_chart` | Execute queries with interactive chart visualization |
+| `discover` | Find relevant cubes (also returns the full query language reference and date-filtering guide) |
+| `validate` | Validate queries and get auto-corrections |
+| `load` | Execute queries and return data |
+| `chart` | Execute queries with interactive chart visualization (when MCP App is enabled) |
 
 Connect Claude, ChatGPT, n8n, or any MCP-compatible client to your semantic layer.
 
