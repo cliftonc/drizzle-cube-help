@@ -175,6 +175,7 @@ export default defineConfig({
             { label: "Analysis Builder", slug: "client/analysis-builder" },
             { label: "Data Browser", slug: "client/data-browser" },
             { label: "Dashboards", slug: "client/dashboards" },
+            { label: "Composable Dashboards", slug: "client/composable-dashboards" },
             { label: "Funnel Analysis", slug: "client/funnel-analysis" },
             { label: "Charts", slug: "client/charts" },
             { label: "Chart Plugins", slug: "client/chart-plugins" },

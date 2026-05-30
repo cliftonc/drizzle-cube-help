@@ -125,6 +125,16 @@ function MyDashboard() {
 }
 ```
 
+#### Customizing or replacing the toolbar
+
+`DashboardGrid` renders its own toolbar. To suppress it, pass `hideToolbar` (this hides both the top edit bar and the floating toolbar):
+
+```tsx
+<DashboardGrid config={config} editable hideToolbar onSave={save} />
+```
+
+To render your **own** toolbar with your design system while Drizzle Cube keeps owning the edit/save state machine — or to embed a grid-only / filter-only view — compose the underlying pieces (`DashboardProvider`, `DashboardToolbar`, `DashboardFilterBar`, `DashboardGridSurface`, `DashboardModals`) and read state via `useDashboardContext()`. See [Composable Dashboards](/client/composable-dashboards/).
+
 ### AnalyticsPortlet
 
 Individual visualization components within the dashboard.
@@ -857,6 +867,7 @@ const operationsDashboard: DashboardConfig = {
 
 ## Next Steps
 
+- Build a custom toolbar or grid-only embed with [Composable Dashboards](/client/composable-dashboards/)
 - Implement [Dashboard Persistence](/client/dashboard-persistence/) for saving and loading dashboards
 - Learn about [Hooks](/client/hooks/) for data fetching patterns
 - Explore [Charts](/client/charts/) for visualization options
