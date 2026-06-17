@@ -47,10 +47,12 @@ export default function ChartDemo({ config, height = 300 }: ChartDemoProps) {
 
   return (
     <CubeProvider
-      apiOptions={{
-        baseUrl: "/api/cube",
-        fetchFn: dummyFetch,
-      }}
+      apiOptions={
+        {
+          baseUrl: "/api/cube",
+          fetchFn: dummyFetch,
+        } as any
+      }
     >
       <div
         className="chart-demo-interactive"
