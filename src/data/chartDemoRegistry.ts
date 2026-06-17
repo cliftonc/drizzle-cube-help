@@ -276,7 +276,7 @@ export const chartDemoRegistry: Record<string, ChartDemoConfig> = {
 
   retentionHeatmap: {
     chartType: "retentionHeatmap",
-    data: retentionData as unknown as unknown[],
+    data: [retentionData],
     chartConfig: {},
     displayConfig: {
       showTooltip: true,

@@ -1,5 +1,9 @@
+interface AssetFetcher {
+  fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>;
+}
+
 export interface Env {
-  ASSETS: Fetcher;
+  ASSETS: AssetFetcher;
 }
 
 export default {
@@ -39,7 +43,7 @@ export default {
       const rootIndexRequest = new Request(new URL('/index.html', request.url).toString(), request);
       return env.ASSETS.fetch(rootIndexRequest);
       
-    } catch (error) {
+    } catch {
       // If there's an error fetching, serve root index.html
       const rootIndexRequest = new Request(new URL('/index.html', request.url).toString(), request);
       return env.ASSETS.fetch(rootIndexRequest);
