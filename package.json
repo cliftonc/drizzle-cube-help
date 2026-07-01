@@ -16,10 +16,10 @@
     "typecheck": "astro check"
   },
   "dependencies": {
-    "@astrojs/react": "^4.4.2",
+    "@astrojs/react": "^6.0.0",
     "@astrojs/starlight": "^0.35.2",
     "@nivo/heatmap": "^0.99.0",
-    "astro": "^5.6.1",
+    "astro": "^7.0.0",
     "d3": "^7.9.0",
     "drizzle-cube": "^0.6.4",
     "mermaid": "^11.10.1",
