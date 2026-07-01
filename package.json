@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
-    "@astrojs/starlight": "^0.35.2",
+    "@astrojs/starlight": "^0.41.0",
     "@nivo/heatmap": "^0.99.0",
     "astro": "^5.6.1",
     "d3": "^7.9.0",
