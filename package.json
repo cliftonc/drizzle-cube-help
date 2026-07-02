@@ -40,7 +40,7 @@
     "pagefind": "^1.4.0",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.61.1",
-    "vite": "^5.4.1",
+    "vite": "^8.0.0",
     "vitest": "^4.1.9",
     "wrangler": "^4.32.0"
   }
