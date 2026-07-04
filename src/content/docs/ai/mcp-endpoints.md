@@ -298,7 +298,7 @@ The built-in MCP server is configured via the `mcp` option on every adapter (`cr
 | `enabled` | `boolean` | `true` | Disable to remove the `/mcp` endpoint entirely. |
 | `basePath` | `string` | `'/mcp'` | URL path the endpoint is mounted at. |
 | `tools` | `Array<'discover' \| 'validate' \| 'load'>` | all | Selectively expose tools (the `chart` tool is controlled by the `app` option below). |
-| `allowedOrigins` | `string[]` | unrestricted | Origin allowlist enforced per the MCP 2025-11-25 spec. Recommended in production. |
+| `allowedOrigins` | `string[]` | loopback only | Origin allowlist enforced per the MCP 2025-11-25 spec (DNS-rebinding mitigation). When unset, only loopback origins (`localhost` / `127.x` / `[::1]`) and non-browser clients that send no `Origin` header are allowed; other browser origins get `403`. List your browser front-end's origin(s) here to allow it; include `'*'` to allow all origins (discouraged). See [Origin restrictions](#origin-restrictions). |
 | `serverName` | `string` | `'drizzle-cube'` | Returned in `serverInfo.name` during the MCP `initialize` handshake. Override to match your product branding. |
 | `instructions` | `string \| (defaults: string) => string` | built-in | Override or extend the `InitializeResult.instructions` returned during `initialize`. **This is the only string the MCP spec expects clients to merge into the LLM system prompt** — see [Customising the model's instructions](#customising-the-models-instructions). |
 | `prompts` | `MCPPrompt[] \| (defaults: MCPPrompt[]) => MCPPrompt[]` | built-in | Override or extend the prompts exposed via `prompts/list` and `prompts/get`. Useful for clients (or end-users) that consume prompts as slash commands. |
@@ -331,16 +331,33 @@ createCubeRouter({
 
 ### Origin restrictions
 
-Restrict which origins can connect to your MCP server (per MCP 2025-11-25 — required when serving browsers in production):
+The MCP endpoint validates the `Origin` header per the MCP 2025-11-25 spec to block DNS-rebinding attacks (where a malicious web page rebinds its hostname to your server's address and drives `/mcp` from the victim's browser).
+
+**Default policy (no `allowedOrigins`):** only loopback origins (`localhost`, `127.x`, `[::1]`) and non-browser / server-to-server clients that send **no** `Origin` header are accepted. Every other browser `Origin` is rejected with `403`. This means:
+
+- **Server-to-server clients are unaffected** — the Claude MCP connector, `mcp-remote`, `curl`, backend services, etc. send no browser `Origin`, so they always work.
+- **Local browser dev tools work** out of the box (e.g. a UI on `http://localhost:3000` calling `http://localhost:8787/mcp`).
+- **A hosted browser front-end must be allowlisted** — if your own web app calls `/mcp` from a browser at a non-loopback origin, list that origin or those requests will `403`:
 
 ```typescript
 createCubeRouter({
   mcp: {
     enabled: true,
-    allowedOrigins: ['https://claude.ai', 'https://chat.openai.com']
+    // The origin(s) your browser front-end is served from:
+    allowedOrigins: ['https://app.example.com']
   }
 })
 ```
+
+Include the wildcard `'*'` to restore fully-permissive behavior (accept any origin) — discouraged; prefer listing exact origins and/or enabling [Bearer authentication](#oauth-protected-resource-metadata) as the primary control for public deployments.
+
+```typescript
+allowedOrigins: ['*']   // permissive — accepts any Origin (not recommended)
+```
+
+:::caution[Upgrading from ≤ 0.6.4]
+Before this fix ([GHSA-ch89-j64x-45pq](https://github.com/cliftonc/drizzle-cube/security/advisories/GHSA-ch89-j64x-45pq)) the default accepted **any** origin. If your deployment relies on a **browser** front-end calling `/mcp` from a non-loopback origin, add that origin to `allowedOrigins` when upgrading, or those browser requests will start returning `403`. Server-to-server clients (including the Claude connector) and the [MCP App](/ai/mcp-app/) visualisation are unaffected.
+:::
 
 ### Branding the server name
 
@@ -453,6 +470,8 @@ createCubeRouter({
 ```
 
 When `resourceMetadataUrl` is set, requests without a `Authorization: Bearer …` token receive `401` with a `WWW-Authenticate` header pointing at the metadata document. Token validation itself is up to your `extractSecurityContext`. See [drizby](https://github.com/cliftonc/drizby) for a complete OAuth 2.1 reference implementation.
+
+For any public deployment, **Bearer auth is the primary access control** for `/mcp`; [Origin validation](#origin-restrictions) is defense-in-depth against browser-driven (DNS-rebinding) requests. Enable both.
 
 ## Security & Authentication
 
