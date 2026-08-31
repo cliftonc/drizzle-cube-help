@@ -31,10 +31,15 @@
     "examples/nextjs": {
       "source": "../drizzle-cube-nextjs/README.md",
       "title": "Next.js Example"
-    },    
+    },
     "contributing/guidelines": {
       "source": "../drizzle-cube/CONTRIBUTING.md",
       "title": "Full contribution guidelines"
+    },
+    "guides/migrating-to-0-8": {
+      "source": "../drizzle-cube/docs/migrating-to-0.8.md",
+      "title": "Release 0.8 & Migration Guide",
+      "description": "What changed in drizzle-cube 0.8 \u2014 per-tenant cube sets, generated attribute dimensions, tolerant casts \u2014 and the mechanical edits needed to upgrade."
     }
   }
 }

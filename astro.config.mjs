@@ -148,6 +148,10 @@ export default defineConfig({
             },
             { label: "Joins", slug: "semantic-layer/joins" },
             { label: "Ungrouped Queries", slug: "semantic-layer/ungrouped-queries" },
+            {
+              label: "Per-Tenant Cube Sets",
+              slug: "semantic-layer/cube-sets",
+            },
             { label: "Security", slug: "semantic-layer/security" },
           ],
         },
@@ -227,6 +231,7 @@ export default defineConfig({
           items: [
             { label: "Internationalisation", slug: "guides/internationalisation" },
             { label: "Config Migration", slug: "guides/config-migration" },
+            { label: "Release 0.8 & Migration", slug: "guides/migrating-to-0-8" },
           ],
         },
         {

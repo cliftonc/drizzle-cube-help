@@ -32,9 +32,12 @@ for (const [slug, config_item] of Object.entries(config.externalIncludes)) {
     let content = fs.readFileSync(sourcePath, 'utf8');
     
     // Add frontmatter for Starlight
+    // `description` is optional; it falls back to the previous auto-generated
+    // form so existing entries are unchanged.
+    const description = config_item.description || `${config_item.title} documentation`;
     const frontmatter = `---
 title: ${config_item.title}
-description: ${config_item.title} documentation
+description: ${description}
 ---
 
 `;
