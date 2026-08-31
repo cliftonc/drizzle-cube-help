@@ -17,7 +17,7 @@ Drizzle Cube adapters **do not include built-in authentication**. Your applicati
 Before security context can be applied, requests must be authenticated. If adapter routes are mounted without prior authentication:
 
 - Analytics endpoints become publicly accessible
-- `extractSecurityContext` / `extractSecurityContext` receives unauthenticated requests
+- `extractSecurityContext` receives unauthenticated requests
 - Data may be exposed if security context defaults are unsafe
 
 ### Implementation Requirements
@@ -153,6 +153,35 @@ sql: (ctx: QueryContext<Schema>): BaseQueryDefinition => ({
   where: eq(productivity.organisationId, ctx.securityContext.organisationId)
 })
 ```
+
+## Tenant-Scoped Cube Definitions
+
+Everything above isolates **rows**: one cube definition serves every tenant, and the security context filters what that tenant may see. From 0.8, the **shape** of the model can be tenant-scoped too — which cubes, dimensions and measures exist at all. See [Per-Tenant Cube Sets](/semantic-layer/cube-sets/) for the mechanism; the security consequences are below.
+
+### `securityContext` is required on every cube-resolving method
+
+Because cube contents can differ per tenant, `getMetadata`, `validateQuery`, `getCube`, `getAllCubes`, `getAllCubesMap`, `getCubeNames` and `hasCube` all take a required `SecurityContext`. Omitting it is a compile error, not a silent wrong-tenant result — an optional parameter with a fallback would leave exactly the failure this design exists to prevent.
+
+If your deployment genuinely has no tenancy, say so explicitly:
+
+```typescript
+import { SINGLE_TENANT_CONTEXT } from 'drizzle-cube/server'
+
+const metadata = semanticLayer.getMetadata(SINGLE_TENANT_CONTEXT)
+```
+
+Set **lifecycle** is the deliberate exception. `registerCube`, `registerCubeSet`, `unregisterCubeSet`, `hasCubeSet`, `getCubeSetIds` and `getCubeSetStats` take no security context, because registration *defines* tenancy rather than operating within it. They are boot-and-admin API, not request-path API.
+
+:::caution[`missingCubeSet` defaults to `'base'`]
+When `contextToCubeSetId` names a cube set that was never registered, the default behaviour is to serve the base set — so a tenant missed by your boot loop silently sees the base model. Set `missingCubeSet: 'throw'` when every tenant is required to have its own set.
+:::
+
+### `/meta` is tenant-scoped and no longer publicly cacheable
+
+`/meta` returns only the calling tenant's cubes, with two consequences:
+
+- **It now invokes your `extractSecurityContext`.** It previously did not. If your extractor throws for unauthenticated requests, anonymous `/meta` calls will now fail. To keep metadata public, return `SINGLE_TENANT_CONTEXT` for anonymous requests.
+- **It must not be cached by a shared cache.** The response used to be identical for every caller; a CDN or proxy keyed on URL alone would now cross-serve one tenant's cube list to another. Drizzle Cube sets `Cache-Control: private, no-store` on every REST response (`/meta`, `/load`, `/sql`, `/dry-run`, `/batch`, `/explain`) for this reason.
 
 ## Role-Based Access Control
 
@@ -457,6 +486,7 @@ describe('Security Context', () => {
 - [ ] Security tests cover tenant isolation
 - [ ] Audit logging is in place
 - [ ] Security context validation is implemented
+- [ ] If cube sets are used, `missingCubeSet` is a deliberate choice and `/meta` is not shared-cached
 
 ## Common Security Patterns
 
@@ -674,6 +704,7 @@ You can combine both approaches — use application-level `where` clauses in you
 ## Next Steps
 
 - Review [Cubes](/semantic-layer/cubes/) for complete security implementation
+- Read [Per-Tenant Cube Sets](/semantic-layer/cube-sets/) when the model's *shape*, not just its rows, differs per tenant
 - Understand [Joins](/semantic-layer/joins/) security requirements
 - Learn about [Adapters](/adapters/hono/) security context extraction
 - Implement comprehensive security testing

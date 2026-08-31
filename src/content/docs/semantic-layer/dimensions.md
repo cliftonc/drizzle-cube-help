@@ -206,6 +206,35 @@ dimensions: {
 - Provides unique record identification
 - Required for some visualization types
 
+## Hiding Dimensions and Measures (`shown`)
+
+`shown: false` omits a member from `/meta`, the client field picker and AI prompts, while leaving it **fully queryable** — a query that names it still works. This matches Cube.js semantics, and applies to measures as well as dimensions.
+
+```typescript
+dimensions: {
+  internalRef: {
+    name: 'internalRef',
+    title: 'Internal Reference',
+    type: 'string',
+    sql: employees.internalRef,
+    shown: false   // queryable, but not offered in metadata surfaces
+  }
+}
+```
+
+Use it for members that exist to support saved queries, drill-downs or generated dashboards but would only add noise to a field list — most commonly large generated attribute sets, which otherwise inflate `/meta` and every AI prompt.
+
+Two details worth knowing:
+
+- `shown: undefined` means shown. Only an explicit `false` hides a member.
+- A [hierarchy](/client/drill-down/) level that references a `shown: false` dimension is dropped from the hierarchy's metadata.
+
+:::note[Behaviour change in 0.8]
+Before 0.8, `shown` was declared on the type but read nowhere, so `shown: false` had no effect. It is now honoured — any existing fields marked `shown: false` will disappear from metadata surfaces on upgrade, while remaining queryable.
+:::
+
+Generated attribute dimensions accept `shown` too — see [Per-Tenant Cube Sets](/semantic-layer/cube-sets/#generated-attribute-dimensions-eav).
+
 ## Cross-Table Dimensions
 
 Access dimensions from joined tables:
@@ -420,6 +449,7 @@ category: {
 - Learn about [Measures](/semantic-layer/measures/) for metrics and aggregations
 - Explore [Joins](/semantic-layer/joins/) for multi-cube relationships  
 - Review [Security](/semantic-layer/security/) patterns
+- See [Per-Tenant Cube Sets](/semantic-layer/cube-sets/) for dimensions generated per tenant from user-defined attributes
 
 ## Roadmap Ideas
 
