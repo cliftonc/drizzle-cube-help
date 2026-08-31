@@ -231,6 +231,7 @@ export default defineConfig({
           items: [
             { label: "Internationalisation", slug: "guides/internationalisation" },
             { label: "Config Migration", slug: "guides/config-migration" },
+            { label: "Release 0.8 & Migration", slug: "guides/migrating-to-0-8" },
           ],
         },
         {

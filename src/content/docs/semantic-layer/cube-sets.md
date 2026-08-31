@@ -3,7 +3,7 @@ title: Per-Tenant Cube Sets
 description: Serve different cube definitions to different tenants from one semantic layer — Drizzle Cube's equivalent of Cube's COMPILE_CONTEXT.
 ---
 
-Cube sets let one `SemanticLayerCompiler` serve **different cube definitions** to different tenants. They are Drizzle Cube's equivalent of Cube's `COMPILE_CONTEXT` / `contextToAppId`, and were introduced in 0.8.
+Cube sets let one `SemanticLayerCompiler` serve **different cube definitions** to different tenants. They are Drizzle Cube's equivalent of Cube's `COMPILE_CONTEXT` / `contextToAppId`, and were introduced in 0.8 — see [Release 0.8 & Migration](/guides/migrating-to-0-8/) if you are upgrading.
 
 Most multi-tenancy needs nothing of the sort. One cube definition normally serves every tenant, and `securityContext` is threaded into each cube's `sql` so that only that tenant's **rows** are visible — see [Security](/semantic-layer/security/). Reach for cube sets only when the **shape** of the model differs per tenant: which cubes, dimensions or measures exist at all.
 
