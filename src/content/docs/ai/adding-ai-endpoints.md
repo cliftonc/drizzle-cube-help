@@ -57,7 +57,7 @@ Create a new file `ai-routes.ts` in your server directory:
 ```typescript
 import { Hono } from 'hono'
 import { eq } from 'drizzle-orm'
-import { SemanticLayerCompiler, createDatabaseExecutor } from 'drizzle-cube/server'
+import { SemanticLayerCompiler, createDatabaseExecutor, SINGLE_TENANT_CONTEXT } from 'drizzle-cube/server'
 import {
   buildStep0Prompt,
   buildSystemPrompt,
@@ -135,7 +135,10 @@ function formatCubeSchemaForAI(db: typeof database): string {
   })
 
   allCubes.forEach(cube => semanticLayer.registerCube(cube))
-  const metadata = semanticLayer.getMetadata()
+  // `getMetadata` requires a security context because cube definitions can
+  // differ per tenant. This throwaway compiler has no tenancy, so it says so
+  // explicitly rather than passing an anonymous `{}`.
+  const metadata = semanticLayer.getMetadata(SINGLE_TENANT_CONTEXT)
 
   // Format for AI consumption
   const cubes: Record<string, any> = {}
@@ -293,7 +296,7 @@ aiApp.post('/explain/analyze', async (c) => {
     })
     allCubes.forEach(cube => semanticLayer.registerCube(cube))
 
-    const metadata = semanticLayer.getMetadata()
+    const metadata = semanticLayer.getMetadata(SINGLE_TENANT_CONTEXT)
     const cubeSchema = formatCubeSchemaForExplain(metadata)
 
     // Get existing indexes

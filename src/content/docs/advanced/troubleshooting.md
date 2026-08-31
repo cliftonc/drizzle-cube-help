@@ -197,7 +197,7 @@ semanticLayer.registerCube(departmentsCube)
 // ... ensure all cubes are registered
 
 // Verify cube names match exactly
-console.log('Registered cubes:', semanticLayer.getCubeNames())
+console.log('Registered cubes:', semanticLayer.getCubeNames(securityContext))
 
 // Check field names in cube definitions
 export const employeesCube = defineCube('Employees', { // Case-sensitive

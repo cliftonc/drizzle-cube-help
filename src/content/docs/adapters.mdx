@@ -60,20 +60,49 @@ All adapters provide:
 Drizzle Cube adapters follow a consistent pattern:
 
 ```typescript
-// Initialize your semantic layer
-const cubes = [usersCube, ordersCube, productsCube];
-const semanticLayer = createSemanticLayer({ cubes });
+import { createCubeRouter } from 'drizzle-cube/adapters/express'
 
-// Create framework-specific adapter
-const adapter = createExpressAdapter(semanticLayer, {
-  // Framework-specific configuration
-  auth: (req) => ({ userId: req.user.id }),
-  errorHandler: (error, req, res, next) => { /* handle errors */ }
+const cubeRouter = createCubeRouter({
+  cubes: [usersCube, ordersCube, productsCube],
+  drizzle: db,
+  schema,
+  // Called for EVERY request - your security boundary
+  extractSecurityContext: async (req, res) => ({
+    organisationId: req.user.orgId,
+    userId: req.user.id
+  })
 });
 
-// Mount to your framework
-app.use('/api/cube', adapter);
+app.use('/', cubeRouter); // defaults to /cubejs-api/v1
 ```
+
+Each adapter exposes the same options under its own factory - `createCubeRouter` / `createCubeApp` (Express), `cubePlugin` / `createCubeApp` (Fastify), `createCubeApp` (Hono) and `createCubeHandlers` (Next.js).
+
+### Bring your own semantic layer
+
+All four adapters accept a pre-built `semanticLayer` instead of `cubes`. This is how an application opts into [per-tenant cube sets](/semantic-layer/cube-sets/), since it must own the `SemanticLayerCompiler` to call `registerCubeSet`:
+
+```typescript
+import { SemanticLayerCompiler } from 'drizzle-cube/server'
+
+const semanticLayer = new SemanticLayerCompiler({
+  drizzle: db,
+  schema,
+  contextToCubeSetId: (ctx) => String(ctx.organisationId)
+});
+
+semanticLayer.registerCube(usersCube);
+semanticLayer.registerCubeSet('org-123', [customOrdersCube]);
+
+const cubeRouter = createCubeRouter({ semanticLayer, drizzle: db, schema, extractSecurityContext });
+```
+
+### Tenant-scoped responses
+
+`GET /meta` resolves `extractSecurityContext` like every other route and returns only that tenant's cubes. Two consequences even if you change no code:
+
+- **`/meta` now invokes your extractor.** It previously did not. If your extractor throws for unauthenticated requests, anonymous `/meta` calls will fail - return `SINGLE_TENANT_CONTEXT` (from `drizzle-cube/server`) for anonymous requests if you want metadata to stay public.
+- **`/meta` is no longer publicly cacheable.** Every REST response (`/meta`, `/load`, `/sql`, `/dry-run`, `/batch`, `/explain`) now sets `Cache-Control: private, no-store`, so none of them may be stored in a shared cache or CDN keyed on URL alone.
 
 ## Custom Adapters
 

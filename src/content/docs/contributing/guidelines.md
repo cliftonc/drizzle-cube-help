@@ -146,6 +146,8 @@ npm run test:teardown # Stop and remove test database containers
 > [!TIP]
 > The dev server and test databases use completely separate Docker containers and ports, so you can run `npm run dev` and `npm test` at the same time. This is useful for observing your changes in the browser while verifying they pass tests.
 
+**No Docker available?** If you're working in a container, a sandbox, or any environment where you can't start Docker, run the DB-free suites instead of `npm test` — `npm run test:sqlite`, `npm run test:client`, `npm run test:cli`, plus `npm run lint` and `npm run typecheck`. `test:sqlite` runs the same server suite against in-process SQLite, so it's a real verification signal rather than a subset. See [CLAUDE.md → Testing in a constrained environment](CLAUDE.md#testing-in-a-constrained-environment-ci-sandboxes-agents-containers).
+
 ## <a name="commit-message-guidelines"></a> Commit message guidelines
 
 We have specific rules on how commit messages should be structured.
@@ -193,6 +195,21 @@ for more flexible analytics queries
 Drizzle Cube has integration tests that run against real databases with different queries and responses. Tests use Docker containers for PostgreSQL and MySQL, and in-memory databases for SQLite and DuckDB.
 
 If you have added additional logic to the core library, make sure that all tests complete without any failures.
+
+> [!IMPORTANT]
+> **Not every test needs a database.** `vitest.config.ts` defines a DB-free `cli` project
+> (alongside `server` and `client`). Logic that never opens a connection or builds SQL — CLI
+> commands, manifest/artifact parsers, code generators, naming and type mapping — goes in
+> `tests/cli/`, runs with in-memory fixtures, needs **no Docker and no `globalSetup`**, and
+> finishes in milliseconds:
+>
+> ```bash
+> npm run test:cli   # DB-free CLI / parser / codegen tests — no containers required
+> ```
+>
+> Reserve the `server` / engine projects for code that actually **issues SQL**. Decide by the
+> subject under test, not by where its source file lives — see `tests/CLAUDE.md` and the live
+> project definitions in `vitest.config.ts`.
 
 > [!NOTE]
 > If you have added data types, query features, or new functionality, you need to create additional test cases using the new API to ensure it works properly.
