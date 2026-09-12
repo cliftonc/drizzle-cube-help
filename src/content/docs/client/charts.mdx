@@ -313,16 +313,81 @@ Display custom markdown content with formatting
 
 <ChartDemoWrapper chartType="markdown" />
 
-**Use Case:** Perfect for adding documentation, notes, instructions, or formatted text to dashboards
+**Use Case:** Perfect for adding documentation, notes, instructions, or formatted text to dashboards — and, with a query attached, for written summaries computed from live data
 
 **Display Options:**
 
 | Option | Type | Description |
 |--------|------|-------------|
-| content | string | Markdown text content |
+| content | string | Markdown text, or a template when the portlet has a query |
 | accentColorIndex | number | Color from dashboard palette for headers, bullets, and links |
 | fontSize | string | Overall text size (small, medium, large) |
 | alignment | string | Horizontal alignment (left, center, right) |
+
+**Data-Driven Narratives:**
+
+A markdown portlet does not need a query. Attach one and its `content` is no longer literal markdown: it is rendered as a [Knap](https://knap.md/) template over the result rows, then displayed as markdown. Knap is the template language behind Obsidian's Web Clipper. It is an AST interpreter and never evaluates arbitrary JavaScript.
+
+This turns a dashboard block into a paragraph that stays current:
+
+```liquid
+## Headcount by department
+
+We employ **{{ rows | map:"employees_count" | sum }}** people
+across {{ rowCount }} departments. The largest is
+{{ first.employees_department }} with {{ first.employees_count }}.
+
+{{ labelled | table }}
+
+{% for r in rows %}{% if r.employees_count > 20 %}
+- {{ r.employees_department }} is above the threshold
+{% endif %}{% endfor %}
+```
+
+**Template Variables:**
+
+| Variable | Description |
+|----------|-------------|
+| rows | Result rows keyed by alias, so `Employees.avgSalary` becomes `employees_avg_salary` |
+| labelled | The same rows keyed by field label, so a table gets readable column headers |
+| data | The raw rows with cube-qualified keys, reached as `data[0]["Employees.count"]` |
+| rowCount | Number of rows returned |
+| first, last | The first and last row, under their aliases |
+| fields | One entry per field, each with its key, alias and label |
+
+**Why aliases:**
+
+Knap reads `a.b` as two levels of nesting, not as one literal key. A cube-qualified key such as `Employees.count` therefore resolves to nothing under dot notation, and does so silently — you get a blank where the value should be:
+
+```liquid
+{% for r in data %}{{ r.Employees.count }}{% endfor %}   → blank
+{{ data | map:"Employees.count" | sum }}                 → 0
+```
+
+Bracket syntax with the literal key does work, including inside a loop:
+
+```liquid
+{% for r in data %}{{ r["Employees.count"] }}{% endfor %}   → 42
+{{ data[0]["Employees.count"] }}                            → 42
+```
+
+So `data` is enough when you are reading values one at a time. Aliases exist for the case brackets cannot cover: filters such as `map`, `where` and `sort` take a property *path*, and there is no bracket form for those. `{{ rows | map:"employees_count" | sum }}` has no equivalent over `data`.
+
+The portlet warns when a reference resolves to nothing, naming the fields that would have worked, so a misspelt alias shows up as a message rather than as a blank line.
+
+**Two further limits:**
+
+A filter chain returns a string once assigned, so a template cannot sort rows and then index into the result — order the query itself and read `first` or `last`. And `rows | first` renders an object rather than a field, so reach into a row with `rows[0].employees_count`.
+
+The [Knap variables reference](https://knap.md/variables) documents the full syntax, and the [filter list](https://knap.md/filters) covers the eighty built-in filters, including `sum`, `map`, `join`, `length`, `sort`, `slice`, `round`, `number_format`, `date` and `table`.
+
+A template still renders when the query returns nothing, so a narrative can report its own empty case:
+
+```liquid
+{% if rowCount %}{{ rowCount }} incidents this week.{% else %}No incidents this week.{% endif %}
+```
+
+Syntax errors and unknown filters are reported in the portlet with their line and column rather than breaking the dashboard.
 
 ---
 
