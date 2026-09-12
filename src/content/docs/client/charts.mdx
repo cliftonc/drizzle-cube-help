@@ -355,9 +355,29 @@ across {{ rowCount }} departments. The largest is
 | first, last | The first and last row, under their aliases |
 | fields | One entry per field, each with its key, alias and label |
 
-Rows are offered under aliases because Knap reads `a.b` as nested member access. A cube-qualified key such as `Employees.count` is therefore unreachable from a loop or from the `map` filter, and only bracket syntax on `data` gets at it directly.
+**Why aliases:**
 
-Two further limits are worth knowing before you write a long template. A filter chain returns a string once assigned, so a template cannot sort rows and then index into the result — order the query itself and read `first` or `last`. And `rows | first` renders an object rather than a field, so reach into a row with `rows[0].employees_count`.
+Knap reads `a.b` as two levels of nesting, not as one literal key. A cube-qualified key such as `Employees.count` therefore resolves to nothing under dot notation, and does so silently — you get a blank where the value should be:
+
+```liquid
+{% for r in data %}{{ r.Employees.count }}{% endfor %}   → blank
+{{ data | map:"Employees.count" | sum }}                 → 0
+```
+
+Bracket syntax with the literal key does work, including inside a loop:
+
+```liquid
+{% for r in data %}{{ r["Employees.count"] }}{% endfor %}   → 42
+{{ data[0]["Employees.count"] }}                            → 42
+```
+
+So `data` is enough when you are reading values one at a time. Aliases exist for the case brackets cannot cover: filters such as `map`, `where` and `sort` take a property *path*, and there is no bracket form for those. `{{ rows | map:"employees_count" | sum }}` has no equivalent over `data`.
+
+The portlet warns when a reference resolves to nothing, naming the fields that would have worked, so a misspelt alias shows up as a message rather than as a blank line.
+
+**Two further limits:**
+
+A filter chain returns a string once assigned, so a template cannot sort rows and then index into the result — order the query itself and read `first` or `last`. And `rows | first` renders an object rather than a field, so reach into a row with `rows[0].employees_count`.
 
 The [Knap variables reference](https://knap.md/variables) documents the full syntax, and the [filter list](https://knap.md/filters) covers the eighty built-in filters, including `sum`, `map`, `join`, `length`, `sort`, `slice`, `round`, `number_format`, `date` and `table`.
 
