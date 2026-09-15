@@ -28,7 +28,7 @@
     "react-grid-layout": "^2.1.1",
     "react-is": "^19.2.3",
     "recharts": "^3.5.1",
-    "sharp": "^0.34.2"
+    "sharp": "^0.35.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
