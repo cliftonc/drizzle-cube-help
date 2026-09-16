@@ -1,2 +1,2 @@
-current_phase: guardrails
-guardrails_status: GATE_PENDING
+current_phase: architect
+guardrails_status: READY
