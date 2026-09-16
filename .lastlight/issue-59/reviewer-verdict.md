@@ -65,3 +65,24 @@ No automated test targets the documentation-only `README.md` change. An independ
 ```text
 README smoke check passed: 9 documented package scripts and 10 project paths verified.
 ```
+
+## Re-review after Fix Cycle 1
+
+VERDICT: APPROVED
+
+The corrected `README.md` text now limits per-source diagnostics to filesystem read/write failures handled by `scripts/sync-external-content.js` and no longer claims malformed Markdown is validated. The fix introduces no new Critical or Important issues.
+
+### Test Results
+
+```text
+$ npm ci > /tmp/gate.log 2>&1; echo EXIT=$?
+EXIT=0
+
+$ npm run typecheck > /tmp/typecheck.log 2>&1; echo EXIT=$?
+EXIT=0
+Result (24 files): 0 errors, 0 warnings, 2 pre-existing deprecation hints
+
+$ node --input-type=module <README sync-diagnostics smoke check>
+README sync-diagnostics smoke check passed
+EXIT=0
+```
