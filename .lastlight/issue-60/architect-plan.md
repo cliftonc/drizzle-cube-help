@@ -2,53 +2,56 @@
 
 ## Problem Statement
 
-The root development dependency currently allows TypeScript 7 (`package.json:41`), while the installed guardrail tools declare incompatible peer ranges: `@astrojs/check` accepts TypeScript 5 or 6 (`package-lock.json:66-68`) and `typescript-eslint` accepts TypeScript below 6.1 (`package-lock.json:13918-13921`). The lockfile consequently installs TypeScript 7.0.2 (`package-lock.json:13854-13867`), causing ESLint to fail during parser initialization and `astro check` to crash before either check can inspect project code. The common supported range includes TypeScript 5; using the latest TypeScript 5 release restores both checks without weakening their configuration.
+The root development dependency selects TypeScript 7 (`package.json:41`), while the installed checking stack only accepts earlier compiler APIs: `@astrojs/check` declares TypeScript 5 or 6 (`package-lock.json:51-68`) and `typescript-eslint` requires TypeScript below 6.1 (`package-lock.json:13899-13921`). The lockfile consequently resolves TypeScript 7.0.2 and its native platform packages (`package-lock.json:13854-13887`), causing ESLint to reject the compiler and `astro check` to crash before either check can inspect project code.
 
 ## Summary of what needs to change
 
-Constrain the direct `typescript` development dependency to the TypeScript 5 release line, specifically `^5.9.3`, and regenerate the npm lockfile so clean installs resolve TypeScript 5.9.3 rather than 7.0.2. Do not alter ESLint rules, Astro configuration, check scripts, or source files: local verification with TypeScript 5.9.3 shows the existing lint and typecheck commands both pass unchanged.
+Pin the direct TypeScript development dependency to the latest mutually supported 6.0 patch, `6.0.3`, and regenerate the npm lockfile. This is a toolchain compatibility repair: it changes neither lint/typecheck configuration nor application behavior, and it preserves both checks at their existing strictness.
 
 ## Files to modify
 
-This implementation has one dependency-manifest/lockfile group; all members are listed below. No source, configuration, or test files should change.
+The implementation manifest is exhaustive; no source, config, or test file should change.
 
-- `package.json` — `devDependencies.typescript` at line 41: replace `^7.0.0` with `^5.9.3`. Keep the `lint` and `typecheck` script definitions unchanged.
-- `package-lock.json` — root package metadata at `packages[""].devDependencies.typescript` (currently line 33) and resolved package entry `packages["node_modules/typescript"]` (currently beginning line 13854): regenerate with npm from the updated manifest so the root spec is `^5.9.3` and the resolved package is TypeScript 5.9.3 with npm-registry URL, integrity, binary, engine, and dependency metadata matching that release. The regenerated lockfile must remove TypeScript 7-only optional platform package entries/references rather than retaining stale `@typescript/typescript-*` artifacts.
+- `package.json` — `devDependencies.typescript` at line 41: replace `^7.0.0` with exact version `6.0.3`. Use an exact pin rather than a caret because `typescript-eslint` 8.x currently caps support below TypeScript 6.1, and an install must not silently advance beyond the known compatible compiler API.
+- `package-lock.json` — root `packages[""].devDependencies.typescript` at line 33 and package records anchored at `packages["node_modules/typescript"]` (currently lines 13854-13887): regenerate with npm so the root spec and resolved compiler are `6.0.3`, with npm-produced integrity, metadata, and dependency information. The TypeScript 7 native-platform record group is part of this lockfile update and must contain no stale entries: `node_modules/@typescript/typescript-aix-ppc64`, `node_modules/@typescript/typescript-darwin-arm64`, `node_modules/@typescript/typescript-darwin-x64`, `node_modules/@typescript/typescript-freebsd-arm64`, `node_modules/@typescript/typescript-freebsd-x64`, `node_modules/@typescript/typescript-linux-arm`, `node_modules/@typescript/typescript-linux-arm64`, `node_modules/@typescript/typescript-linux-loong64`, `node_modules/@typescript/typescript-linux-mips64el`, `node_modules/@typescript/typescript-linux-ppc64`, `node_modules/@typescript/typescript-linux-riscv64`, `node_modules/@typescript/typescript-linux-s390x`, `node_modules/@typescript/typescript-linux-x64`, `node_modules/@typescript/typescript-netbsd-arm64`, `node_modules/@typescript/typescript-netbsd-x64`, `node_modules/@typescript/typescript-openbsd-arm64`, `node_modules/@typescript/typescript-openbsd-x64`, `node_modules/@typescript/typescript-sunos-x64`, `node_modules/@typescript/typescript-win32-arm64`, and `node_modules/@typescript/typescript-win32-x64`. Let npm remove/update this complete group according to the TypeScript 6 package metadata; do not hand-edit generated integrity data.
+
+Existing tests to run, but not modify, are the complete `src/**/*.test.ts` set: `src/worker.test.ts`, `src/data/chartDemoRegistry.test.ts`, and `src/lib/llms.test.ts`.
 
 ## Commands
 
-Use the exact repository commands recorded in `.lastlight/issue-60/guardrails-report.md`:
+Copied from `.lastlight/issue-60/guardrails-report.md`:
 
 ```bash
 npm ci
+npm test
 npm run lint
 npm run typecheck
-npm test
 ```
 
 ## Implementation approach
 
-1. Run the package-manager update for the direct dev dependency (for example, `npm install --save-dev typescript@^5.9.3`) so npm updates both `package.json` and `package-lock.json` consistently.
-2. Inspect the diff and confirm it is limited to the two dependency files, the declared range is `^5.9.3`, the lockfile resolves `node_modules/typescript` to 5.9.3, and stale TypeScript 7 platform-package records are removed.
-3. Run `npm ci` to prove a clean lockfile-based install succeeds and reproduces TypeScript 5.9.3.
-4. Run the unchanged lint and Astro typecheck scripts. Fix any genuine diagnostics in the code if newly surfaced, but do not suppress rules, weaken tsconfig/ESLint configuration, or change scripts to bypass errors.
-5. Run the complete Vitest suite to verify the compiler downgrade does not regress routing, generated output, worker behavior, or chart registry/data invariants.
+1. Update `devDependencies.typescript` to the exact `6.0.3` release, which lies in the intersection of `@astrojs/check`'s `^5.0.0 || ^6.0.0` peer range and `typescript-eslint`'s `>=4.8.4 <6.1.0` peer range.
+2. Regenerate `package-lock.json` through npm (for example, `npm install --save-dev --save-exact typescript@6.0.3`) so the manifest and lockfile remain internally consistent and TypeScript 7 platform artifacts are removed by the package manager.
+3. Run `npm ci` to prove a clean, lockfile-driven installation succeeds without peer incompatibility warnings/errors.
+4. Run the existing full Vitest suite, lint command, and Astro typecheck command exactly as listed above. Fix genuine diagnostics in implementation files if TypeScript 6 exposes any, rather than suppressing or weakening a check; any such extra file would first require an architecture-plan update because it is not currently expected.
+5. Inspect the final diff to ensure it contains only the dependency declaration and npm-generated lockfile changes and that no generated coverage content was touched.
 
 ## Risks and edge cases
 
-- A broad TypeScript range could permit a future incompatible major. `^5.9.3` intentionally stays below 6.0 while accepting compatible TypeScript 5 patches, satisfying both current peer ranges.
-- The lockfile currently contains TypeScript 7's platform-specific optional packages. Regenerating rather than hand-editing avoids stale or host-specific lock metadata; any lockfile/manifest mismatch must be **warn-and-surface** through a failing `npm ci`, never silently accepted.
-- Future upgrades to Astro checking or `typescript-eslint` may change their supported TypeScript intersection. An unsatisfied peer dependency or guardrail startup failure must be **warn-and-surface** through npm/lint/typecheck output; do not silently select an unsupported compiler or skip a check.
-- TypeScript 5.9 may report project diagnostics that TypeScript 7 did not reach because the current tooling crashes first. Such diagnostics must be **warn-and-surface** as normal `npm run typecheck` failures and repaired directly, not ignored or suppressed. Current local verification found none.
-- There are no application runtime inputs or user data paths affected by this dependency-only change, so no runtime warn-and-skip behavior is needed. No unsupported input should be silently dropped.
+- Future TypeScript releases at or above 6.1 are not fully supported by the currently locked `typescript-eslint` range. The exact pin prevents silently selecting them; a requested compiler upgrade must **warn-and-surface** an npm peer-dependency conflict and require an explicit coordinated tooling upgrade rather than being skipped or forced.
+- TypeScript 7 is not supported by the current Astro checker or lint parser. Attempts to reintroduce it must **warn-and-surface** through npm peer validation and failed lint/typecheck gates; do not use `--force`, legacy peer handling, or warning suppression.
+- Lockfile generation can vary with npm versions or registry resolution. If npm cannot resolve 6.0.3 or reports integrity/peer errors, **warn-and-surface** the install failure and stop; do not retain stale TypeScript 7 records, hand-author integrity fields, or silently fall back to another compiler.
+- A compiler downgrade can reveal legitimate project diagnostics after the startup crashes are removed. These must be **warn-and-surface** through the unchanged commands and then corrected in source under a revised manifest, never silently skipped with exclusions, disabled rules, or broad suppressions.
+- Platform-specific TypeScript 7 optional packages are unsupported by the TypeScript 6 package shape. Their removal must be explicit in the generated lockfile; npm installation errors on any supported host must **warn-and-surface**, not fall back silently to an unpinned/global compiler.
 
 ## Test strategy
 
-- Clean-install reproducibility: `npm ci` must pass using the regenerated lockfile.
-- Lint regression: `npm run lint` must initialize `typescript-eslint`, inspect its existing target set, and exit successfully.
-- Type-system regression: `npm run typecheck` must allow `astro check` to load `tsconfig.json`, complete diagnostics, and exit successfully.
-- Functional regression: `npm test` must run all existing Vitest files—`src/worker.test.ts`, `src/data/chartDemoRegistry.test.ts`, and `src/lib/llms.test.ts`—without failures. A new unit test is not warranted because this repair is fully exercised by clean dependency installation and the two restored command-level guardrails.
+- `npm ci` validates that `package.json` and `package-lock.json` agree and that the compatible compiler can be installed cleanly.
+- `npm test` runs all three existing Vitest files (`src/worker.test.ts`, `src/data/chartDemoRegistry.test.ts`, and `src/lib/llms.test.ts`) to catch regressions despite the dependency-only scope.
+- `npm run lint` proves `typescript-eslint` can load TypeScript 6 and complete its configured source/test analysis.
+- `npm run typecheck` proves `astro check` can load the tsconfig and complete semantic checking rather than crashing in the language-server API.
+- Confirm the command output represents actual analyzed files/tests and that no check configuration, source exclusion, test skip, or suppression was introduced.
 
 ## Estimated complexity
 
-**Simple** — two dependency metadata files, no source or configuration changes.
+simple
