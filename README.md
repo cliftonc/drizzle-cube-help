@@ -1,100 +1,120 @@
-# Drizzle Cube Documentation (Starlight)
+# Drizzle Cube Documentation
 
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
-This is the new Starlight-powered documentation site for Drizzle Cube, migrated from the custom-built help site.
+This repository contains the Astro/Starlight documentation site for Drizzle Cube. It builds a static site and includes a Cloudflare Worker for production asset routing and fallback behavior.
 
-## 🚀 Quick Start
+## Prerequisites
+
+- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/) 22 or newer
+- npm 9.6.5 or newer
+
+## Local development
+
+Start from a clean checkout and install the versions locked in `package-lock.json`:
 
 ```bash
-# Install dependencies
-npm install
-
-# Start development server (includes external content sync)
+git clone https://github.com/cliftonc/drizzle-cube-help.git
+cd drizzle-cube-help
+npm ci
 npm run dev
+```
 
-# Build for production
+The development site is available at <http://localhost:4321> by default.
+
+`npm run dev` runs the external-content sync before starting Astro. The sync may print warnings when optional sibling repositories are absent; this does not prevent the checked-in documentation from being served.
+
+### Configuration and external content
+
+No environment variables or supporting services are required for local development, builds, or previews.
+
+The repositories referenced by `help-content-config.json` are optional sibling checkouts alongside this repository:
+
+- `drizzle-cube`
+- `drizzle-cube-express`
+- `drizzle-cube-fastify`
+- `drizzle-cube-hono`
+- `drizzle-cube-nextjs`
+
+`help-content-config.json` is the authoritative mapping from external source files to documentation pages. Both `npm run dev` and `npm run build` run the sync automatically; use the following command to request an explicit refresh:
+
+```bash
+npm run sync:external
+```
+
+The sync reports incomplete refreshes rather than hiding them:
+
+- A missing configured source is warned about and skipped, leaving the checked-in page in place.
+- A missing sibling coverage folder is warned about and skipped.
+- An unreadable or malformed per-source input is reported as an error for that source while processing continues. Treat that message as an indication that the affected page was not refreshed.
+- An invalid `help-content-config.json` fails the command and must be corrected.
+
+## Production build and preview
+
+Build the static Astro output in `dist/`, then preview that output locally:
+
+```bash
 npm run build
-
-# Preview production build
 npm run preview
 ```
 
-## 📁 Project Structure
+The preview serves Astro's static output; it does not emulate the Cloudflare Worker routing in `src/worker.ts`.
 
+## Contributor checks
+
+```bash
+npm test          # Run the test suite
+npm run lint      # Check source formatting and lint rules
+npm run typecheck # Run Astro and TypeScript checks
 ```
+
+## Project structure
+
+```text
 src/
-├── assets/              # Images and assets
-├── content/
-│   └── docs/           # Documentation content (Markdown/MDX)
-├── styles/
-│   └── custom.css      # Custom styling
-public/                 # Static assets (images, etc.)
+├── content/docs/                # Documentation content (Markdown/MDX)
+├── pages/                       # Generated Markdown and LLM-facing routes
+├── data/                        # Chart demo registry and sample data
+├── styles/                      # Site styles
+└── worker.ts                    # Cloudflare Worker asset routing
+public/                          # Static assets
 scripts/
-├── sync-external-content.js  # Syncs external README files
-└── add-frontmatter.js        # Utility to add frontmatter
-help-content-config.json      # Configuration for external content
+└── sync-external-content.js     # External documentation sync
+help-content-config.json         # External source-to-page mappings
+astro.config.mjs                 # Astro and Starlight configuration
+wrangler.toml                    # Cloudflare Worker configuration
 ```
 
-## 🔧 Key Features
+## Content management
 
-### Built-in Features (from Starlight)
-- ✅ **Built-in search** - Pagefind-powered search
-- ✅ **Dark mode** - Automatic theme switching
-- ✅ **Responsive navigation** - Mobile-friendly sidebar
-- ✅ **SEO optimized** - Proper meta tags and sitemap
-- ✅ **Syntax highlighting** - Code blocks with Shiki
-- ✅ **Table of contents** - Auto-generated from headings
+### Adding content
 
-### Migration Features
-- ✅ **External content sync** - Automatically pulls adapter docs and examples
-- ✅ **Content structure preserved** - All original content migrated
-- ✅ **Asset migration** - All images and assets copied
-- ✅ **Navigation maintained** - Same structure as original site
+1. Create a `.md` or `.mdx` file in `src/content/docs/`.
+2. Add frontmatter with a `title` and, optionally, a `description`.
+3. Update the sidebar navigation in `astro.config.mjs` when needed.
 
-## 📝 Content Management
+For externally maintained pages, update the source mapping in `help-content-config.json` and keep the relevant sibling repository optional for standalone contributors.
 
-### Adding New Content
-1. Create `.md` files in `src/content/docs/`
-2. Add frontmatter with `title` and optional `description`
-3. Update navigation in `astro.config.mjs`
+## Deployment
 
-### External Content
-External content (like adapter READMEs) is automatically synced from:
-- `../drizzle-cube/src/adapters/*/README.md`
-- `../drizzle-cube-*/README.md` (example projects)
+Deployment in this repository is configured for a Cloudflare Worker through `wrangler.toml`:
 
-Configure external sources in `help-content-config.json`.
+```bash
+npm run deploy         # Production deployment
+npm run deploy:staging # Staging deployment
+```
 
-## 🚀 Deployment
+Cloudflare authentication and access to the configured account are required only for these deployment commands; they are not required for local development, building, testing, or previewing. Wrangler surfaces missing or invalid credentials as a command failure.
 
-The site builds to static HTML and can be deployed anywhere:
-- Cloudflare Pages
-- Vercel
-- Netlify
-- GitHub Pages
+The static output can be adapted to another hosting provider, but this repository does not include Vercel, Netlify, GitHub Pages, or other provider configuration. An alternative deployment must recreate any required routing and fallback behavior from `src/worker.ts`.
 
-## 🎨 Customization
+## Customization
 
-### Styling
-- Edit `src/styles/custom.css` for custom styles
-- Modify theme colors in CSS custom properties
+- Edit `src/styles/custom.css` for custom styles.
+- Configure navigation, site metadata, and social links in `astro.config.mjs`.
 
-### Configuration
-- Main config in `astro.config.mjs`
-- Navigation structure defined in sidebar config
-- Site metadata and social links
+## Documentation
 
-## 🔄 Migration from Original Site
-
-This site was migrated from `drizzle-cube-help-site` with:
-- All content preserved (no changes to text)
-- Navigation structure maintained
-- Assets and images copied
-- External content synchronization
-- Default Starlight styling (as requested)
-
-## 📚 Documentation
-
-For Starlight documentation: https://starlight.astro.build/
-For Astro documentation: https://docs.astro.build/
+- [Starlight documentation](https://starlight.astro.build/)
+- [Astro documentation](https://docs.astro.build/)
