@@ -2,7 +2,7 @@
 
 ## Status
 
-BLOCKED: configured linting and type checking do not run successfully after a clean dependency install.
+BLOCKED: configured linting and type checking do not run successfully after a clean dependency install. Tooling repair is tracked in #61.
 
 ## Dependency installation
 
