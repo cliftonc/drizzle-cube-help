@@ -47,7 +47,7 @@ The sync reports incomplete refreshes rather than hiding them:
 
 - A missing configured source is warned about and skipped, leaving the checked-in page in place.
 - A missing sibling coverage folder is warned about and skipped.
-- An unreadable or malformed per-source input is reported as an error for that source while processing continues. Treat that message as an indication that the affected page was not refreshed.
+- A per-source filesystem failure while reading or writing is reported as an error for that source while processing continues. Treat that message as an indication that the affected page was not refreshed.
 - An invalid `help-content-config.json` fails the command and must be corrected.
 
 ## Production build and preview
