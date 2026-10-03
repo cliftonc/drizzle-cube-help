@@ -199,9 +199,11 @@ const handlers = createCubeHandlers({
   }
 })
 
-export async function GET(request: NextRequest, context: RouteContext) {
-  const { endpoint } = context.params
-  
+type CatchAllContext = { params: Promise<{ endpoint: string[] }> }
+
+export async function GET(request: NextRequest, context: CatchAllContext) {
+  const { endpoint } = await context.params
+
   switch (endpoint[0]) {
     case 'load':
       return handlers.load(request, context)
@@ -216,9 +218,9 @@ export async function GET(request: NextRequest, context: RouteContext) {
   }
 }
 
-export async function POST(request: NextRequest, context: RouteContext) {
-  const { endpoint } = context.params
-  
+export async function POST(request: NextRequest, context: CatchAllContext) {
+  const { endpoint } = await context.params
+
   switch (endpoint[0]) {
     case 'load':
       return handlers.load(request, context)
@@ -396,6 +398,18 @@ interface NextAdapterOptions<TSchema> {
 }
 ```
 
+#### `RouteContext`
+
+Next.js 15+ passes dynamic route params as a Promise, and Next.js 16 removed synchronous access. The adapter forwards the route context to `extractSecurityContext` unchanged, so `await` the params before reading them:
+
+```typescript
+extractSecurityContext: async (request, context) => {
+  const params = await context?.params
+  // e.g. params?.tenant for a /api/[tenant]/cubejs/... route
+  return { organisationId: await resolveOrg(request, params?.tenant) }
+}
+```
+
 #### `NextCorsOptions`
 
 ```typescript
@@ -441,8 +455,8 @@ import { cubeConfig } from '@/lib/cube-config'
 
 const handlers = createCubeHandlers(cubeConfig)
 
-export async function GET(request: NextRequest, { params }: { params: { endpoint: string[] } }) {
-  const endpoint = params.endpoint[0]
+export async function GET(request: NextRequest, { params }: { params: Promise<{ endpoint: string[] }> }) {
+  const endpoint = (await params).endpoint[0]
   
   switch (endpoint) {
     case 'load': return handlers.load(request)
@@ -454,8 +468,8 @@ export async function GET(request: NextRequest, { params }: { params: { endpoint
   }
 }
 
-export async function POST(request: NextRequest, { params }: { params: { endpoint: string[] } }) {
-  const endpoint = params.endpoint[0]
+export async function POST(request: NextRequest, { params }: { params: Promise<{ endpoint: string[] }> }) {
+  const endpoint = (await params).endpoint[0]
 
   switch (endpoint) {
     case 'load': return handlers.load(request)

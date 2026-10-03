@@ -5,7 +5,7 @@ description: Next.js Example documentation
 
 # Drizzle Cube Next.js Example
 
-A full-stack Next.js 15 application demonstrating drizzle-cube integration with App Router and a complete analytics dashboard.
+A full-stack Next.js 16 application demonstrating drizzle-cube integration with App Router and a complete analytics dashboard.
 
 [Github Repository](https://github.com/cliftonc/drizzle-cube-nextjs)
 
@@ -17,7 +17,7 @@ See this example running live with the full dashboard and analysis builder funct
 
 ## Features
 
-- **Next.js 15 App Router**: Modern React patterns with server components and API routes
+- **Next.js 16 App Router**: Modern React patterns with server components and API routes
 - **drizzle-cube Integration**: Semantic layer with Cube.js-compatible API endpoints
 - **PostgreSQL Database**: Self-contained with Docker
 - **Analytics Dashboard**: Interactive charts with drag-and-drop editing
@@ -43,9 +43,9 @@ Visit:
 
 ## Architecture
 
-### Full-Stack Next.js 15 App
+### Full-Stack Next.js 16 App
 
-This example uses Next.js 15's App Router for a modern full-stack architecture:
+This example uses Next.js 16's App Router for a modern full-stack architecture:
 
 - **API Routes**: `app/api/cube/[...path]/route.ts` handles all Cube.js endpoints
 - **Client Components**: React components with `'use client'` for interactivity
@@ -186,7 +186,7 @@ curl -X POST http://localhost:6001/api/cubejs-api/v1/sql \
   }'
 ```
 
-## Next.js 15 Integration
+## Next.js 16 Integration
 
 ### App Router Patterns
 
@@ -306,7 +306,7 @@ The example uses Tailwind CSS with drizzle-cube styles:
 
 This Next.js example provides enhanced functionality:
 
-### ✅ Next.js 15 Advantages
+### ✅ Next.js 16 Advantages
 - **App Router**: Modern React patterns with server components
 - **Full-Stack**: API routes integrated with frontend
 - **TypeScript**: Strict type checking throughout
