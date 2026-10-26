@@ -701,27 +701,25 @@ const theme = {
 
 ## Real-time Updates
 
-### WebSocket Support
+### Interval Refresh
 
-Enable real-time data updates:
+Dashboards and portlets can refetch on an interval, accepting a cached server
+result no older than that interval. Turn it on with `features.refresh` and set
+`refresh` on the dashboard or a portlet:
 
 ```tsx
 <CubeProvider
-  apiOptions={{
-    apiUrl: '/api/cube',
-    websocketUrl: 'ws://localhost:3000/ws',
-    headers: {
-      'Authorization': 'token' // Token is used as-is, no 'Bearer' prefix needed
-    }
-  }}
+  apiOptions={{ apiUrl: '/api/cube' }}
+  features={{ refresh: { enabled: true } }}
 >
-  <AnalyticsPortlet
-    query={query}
-    realtime={true}
-    refreshInterval={5000}
+  <AnalyticsDashboard
+    config={{ refresh: { intervalSeconds: 30 }, portlets }}
   />
 </CubeProvider>
 ```
+
+See [Dashboards → Interval Refresh](/client/dashboards/#interval-refresh) for
+per-portlet intervals, pausing and the freshness indicator.
 
 ### Manual Refresh
 
@@ -731,18 +729,25 @@ Trigger updates programmatically:
 import { useCubeQuery } from 'drizzle-cube/client';
 
 function RefreshableChart() {
-  const { data, isLoading, refetch } = useCubeQuery(query);
+  const { rawData, isLoading, refetch } = useCubeQuery(query);
 
   return (
     <div>
       <button onClick={() => refetch()}>
         Refresh Data
       </button>
+      <button onClick={() => refetch({ bustCache: true })}>
+        Refresh, skipping caches
+      </button>
       {/* Chart content */}
     </div>
   );
 }
 ```
+
+`refetch({ maxAgeSeconds: 60 })` accepts a cached server result up to 60
+seconds old, and `refetch({ bustCache: true })` skips both the client and server
+caches.
 
 ## Error Handling
 
