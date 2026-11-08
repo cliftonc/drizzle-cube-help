@@ -61,17 +61,28 @@ const handlers = createCubeHandlers({
 })
 ```
 
+The adapters load the app HTML only when a client requests it.
+
 ### Composable MCP Tools
+
+`getCubeTools()` does not bundle the app HTML (about 2 MB), so a server that doesn't use the app never loads it. Import it from `drizzle-cube/mcp-app-html` and pass it in:
 
 ```typescript
 import { getCubeTools } from 'drizzle-cube/mcp'
+import { mcpAppHtml } from 'drizzle-cube/mcp-app-html'
 
 const cubeTools = getCubeTools({
   semanticLayer,
   getSecurityContext: async (meta) => ({ orgId: meta?.authInfo?.orgId }),
-  app: true  // ← enable MCP App
+  app: { html: mcpAppHtml }  // ← enable MCP App
 })
 ```
+
+Locale options sit next to `html`: `app: { html: mcpAppHtml, defaultLocale: 'nl-NL' }`.
+
+:::caution[Upgrading from 0.12]
+Before 0.13.0, `getCubeTools()` took `app: true`. It now throws a `TypeError` for `app: true`: replace it with `app: { html: mcpAppHtml }` as above. The framework adapters' `mcp: { app: true }` is unchanged.
+:::
 
 ## AI Chart Hints
 
