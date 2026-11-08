@@ -167,6 +167,7 @@ Creates a composable tools object.
 | `tools` | `string[]` | `['discover', 'validate', 'load', 'chart']` | Which tools to expose |
 | `prompts` | `MCPPrompt[]` | built-in | Custom MCP prompts |
 | `resources` | `MCPResource[]` | built-in | Custom MCP resources |
+| `app` | `false \| { html: string, defaultLocale?, detectBrowserLocale? }` | `false` | Serve the [MCP App](/ai/mcp-app/) chart UI. Pass the HTML from `drizzle-cube/mcp-app-html`: `app: { html: mcpAppHtml }` |
 
 #### Returns: CubeTools
 
