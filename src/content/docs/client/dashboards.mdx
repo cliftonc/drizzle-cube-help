@@ -225,7 +225,10 @@ interface PortletConfig {
   dashboardFilterMapping?: string[] // IDs of dashboard filters to apply
 
   // Behavior
-  autoRefresh?: number        // Auto-refresh interval (seconds)
+  refresh?: {                 // Interval refresh (needs features.refresh.enabled)
+    intervalSeconds: number   // Refetch every N seconds; overrides the dashboard default
+    pauseWhenHidden?: boolean // Skip refreshes while the tab is hidden; unset inherits the dashboard's
+  }
   cachingEnabled?: boolean    // Enable result caching
 }
 ```
@@ -407,21 +410,68 @@ layout: {
 }
 ```
 
-### Real-time Updates
+### Interval Refresh
 
-Portlets support automatic refresh and real-time updates:
+Dashboards and portlets can refetch on an interval. Interval refresh is off
+until you turn it on in `CubeProvider` features:
 
 ```tsx
-// Portlet with auto-refresh every 30 seconds
-{
-  id: 'live-metrics',
-  name: 'Live Metrics',
-  query: { /* ... */ },
-  chartConfig: { /* ... */ },
-  chartType: 'line',
-  autoRefresh: 30  // Refresh every 30 seconds
+<CubeProvider
+  apiOptions={{ apiUrl: '/api/cube' }}
+  features={{
+    refresh: {
+      enabled: true,
+      minIntervalSeconds: 10 // Floor for every interval (default: 5)
+    }
+  }}
+>
+  <AnalyticsDashboard config={config} />
+</CubeProvider>
+```
+
+Then set a default interval on the dashboard, an interval on a portlet, or both.
+A portlet's own `refresh` overrides the dashboard default:
+
+```tsx
+const config: DashboardConfig = {
+  // Every portlet refreshes every 60 seconds...
+  refresh: { intervalSeconds: 60, pauseWhenHidden: true },
+  portlets: [
+    {
+      id: 'live-metrics',
+      title: 'Live Metrics',
+      query: { /* ... */ },
+      chartType: 'line',
+      // ...except this one, every 30 seconds
+      refresh: { intervalSeconds: 30 }
+    }
+  ]
 }
 ```
+
+Editors can also set both in the UI: the dashboard default from the edit bar,
+and a portlet's interval from the portlet edit modal.
+
+How it behaves:
+
+- **Shared server work.** Each refresh sends `x-cache-max-age` equal to the
+  interval, so viewers in the same security context share one server execution
+  per interval when the server has a result cache. Cross-origin deployments must
+  allow the `X-Cache-Max-Age` and `X-Cache-Control` request headers in CORS. The
+  adapters' `cors` option adds them for you.
+- **Only visible portlets fetch.** A portlet that is off-screen waits and
+  refreshes when it scrolls back into view.
+- **Hidden tabs.** With `pauseWhenHidden`, refreshes stop while the browser tab
+  is hidden. A portlet without its own `pauseWhenHidden` uses the dashboard's;
+  setting it to `false` on the portlet overrides a dashboard `true`.
+- **Pausing.** Viewers can pause the whole dashboard from the toolbar (or the
+  floating toolbar) or one portlet from its header. Edit mode pauses every timer.
+- **Freshness.** Each portlet header shows how old its data is, and the age turns
+  to a warning color when the data is older than two intervals.
+- **`manualRefresh` wins.** With `features.manualRefresh` on, nothing refreshes
+  on an interval.
+
+The refresh button uses the same path. Shift+click bypasses the cache.
 
 ## Portlet Types
 
